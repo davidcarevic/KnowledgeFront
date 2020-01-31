@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 
 class Home extends Component {
     state = {
-      username: '',
+      email: '',
       password: '',
     }
   
@@ -14,9 +14,9 @@ class Home extends Component {
   
     handleFormSubmit = (e) => {
       e.preventDefault();
-      const { username, password } = this.state;
+      const { email, password } = this.state;
       const {history } = this.props
-    //   getToken(username, password)
+    //   getToken(email, password)
     //     .then(res => {
     //         window.localStorage.setItem('accessToken', res.data.access);
     //         window.localStorage.setItem('refreshToken', res.data.refresh);
@@ -27,7 +27,7 @@ class Home extends Component {
     }
   
     render() {
-      const { username, password } = this.state;
+      const { email, password } = this.state;
       if(window.localStorage.getItem('accessToken') && window.localStorage.getItem('accessToken')!=='' ){
         return (
           <div>
@@ -38,8 +38,8 @@ class Home extends Component {
       return (
         <div>
           <form onSubmit={this.handleFormSubmit}>
-            <h1> Log in plz </h1>
-            <input id="username" placeholder="Username "type="text" value={username} onChange={this.handleInputChange} />
+            <h1> Log in </h1>
+            <input id="email" placeholder="Email" type="email" value={email} onChange={this.handleInputChange} />
             <br/>
             <br/>
             <input id="password" placeholder="Password" type="password" value={password} onChange={this.handleInputChange} />
