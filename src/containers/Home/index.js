@@ -1,0 +1,55 @@
+import React, { Component } from 'react';
+//import { getToken } from '../../services';
+
+
+class Home extends Component {
+    state = {
+      username: '',
+      password: '',
+    }
+  
+    handleInputChange = (e) => {
+      this.setState({ [e.target.id]: e.target.value })
+    }
+  
+    handleFormSubmit = (e) => {
+      e.preventDefault();
+      const { username, password } = this.state;
+      const {history } = this.props
+    //   getToken(username, password)
+    //     .then(res => {
+    //         window.localStorage.setItem('accessToken', res.data.access);
+    //         window.localStorage.setItem('refreshToken', res.data.refresh);
+    //         history.push('/dashboard')
+    //     })
+        
+      
+    }
+  
+    render() {
+      const { username, password } = this.state;
+      if(window.localStorage.getItem('accessToken') && window.localStorage.getItem('accessToken')!=='' ){
+        return (
+          <div>
+          <h1>Hello fren</h1>
+        </div>
+        )
+      }
+      return (
+        <div>
+          <form onSubmit={this.handleFormSubmit}>
+            <h1> Log in plz </h1>
+            <input id="username" placeholder="Username "type="text" value={username} onChange={this.handleInputChange} />
+            <br/>
+            <br/>
+            <input id="password" placeholder="Password" type="password" value={password} onChange={this.handleInputChange} />
+            <br/>
+            <br/>
+            <button  type="submit">Login</button>
+          </form>
+        </div>
+      )
+    }
+  } 
+
+  export default Home
