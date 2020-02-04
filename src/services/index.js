@@ -10,6 +10,10 @@ export const getToken = (email, password) => {
         })
 }
 
+// export const getRefresh = () =>{
+//
+// }
+
 export const register = (email, password) => {
   console.log("usao u reg")
   return axios.post('/api/users/',{

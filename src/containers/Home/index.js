@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom'
-import { getToken } from '../../services';
+import {Link} from 'react-router-dom';
 
+import { connect } from 'react-redux'
+
+import userRedux from '../../redux/user';
 
 class Home extends Component {
     state = {
@@ -17,14 +19,8 @@ class Home extends Component {
       e.preventDefault();
       const { email, password } = this.state;
       const {history } = this.props
-      getToken(email, password)
-        .then(res => {
-            window.localStorage.setItem('accessToken', res.data.access);
-            window.localStorage.setItem('refreshToken', res.data.refresh);
-            history.push('/teams')
-        })
-        
-      
+      this.props.loginUser(email, password);
+      history.push('/teams');
     }
   
     render() {
@@ -32,7 +28,7 @@ class Home extends Component {
       if(window.localStorage.getItem('accessToken') && window.localStorage.getItem('accessToken')!=='' ){
         return (
           <div>
-          <h1>Hello fren</h1>
+              <h1>Hello fren</h1>
         </div>
         )
       }
@@ -52,6 +48,10 @@ class Home extends Component {
         </div>
       )
     }
-  } 
+  }
 
-  export default Home
+  const mapDispatchToProps = {
+    loginUser: userRedux.thunks.loginUser
+  }
+
+  export default connect(null, mapDispatchToProps)(Home)

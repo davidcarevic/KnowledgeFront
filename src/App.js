@@ -7,6 +7,8 @@ import {
   Route,
 } from "react-router-dom";
 
+import { connect } from 'react-redux';
+
 import Home from './containers/Home'
 import Register from './containers/Register'
 import TestNav from './containers/TestNav'
@@ -14,7 +16,7 @@ import Teams from './containers/Teams'
 import PrivateRoute from "./HOC/PrivateRoute";
 import CreateTeam from "./containers/CreateTeam";
 
-const App=()=> (
+const App = props => (
   
     <Router>
       <Switch>
@@ -28,5 +30,10 @@ const App=()=> (
     </Router>
   )
 
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
 
-export default App;
+export default connect(mapStateToProps, null)(App);
