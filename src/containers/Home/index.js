@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-//import { getToken } from '../../services';
+import {Link} from 'react-router-dom'
+import { getToken } from '../../services';
 
 
 class Home extends Component {
@@ -16,12 +17,12 @@ class Home extends Component {
       e.preventDefault();
       const { email, password } = this.state;
       const {history } = this.props
-    //   getToken(email, password)
-    //     .then(res => {
-    //         window.localStorage.setItem('accessToken', res.data.access);
-    //         window.localStorage.setItem('refreshToken', res.data.refresh);
-    //         history.push('/dashboard')
-    //     })
+      getToken(email, password)
+        .then(res => {
+            window.localStorage.setItem('accessToken', res.data.access);
+            window.localStorage.setItem('refreshToken', res.data.refresh);
+            history.push('/teams')
+        })
         
       
     }
@@ -44,6 +45,7 @@ class Home extends Component {
             <br/>
             <input id="password" placeholder="Password" type="password" value={password} onChange={this.handleInputChange} />
             <br/>
+            <Link to="/register">Create an account</Link>
             <br/>
             <button  type="submit">Login</button>
           </form>
