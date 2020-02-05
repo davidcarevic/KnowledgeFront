@@ -35,13 +35,13 @@ export const loginUser = (email, password) => dispatch => {
         })
 }
 
-export const refreshToken = () => {
+export const refreshToken = () => dispatch => {
     // call refresh token service and set new access and refresh tokens
-    dispatch(isLoading(true))
+    dispatch(isLoading(true));
     getRefresh()
         .then(res=>{
-            dispatch(isLoading(false))
-            dispatch(setAccessToken(rest.data.access))
+            dispatch(isLoading(false));
+            dispatch(setAccessToken(res.data.access))
         })
         .catch(err=>{
            console.log(err.message)
