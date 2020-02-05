@@ -25,7 +25,7 @@ export const loginUser = (email, password) => dispatch => {
         .catch(err => {
             console.log("AXIOS ERROR: ", axios);
             if(err.status === 401) {
-               //
+                refreshToken()
                 dispatch(isLoading(false));
             } else {
                 dispatch(isLoading(false));
