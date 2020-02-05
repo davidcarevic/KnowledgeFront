@@ -25,13 +25,7 @@ class Home extends Component {
   
     render() {
       const { email, password } = this.state;
-      if(window.localStorage.getItem('accessToken') && window.localStorage.getItem('accessToken')!=='' ){
-        return (
-          <div>
-              <h1>Hello fren</h1>
-        </div>
-        )
-      }
+
       return (
         <div>
           <form onSubmit={this.handleFormSubmit}>

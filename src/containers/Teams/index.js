@@ -5,21 +5,11 @@ import {getTeamsByUser} from "../../services"
 import {Link} from "react-router-dom";
 
 class Teams extends Component {
-    state={
-        teams:[],
-    };
     componentDidMount() {
         console.log('dashboard did mount')
         if(!this.props.isLoading && this.props.isAuthenticated && !this.props.authenticationError) {
-            getTeamsByUser()
-                .then((res) => {
-                    let teams = res.data;
-                    this.setState({ teams: res.data})
-                    console.log(teams);
-                })
-                .catch(err => {
-                    console.log(err.message);
-                })
+            console.log(this.props.teams)
+
         }
 
     }
@@ -29,14 +19,19 @@ class Teams extends Component {
         }
         return (
             <div>
-                {this.state.teams.map((item)=> <SingleTeam key={item.team.id} id={item.team.id}  name={item.team.name} description={item.team.description}/>)}
+                {this.props.teams.map((item)=> <SingleTeam key={item.team.id} id={item.team.id}  name={item.team.name} description={item.team.description}/>)}
                 <Link to="/teams/create">Create a team</Link>
             </div>
         )
     }
 }
 
+const mapDispatchToProps ={
+
+}
+
 const mapStateToProps = state => ({
+    teams:'',
     isLoading: state.global.isLoading,
     isAuthenticated: state.user.isAuthenticated,
     authenticationError: state.user.authenticationError,

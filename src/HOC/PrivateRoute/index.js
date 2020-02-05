@@ -2,11 +2,14 @@ import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { connect } from 'react-redux'
 //import {logout} from '../../services'
-
 // Higher Order Component || HOC
 const PrivateRoute = props => {
     const { Component } = props;
-    if(window.localStorage.getItem('accessToken') === null || window.localStorage.getItem('accessToken') === '' ) {
+    if(props.isLoading) {
+        return <div>Loading...</div>
+    }
+    if(!props.isAuthenticated && !props.isLoading) {
+        console.log("OVDE");
         return (
         <Redirect to="/" />
         )
@@ -16,24 +19,15 @@ const PrivateRoute = props => {
         const handleFormSubmit = (e) => {
             e.preventDefault();
             console.log('DDDDDDD')
-            
             console.log(routerprops)
-
-            window.localStorage.removeItem('accessToken');   
             window.localStorage.removeItem('refreshToken');
-            
-
             routerprops.history.push('/')
-             
-
         }
-
        return(    
         <div>
             <form  onSubmit={handleFormSubmit}>
                 <input type="submit" value="Logout" className='le-btn'/>    
-            </form> 
-            
+            </form>
             <Component {...props} />
         </div>
         )
@@ -43,11 +37,16 @@ const PrivateRoute = props => {
     )
 }
 
-const mapStateToProps = (state) => {
-
+const mapStateToProps = state => {
+    return {
+        user:state.user,
+        isLoading: state.global.isLoading,
+        isAuthenticated: state.user.isAuthenticated,
+        authenticationError: state.user.authenticationError,
+        authenticationErrorMessage: state.user.authenticationErrorMessage,
+    }
 }
-    
 
         
 
-export default connect()(PrivateRoute);
+export default connect(mapStateToProps,null)(PrivateRoute);
