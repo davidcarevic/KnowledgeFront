@@ -1,10 +1,11 @@
 import { combineReducers } from "redux";
 import userRedux from './user';
 import globalRedux from './global';
-import teamRedux from './teams'
+import teamsRedux from './teams'
+
 
 export default combineReducers({
     user: userRedux.reducer,
     global: globalRedux.reducer,
-    teams:teamRedux.reducer
+    teams:teamsRedux.reducer
 })

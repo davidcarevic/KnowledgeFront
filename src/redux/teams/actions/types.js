@@ -1,1 +1,1 @@
-export const GET_TEAMS_BY_USER = "GET_TEAMS_BY_USER"
+export const SET_TEAMS_BY_USER = "SET_TEAMS_BY_USER";

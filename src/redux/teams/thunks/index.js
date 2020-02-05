@@ -1,17 +1,18 @@
-import {getTeamsByUser as getTeamsAxios} from "../../../services";
-import axios from "../../../axios";
+import {getTeamsByUser} from "../../../services";
+import {setTeamsByUser} from "../actions";
 import {isLoading} from "../../global/actions";
-import {getTeamsByUser as getTeams} from "../actions"
 
-
-export const getTeamsByUser= () => dispatch =>{
-
-
-    console.log('Usao u getTeamsByUser')
+export const getTeams =()=> dispatch =>{
     dispatch(isLoading(true));
-    getTeamsAxios() ()
+    getTeamsByUser()
         .then(res=>{
-            dispatch(getTeams(res.data.teams))
+            dispatch(setTeamsByUser(res.data))
+
         })
-        .catch(err=> console.log(err))
+        .catch(err=>{
+            console.log(err.message)
+            })
+
+    dispatch(isLoading(false));
 }
+

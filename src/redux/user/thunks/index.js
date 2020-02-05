@@ -35,7 +35,6 @@ export const loginUser = (email, password) => dispatch => {
             }
         })
 }
-
 export const refreshToken = () => dispatch => {
     // call refresh token service and set new access and refresh tokens
     console.log('skace na refresh')
@@ -55,5 +54,4 @@ export const refreshToken = () => dispatch => {
             dispatch(authenticationErrorMessage(err.message));
            console.log(err.message)
         })
-
 }

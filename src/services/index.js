@@ -20,13 +20,11 @@ export const register = (email, password) => {
   console.log("usao u reg")
   return axios.post('/api/users/',{
      password:password, email:email
-  }).catch(err => console.log(err.message))
+  })
 }
 
 export const getTeamsByUser = () => {
-    console.log()
     return axios.get('/api/users-teams/')
-        .catch(err=>console.log(err.message))
 }
 
 export const createTeam = (name,description) =>{
@@ -34,5 +32,4 @@ export const createTeam = (name,description) =>{
         name:name,
         description:description,
         })
-        .catch(err=>console.log(err.message))
 }
