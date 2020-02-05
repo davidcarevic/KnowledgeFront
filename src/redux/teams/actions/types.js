@@ -1,0 +1,1 @@
+export const GET_TEAMS_BY_USER = "GET_TEAMS_BY_USER"
