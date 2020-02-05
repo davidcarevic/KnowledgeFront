@@ -7,16 +7,19 @@ import teamsRedux from '../../redux/teams';
 
 class Teams extends Component {
     componentDidMount() {
-           this.props.getTeams()
+        if(this.props.teams.length < 1) {
+            this.props.getTeams()
+        }
+
     }
     render(){
-        console.log("TEAMS: ", this.props.teams.teams);
+        console.log("TEAMS: ", this.props.teams);
         if(this.props.isLoading) {
             return <div>Loading...</div>
         }
         return (
             <div>
-                {this.props.teams.teams.map((item)=><SingleTeam key={item.team.id} id={item.team.id} name={item.team.name} description={item.team.description}/> )}
+                {this.props.teams.map((item)=><SingleTeam key={item.team.id} id={item.team.id} name={item.team.name} description={item.team.description}/> )}
                 <Link to="/teams/create">Create a team</Link>
             </div>
         )

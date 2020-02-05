@@ -1,16 +1,13 @@
 import * as types from '../actions/types'
 
-const initialState={
-    teams:[]
-}
+const initialState = [];
 
 export default (state = initialState,action) =>{
     switch(action.type){
         case types.SET_TEAMS_BY_USER:
-            return {
-            ...state,
-            teams:action.payload
-        }
+            return [
+                ...action.payload
+            ]
         default:
             return state;
     }

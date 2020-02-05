@@ -6,13 +6,14 @@ export const getTeams =()=> dispatch =>{
     dispatch(isLoading(true));
     getTeamsByUser()
         .then(res=>{
-            dispatch(setTeamsByUser(res.data))
+            dispatch(setTeamsByUser(res.data));
+            dispatch(isLoading(false));
 
         })
         .catch(err=>{
             console.log(err.message)
             })
 
-    dispatch(isLoading(false));
+
 }
 

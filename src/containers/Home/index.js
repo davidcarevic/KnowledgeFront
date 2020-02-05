@@ -10,11 +10,9 @@ class Home extends Component {
       email: '',
       password: '',
     }
-  
     handleInputChange = (e) => {
       this.setState({ [e.target.id]: e.target.value })
     }
-  
     handleFormSubmit = (e) => {
       e.preventDefault();
       const { email, password } = this.state;
@@ -22,10 +20,8 @@ class Home extends Component {
       this.props.loginUser(email, password);
       history.push('/teams');
     }
-  
     render() {
       const { email, password } = this.state;
-
       return (
         <div>
           <form onSubmit={this.handleFormSubmit}>
