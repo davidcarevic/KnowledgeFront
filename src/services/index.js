@@ -10,9 +10,11 @@ export const getToken = (email, password) => {
         })
 }
 
-// export const getRefresh = () =>{
-//
-// }
+export const getRefresh = () =>{
+    return axios.post('/api/token/refresh/',{
+        refresh:window.localStorage.getItem("refresh")
+    })
+}
 
 export const register = (email, password) => {
   console.log("usao u reg")
