@@ -10,7 +10,6 @@ class Teams extends Component {
         if(this.props.teams.teams.length < 1) {
             this.props.getTeams()
         }
-
     }
     render(){
         let teams=this.props.teams.teams  //getting the array so the map function doesn't have a bunch of props
@@ -35,6 +34,5 @@ const mapStateToProps = state => ({
     isAuthenticated: state.user.isAuthenticated,
     authenticationError: state.user.authenticationError,
     authenticationErrorMessage: state.user.authenticationErrorMessage,
-
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Teams)
