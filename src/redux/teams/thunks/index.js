@@ -8,6 +8,7 @@ export const getTeams =()=> dispatch =>{
         .then(res=>{
             dispatch(setTeamsByUser(res.data));
             dispatch(isLoading(false));
+            console.log(res)
 
         })
         .catch(err=>{
