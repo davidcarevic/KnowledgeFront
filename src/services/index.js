@@ -10,6 +10,10 @@ export const getToken = (email, password) => {
         })
 }
 
+export const removeToken=()=>{
+    return true
+}
+
 export const getRefresh = () =>{
     return axios.post('/api/token/refresh/',{
         refresh:window.localStorage.getItem("refreshToken")
@@ -24,7 +28,7 @@ export const register = (email, password) => {
 }
 
 export const getTeamsByUser = () => {
-    return axios.get('/api/users-teams/')
+    return axios.get('/api/teams/')
 }
 
 export const createTeam = (name,description) =>{

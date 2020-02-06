@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { connect } from 'react-redux'
+import userRedux from '../../redux/user';
 //import {logout} from '../../services'
 // Higher Order Component || HOC
 const PrivateRoute = props => {
@@ -18,10 +19,11 @@ const PrivateRoute = props => {
     <Route exact={props.exact} path={props.path} render={(routerprops) =>{
         const handleFormSubmit = (e) => {
             e.preventDefault();
-            console.log('DDDDDDD')
-            console.log(routerprops)
-            window.localStorage.removeItem('refreshToken');
-            routerprops.history.push('/')
+            console.log('DDDDDDD',props)
+           //  console.log(routerprops)
+           //  window.localStorage.removeItem('refreshToken');
+           //  routerprops.history.push('/')
+            props.logout()
         }
        return(    
         <div>
@@ -47,6 +49,9 @@ const mapStateToProps = state => {
     }
 }
 
+const mapDispatchToProps={
+    logout:userRedux.thunks.logout
+}
         
 
-export default connect(mapStateToProps,null)(PrivateRoute);
+export default connect(mapStateToProps,mapDispatchToProps)(PrivateRoute);

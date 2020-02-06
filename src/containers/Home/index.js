@@ -22,6 +22,13 @@ class Home extends Component {
     }
     render() {
       const { email, password } = this.state;
+      if(this.props.isAuthenticated){
+          return(
+              <div>
+                  <h1>Logged</h1>
+              </div>
+          )
+      }
       return (
         <div>
           <form onSubmit={this.handleFormSubmit}>
@@ -41,7 +48,12 @@ class Home extends Component {
   }
 
   const mapDispatchToProps = {
-    loginUser: userRedux.thunks.loginUser
+    loginUser: userRedux.thunks.loginUser,
   }
 
-  export default connect(null, mapDispatchToProps)(Home)
+  const mapStateToProps=state=>({
+          isAuthenticated: state.user.isAuthenticated,
+      }
+  )
+
+  export default connect(mapStateToProps, mapDispatchToProps)(Home)

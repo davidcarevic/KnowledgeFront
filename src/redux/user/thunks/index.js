@@ -1,4 +1,4 @@
-import { getToken,getRefresh } from "../../../services";
+import { getToken,getRefresh,removeToken } from "../../../services";
 import {
     authenticateUser,
     setAccessToken,
@@ -14,7 +14,6 @@ export const loginUser = (email, password) => dispatch => {
     dispatch(isLoading(true));
     dispatch(authenticationError(false));
     dispatch(authenticationErrorMessage(''));
-
     getToken(email, password)
         .then(res => {
             console.log("OVO DRUGO");
@@ -27,7 +26,7 @@ export const loginUser = (email, password) => dispatch => {
         .catch(err => {
             console.log("AXIOS ERROR: ", axios);
             if(err.status === 401) {
-                refreshToken()
+                //
             } else {
                 dispatch(isLoading(false));
                 dispatch(authenticationError(true));
@@ -54,4 +53,25 @@ export const refreshToken = () => dispatch => {
             dispatch(authenticationErrorMessage(err.message));
            console.log(err.message)
         })
+}
+
+export const logout = () => dispatch =>{
+    // works, the axios call for blacklisting needs to be added
+    dispatch(isLoading(true))
+    console.log("usao u logout")
+    let res=removeToken()
+    console.log("true is remove token ??",res)
+    dispatch(setAccessToken(null))
+    dispatch(setRefreshToken(null))
+    dispatch(authenticateUser(false))
+    window.localStorage.removeItem('refreshToken')
+    dispatch(isLoading(false))
+
+
+
+
+
+
+
+
 }
