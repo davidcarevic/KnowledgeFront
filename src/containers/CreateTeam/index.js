@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import teamRedux from '../../redux/teams'
-
 var jwtDecode = require('jwt-decode');
 
 class CreateTeam extends Component {
@@ -34,8 +32,6 @@ class CreateTeam extends Component {
         )
     }
 }
-
-
 const mapDispatchToProps={
     createTeam:teamRedux.thunks.teamCreation
 }
@@ -43,4 +39,5 @@ const mapStateToProps=state=>({
     teams:state.teams,
     team:state.team
 })
+
 export default connect(mapStateToProps,mapDispatchToProps)(CreateTeam)

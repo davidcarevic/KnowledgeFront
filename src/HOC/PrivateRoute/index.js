@@ -1,9 +1,8 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { connect } from 'react-redux'
+import  {connect} from 'react-redux'
 import userRedux from '../../redux/user';
-//import {logout} from '../../services'
-// Higher Order Component || HOC
+
 const PrivateRoute = props => {
     const { Component } = props;
     if(props.isLoading) {
@@ -22,8 +21,8 @@ const PrivateRoute = props => {
             console.log('DDDDDDD',props)
            //  console.log(routerprops)
            //  window.localStorage.removeItem('refreshToken');
-           //  routerprops.history.push('/')
-            props.logout()
+             props.logout()
+            // routerprops.history.push('/')
         }
        return(    
         <div>

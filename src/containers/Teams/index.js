@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
- import SingleTeam from "../../components/SingleTeam";
-import {getTeamsByUser} from "../../services"
-import {Link} from "react-router-dom";
+import SingleTeam from "../../components/SingleTeam";
+import {Link,Route,withRouter} from "react-router-dom";
 import teamsRedux from '../../redux/teams';
 
 class Teams extends Component {
-
     componentDidMount() {
         console.log("timovi na ulazu",this.props.teams.teams)
         var len=this.props.teams.teams.length
@@ -31,7 +29,11 @@ class Teams extends Component {
         }
         return (
             <div>
-                {teams.map((item)=><SingleTeam key={item.team.id} id={item.team.id} name={item.team.name} description={item.team.description}/> )}
+                {teams.map((item)=>
+                    <div key={item.team.id}>
+                    <SingleTeam key={item.team.id} id={item.team.id} name={item.team.name} description={item.team.description}/>
+                    </div>
+                    )}
                 <Link to="/teams/create">Create a team</Link>
             </div>
         )
@@ -47,4 +49,5 @@ const mapStateToProps = state => ({
     authenticationError: state.user.authenticationError,
     authenticationErrorMessage: state.user.authenticationErrorMessage,
 })
+
 export default connect(mapStateToProps, mapDispatchToProps)(Teams)

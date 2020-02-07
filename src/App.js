@@ -15,6 +15,7 @@ import TestNav from './containers/TestNav'
 import Teams from './containers/Teams'
 import PrivateRoute from "./HOC/PrivateRoute";
 import CreateTeam from "./containers/CreateTeam";
+import TeamProjects from "./containers/TeamProjects";
 
 const App = props => (
   
@@ -24,7 +25,7 @@ const App = props => (
       <Route exact path="/register" component={Register}/>
       <PrivateRoute exact path="/teams" Component={Teams}/>
       <PrivateRoute exact path="/teams/create" Component={CreateTeam}/>
-      <PrivateRoute exact path="/teams/{name}"/>
+      <PrivateRoute exact path="/teams/:name" Component={TeamProjects}/>
       <Route exact path="/testnav" component={TestNav}/>
       </Switch>
     </Router>
