@@ -41,6 +41,7 @@ const PrivateRoute = props => {
 
 const mapStateToProps = state => {
     return {
+        teams:state.teams,
         user:state.user,
         isLoading: state.global.isLoading,
         isAuthenticated: state.user.isAuthenticated,

@@ -25,7 +25,7 @@ class Home extends Component {
       if(this.props.isAuthenticated){
           return(
               <div>
-                  <h1>Logged</h1>
+                  <h1>Logged in</h1>
               </div>
           )
       }

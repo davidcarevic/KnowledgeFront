@@ -5,3 +5,18 @@ export const setTeamsByUser = teams =>{
         payload:teams
     }
 }
+
+export const removeTeamsByUser = () =>{
+    console.log("usao u removeteams")
+    return{
+        type:types.REMOVE_TEAMS_BY_USER,
+        payload:[]
+    }
+}
+
+export const setTeam=team=>{
+    return{
+        type:types.SET_TEAM,
+        payload:team
+    }
+}

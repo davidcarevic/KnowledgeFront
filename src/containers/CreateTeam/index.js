@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {createTeam} from '../../services';
+import { connect } from 'react-redux';
+
+import teamRedux from '../../redux/teams'
 
 var jwtDecode = require('jwt-decode');
 
@@ -9,22 +11,14 @@ class CreateTeam extends Component {
         description:'',
     }
     componentDidMount() {
-        // let token=window.localStorage.getItem('accessToken')
-        // console.log(token)
-        // let decoded=jwtDecode(token)
-        // console.log(decoded)
-        // this.setState({userId:decoded.user_id})
     }
     handleInputChange = (e) => {
         this.setState({ [e.target.id]: e.target.value })
     }
     handleFormSubmit = (e) => {
         e.preventDefault();
-        const {name,description,userId} = this.state;
-        console.log(this.state)
-            createTeam(name,description)
-                .then(res => console.log(res))
-                .catch(err => console.log(err.message))
+        const {name,description} = this.state;
+        this.props.createTeam(name,description)
         }
     render(){
         const {name,description} = this.state;
@@ -40,4 +34,13 @@ class CreateTeam extends Component {
         )
     }
 }
-export default CreateTeam
+
+
+const mapDispatchToProps={
+    createTeam:teamRedux.thunks.teamCreation
+}
+const mapStateToProps=state=>({
+    teams:state.teams,
+    team:state.team
+})
+export default connect(mapStateToProps,mapDispatchToProps)(CreateTeam)

@@ -6,8 +6,12 @@ import {Link} from "react-router-dom";
 import teamsRedux from '../../redux/teams';
 
 class Teams extends Component {
+
     componentDidMount() {
-        if(this.props.teams.teams.length < 1) {
+        console.log("timovi na ulazu",this.props.teams.teams)
+        var len=this.props.teams.teams.length
+        console.log("duzina",len)
+        if(len<1) {
             this.props.getTeams()
         }
     }
@@ -16,6 +20,14 @@ class Teams extends Component {
         console.log("TEAMS: ", this.props.teams.teams);
         if(this.props.isLoading) {
             return <div>Loading...</div>
+        }
+        if(teams===0){
+            return(
+            <div>
+               <h2>No teams</h2>
+                <Link to="/teams/create">Create a team</Link>
+            </div>
+            )
         }
         return (
             <div>

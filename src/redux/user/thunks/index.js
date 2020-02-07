@@ -1,4 +1,5 @@
 import { getToken,getRefresh,removeToken } from "../../../services";
+import {removeTeamsByUser} from "../../teams/actions";
 import {
     authenticateUser,
     setAccessToken,
@@ -8,6 +9,7 @@ import {
 } from "../actions";
 import { isLoading } from "../../global/actions";
 import axios from "../../../axios";
+import store from "../../configureStore";
 
 export const loginUser = (email, password) => dispatch => {
     console.log("OVO PRVO")
@@ -54,7 +56,6 @@ export const refreshToken = () => dispatch => {
            console.log(err.message)
         })
 }
-
 export const logout = () => dispatch =>{
     // works, the axios call for blacklisting needs to be added
     dispatch(isLoading(true))
@@ -64,14 +65,7 @@ export const logout = () => dispatch =>{
     dispatch(setAccessToken(null))
     dispatch(setRefreshToken(null))
     dispatch(authenticateUser(false))
+    dispatch(removeTeamsByUser())
     window.localStorage.removeItem('refreshToken')
     dispatch(isLoading(false))
-
-
-
-
-
-
-
-
 }

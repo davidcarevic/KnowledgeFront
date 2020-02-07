@@ -1,7 +1,8 @@
 import * as types from '../actions/types'
 
 const initialState = {
-    teams:[]
+    teams:[],
+    team:{}
 };
 
 export default (state = initialState,action) =>{
@@ -10,6 +11,16 @@ export default (state = initialState,action) =>{
             return {
                 ...state,
                 teams:action.payload
+            }
+        case types.REMOVE_TEAMS_BY_USER:
+            return{
+                ...state,
+                teams:action.payload
+            }
+        case types.SET_TEAM:
+            return{
+                ...state,
+                team:action.payload
             }
 
 
