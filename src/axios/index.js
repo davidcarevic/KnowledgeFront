@@ -6,7 +6,7 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use(config => {
-    if(!config.headers.common.Authorization || config.headers.common.Authorization==="" ) {
+    if(!config.headers.common.Authorization && store.getState().user.accessToken) {
         config.headers.common.Authorization = `Bearer ${store.getState().user.accessToken}`
     }
     return config;
