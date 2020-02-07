@@ -6,6 +6,7 @@ const initialState = {
     authenticationErrorMessage: '',
     accessToken: '',
     refreshToken: '',
+    user:{}
 }
 
 export default (state = initialState, action) => {
@@ -34,6 +35,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isAuthenticated: action.payload
+            }
+        case types.CREATE_USER:
+            return{
+                ...state,
+                user:action.payload
             }
         default:
             return state

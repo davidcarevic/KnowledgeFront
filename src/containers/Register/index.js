@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {register} from '../../services';
-
+import { connect } from 'react-redux'
+import userRedux from '../../redux/user';
 
 class Register extends Component {
     state = {
@@ -8,23 +8,18 @@ class Register extends Component {
       password: '',
       password2:''
     }
-  
     handleInputChange = (e) => {
       this.setState({ [e.target.id]: e.target.value })
     }
-  
     handleFormSubmit = (e) => {
       e.preventDefault();
       const { email, password, password2 } = this.state;
       //const {history } = this.props
       if(password===password2){
           console.log(" email i pass : ",email,password)
-          register(email,password)
-          .then(res => console.log(res))
-          .catch(err => console.log(err.message))
+          this.props.createUser(email,password)
       }
     }
-  
     render() {
       const { email, password,password2 } = this.state;
       return (
@@ -39,6 +34,12 @@ class Register extends Component {
         </div>
       )
     }
-  } 
+  }
+  const mapDispatchToProps={
+    createUser:userRedux.thunks.registerUser
+  }
+const mapStateToProps=state=>({
+    user:state.user
+})
 
-  export default Register
+  export default connect(mapStateToProps,mapDispatchToProps)(Register)

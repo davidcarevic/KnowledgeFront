@@ -39,3 +39,10 @@ export const authenticationErrorMessage = errorMessage => {
         payload: errorMessage
     }
 }
+
+export const createUser= user =>{
+    return{
+        type:types.CREATE_USER,
+        payload:user
+    }
+}

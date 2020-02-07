@@ -1,11 +1,12 @@
-import { getToken,getRefresh,removeToken } from "../../../services";
+import { getToken,getRefresh,removeToken,register } from "../../../services";
 import {removeTeamsByUser} from "../../teams/actions";
 import {
     authenticateUser,
     setAccessToken,
     setRefreshToken,
     authenticationError,
-    authenticationErrorMessage
+    authenticationErrorMessage,
+    createUser
 } from "../actions";
 import { isLoading } from "../../global/actions";
 import axios from "../../../axios";
@@ -60,7 +61,7 @@ export const logout = () => dispatch =>{
     // works, the axios call for blacklisting needs to be added
     dispatch(isLoading(true))
     console.log("usao u logout")
-    let res=removeToken()
+    let res=removeToken() // a function that returns true, if we decide to implement some kind of axios call to backend for token removal it will be changed
     console.log("true is remove token ??",res)
     dispatch(setAccessToken(null))
     dispatch(setRefreshToken(null))
@@ -68,4 +69,19 @@ export const logout = () => dispatch =>{
     dispatch(removeTeamsByUser())
     window.localStorage.removeItem('refreshToken')
     dispatch(isLoading(false))
+}
+
+
+export const registerUser = (email,password) =>dispatch =>{
+    dispatch(isLoading(true))
+    register(email,password)
+        .then(res=>{
+            dispatch(createUser(res.data))
+            dispatch(isLoading(false))
+        })
+        .catch(err=>{
+            console.log(err.message)
+            dispatch(isLoading(false))
+        })
+
 }
