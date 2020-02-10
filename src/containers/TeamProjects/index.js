@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import SingleTeam from "../../components/SingleTeam";
+import SingleProject from "../../components/SingleProject";
 import {Link} from "react-router-dom";
-import teamsRedux from '../../redux/teams';
+import projectsRedux from '../../redux/projects';
 
 class TeamProjects extends Component {
     state={
@@ -10,42 +10,41 @@ class TeamProjects extends Component {
     }
     componentDidMount() {
         console.log("PARAMS ID : ",this.props.computedMatch.params.id)
-        this.setState({id:this.props.computedMatch.params.id})
-        console.log("id tima ",this.state)
-        var len=this.props.teams.teams.length
-        console.log("duzina",len)
+        var len=this.props.projects.projects.length
+        console.log("Projekti", len)
         if(len<1) {
-            this.props.getTeams()
+            this.props.getProjects(this.props.computedMatch.params.id)
         }
     }
     render(){
-        let teams=this.props.teams.teams  //getting the array so the map function doesn't have a bunch of props
+        let projects=this.props.projects.projects  //getting the array so the map function doesn't have a bunch of props
         console.log("TEAMS: ", this.props.teams.teams);
         if(this.props.isLoading) {
             return <div>Loading...</div>
         }
-        if(teams===0){
+        if(projects===0){
             return(
                 <div>
-                    <h2>No teams</h2>
-                    <Link to="/teams/create">Create a team</Link>
+                    <h2>No projects</h2>
+                    <Link to="/teams/projects/create">Create a project</Link>
                 </div>
             )
         }
         return (
             <div>
-                {teams.map((item)=>
-                    <SingleTeam  key={item.team.id} id={item.team.id} name={item.team.name} description={item.team.description}/>
+                {projects.map((item)=>
+                    <SingleProject  key={item.project.id} id={item.project.id} name={item.project.name} description={item.project.description}/>
                 )}
-                <Link to="/teams/create">Create a team</Link>
+                <Link to="/teams/projects/create">Create a project</Link>
             </div>
         )
     }
 }
 const mapDispatchToProps ={
-    getTeams:teamsRedux.thunks.getTeams
+    getProjects:projectsRedux.thunks.getTeamProjects
 }
 const mapStateToProps = state => ({
+    projects:state.projects,
     teams:state.teams,
     isLoading: state.global.isLoading,
     isAuthenticated: state.user.isAuthenticated,

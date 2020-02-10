@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import teamRedux from '../../redux/teams'
+import { withRouter } from 'react-router-dom';
 var jwtDecode = require('jwt-decode');
+
 
 class CreateTeam extends Component {
     state = {
@@ -15,8 +17,11 @@ class CreateTeam extends Component {
     }
     handleFormSubmit = (e) => {
         e.preventDefault();
+        const {history } = this.props
+        console.log(history)
         const {name,description} = this.state;
         this.props.createTeam(name,description)
+        history.push("/teams")
         }
     render(){
         const {name,description} = this.state;
@@ -40,4 +45,4 @@ const mapStateToProps=state=>({
     team:state.team
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(CreateTeam)
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(CreateTeam))

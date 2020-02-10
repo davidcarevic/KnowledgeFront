@@ -9,7 +9,7 @@ class Teams extends Component {
         console.log("timovi na ulazu",this.props.teams.teams)
         var len=this.props.teams.teams.length
         console.log("duzina",len)
-        if(len<1) {
+        if(len<1 || this.props.team) {
             this.props.getTeams()
         }
     }

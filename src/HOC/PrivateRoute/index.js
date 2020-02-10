@@ -3,6 +3,7 @@ import { Redirect, Route } from 'react-router-dom';
 import  {connect} from 'react-redux'
 import userRedux from '../../redux/user';
 
+
 const PrivateRoute = props => {
     const { Component } = props;
     if(props.isLoading) {
@@ -15,7 +16,7 @@ const PrivateRoute = props => {
         )
     }
     return (
-    <Route exact={props.exact} path={props.path} render={(routerprops) =>{
+    <Route exact={props.exact} path={props.path} render={(...routerprops)  =>{
         const handleFormSubmit = (e) => {
             e.preventDefault();
             console.log('DDDDDDD',props)
@@ -29,7 +30,7 @@ const PrivateRoute = props => {
             <form  onSubmit={handleFormSubmit}>
                 <input type="submit" value="Logout" className='le-btn'/>    
             </form>
-            <Component {...props} />
+            <Component {...props}/>
         </div>
         )
     }
