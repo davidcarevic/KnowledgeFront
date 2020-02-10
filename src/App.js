@@ -25,7 +25,7 @@ const App = props => (
       <Route exact path="/register" component={Register}/>
       <PrivateRoute exact path="/teams" Component={Teams}/>
       <PrivateRoute exact path="/teams/create" Component={CreateTeam}/>
-      <PrivateRoute exact path="/teams/:name" Component={TeamProjects}/>
+      <PrivateRoute exact path="/teams/:id" Component={TeamProjects}/>
       <Route exact path="/testnav" component={TestNav}/>
       </Switch>
     </Router>

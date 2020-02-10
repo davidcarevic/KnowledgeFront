@@ -37,3 +37,7 @@ export const createTeam = (name,description) =>{
         description:description,
         })
 }
+
+export const getProjects=(id)=>{
+    return axios.get('/api/teams/'+id+'/')
+}
