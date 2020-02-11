@@ -26,16 +26,16 @@ class TeamProjects extends Component {
             return(
                 <div>
                     <h2>No projects</h2>
-                    <Link to="/teams/projects/create">Create a project</Link>
+                    <Link to={`/teams/${this.props.computedMatch.params.id}/projects/create`}>Create a project</Link>
                 </div>
             )
         }
         return (
             <div>
                 {projects.map((item)=>
-                    <SingleProject  key={item.project.id} id={item.project.id} name={item.project.name} description={item.project.description}/>
+                    <SingleProject  key={item.project.id} teamId={this.props.computedMatch.params.id} id={item.project.id} name={item.project.name} description={item.project.description}/>
                 )}
-                <Link to="/teams/projects/create">Create a project</Link>
+                <Link to={`/teams/${this.props.computedMatch.params.id}/projects/create`}>Create a project</Link>
             </div>
         )
     }

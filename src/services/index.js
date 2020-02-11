@@ -41,3 +41,11 @@ export const createTeam = (name,description) =>{
 export const getProjects=(id)=>{
     return axios.get('/api/teams/'+id+'/')
 }
+
+export const createProject =(name,description,teamID) => {
+    return axios.post('/api/projects/',{
+        name:name,
+        description:description,
+        teamID:teamID
+    })
+}

@@ -5,3 +5,10 @@ export const setProjectsByTeam = projects =>{
         payload:projects
     }
 }
+
+export const setProject=project=>{
+    return{
+        type:types.SET_PROJECT,
+        payload:project
+    }
+}

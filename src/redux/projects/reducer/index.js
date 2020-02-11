@@ -3,6 +3,7 @@ import {SET_PROJECTS_BY_TEAMS} from "../actions/types";
 
 const initialState = {
     projects:[],
+    project:{}
 
 };
 
@@ -15,6 +16,11 @@ export default (state =initialState,action)=>{
             }
 
         }
+        case types.SET_PROJECT:
+            return{
+                ...state,
+                project:action.payload
+            }
         default:
             return state;
     }
