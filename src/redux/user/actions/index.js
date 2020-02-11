@@ -46,3 +46,16 @@ export const createUser= user =>{
         payload:user
     }
 }
+
+export const createInvite = invite =>{
+    return{
+        type:types.SET_INVITE,
+        payload:invite
+    }
+}
+export const setInvitedUser = invited =>{
+    return{
+        type:types.SET_INVITED_USER,
+        payload:invited
+    }
+}

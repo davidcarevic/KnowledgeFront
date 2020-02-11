@@ -6,7 +6,10 @@ const initialState = {
     authenticationErrorMessage: '',
     accessToken: '',
     refreshToken: '',
-    user:{}
+    user:{},
+    invite:{},
+    invited:{}
+
 }
 
 export default (state = initialState, action) => {
@@ -40,6 +43,16 @@ export default (state = initialState, action) => {
             return{
                 ...state,
                 user:action.payload
+            }
+        case types.SET_INVITE:
+            return{
+                ...state,
+                invite:action.payload
+            }
+        case types.SET_INVITED_USER:
+            return{
+                ...state,
+                invited:action.payload
             }
         default:
             return state

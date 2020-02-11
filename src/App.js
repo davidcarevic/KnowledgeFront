@@ -17,6 +17,7 @@ import PrivateRoute from "./HOC/PrivateRoute";
 import CreateTeam from "./containers/CreateTeam";
 import TeamProjects from "./containers/TeamProjects";
 import CreateProject from "./containers/CreateProject";
+import InviteUser from "./containers/InviteUser";
 
 const App = props => (
   
@@ -24,10 +25,12 @@ const App = props => (
       <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/register" component={Register}/>
+      <Route exact path="/register/:guid" component={Register}/>
       <PrivateRoute exact path="/teams" Component={Teams}/>
       <PrivateRoute exact path="/teams/create" Component={CreateTeam}/>
       <PrivateRoute exact path="/teams/:id" Component={TeamProjects}/>
       <PrivateRoute exact path="/teams/:id/projects/create" Component={CreateProject}/>
+      <PrivateRoute exact path="/invite" Component={InviteUser}/>
       <Route exact path="/testnav" component={TestNav}/>
       </Switch>
     </Router>

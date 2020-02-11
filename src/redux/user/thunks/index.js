@@ -1,4 +1,4 @@
-import { getToken,getRefresh,removeToken,register } from "../../../services";
+import { getToken,getRefresh,removeToken,register,inviteUser,getInvitedUser } from "../../../services";
 import {removeTeamsByUser} from "../../teams/actions";
 import {
     authenticateUser,
@@ -6,7 +6,9 @@ import {
     setRefreshToken,
     authenticationError,
     authenticationErrorMessage,
-    createUser
+    createUser,
+    createInvite,
+    setInvitedUser
 } from "../actions";
 import { isLoading } from "../../global/actions";
 import axios from "../../../axios";
@@ -84,4 +86,30 @@ export const registerUser = (email,password) =>dispatch =>{
             dispatch(isLoading(false))
         })
 
+}
+
+export const userInvite = (email,data) => dispatch =>{
+    dispatch(isLoading(true))
+    inviteUser(email,data)
+        .then(res=>{
+            dispatch(createInvite(res.data))
+            dispatch(isLoading(false))
+        })
+        .catch(err=>{
+            console.log(err.message)
+            dispatch(isLoading(false))
+        })
+}
+
+export const getInvited = (guid) => dispatch =>{
+    dispatch(isLoading(true))
+    getInvitedUser(guid)
+        .then(res=>{
+            dispatch(setInvitedUser(res.data))
+            dispatch(isLoading(false))
+        })
+        .catch(err=>{
+            console.log(err.message)
+            dispatch(isLoading(false))
+        })
 }

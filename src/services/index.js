@@ -49,3 +49,14 @@ export const createProject =(name,description,teamID) => {
         teamID:teamID
     })
 }
+
+export const inviteUser=(email,data)=>{
+    return axios.post('/api/email-invitations/',{
+        email:email,
+        data:data
+    })
+}
+
+export const getInvitedUser=(guid)=>{
+    return axios.get('/api/email-invitations/'+guid+'/')
+}

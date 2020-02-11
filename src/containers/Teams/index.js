@@ -24,6 +24,8 @@ class Teams extends Component {
             <div>
                <h2>No teams</h2>
                 <Link to="/teams/create">Create a team</Link>
+                <br/>
+                <Link to="/invite">Invite a person</Link>
             </div>
             )
         }
@@ -35,6 +37,8 @@ class Teams extends Component {
                     </div>
                     )}
                 <Link to="/teams/create">Create a team</Link>
+                <br/>
+                <Link to="/invite">Invite a person</Link>
             </div>
         )
     }
