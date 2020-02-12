@@ -12,7 +12,6 @@ import {
 } from "../actions";
 import { isLoading } from "../../global/actions";
 import axios from "../../../axios";
-import store from "../../configureStore";
 
 export const loginUser = (email, password) => dispatch => {
     console.log("OVO PRVO")
@@ -46,12 +45,12 @@ export const refreshToken = () => dispatch => {
     dispatch(authenticationError(false));
     dispatch(authenticationErrorMessage(''));
     getRefresh()
-        .then(res=>{
+        .then(res => {
             dispatch(isLoading(false));
             dispatch(setAccessToken(res.data.access))
             dispatch(authenticateUser(true))
         })
-        .catch(err=>{
+        .catch(err => {
             console.log("OVDE: ", err);
             dispatch(isLoading(false));
             dispatch(authenticationError(true));

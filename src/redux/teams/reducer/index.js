@@ -1,8 +1,7 @@
 import * as types from '../actions/types'
 
 const initialState = {
-    teams:[],
-    team:{}
+    teams:[]
 };
 
 export default (state = initialState,action) =>{
@@ -17,14 +16,6 @@ export default (state = initialState,action) =>{
                 ...state,
                 teams:action.payload
             }
-        case types.SET_TEAM:
-            return{
-                ...state,
-                team:action.payload
-            }
-
-
-
         default:
             return state;
     }

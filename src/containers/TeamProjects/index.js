@@ -5,14 +5,14 @@ import {Link} from "react-router-dom";
 import projectsRedux from '../../redux/projects';
 
 class TeamProjects extends Component {
-    state={
-        id:''
+    state = {
+        id: ''
     }
     componentDidMount() {
-        console.log("PARAMS ID : ",this.props.computedMatch.params.id)
-        var len=this.props.projects.projects.length
+        console.log("PARAMS ID : ", this.props.computedMatch.params.id)
+        var len = this.props.projects.projects.length
         console.log("Projekti", len)
-        if(len<1) {
+        if(len < 1) {
             this.props.getProjects(this.props.computedMatch.params.id)
         }
     }
@@ -22,8 +22,8 @@ class TeamProjects extends Component {
         if(this.props.isLoading) {
             return <div>Loading...</div>
         }
-        if(projects===0){
-            return(
+        if(projects === 0){
+            return (
                 <div>
                     <h2>No projects</h2>
                     <Link to={`/teams/${this.props.computedMatch.params.id}/projects/create`}>Create a project</Link>
@@ -40,12 +40,12 @@ class TeamProjects extends Component {
         )
     }
 }
-const mapDispatchToProps ={
-    getProjects:projectsRedux.thunks.getTeamProjects
+const mapDispatchToProps = {
+    getProjects: projectsRedux.thunks.getTeamProjects
 }
 const mapStateToProps = state => ({
-    projects:state.projects,
-    teams:state.teams,
+    projects: state.projects,
+    teams: state.teams,
     isLoading: state.global.isLoading,
     isAuthenticated: state.user.isAuthenticated,
     authenticationError: state.user.authenticationError,

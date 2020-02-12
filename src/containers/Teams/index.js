@@ -1,25 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import SingleTeam from "../../components/SingleTeam";
-import {Link,Route,withRouter} from "react-router-dom";
+import { Link } from "react-router-dom";
 import teamsRedux from '../../redux/teams';
 
 class Teams extends Component {
     componentDidMount() {
-        console.log("timovi na ulazu",this.props.teams.teams)
-        var len=this.props.teams.teams.length
-        console.log("duzina",len)
-        if(len<1 || this.props.team) {
+        console.log("timovi na ulazu", this.props.teams.teams)
+        var len = this.props.teams.teams.length
+        if(len < 1 && !this.props.isLoading) {
             this.props.getTeams()
         }
     }
     render(){
-        let teams=this.props.teams.teams  //getting the array so the map function doesn't have a bunch of props
+        let teams = this.props.teams.teams  //getting the array so the map function doesn't have a bunch of props
         console.log("TEAMS: ", this.props.teams.teams);
-        if(this.props.isLoading) {
+        if (this.props.isLoading) {
             return <div>Loading...</div>
         }
-        if(teams===0){
+        if (teams === 0){
             return(
             <div>
                <h2>No teams</h2>
@@ -43,11 +42,11 @@ class Teams extends Component {
         )
     }
 }
-const mapDispatchToProps ={
-    getTeams:teamsRedux.thunks.getTeams
+const mapDispatchToProps = {
+    getTeams: teamsRedux.thunks.getTeams
 }
 const mapStateToProps = state => ({
-    teams:state.teams,
+    teams: state.teams,
     isLoading: state.global.isLoading,
     isAuthenticated: state.user.isAuthenticated,
     authenticationError: state.user.authenticationError,

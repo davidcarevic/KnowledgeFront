@@ -7,19 +7,19 @@ const initialState = {
 
 };
 
-export default (state =initialState,action)=>{
+export default (state = initialState, action) => {
     switch(action.type){
-        case SET_PROJECTS_BY_TEAMS:{
-            return{
+        case SET_PROJECTS_BY_TEAMS: {
+            return {
                 ...state,
-                projects:action.payload
+                projects: action.payload
             }
 
         }
         case types.SET_PROJECT:
-            return{
+            return {
                 ...state,
-                project:action.payload
+                project: action.payload
             }
         default:
             return state;

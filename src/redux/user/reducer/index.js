@@ -6,9 +6,9 @@ const initialState = {
     authenticationErrorMessage: '',
     accessToken: '',
     refreshToken: '',
-    user:{},
-    invite:{},
-    invited:{}
+    user: {},
+    invite: {},
+    invited: {}
 
 }
 
@@ -42,17 +42,17 @@ export default (state = initialState, action) => {
         case types.CREATE_USER:
             return{
                 ...state,
-                user:action.payload
+                user: action.payload
             }
         case types.SET_INVITE:
             return{
                 ...state,
-                invite:action.payload
+                invite: action.payload
             }
         case types.SET_INVITED_USER:
             return{
                 ...state,
-                invited:action.payload
+                invited: action.payload
             }
         default:
             return state

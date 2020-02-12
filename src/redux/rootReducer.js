@@ -8,6 +8,6 @@ import projectsRedux from './projects'
 export default combineReducers({
     user: userRedux.reducer,
     global: globalRedux.reducer,
-    teams:teamsRedux.reducer,
-    projects:projectsRedux.reducer
+    teams: teamsRedux.reducer,
+    projects: projectsRedux.reducer
 })

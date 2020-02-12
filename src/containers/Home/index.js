@@ -16,7 +16,7 @@ class Home extends Component {
     handleFormSubmit = (e) => {
       e.preventDefault();
       const { email, password } = this.state;
-      const {history } = this.props
+      const { history } = this.props
       this.props.loginUser(email, password);
       history.push('/teams');
     }
@@ -51,7 +51,7 @@ class Home extends Component {
     loginUser: userRedux.thunks.loginUser,
   }
 
-  const mapStateToProps=state=>({
+  const mapStateToProps = state => ({
           isAuthenticated: state.user.isAuthenticated,
       }
   )

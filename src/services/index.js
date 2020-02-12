@@ -1,6 +1,4 @@
 import axios from '../axios';
-import { Route } from 'react-router-dom';
-import { render } from '@testing-library/react';
 
 export const getToken = (email, password) => {
     console.log("asdasdasds")
@@ -10,7 +8,7 @@ export const getToken = (email, password) => {
         })
 }
 
-export const removeToken=()=>{
+export const removeToken = () => {
     return true
 }
 
@@ -31,32 +29,32 @@ export const getTeamsByUser = () => {
     return axios.get('/api/teams/')
 }
 
-export const createTeam = (name,description) =>{
+export const createTeam = (name, description) => {
     return axios.post('/api/teams/',{
-        name:name,
-        description:description,
+        name: name,
+        description: description,
         })
 }
 
-export const getProjects=(id)=>{
+export const getProjects = (id) => {
     return axios.get('/api/teams/'+id+'/')
 }
 
-export const createProject =(name,description,teamID) => {
+export const createProject = (name, description, teamID) => {
     return axios.post('/api/projects/',{
-        name:name,
-        description:description,
-        teamID:teamID
+        name: name,
+        description: description,
+        teamID: teamID
     })
 }
 
-export const inviteUser=(email,data)=>{
+export const inviteUser = (email, data) => {
     return axios.post('/api/email-invitations/',{
-        email:email,
-        data:data
+        email: email,
+        data: data
     })
 }
 
-export const getInvitedUser=(guid)=>{
-    return axios.get('/api/email-invitations/'+guid+'/')
+export const getInvitedUser = (guid) => {
+    return axios.get('/api/email-invitations/' + guid + '/')
 }

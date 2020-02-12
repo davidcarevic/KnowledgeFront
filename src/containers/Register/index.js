@@ -4,18 +4,18 @@ import userRedux from '../../redux/user';
 
 class Register extends Component {
     state = {
-        guid:'',
+      guid: '',
       email: '',
       password: '',
-      password2:'',
-        inivtedUser:{}
+      password2: '',
+      inivtedUser: {}
     }
     componentDidMount() {
-        console.log("GUID : ",this.props.match.params.guid)
-        var guid=this.props.match.params.guid
+        console.log("GUID : ", this.props.match.params.guid)
+        var guid = this.props.match.params.guid
         if(guid) {
             this.setState({guid: guid})
-            this.setState({invitedUser:this.props.getUser(guid)})
+            this.setState({invitedUser: this.props.getUser(guid)})
         }
     }
 
@@ -24,21 +24,20 @@ class Register extends Component {
     }
     handleFormSubmit = (e) => {
       e.preventDefault();
-      const { email,password, password2 } = this.state;
-      const{invitedUser}= this.state
+      const { email, password, password2 } = this.state;
        console.log("USER MAIL , ",this.props.user.invited.email)
-        if(email==='') {
+        if(email === '') {
             this.setState({email: this.props.user.invited.email})
         }
       //const {history } = this.props
-      if(password===password2){
+      if(password === password2) {
           console.log(this.state)
-          console.log(" email i pass : ",email,password)
+          console.log(" email i pass : ", email, password)
           this.props.createUser(email,password)
       }
     }
     render() {
-      const { email, password,password2,guid } = this.state;
+      const { email, password, password2, guid } = this.state;
       if(guid){
           return(
               <div>
@@ -64,13 +63,13 @@ class Register extends Component {
       )
     }
   }
-  const mapDispatchToProps={
-    createUser:userRedux.thunks.registerUser,
-      getUser:userRedux.thunks.getInvited
+  const mapDispatchToProps = {
+    createUser: userRedux.thunks.registerUser,
+      getUser: userRedux.thunks.getInvited
   }
-const mapStateToProps=state=>({
-    user:state.user,
-    invited:state.invited
+const mapStateToProps = state => ({
+    user: state.user,
+    invited: state.invited
 })
 
   export default connect(mapStateToProps,mapDispatchToProps)(Register)

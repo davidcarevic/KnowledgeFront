@@ -40,22 +40,22 @@ export const authenticationErrorMessage = errorMessage => {
     }
 }
 
-export const createUser= user =>{
-    return{
-        type:types.CREATE_USER,
-        payload:user
+export const createUser= user => {
+    return {
+        type: types.CREATE_USER,
+        payload: user
     }
 }
 
-export const createInvite = invite =>{
-    return{
-        type:types.SET_INVITE,
-        payload:invite
+export const createInvite = invite => {
+    return {
+        type: types.SET_INVITE,
+        payload: invite
     }
 }
-export const setInvitedUser = invited =>{
-    return{
-        type:types.SET_INVITED_USER,
-        payload:invited
+export const setInvitedUser = invited => {
+    return {
+        type: types.SET_INVITED_USER,
+        payload: invited
     }
 }
