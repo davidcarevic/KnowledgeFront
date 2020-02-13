@@ -16,13 +16,16 @@ instance.interceptors.response.use( response => {
     return response
 },error=>{
     axios.interceptors.response.eject();
-    getRefresh()
-        .then(res => {
-            instance.interceptors.request.use(config => {
+    if(window.localStorage.getItem("refreshToken")) {
+        getRefresh()
+            .then(res => {
+                instance.interceptors.request.use(config => {
                     config.headers.common.Authorization = `Bearer ${res.data.access}`
-                return config;
-            });
-        })
-        .catch(err=>console.log(err.message))
+                    return config;
+                });
+            })
+            .catch(err => console.log(err.message))
+    }
+    return error
 })
 export default instance;
