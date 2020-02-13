@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import Home from './containers/Home'
 import Register from './containers/Register'
 import TestNav from './containers/TestNav'
-import Teams from './containers/Teams'
+import Dashboard from './containers/Dashboard'
 import PrivateRoute from "./HOC/PrivateRoute";
 import CreateTeam from "./containers/CreateTeam";
 import TeamProjects from "./containers/TeamProjects";
@@ -25,10 +25,10 @@ const App = props => (
       <Route exact path="/" component={Home} />
       <Route exact path="/register" component={Register}/>
       <Route exact path="/register/:guid" component={Register}/>
-      <PrivateRoute exact path="/teams" Component={Teams}/>
-      <PrivateRoute exact path="/teams/create" Component={CreateTeam}/>
-      <PrivateRoute exact path="/teams/:id" Component={TeamProjects}/>
-      <PrivateRoute exact path="/teams/:id/projects/create" Component={CreateProject}/>
+      <PrivateRoute exact path="/dashboard" Component={Dashboard}/>
+      <PrivateRoute exact path="/dashboard/teams/create" Component={CreateTeam}/>
+      <PrivateRoute exact path="/dashboard/:id" Component={TeamProjects}/>
+      <PrivateRoute exact path="/dashboard/projects/create" Component={CreateProject}/>
       <PrivateRoute exact path="/invite" Component={InviteUser}/>
       <Route exact path="/testnav" component={TestNav}/>
       </Switch>

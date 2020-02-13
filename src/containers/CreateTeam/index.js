@@ -19,7 +19,7 @@ class CreateTeam extends Component {
         console.log(history)
         const { name, description } = this.state;
         this.props.createTeam(name, description);
-        history.push("/teams");
+        history.push("/dashboard");
         }
     render(){
         const { name, description } = this.state;

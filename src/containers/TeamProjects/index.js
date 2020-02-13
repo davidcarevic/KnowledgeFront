@@ -10,9 +10,9 @@ class TeamProjects extends Component {
     }
     componentDidMount() {
         console.log("PARAMS ID : ", this.props.computedMatch.params.id)
-        var len = this.props.projects.projects.length
+        var len = this.props.computedMatch.params.id
         console.log("Projekti", len)
-        if(len < 1) {
+        if(!this.props.isLoading) {
             this.props.getProjects(this.props.computedMatch.params.id)
         }
     }

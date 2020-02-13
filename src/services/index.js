@@ -40,6 +40,10 @@ export const getProjects = (id) => {
     return axios.get('/api/teams/'+id+'/')
 }
 
+export const getProjectsByUser = () => {
+    return axios.get('/api/user-projects/')
+}
+
 export const createProject = (name, description, teamID) => {
     return axios.post('/api/projects/',{
         name: name,

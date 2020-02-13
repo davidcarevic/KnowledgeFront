@@ -15,20 +15,22 @@ class InviteUser extends Component {
         e.preventDefault();
         const { email, team, project } = this.state;
         var data = {
-            team: team
+            team: team,
+            project:project
         }
         //const {history } = this.props
             console.log(" email i data : ",email,data)
             this.props.inviteUser(email,data)
     }
     render() {
-        const { email, team } = this.state;
+        const { email, team , project } = this.state;
         return (
             <div>
                 <form onSubmit={this.handleFormSubmit}>
                     <h1> Invite a person to join a team or the app.</h1>
                     <p>Email : <input id="email" type="text" value={email} onChange={this.handleInputChange} /></p>
                     <p>Team : <input id="team" type="text" value={team} onChange={this.handleInputChange}/></p>
+                    <p>Project : <input id="project" type="text" value={project} onChange={this.handleInputChange}/></p>
                     <p><button  type="submit">Invite this email</button></p>
                 </form>
             </div>

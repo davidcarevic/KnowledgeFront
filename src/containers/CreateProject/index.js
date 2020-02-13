@@ -19,7 +19,7 @@ class CreateProject extends Component {
         const { history } = this.props
         const { name, description } = this.state;
         this.props.createProject(name, description, this.props.computedMatch.params.id)
-        history.push("/teams/" + this.props.computedMatch.params.id)
+        history.push("/dashboard/")
     }
     render(){
         const {name, description} = this.state;

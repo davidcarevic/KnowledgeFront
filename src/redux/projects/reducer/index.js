@@ -21,6 +21,11 @@ export default (state = initialState, action) => {
                 ...state,
                 project: action.payload
             }
+        case types.SET_PROJECTS_BY_USER:
+            return {
+                ...state,
+                projects:action.payload
+            }
         default:
             return state;
     }

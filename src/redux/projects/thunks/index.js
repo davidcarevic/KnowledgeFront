@@ -1,6 +1,7 @@
-import { createProject,getProjects} from "../../../services";
-import {setProject, setProjectsByTeam} from "../actions";
+import {createProject, getProjects, getProjectsByUser} from "../../../services";
+import {setProjectsByTeam,setProjectsByUser} from "../actions";
 import {isLoading} from "../../global/actions";
+
 
 export const getTeamProjects = (id) => dispatch => {
     dispatch(isLoading(true));
@@ -24,8 +25,26 @@ export const projectCreation = (name, description, teamId) => dispatch =>{
     dispatch(isLoading(true));
     createProject(name, description, teamId)
         .then(res => {
-            console.log("project created : ", res.data)
-            dispatch(setProject(res.data))
+        return getProjectsByUser()
+    })
+        .then(res => {
+            dispatch(setProjectsByUser(res.data));
+            dispatch(isLoading(false));
+        })
+        .catch(err => {
+            console.log(err.message)
+            dispatch(isLoading(false))
+        })
+}
+
+export const getProjectsForUser = () => dispatch => {
+    dispatch(isLoading(true));
+    getProjectsByUser()
+        .then(res => {
+            if(res.data.length === 0) {
+                res.data = 0;
+            }
+            dispatch(setProjectsByUser(res.data));
             dispatch(isLoading(false));
         })
         .catch(err => {

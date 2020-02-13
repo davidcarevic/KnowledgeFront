@@ -13,3 +13,10 @@ export const setProject = project => {
         payload: project
     }
 }
+
+export const setProjectsByUser = projects =>{
+    return{
+        type: types.SET_PROJECTS_BY_USER,
+        payload: projects
+    }
+}

@@ -18,7 +18,7 @@ class Home extends Component {
       const { email, password } = this.state;
       const { history } = this.props
       this.props.loginUser(email, password);
-      history.push('/teams');
+      history.push('/dashboard');
     }
     render() {
       const { email, password } = this.state;
