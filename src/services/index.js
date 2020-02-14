@@ -18,10 +18,10 @@ export const getRefresh = () =>{
     })
 }
 
-export const register = (email, password) => {
+export const register = (email, password,data) => {
   console.log("usao u reg")
   return axios.post('/api/users/',{
-     email:email, password:password
+     email:email, password:password,data:data
   })
 }
 

@@ -73,9 +73,9 @@ export const logout = () => dispatch =>{
 }
 
 
-export const registerUser = (email,password) =>dispatch =>{
+export const registerUser = (email,password,data) =>dispatch =>{
     dispatch(isLoading(true))
-    register(email,password)
+    register(email,password,data)
         .then(res=>{
             dispatch(createUser(res.data))
             dispatch(isLoading(false))

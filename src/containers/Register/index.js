@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import userRedux from '../../redux/user';
+import { withRouter } from 'react-router-dom';
 
 class Register extends Component {
     state = {
@@ -8,14 +9,16 @@ class Register extends Component {
       email: '',
       password: '',
       password2: '',
-      inivtedUser: {}
+      data:{}
     }
     componentDidMount() {
         console.log("GUID : ", this.props.match.params.guid)
         var guid = this.props.match.params.guid
         if(guid) {
             this.setState({guid: guid})
-            this.setState({invitedUser: this.props.getUser(guid)})
+            if(this.props.user.invited!=={}  && !this.props.isLoading){
+                this.props.getUser(guid)
+            }
         }
     }
 
@@ -24,16 +27,24 @@ class Register extends Component {
     }
     handleFormSubmit = (e) => {
       e.preventDefault();
-      const { email, password, password2 } = this.state;
-       console.log("USER MAIL , ",this.props.user.invited.email)
-        if(email === '') {
-            this.setState({email: this.props.user.invited.email})
-        }
-      //const {history } = this.props
+      const { email, password, password2,data,guid} = this.state;
+      const {history } = this.props
       if(password === password2) {
+          if(this.props.user.invited.email){
+              let email = this.props.user.invited.email
+              let data = {
+                  team:this.props.user.invited.data.team,
+                  project:this.props.user.invited.data.project,
+                  guid:guid
+              }
+               this.props.createUser(email, password, data)
+               history.push("/")
+              return
+          }
           console.log(this.state)
-          console.log(" email i pass : ", email, password)
-          this.props.createUser(email,password)
+          this.props.createUser(email, password, data)
+          history.push("/")
+
       }
     }
     render() {
@@ -72,4 +83,4 @@ const mapStateToProps = state => ({
     invited: state.invited
 })
 
-  export default connect(mapStateToProps,mapDispatchToProps)(Register)
+  export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Register))

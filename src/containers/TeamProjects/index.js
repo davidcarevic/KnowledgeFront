@@ -12,7 +12,7 @@ class TeamProjects extends Component {
         console.log("PARAMS ID : ", this.props.computedMatch.params.id)
         var len = this.props.computedMatch.params.id
         console.log("Projekti", len)
-        if(!this.props.isLoading) {
+        if(this.props.isLoading) {
             this.props.getProjects(this.props.computedMatch.params.id)
         }
     }
