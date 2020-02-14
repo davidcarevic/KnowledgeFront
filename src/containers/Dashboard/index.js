@@ -26,7 +26,7 @@ class Dashboard extends Component {
         if (this.props.isLoading) {
             return <div>Loading...</div>
         }
-        if (teams === 0 && projects===0){
+        if (teams === 0 && projects === 0){
             return(
             <div>
                <h2>No teams and projects</h2>
@@ -41,13 +41,13 @@ class Dashboard extends Component {
         return (
             <div>
                 <h2>TEAMS:</h2>
-                {teams.map((item)=>
+                {!teams?<div>No teams</div>:teams.map((item)=>
                     <div key={item.team.id}>
                     <SingleTeam key={item.team.id} id={item.team.id} name={item.team.name} description={item.team.description}/>
                     </div>
                     )}
                     <h2>PROJECTS:</h2>
-                {projects.map((item)=>
+                {!projects?<div>No projects</div>:projects.map((item)=>
                     <div key={item.project.id}>
                         <SingleProject key={item.project.id} id={item.project.id} name={item.project.name} description={item.project.description}/>
                     </div>
