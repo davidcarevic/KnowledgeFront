@@ -11,9 +11,11 @@ class CreateProject extends Component {
     componentDidMount() {
         console.log("ID : ", this.props.computedMatch.params.id);
     }
+
     handleInputChange = (e) => {
         this.setState({ [e.target.id]: e.target.value })
     }
+
     handleFormSubmit = (e) => {
         e.preventDefault();
         const { history } = this.props
@@ -21,8 +23,9 @@ class CreateProject extends Component {
         this.props.createProject(name, description, this.props.computedMatch.params.id)
         history.push("/dashboard")
     }
-    render(){
-        const {name, description} = this.state;
+
+    render() {
+        const { name, description } = this.state;
         return (
             <div>
                 <form onSubmit={this.handleFormSubmit}>
@@ -38,6 +41,7 @@ class CreateProject extends Component {
 const mapDispatchToProps = {
     createProject: projectRedux.thunks.projectCreation
 }
+
 const mapStateToProps = state => ({
     teams: state.teams,
     team: state.team,
@@ -45,4 +49,4 @@ const mapStateToProps = state => ({
     project: state.project
 })
 
-export default withRouter(connect(mapStateToProps,mapDispatchToProps)(CreateProject))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreateProject))

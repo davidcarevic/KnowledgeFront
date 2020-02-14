@@ -22,11 +22,11 @@ class Dashboard extends Component {
         let teams = this.props.teams.teams  //getting the array so the map function doesn't have a bunch of props
         let projects = this.props.projects.projects
         console.log("TEAMS: ", this.props.teams.teams);
-        console.log("PROJECTS: ",this.props.projects.projects)
+        console.log("PROJECTS: ", this.props.projects.projects)
         if (this.props.isLoading) {
             return <div>Loading...</div>
         }
-        if (teams === 0 && projects === 0){
+        if (teams === 0 && projects === 0) {
             return(
             <div>
                <h2>No teams and projects</h2>
@@ -41,13 +41,13 @@ class Dashboard extends Component {
         return (
             <div>
                 <h2>TEAMS:</h2>
-                {!teams?<div>No teams</div>:teams.map((item)=>
+                {!teams ? <div>No teams</div> : teams.map((item) =>
                     <div key={item.team.id}>
                     <SingleTeam key={item.team.id} id={item.team.id} name={item.team.name} description={item.team.description}/>
                     </div>
                     )}
                     <h2>PROJECTS:</h2>
-                {!projects?<div>No projects</div>:projects.map((item)=>
+                {!projects ? <div>No projects</div> : projects.map((item) =>
                     <div key={item.project.id}>
                         <SingleProject key={item.project.id} id={item.project.id} name={item.project.name} description={item.project.description}/>
                     </div>

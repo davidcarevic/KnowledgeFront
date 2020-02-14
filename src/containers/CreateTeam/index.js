@@ -8,11 +8,11 @@ class CreateTeam extends Component {
         name: '',
         description: '',
     }
-    componentDidMount() {
-    }
+
     handleInputChange = (e) => {
         this.setState({ [e.target.id]: e.target.value })
     }
+
     handleFormSubmit = (e) => {
         e.preventDefault();
         const { history } = this.props
@@ -21,7 +21,8 @@ class CreateTeam extends Component {
         this.props.createTeam(name, description);
         history.push("/dashboard");
         }
-    render(){
+
+    render() {
         const { name, description } = this.state;
         return (
             <div>
@@ -35,12 +36,14 @@ class CreateTeam extends Component {
         )
     }
 }
+
 const mapDispatchToProps = {
     createTeam: teamRedux.thunks.teamCreation
 }
+
 const mapStateToProps = state => ({
     teams: state.teams,
     team: state.team
 })
 
-export default withRouter(connect(mapStateToProps,mapDispatchToProps)(CreateTeam))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreateTeam))

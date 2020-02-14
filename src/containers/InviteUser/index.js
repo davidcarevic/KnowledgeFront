@@ -8,9 +8,11 @@ class InviteUser extends Component {
         team: '',
         project: ''
     }
+
     handleInputChange = (e) => {
         this.setState({ [e.target.id]: e.target.value })
     }
+
     handleFormSubmit = (e) => {
         e.preventDefault();
         const { email, team, project } = this.state;
@@ -22,6 +24,7 @@ class InviteUser extends Component {
             console.log(" email i data : ",email,data)
             this.props.inviteUser(email,data)
     }
+
     render() {
         const { email, team , project } = this.state;
         return (
@@ -37,11 +40,13 @@ class InviteUser extends Component {
         )
     }
 }
+
 const mapDispatchToProps = {
     inviteUser: userRedux.thunks.userInvite
 }
+
 const mapStateToProps = state => ({
     invite: state.invite
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(InviteUser)
+export default connect(mapStateToProps, mapDispatchToProps)(InviteUser)

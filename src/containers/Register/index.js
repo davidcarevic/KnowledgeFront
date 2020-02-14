@@ -9,14 +9,15 @@ class Register extends Component {
       email: '',
       password: '',
       password2: '',
-      data:{}
+      data: {}
     }
+
     componentDidMount() {
         console.log("GUID : ", this.props.match.params.guid)
         var guid = this.props.match.params.guid
-        if(guid) {
+        if (guid) {
             this.setState({guid: guid})
-            if(this.props.user.invited!=={}  && !this.props.isLoading){
+            if (this.props.user.invited !== {}  && !this.props.isLoading){
                 this.props.getUser(guid)
             }
         }
@@ -25,17 +26,18 @@ class Register extends Component {
     handleInputChange = (e) => {
       this.setState({ [e.target.id]: e.target.value })
     }
+
     handleFormSubmit = (e) => {
       e.preventDefault();
       const { email, password, password2,data,guid} = this.state;
-      const {history } = this.props
-      if(password === password2) {
-          if(this.props.user.invited.email){
+      const { history } = this.props
+      if (password === password2) {
+          if (this.props.user.invited.email) {
               let email = this.props.user.invited.email
               let data = {
-                  team:this.props.user.invited.data.team,
-                  project:this.props.user.invited.data.project,
-                  guid:guid
+                  team: this.props.user.invited.data.team,
+                  project: this.props.user.invited.data.project,
+                  guid: guid
               }
                this.props.createUser(email, password, data)
                history.push("/")
@@ -49,8 +51,8 @@ class Register extends Component {
     }
     render() {
       const { email, password, password2, guid } = this.state;
-      if(guid){
-          return(
+      if (guid) {
+          return (
               <div>
                   <form onSubmit={this.handleFormSubmit}>
                       <h1> Join!</h1>
@@ -61,6 +63,7 @@ class Register extends Component {
               </div>
           )
       }
+
       return (
         <div>
           <form onSubmit={this.handleFormSubmit}> 
@@ -74,13 +77,15 @@ class Register extends Component {
       )
     }
   }
+
   const mapDispatchToProps = {
     createUser: userRedux.thunks.registerUser,
       getUser: userRedux.thunks.getInvited
   }
+
 const mapStateToProps = state => ({
     user: state.user,
     invited: state.invited
 })
 
-  export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Register))
+  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Register))

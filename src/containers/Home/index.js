@@ -10,9 +10,11 @@ class Home extends Component {
       email: '',
       password: '',
     }
+    
     handleInputChange = (e) => {
       this.setState({ [e.target.id]: e.target.value })
     }
+
     handleFormSubmit = (e) => {
       e.preventDefault();
       const { email, password } = this.state;
@@ -20,10 +22,11 @@ class Home extends Component {
       this.props.loginUser(email, password);
       history.push('/dashboard');
     }
+
     render() {
       const { email, password } = this.state;
-      if(this.props.isAuthenticated){
-          return(
+      if (this.props.isAuthenticated) {
+          return (
               <div>
                   <h1>Logged in</h1>
               </div>

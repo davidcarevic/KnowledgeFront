@@ -8,21 +8,24 @@ class TeamProjects extends Component {
     state = {
         id: ''
     }
+
     componentDidMount() {
         console.log("PARAMS ID : ", this.props.computedMatch.params.id)
         var len = this.props.computedMatch.params.id
         console.log("Projekti", len)
-        if(this.props.isLoading) {
+        if (this.props.isLoading) {
             this.props.getProjects(this.props.computedMatch.params.id)
         }
     }
-    render(){
+
+    render() {
         let projects=this.props.projects.projects  //getting the array so the map function doesn't have a bunch of props
         console.log("TEAMS: ", this.props.teams.teams);
-        if(this.props.isLoading) {
+        if (this.props.isLoading) {
             return <div>Loading...</div>
         }
-        if(projects === 0){
+
+        if (projects === 0) {
             return (
                 <div>
                     <h2>No projects</h2>
@@ -30,6 +33,7 @@ class TeamProjects extends Component {
                 </div>
             )
         }
+
         return (
             <div>
                 {projects.map((item)=>
@@ -40,9 +44,11 @@ class TeamProjects extends Component {
         )
     }
 }
+
 const mapDispatchToProps = {
     getProjects: projectsRedux.thunks.getTeamProjects
 }
+
 const mapStateToProps = state => ({
     projects: state.projects,
     teams: state.teams,
