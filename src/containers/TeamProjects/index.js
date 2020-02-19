@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import SingleProject from "../../components/SingleProject";
 import StyledLink from '../../components/elements/Link';
 import projectsRedux from '../../redux/projects';
+import Title from '../../components/elements/Title';
 
 class TeamProjects extends Component {
     state = {
@@ -36,6 +37,7 @@ class TeamProjects extends Component {
 
         return (
             <div>
+                <Title>TEAM</Title>
                 {projects.map((item)=>
                     <SingleProject  key={item.project.id} teamId={this.props.computedMatch.params.id} id={item.project.id} name={item.project.name} description={item.project.description}/>
                 )}

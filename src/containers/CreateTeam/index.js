@@ -4,7 +4,10 @@ import teamRedux from '../../redux/teams'
 import { withRouter } from 'react-router-dom';
 import Button from '../../components/elements/Button';
 import Title from '../../components/elements/Title';
-import Form from '../../components/elements/Form'
+import StyledLink from '../../components/elements/Link';
+import Form from '../../components/elements/Form';
+import Input from '../../components/elements/Input';
+import TextArea from '../../components/elements/TextArea';
 
 class CreateTeam extends Component {
     state = {
@@ -28,14 +31,13 @@ class CreateTeam extends Component {
     render() {
         const { name, description } = this.state;
         return (
-            <Form>
-                <form onSubmit={this.handleFormSubmit}>
-                    <Title>CREATE YOUR TEAM!</Title>
-                    <p><input id="name" placeholder="TEAM NAME" type="text" value={name} onChange={this.handleInputChange} /></p>
-                    <p><textarea id="description" placeholder="DESCRIPTION" value={description} onChange={this.handleInputChange} /></p>
-                    <p><Button type="submit">CREATE</Button></p>
-                </form>
-            </Form>
+        <Form onSubmit={this.handleFormSubmit}>
+            <Title>CREATE YOUR TEAM!</Title>
+            <Input id="name" placeholder="TEAM NAME" type="text" value={name} onChange={this.handleInputChange} /><br/><br/>
+            <TextArea id="description" placeholder="DESCRIPTION" value={description} onChange={this.handleInputChange} /><br/><br/>
+            <Button type="submit">CREATE</Button><hr/>
+            <StyledLink to="/dashboard">Back to Dashboard</StyledLink>
+        </Form>
         )
     }
 }
