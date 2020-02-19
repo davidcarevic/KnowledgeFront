@@ -3,11 +3,9 @@ import { connect } from 'react-redux';
 import SingleProject from "../../components/SingleProject";
 import StyledLink from '../../components/elements/Link';
 import projectsRedux from '../../redux/projects';
-<<<<<<< HEAD
 import Title from '../../components/elements/Title';
-=======
 import LoadingSpinner from '../../components/elements/LoadingSpinner'
->>>>>>> 29387fb603f9e7430e3fb73ee447561fc3fcaf3b
+import Add from '../../components/elements/AddButton'
 
 class TeamProjects extends Component {
     state = {
@@ -45,8 +43,7 @@ class TeamProjects extends Component {
                 {projects.map((item)=>
                     <SingleProject  key={item.project.id} teamId={this.props.computedMatch.params.id} id={item.project.id} name={item.project.name} description={item.project.description}/>
                 )}
-                <hr />
-                <StyledLink to={`/teams/${this.props.computedMatch.params.id}/projects/create`}>Create a project</StyledLink>
+                <StyledLink to={`/teams/${this.props.computedMatch.params.id}/projects/create`}><Add>+</Add></StyledLink>
                 <hr />
                 <StyledLink to="/dashboard">Back to Dashboard</StyledLink>
             </div>
