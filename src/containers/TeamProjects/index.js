@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import SingleProject from "../../components/SingleProject";
 import StyledLink from '../../components/elements/Link';
 import projectsRedux from '../../redux/projects';
+<<<<<<< HEAD
 import Title from '../../components/elements/Title';
+=======
+import LoadingSpinner from '../../components/elements/LoadingSpinner'
+>>>>>>> 29387fb603f9e7430e3fb73ee447561fc3fcaf3b
 
 class TeamProjects extends Component {
     state = {
@@ -23,7 +27,7 @@ class TeamProjects extends Component {
         let projects=this.props.projects.projects  //getting the array so the map function doesn't have a bunch of props
         console.log("TEAMS: ", this.props.teams.teams);
         if (this.props.isLoading) {
-            return <div>Loading...</div>
+            return <LoadingSpinner/>
         }
 
         if (projects === 0) {

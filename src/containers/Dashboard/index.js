@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import SingleTeam from "../../components/SingleTeam";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import teamsRedux from '../../redux/teams';
 import projectsRedux from '../../redux/projects';
 import SingleProject from "../../components/SingleProject";
@@ -11,7 +11,10 @@ import TeamHolder from '../../components/blocks/TeamHolder';
 import ProjectHolder from '../../components/blocks/ProjectHolder';
 import Team from '../../components/elements/Team';
 import Project from '../../components/elements/Project';
-import StyledLink from '../../components/elements/Link';
+import LoadingSpinner from "../../components/elements/LoadingSpinner";
+
+
+
 
 class Dashboard extends Component {
     componentDidMount() {
@@ -31,7 +34,7 @@ class Dashboard extends Component {
         console.log("TEAMS: ", this.props.teams.teams);
         console.log("PROJECTS: ", this.props.projects.projects)
         if (this.props.isLoading) {
-            return <div>Loading...</div>
+            return <LoadingSpinner/>
         }
         if (teams === 0 && projects === 0) {
             return(
@@ -39,35 +42,39 @@ class Dashboard extends Component {
                 <Title>
                No teams and projects
                 </Title>
-                <StyledLink to="/dashboard/teams/create">Create a team</StyledLink>
+                <Link to="/dashboard/teams/create">Create a team</Link>
                 <br/>
-                <StyledLink to="/dashboard/projects/create">Create a project</StyledLink>
+                <Link to="/dashboard/projects/create">Create a project</Link>
                 <br/>
-                <StyledLink to="/invite">Invite a person</StyledLink>
+                <Link to="/invite">Invite a person</Link>
             </div>
             )
         }
         return (
             <div>
                 <TeamHolder>
-                    <h3>Teams</h3>
+                    <Title>
+                        TEAMS
+                    </Title>
                     {!teams ? <div>No teams</div> : teams.map((item) =>
                     <Team key={item.team.id}>
-                        <SingleTeam key={item.team.id} id={item.team.id} name={item.team.name} description={item.team.description}/>
+                    <SingleTeam key={item.team.id} id={item.team.id} name={item.team.name} description={item.team.description}/>
                     </Team>
                     )}
-                    <StyledLink to="/dashboard/teams/create"><Add>+</Add></StyledLink>
+                    <Link to="/dashboard/teams/create"><Add>+</Add></Link>
                 </TeamHolder>
                 <ProjectHolder>
-                    <h3>Projects</h3>
+                    <Title>
+                    PROJECTS
+                    </Title>
                     {!projects ? <div>No projects</div> : projects.map((item) =>
                     <Project key={item.project.id}>
                         <SingleProject key={item.project.id} id={item.project.id} name={item.project.name} description={item.project.description}/>
                     </Project>
                 )}
-                    <StyledLink to="/dashboard/projects/create"><Add>+</Add></StyledLink>
+                    <Link to="/dashboard/projects/create"><Add>+</Add></Link>
                 </ProjectHolder>
-                <StyledLink to="/invite">Invite a person</StyledLink>
+                <Link to="/invite"><Title>Invite a person</Title></Link>
             </div>
         )
     }
