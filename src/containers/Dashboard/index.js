@@ -5,6 +5,12 @@ import { Link } from "react-router-dom";
 import teamsRedux from '../../redux/teams';
 import projectsRedux from '../../redux/projects';
 import SingleProject from "../../components/SingleProject";
+import Title from '../../components/elements/Title';
+import Add from '../../components/elements/AddButton';
+import TeamHolder from '../../components/blocks/TeamHolder';
+import ProjectHolder from '../../components/blocks/ProjectHolder';
+import Team from '../../components/elements/Team';
+import Project from '../../components/elements/Project';
 
 class Dashboard extends Component {
     componentDidMount() {
@@ -29,7 +35,9 @@ class Dashboard extends Component {
         if (teams === 0 && projects === 0) {
             return(
             <div>
+                <Title>
                <h2>No teams and projects</h2>
+                </Title>
                 <Link to="/dashboard/teams/create">Create a team</Link>
                 <br/>
                 <Link to="/dashboard/projects/create">Create a project</Link>
@@ -40,24 +48,29 @@ class Dashboard extends Component {
         }
         return (
             <div>
-                <h2>TEAMS:</h2>
-                {!teams ? <div>No teams</div> : teams.map((item) =>
-                    <div key={item.team.id}>
+                <TeamHolder>
+                    <Title>
+                        TEAMS
+                    </Title>
+                    {!teams ? <div>No teams</div> : teams.map((item) =>
+                    <Team key={item.team.id}>
                     <SingleTeam key={item.team.id} id={item.team.id} name={item.team.name} description={item.team.description}/>
-                    </div>
+                    </Team>
                     )}
-                    <h2>PROJECTS:</h2>
-                {!projects ? <div>No projects</div> : projects.map((item) =>
-                    <div key={item.project.id}>
+                    <Link to="/dashboard/teams/create"><Add>+</Add></Link>
+                </TeamHolder>
+                <ProjectHolder>
+                    <Title>
+                    PROJECTS
+                    </Title>
+                    {!projects ? <div>No projects</div> : projects.map((item) =>
+                    <Project key={item.project.id}>
                         <SingleProject key={item.project.id} id={item.project.id} name={item.project.name} description={item.project.description}/>
-                    </div>
+                    </Project>
                 )}
-
-                <Link to="/dashboard/teams/create">Create a team</Link>
-                <br/>
-                <Link to="/dashboard/projects/create">Create a project</Link>
-                <br/>
-                <Link to="/invite">Invite a person</Link>
+                    <Link to="/dashboard/projects/create"><Add>+</Add></Link>
+                </ProjectHolder>
+                <Link to="/invite"><Title>Invite a person</Title></Link>
             </div>
         )
     }

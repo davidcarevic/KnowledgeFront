@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import projectRedux from '../../redux/projects'
 import { withRouter } from 'react-router-dom';
+import Button from '../../components/elements/Button';
+import Title from '../../components/elements/Title'
 
 class CreateProject extends Component {
     state = {
@@ -29,10 +31,10 @@ class CreateProject extends Component {
         return (
             <div>
                 <form onSubmit={this.handleFormSubmit}>
-                    <h1>Create your project!</h1>
-                    <p>Project name : <input id="name" type="text" value={name} onChange={this.handleInputChange} /></p>
-                    <p>Description : <textarea id="description" value={description} onChange={this.handleInputChange} /></p>
-                    <p><button  type="submit">Create</button></p>
+                    <Title>CREATE YOUR PROJECT!</Title>
+                    <p> <input id="name" placeholder="PROJECT NAME" type="text" value={name} onChange={this.handleInputChange} /></p>
+                    <p><textarea id="description" placeholder="DESCRIPTION" value={description} onChange={this.handleInputChange} /></p>
+                    <p><Button type="submit">CREATE PROJECT</Button></p>
                 </form>
             </div>
         )

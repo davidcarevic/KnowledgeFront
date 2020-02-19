@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-
 import { connect } from 'react-redux'
-
 import userRedux from '../../redux/user';
+import Button from '../../components/elements/Button';
+import Title from '../../components/elements/Title';
+import Form from '../../components/elements/Form'
 
 class Home extends Component {
     state = {
@@ -28,24 +29,27 @@ class Home extends Component {
       if (this.props.isAuthenticated) {
           return (
               <div>
-                  <h1>Logged in</h1>
+                  <Title>
+                  Logged in
+                  </Title>
               </div>
           )
       }
       return (
-        <div>
+        <Form>
           <form onSubmit={this.handleFormSubmit}>
-            <h1> Log in </h1>
-            <input id="email" placeholder="Email" type="email" value={email} onChange={this.handleInputChange} />
+            <Title> WELCOME BACK </Title>
+            <input id="email" placeholder="EMAIL" type="email" value={email} onChange={this.handleInputChange} />
             <br/>
             <br/>
-            <input id="password" placeholder="Password" type="password" value={password} onChange={this.handleInputChange} />
+            <input id="password" placeholder="PASSWORD" type="password" value={password} onChange={this.handleInputChange} />
             <br/>
-            <Link to="/register">Create an account</Link>
             <br/>
-            <button  type="submit">Login</button>
+              <Link to="/register"><Title>Sign up</Title></Link>
+            <br/>
+            <Button primary  type="submit">LOGIN</Button>
           </form>
-        </div>
+        </Form>
       )
     }
   }

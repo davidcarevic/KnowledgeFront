@@ -2,7 +2,8 @@ import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import  {connect} from 'react-redux'
 import userRedux from '../../redux/user';
-
+import LogoutButton from "../../components/elements/NavButtons"
+import SideBar from "../../components/blocks/SideBar"
 
 const PrivateRoute = props => {
     const { Component } = props;
@@ -19,18 +20,17 @@ const PrivateRoute = props => {
     <Route exact={props.exact} path={props.path} render={(...routerprops)  =>{
         const handleFormSubmit = (e) => {
             e.preventDefault();
-            console.log('DDDDDDD',props)
-           //  console.log(routerprops)
-           //  window.localStorage.removeItem('refreshToken');
              props.logout()
             // routerprops.history.push('/')
         }
        return(    
         <div>
-            <form  onSubmit={handleFormSubmit}>
-                <input type="submit" value="Logout" className='le-btn'/>    
-            </form>
             <Component {...props}/>
+            <SideBar>
+                <form  onSubmit={handleFormSubmit}>
+                    <LogoutButton primary type="submit">L</LogoutButton>
+                </form>
+            </SideBar>
         </div>
         )
     }

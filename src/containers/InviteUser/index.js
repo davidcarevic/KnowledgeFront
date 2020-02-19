@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import userRedux from '../../redux/user';
+import Button from '../../components/elements/Button';
+import Title from '../../components/elements/Title';
 
 class InviteUser extends Component {
     state = {
@@ -30,11 +32,11 @@ class InviteUser extends Component {
         return (
             <div>
                 <form onSubmit={this.handleFormSubmit}>
-                    <h1> Invite a person to join a team or the app.</h1>
-                    <p>Email : <input id="email" type="text" value={email} onChange={this.handleInputChange} /></p>
-                    <p>Team : <input id="team" type="text" value={team} onChange={this.handleInputChange}/></p>
-                    <p>Project : <input id="project" type="text" value={project} onChange={this.handleInputChange}/></p>
-                    <p><button  type="submit">Invite this email</button></p>
+                    <Title> Invite a person to join a team or the app.</Title>
+                    <p><input id="email" placeholder="EMAIL" type="email" value={email} onChange={this.handleInputChange} /></p>
+                    <p><input id="team" placeholder="Team ID" type="text" value={team} onChange={this.handleInputChange}/></p>
+                    <p><input id="project" placeholder="Project ID"  type="text" value={project} onChange={this.handleInputChange}/></p>
+                    <p><Button  type="submit">INVITE THIS EMAIL</Button></p>
                 </form>
             </div>
         )

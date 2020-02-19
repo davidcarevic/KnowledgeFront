@@ -17,9 +17,10 @@ import CreateTeam from "./containers/CreateTeam";
 import TeamProjects from "./containers/TeamProjects";
 import CreateProject from "./containers/CreateProject";
 import InviteUser from "./containers/InviteUser";
+import Wrapper from "./components/blocks/Wrapper"
 
 const App = props => (
-  
+  <Wrapper>
     <Router>
       <Switch>
       <Route exact path="/" component={Home} />
@@ -33,6 +34,7 @@ const App = props => (
       <Route exact path="/testnav" component={TestNav}/>
       </Switch>
     </Router>
+  </Wrapper>
   )
 
 const mapStateToProps = state => {
