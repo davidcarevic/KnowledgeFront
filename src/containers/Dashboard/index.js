@@ -36,7 +36,7 @@ class Dashboard extends Component {
             return(
             <div>
                 <Title>
-               <h2>No teams and projects</h2>
+               No teams and projects
                 </Title>
                 <Link to="/dashboard/teams/create">Create a team</Link>
                 <br/>

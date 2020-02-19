@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export default styled.h2`
-  font-size: 1.5em;
+  font-size: 1.7em;
   text-align: left;
-  color: palevioletred;
+  color: ${props => props.theme.color};
 `;

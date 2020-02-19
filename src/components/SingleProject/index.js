@@ -13,7 +13,7 @@ const SingleProject = props => (
             </ProjectImage>
             <Info>
         <h3><Link to={`/dashboard/projects/`+props.id}>{props.name}</Link></h3>
-        <H4>{props.description}</H4>
+        {/* <H4>{props.description}</H4> */}
             </Info>
         </Style>
     </Item>
