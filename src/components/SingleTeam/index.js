@@ -1,12 +1,12 @@
 import React from 'react'
-import {Link} from "react-router-dom";
 import {Item, Style} from "./styled"
+import StyledLink from '../../components/elements/Link';
 
 //<p>ID = {props.id}</p>
 const SingleTeam = props => (
     <Item>
         <Style>
-            <h3><Link to={"/dashboard/"+props.id}>{props.name}</Link></h3>
+            <StyledLink to={"/dashboard/"+props.id}>{props.name}</StyledLink>
             {/* <h4>{props.description}</h4> */}
         </Style>
     </Item>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import StyledLink from '../../components/elements/Link';
 import { connect } from 'react-redux'
 import userRedux from '../../redux/user';
 import Button from '../../components/elements/Button';
@@ -49,8 +49,8 @@ class Home extends Component {
           <Input id="password" placeholder="PASSWORD" type="password" value={password} onChange={this.handleInputChange} /><br/><br/>
           <Button type="submit">LOGIN</Button><br/><br/>
         </Form>
-          <Link to="#">Forgot your password?</Link><br/><br/>
-          <Link to="/register">You don't have an account?</Link>
+          <StyledLink to="#">Forgot your password?</StyledLink><br/><br/>
+          <StyledLink to="/register">You don't have an account?</StyledLink>
         </HomeHolder>
       )
     }
