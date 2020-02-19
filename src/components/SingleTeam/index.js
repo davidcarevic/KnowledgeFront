@@ -7,7 +7,7 @@ const SingleTeam = props => (
     <Item>
         <Style>
             <h3><Link to={"/dashboard/"+props.id}>{props.name}</Link></h3>
-            <h4>{props.description}</h4>
+            {/* <h4>{props.description}</h4> */}
         </Style>
     </Item>
 )
