@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import userRedux from '../../redux/user';
 import Button from '../../components/elements/Button';
 import Title from '../../components/elements/Title';
+import Form from '../../components/elements/Form';
 
 class InviteUser extends Component {
     state = {
@@ -30,7 +31,7 @@ class InviteUser extends Component {
     render() {
         const { email, team , project } = this.state;
         return (
-            <div>
+            <Form>
                 <form onSubmit={this.handleFormSubmit}>
                     <Title> Invite a person to join a team or the app.</Title>
                     <p><input id="email" placeholder="EMAIL" type="email" value={email} onChange={this.handleInputChange} /></p>
@@ -38,7 +39,7 @@ class InviteUser extends Component {
                     <p><input id="project" placeholder="Project ID"  type="text" value={project} onChange={this.handleInputChange}/></p>
                     <p><Button  type="submit">INVITE THIS EMAIL</Button></p>
                 </form>
-            </div>
+            </Form>
         )
     }
 }

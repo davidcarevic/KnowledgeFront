@@ -2,8 +2,9 @@ import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import  {connect} from 'react-redux'
 import userRedux from '../../redux/user';
-import LogoutButton from "../../components/elements/NavButtons"
-import SideBar from "../../components/blocks/SideBar"
+import LogoutButton from "../../components/elements/NavButtons";
+import SideBarTop from "../../components/blocks/SideBarTop";
+import BottomButton from "../../components/elements/BottomButton"
 
 const PrivateRoute = props => {
     const { Component } = props;
@@ -26,11 +27,12 @@ const PrivateRoute = props => {
        return(    
         <div>
             <Component {...props}/>
-            <SideBar>
+            <SideBarTop>
                 <form  onSubmit={handleFormSubmit}>
                     <LogoutButton primary type="submit">L</LogoutButton>
+                    <BottomButton primary >L</BottomButton>
                 </form>
-            </SideBar>
+            </SideBarTop>
         </div>
         )
     }

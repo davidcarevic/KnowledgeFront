@@ -4,6 +4,7 @@ import userRedux from '../../redux/user';
 import { withRouter } from 'react-router-dom';
 import Button from '../../components/elements/Button'
 import Title from '../../components/elements/Title'
+import Form from '../../components/elements/Form'
 
 class Register extends Component {
     state = {
@@ -55,19 +56,19 @@ class Register extends Component {
       const { email, password, password2, guid } = this.state;
       if (guid) {
           return (
-              <div>
+              <Form>
                   <form onSubmit={this.handleFormSubmit}>
                       <Title> WELCOME </Title>
                       <p><input id="password" placeholder="PASSWORD" type="password" value={password} onChange={this.handleInputChange} /></p>
                       <p><input id="password2" placeholder="CONFIRM PASSWORD" type="password" value={password2} onChange={this.handleInputChange} /></p>
                       <p><Button primary type="submit">REGISTER</Button></p>
                   </form>
-              </div>
+              </Form>
           )
       }
 
       return (
-        <div>
+        <Form>
           <form onSubmit={this.handleFormSubmit}>
               <Title> WELCOME </Title>
             <p><input id="email" type="email" placeholder="EMAIL" value={email} onChange={this.handleInputChange} /></p>
@@ -75,7 +76,7 @@ class Register extends Component {
             <p><input id="password2" placeholder="CONFIRM PASSWORD" type="password" value={password2} onChange={this.handleInputChange} /></p>
             <p><Button primary type="submit">REGISTER</Button></p>
           </form>
-        </div>
+        </Form>
       )
     }
   }

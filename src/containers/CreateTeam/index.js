@@ -4,6 +4,7 @@ import teamRedux from '../../redux/teams'
 import { withRouter } from 'react-router-dom';
 import Button from '../../components/elements/Button';
 import Title from '../../components/elements/Title';
+import Form from '../../components/elements/Form'
 
 class CreateTeam extends Component {
     state = {
@@ -27,14 +28,14 @@ class CreateTeam extends Component {
     render() {
         const { name, description } = this.state;
         return (
-            <div>
+            <Form>
                 <form onSubmit={this.handleFormSubmit}>
                     <Title>CREATE YOUR TEAM!</Title>
                     <p><input id="name" placeholder="TEAM NAME" type="text" value={name} onChange={this.handleInputChange} /></p>
                     <p><textarea id="description" placeholder="DESCRIPTION" value={description} onChange={this.handleInputChange} /></p>
                     <p><Button type="submit">CREATE</Button></p>
                 </form>
-            </div>
+            </Form>
         )
     }
 }
