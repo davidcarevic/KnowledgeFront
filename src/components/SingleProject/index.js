@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from "react-router-dom";
+import StyledLink from '../../components/elements/Link';
 import { Info, Image, Item, H4, ProjectImage, Style} from "./styled";
 
 
@@ -12,7 +12,7 @@ const SingleProject = props => (
                 <Image src="https://cdn.pixabay.com/photo/2016/08/25/19/17/boat-1620452_960_720.jpg"/>
             </ProjectImage>
             <Info>
-        <h3><Link to={`/dashboard/projects/`+props.id}>{props.name}</Link></h3>
+        <StyledLink to={`/dashboard/projects/`+props.id}>{props.name}</StyledLink>
         {/* <H4>{props.description}</H4> */}
             </Info>
         </Style>
