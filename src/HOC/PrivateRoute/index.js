@@ -30,7 +30,7 @@ const PrivateRoute = props => {
         <div>
             <Component {...props}/>
             <SideBarTop>
-                <form  onSubmit={handleFormSubmit}>
+                <form onSubmit={handleFormSubmit}>
                     <LogoutButton primary type="submit">L</LogoutButton>
                     <BottomButton primary >L</BottomButton>
                 </form>
