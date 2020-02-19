@@ -5,6 +5,8 @@ import userRedux from '../../redux/user';
 import Button from '../../components/elements/Button';
 import Title from '../../components/elements/Title';
 import Form from '../../components/elements/Form'
+import Input from '../../components/elements/Input'
+import HomeHolder from '../../components/elements/HomeHolder';
 
 class Home extends Component {
     state = {
@@ -36,20 +38,20 @@ class Home extends Component {
           )
       }
       return (
-        <Form>
-          <form onSubmit={this.handleFormSubmit}>
-            <Title> WELCOME BACK </Title>
-            <input id="email" placeholder="EMAIL" type="email" value={email} onChange={this.handleInputChange} />
-            <br/>
-            <br/>
-            <input id="password" placeholder="PASSWORD" type="password" value={password} onChange={this.handleInputChange} />
-            <br/>
-            <br/>
-              <Link to="/register"><Title>Sign up</Title></Link>
-            <br/>
-            <Button primary  type="submit">LOGIN</Button>
-          </form>
+        <HomeHolder>
+        <Form onSubmit={this.handleFormSubmit}>
+          <Title> WELCOME BACK </Title>
+          <div>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, <br />sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br />
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris<br />nisi ut aliquip ex ea commodo consequat.
+          </div><br />
+          <Input id="email" placeholder="EMAIL" type="email" value={email} onChange={this.handleInputChange} /><br/><br/>
+          <Input id="password" placeholder="PASSWORD" type="password" value={password} onChange={this.handleInputChange} /><br/><br/>
+          <Button type="submit">LOGIN</Button><br/><br/>
         </Form>
+          <Link to="#">Forgot your password?</Link><br/><br/>
+          <Link to="/register">You don't have an account?</Link>
+        </HomeHolder>
       )
     }
   }

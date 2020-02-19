@@ -5,6 +5,9 @@ import { withRouter } from 'react-router-dom';
 import Button from '../../components/elements/Button'
 import Title from '../../components/elements/Title'
 import Form from '../../components/elements/Form'
+import Input from '../../components/elements/Input'
+import HomeHolder from '../../components/elements/HomeHolder';
+import Home from '../Home';
 
 class Register extends Component {
     state = {
@@ -56,27 +59,31 @@ class Register extends Component {
       const { email, password, password2, guid } = this.state;
       if (guid) {
           return (
-              <Form>
-                  <form onSubmit={this.handleFormSubmit}>
-                      <Title> WELCOME </Title>
-                      <p><input id="password" placeholder="PASSWORD" type="password" value={password} onChange={this.handleInputChange} /></p>
-                      <p><input id="password2" placeholder="CONFIRM PASSWORD" type="password" value={password2} onChange={this.handleInputChange} /></p>
-                      <p><Button primary type="submit">REGISTER</Button></p>
-                  </form>
+            <HomeHolder>
+              <Form onSubmit={this.handleFormSubmit}>
+                  <Title> WELCOME </Title>
+                  <Input id="password" placeholder="PASSWORD" type="password" value={password} onChange={this.handleInputChange} /><br/><br/>
+                  <Input id="password2" placeholder="CONFIRM PASSWORD" type="password" value={password2} onChange={this.handleInputChange} /><br/><br/>
+                  <Button primary type="submit">REGISTER</Button>
               </Form>
+            </HomeHolder>
           )
       }
 
       return (
-        <Form>
-          <form onSubmit={this.handleFormSubmit}>
+        <HomeHolder>
+          <Form onSubmit={this.handleFormSubmit}>
               <Title> WELCOME </Title>
-            <p><input id="email" type="email" placeholder="EMAIL" value={email} onChange={this.handleInputChange} /></p>
-            <p><input id="password" placeholder="PASSWORD" type="password" value={password} onChange={this.handleInputChange} /></p>
-            <p><input id="password2" placeholder="CONFIRM PASSWORD" type="password" value={password2} onChange={this.handleInputChange} /></p>
-            <p><Button primary type="submit">REGISTER</Button></p>
-          </form>
-        </Form>
+              <div>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, <br />sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br />
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris<br />nisi ut aliquip ex ea commodo consequat.
+              </div><br />
+              <Input id="email" type="email" placeholder="EMAIL" value={email} onChange={this.handleInputChange} /><br/><br/>
+              <Input id="password" placeholder="PASSWORD" type="password" value={password} onChange={this.handleInputChange} /><br/><br/>
+              <Input id="password2" placeholder="CONFIRM PASSWORD" type="password" value={password2} onChange={this.handleInputChange} /><br/><br/>
+              <Button primary type="submit">REGISTER</Button>
+          </Form>
+        </HomeHolder>
       )
     }
   }

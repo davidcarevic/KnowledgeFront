@@ -1,5 +1,5 @@
 import styled from "styled-components";
 
-export default styled.div`
-    margin-left:50%;
+export default styled.form`
+    
 `;
