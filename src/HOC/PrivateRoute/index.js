@@ -4,15 +4,17 @@ import  {connect} from 'react-redux'
 import userRedux from '../../redux/user';
 import LogoutButton from "../../components/elements/NavButtons";
 import SideBarTop from "../../components/blocks/SideBarTop";
-import BottomButton from "../../components/elements/BottomButton"
+import BottomButton from "../../components/elements/BottomButton";
+import LoadingSpinner from '../../components/elements/LoadingSpinner'
+
 
 const PrivateRoute = props => {
     const { Component } = props;
     if(props.isLoading) {
-        return <div>Loading...</div>
+        return <LoadingSpinner/>
     }
     if(!props.isAuthenticated && !props.isLoading) {
-        console.log("OVDE");
+        console.log("Auth ga kikuje");
         return (
         <Redirect to="/" />
         )

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import SingleProject from "../../components/SingleProject";
 import {Link} from "react-router-dom";
 import projectsRedux from '../../redux/projects';
+import LoadingSpinner from '../../components/elements/LoadingSpinner'
 
 class TeamProjects extends Component {
     state = {
@@ -22,7 +23,7 @@ class TeamProjects extends Component {
         let projects=this.props.projects.projects  //getting the array so the map function doesn't have a bunch of props
         console.log("TEAMS: ", this.props.teams.teams);
         if (this.props.isLoading) {
-            return <div>Loading...</div>
+            return <LoadingSpinner/>
         }
 
         if (projects === 0) {

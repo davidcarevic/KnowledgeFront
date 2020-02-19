@@ -11,6 +11,10 @@ import TeamHolder from '../../components/blocks/TeamHolder';
 import ProjectHolder from '../../components/blocks/ProjectHolder';
 import Team from '../../components/elements/Team';
 import Project from '../../components/elements/Project';
+import LoadingSpinner from "../../components/elements/LoadingSpinner";
+
+
+
 
 class Dashboard extends Component {
     componentDidMount() {
@@ -30,7 +34,7 @@ class Dashboard extends Component {
         console.log("TEAMS: ", this.props.teams.teams);
         console.log("PROJECTS: ", this.props.projects.projects)
         if (this.props.isLoading) {
-            return <div>Loading...</div>
+            return <LoadingSpinner/>
         }
         if (teams === 0 && projects === 0) {
             return(
