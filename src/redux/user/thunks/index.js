@@ -1,4 +1,4 @@
-import { getToken,getRefresh,removeToken,register,inviteUser,getInvitedUser } from "../../../services";
+import { getToken,getRefresh,removeToken,register,inviteUser,getInvitedUser,resetPass } from "../../../services";
 import {removeTeamsByUser} from "../../teams/actions";
 import {
     authenticateUser,
@@ -12,6 +12,7 @@ import {
 } from "../actions";
 import { isLoading } from "../../global/actions";
 import axios from "../../../axios";
+import {setProjectsByUser} from "../../projects/actions";
 
 export const loginUser = (email, password) => dispatch => {
     console.log("OVO PRVO")
@@ -68,6 +69,7 @@ export const logout = () => dispatch =>{
     dispatch(setRefreshToken(null))
     dispatch(authenticateUser(false))
     dispatch(removeTeamsByUser())
+    dispatch(setProjectsByUser([]));
     window.localStorage.removeItem('refreshToken')
     dispatch(isLoading(false))
 }
@@ -84,7 +86,6 @@ export const registerUser = (email,password,data) =>dispatch =>{
             console.log(err.message)
             dispatch(isLoading(false))
         })
-
 }
 
 export const userInvite = (email,data) => dispatch =>{
@@ -105,6 +106,19 @@ export const getInvited = (guid) => dispatch =>{
     getInvitedUser(guid)
         .then(res=>{
             dispatch(setInvitedUser(res.data))
+            dispatch(isLoading(false))
+        })
+        .catch(err=>{
+            console.log(err.message)
+            dispatch(isLoading(false))
+        })
+}
+
+export const resetPassword = (email) => dispatch =>{
+    dispatch(isLoading(true))
+    resetPass(email)  //returns true, needs to be changed to an axios call
+        .then(res=>{
+            console.log(res)
             dispatch(isLoading(false))
         })
         .catch(err=>{

@@ -1,9 +1,9 @@
 import * as types from './types';
 
-export const setProjectsByTeam = projects => {
+export const setProjectsByTeam = teamProjects => {
     return{
         type:types.SET_PROJECTS_BY_TEAMS,
-        payload:projects
+        payload:teamProjects
     }
 }
 

@@ -24,6 +24,7 @@ class Dashboard extends Component {
         if(len1 < 1 && !this.props.isLoading){
             this.props.getProjects()
         }
+        this.props.unsetProjectsByTeam([])
     }
     render(){
         let teams = this.props.teams.teams  //getting the array so the map function doesn't have a bunch of props
@@ -74,7 +75,8 @@ class Dashboard extends Component {
 }
 const mapDispatchToProps = {
     getTeams: teamsRedux.thunks.getTeams,
-    getProjects: projectsRedux.thunks.getProjectsForUser
+    getProjects: projectsRedux.thunks.getProjectsForUser,
+    unsetProjectsByTeam:projectsRedux.actions.setProjectsByTeam
 }
 const mapStateToProps = state => ({
     teams: state.teams,

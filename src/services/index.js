@@ -62,3 +62,7 @@ export const inviteUser = (email, data) => {
 export const getInvitedUser = (guid) => {
     return axios.get('/api/email-invitations/' + guid + '/')
 }
+
+export const resetPass = (email) => {
+    return true
+}

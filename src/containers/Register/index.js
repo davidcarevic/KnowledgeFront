@@ -7,7 +7,6 @@ import Title from '../../components/elements/Title'
 import Form from '../../components/elements/Form'
 import Input from '../../components/elements/Input'
 import HomeHolder from '../../components/elements/HomeHolder';
-import Home from '../Home';
 
 class Register extends Component {
     state = {
