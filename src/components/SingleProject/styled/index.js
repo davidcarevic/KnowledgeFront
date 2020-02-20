@@ -13,10 +13,12 @@ export const Item = styled.div`
 `;
 
 export const ProjectImage = styled.div`
-    padding :1em;
+    background: ${props => `url(${props.img})`};
+    padding: 1em;
     background-color: #DCDCDC;
     width: 250px;
     height: 150px;
+    border-radius: 5px 5px 0 0;
 `;
 export const Image = styled.img`
     width: 250px;
@@ -29,7 +31,7 @@ export const Info = styled.div`
     display: block;
     width: 250px;
     padding :1em;
-    
+    border-radius: 0 0 5px 5px;
 `;
 
 export const H4 = styled.h4`
