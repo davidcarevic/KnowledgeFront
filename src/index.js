@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import  {Provider}  from 'react-redux';
+import { PersistGate } from 'redux-persist/lib/integration/react';
 import { ThemeProvider } from 'styled-components'
-import store from './redux/configureStore';
+import LoadingSpinner from './components/elements/LoadingSpinner';
+import {store, persistor} from './redux/configureStore';
 import './index.css';
 import App from './App';
 import theme from './theme'
@@ -11,7 +13,9 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM.render(
     <Provider store={store}>
         <ThemeProvider theme={theme}>
+            <PersistGate loading={<LoadingSpinner/>} persistor={persistor}>
             <App/>
+            </PersistGate>
         </ThemeProvider>
     </Provider>
     , document.getElementById('root'));

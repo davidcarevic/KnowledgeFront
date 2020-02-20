@@ -9,21 +9,22 @@ import Add from '../../components/elements/AddButton'
 
 class TeamProjects extends Component {
     state = {
-        id: ''
+        id: '',
     }
 
     componentDidMount() {
         console.log("PARAMS ID : ", this.props.computedMatch.params.id)
-        var len = this.props.computedMatch.params.id
-        console.log("Projekti", len)
-        if (this.props.isLoading) {
-            this.props.getProjects(this.props.computedMatch.params.id)
+        let idTeam = this.props.computedMatch.params.id
+        if(this.props.projects.teamProjects.length < 1 && !this.props.isLoading){
+            this.props.getProjects(idTeam)
         }
+
     }
 
     render() {
-        let projects=this.props.projects.projects  //getting the array so the map function doesn't have a bunch of props
+        let projects=this.props.projects.teamProjects  //getting the array so the map function doesn't have a bunch of props
         console.log("TEAMS: ", this.props.teams.teams);
+        console.log("PROJECTS: ",projects)
         if (this.props.isLoading) {
             return <LoadingSpinner/>
         }
@@ -52,7 +53,7 @@ class TeamProjects extends Component {
 }
 
 const mapDispatchToProps = {
-    getProjects: projectsRedux.thunks.getTeamProjects
+    getProjects: projectsRedux.thunks.getTeamProjects,
 }
 
 const mapStateToProps = state => ({

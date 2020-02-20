@@ -8,8 +8,7 @@ const initialState = {
     refreshToken: '',
     user: {},
     invite: {},
-    invited: {}
-
+    invited: {},
 }
 
 export default (state = initialState, action) => {

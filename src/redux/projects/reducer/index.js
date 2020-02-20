@@ -3,6 +3,7 @@ import {SET_PROJECTS_BY_TEAMS} from "../actions/types";
 
 const initialState = {
     projects:[],
+    teamProjects:[],
     project:{}
 
 };
@@ -12,7 +13,7 @@ export default (state = initialState, action) => {
         case SET_PROJECTS_BY_TEAMS: {
             return {
                 ...state,
-                projects: action.payload
+                teamProjects: action.payload
             }
 
         }

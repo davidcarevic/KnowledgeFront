@@ -14,9 +14,9 @@ const PrivateRoute = props => {
         return <LoadingSpinner/>
     }
     if(!props.isAuthenticated && !props.isLoading) {
-        console.log("Auth ga kikuje");
+        console.log("HOC kick : activated");
         return (
-        <Redirect to="/" />
+        <Redirect to="/"/>
         )
     }
     return (

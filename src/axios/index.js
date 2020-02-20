@@ -1,5 +1,5 @@
 import axios from 'axios';
-import store from '../redux/configureStore';
+import {store} from '../redux/configureStore';
 import {getRefresh} from '../services';
 
 const instance = axios.create({
