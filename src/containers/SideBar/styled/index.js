@@ -25,13 +25,6 @@ export const LogOutIcon = styled(LogOut)`
   position: absolute;
 `
 
-export const BellIcon = styled(Bell)`
-  color: white;
-  width: 24px;
-  height: 24px;
-  margin-bottom: 15px;
-`
-
 export const SettingsIcon = styled(Settings)`
   color: white;
   width: 24px;
@@ -41,23 +34,34 @@ export const SettingsIcon = styled(Settings)`
   position: absolute;
 `
 
+export const BellIcon = styled(Bell)`
+  color: white;
+  width: 24px;
+  height: 24px;
+  margin-bottom: 15px;
+  padding-left: 5px;
+`
+
 export const PlusIcon = styled(Plus)`
   color: white;
   width: 24px;
   height: 24px;
   margin-bottom: 15px;
+  padding-left: 5px;
 `
 export const NetworkWiredIcon = styled(NetworkWired)`
   color: white;
   width: 24px;
   height: 24px;
   margin-bottom: 15px;
+  padding-left: 5px;
 `
 export const SearchIcon = styled(Search)`
   color: white;
   width: 24px;
   height: 24px;
   margin-bottom: 15px;
+  padding-left: 5px;
 `
 export const ThSmallIcon = styled(ThSmall)`
   color: white;
@@ -65,10 +69,12 @@ export const ThSmallIcon = styled(ThSmall)`
   height: 24px;
   margin-top: 10px;
   margin-bottom: 15px;
+  padding-left: 5px;
 `
 export const UserPlusIcon = styled(UserPlus)`
   color: white;
   width: 24px;
   height: 24px;
   margin-bottom: 15px;
+  padding-left: 5px;
 `
