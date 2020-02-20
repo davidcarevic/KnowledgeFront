@@ -16,7 +16,7 @@ class SideBar extends Component {
           <Link to={"#"}><NetworkWiredIcon /></Link>
           <Link to={"#"}><SearchIcon /></Link>
           <Link to={"#"}><SettingsIcon /></Link>
-          <Link to={"/"}><LogOutIcon /></Link>
+          <Link to={"#"}><LogOutIcon /></Link>
         </Bar>
       )
     }
