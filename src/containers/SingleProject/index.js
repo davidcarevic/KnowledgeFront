@@ -9,18 +9,24 @@ class SingleProject extends Component {
     }
 
     componentDidMount() {
-        let id = this.props.match.params.id
         if (!this.props.isLoading) {
-            this.props.getProject(id)
+            this.props.getProject(this.props.match.params.id)
+            this.props.getProjectSections(this.props.project.id)
         }
     }
 
     render() {
         let project = this.props.project
-        console.log("Props: ", this.props)
+        let categories = this.props.categories //ne valja mapiranje sredi!!!
         return (
             <div>
                 <p>{project.name}</p>
+                <p>
+                {!categories ? <div>No categories</div> : categories.map((item) =>
+
+                        <p key={item.project.id} id={item.project.id} >{item.project.name}</p>
+                )}
+                </p>
             </div>
         )
       } 
@@ -29,10 +35,14 @@ class SingleProject extends Component {
 
 const mapDispatchToProps = {
     getProject: projectRedux.thunks.retrieveProject,
+    getProjectSections: projectRedux.thunks.retrieveProjectSections,
+    getSectionCategories: projectRedux.thunks.retrieveSectionCategories
 }
 
 const mapStateToProps = state => ({
-    project: state.projects.project
+    project: state.projects.project,
+    sections: state.projects.sections,
+    categories: state.projects.categories
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SingleProject))

@@ -1,5 +1,5 @@
-import { createProject, getProjects, getProjectsByUser, getSingleProject } from "../../../services";
-import { setProjectsByTeam, setProjectsByUser, getProject } from "../actions";
+import { createProject, getProjects, getProjectsByUser, getSingleProject, getProjectSections } from "../../../services";
+import { setProjectsByTeam, setProjectsByUser, getProject, getSections } from "../actions";
 import { isLoading } from "../../global/actions";
 
 
@@ -57,9 +57,21 @@ export const retrieveProject = (id) => dispatch => {
     dispatch(isLoading(false));
     getSingleProject(id)
     .then(res => {
-        console.log('Single project: ', res.data)
         dispatch(getProject(res.data))
         dispatch(isLoading(false));
+    })
+    .catch(err => {
+        console.log(err.message)
+        dispatch(isLoading(false))
+    })
+}
+
+export const retrieveProjectSections = (id) => dispatch => {
+    dispatch(isLoading(false))
+    getProjectSections(id)
+    .then(res => {
+        dispatch(getSections(res.data))
+        dispatch(isLoading(false))
     })
     .catch(err => {
         console.log(err.message)

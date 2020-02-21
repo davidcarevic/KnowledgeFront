@@ -27,3 +27,10 @@ export const getProject = project => {
         payload: project
     }
 }
+
+export const getSections = sections => {
+    return {
+        type: types.GET_PROJECT_SECTIONS,
+        payload: sections
+    }
+}

@@ -17,7 +17,7 @@ export const getRefresh = () =>{
     })
 }
 
-export const register = (email, password,data) => {
+export const register = (email, password, data) => {
   return axios.post('/api/users/', {
      email: email, 
      password: password,
@@ -69,4 +69,8 @@ export const getInvitedUser = (guid) => {
 
 export const resetPass = (email) => {
     return true
+}
+
+export const getProjectSections = (id) => {
+    return axios.get('/api/project-sections/' + id + '/')
 }

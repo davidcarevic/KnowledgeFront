@@ -4,7 +4,8 @@ import { SET_PROJECTS_BY_TEAMS } from "../actions/types";
 const initialState = {
     projects: [],
     teamProjects: [],
-    project: {}
+    project: {},
+    sections: []
 };
 
 export default (state = initialState, action) => {
@@ -28,6 +29,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 project: action.payload
+            }
+        case types.GET_PROJECT_SECTIONS:
+            return {
+                ...state,
+                sections: action.payload
             }
         default:
             return state;
