@@ -59,12 +59,12 @@ export const refreshToken = () => dispatch => {
            console.log(err.message)
         })
 }
-export const logout = () => dispatch =>{
+export const logout = () => dispatch => {
     // works, the axios call for blacklisting needs to be added
     dispatch(isLoading(true))
     console.log("usao u logout")
-    let res=removeToken() // a function that returns true, if we decide to implement some kind of axios call to backend for token removal it will be changed
-    console.log("true is remove token ??",res)
+    let res = removeToken() // a function that returns true, if we decide to implement some kind of axios call to backend for token removal it will be changed
+    console.log("true is remove token ??", res)
     dispatch(setAccessToken(null))
     dispatch(setRefreshToken(null))
     dispatch(authenticateUser(false))
@@ -75,53 +75,53 @@ export const logout = () => dispatch =>{
 }
 
 
-export const registerUser = (email,password,data) =>dispatch =>{
+export const registerUser = (email, password, data) => dispatch => {
     dispatch(isLoading(true))
-    register(email,password,data)
-        .then(res=>{
+    register(email, password, data)
+        .then(res => {
             dispatch(createUser(res.data))
             dispatch(isLoading(false))
         })
-        .catch(err=>{
+        .catch(err => {
             console.log(err.message)
             dispatch(isLoading(false))
         })
 }
 
-export const userInvite = (email,data) => dispatch =>{
+export const userInvite = (email, data) => dispatch => {
     dispatch(isLoading(true))
-    inviteUser(email,data)
-        .then(res=>{
+    inviteUser(email, data)
+        .then(res => {
             dispatch(createInvite(res.data))
             dispatch(isLoading(false))
         })
-        .catch(err=>{
+        .catch(err => {
             console.log(err.message)
             dispatch(isLoading(false))
         })
 }
 
-export const getInvited = (guid) => dispatch =>{
+export const getInvited = (guid) => dispatch => {
     dispatch(isLoading(true))
     getInvitedUser(guid)
-        .then(res=>{
+        .then(res => {
             dispatch(setInvitedUser(res.data))
             dispatch(isLoading(false))
         })
-        .catch(err=>{
+        .catch(err => {
             console.log(err.message)
             dispatch(isLoading(false))
         })
 }
 
-export const resetPassword = (email) => dispatch =>{
+export const resetPassword = (email) => dispatch => {
     dispatch(isLoading(true))
     resetPass(email)  //returns true, needs to be changed to an axios call
-        .then(res=>{
+        .then(res => {
             console.log(res)
             dispatch(isLoading(false))
         })
-        .catch(err=>{
+        .catch(err => {
             console.log(err.message)
             dispatch(isLoading(false))
         })
