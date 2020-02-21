@@ -53,6 +53,16 @@ export default (state = initialState, action) => {
                 ...state,
                 invited: action.payload
             }
+        case types.SET_RESET_PASS_USER:
+            return{
+                ...state,
+                reset: action.payload
+            }
+        case types.PASS_RESET:
+            return{
+                ...state,
+                passReset: action.payload
+            }
         default:
             return state
     }

@@ -1,4 +1,4 @@
-import { getToken,getRefresh,removeToken,register,inviteUser,getInvitedUser,resetPass } from "../../../services";
+import { getToken,getRefresh,removeToken,register,inviteUser,getInvitedUser,resetPass, getResetPassForUser, destroyResetAndUpdatePass } from "../../../services";
 import {removeTeamsByUser} from "../../teams/actions";
 import {
     authenticateUser,
@@ -8,7 +8,9 @@ import {
     authenticationErrorMessage,
     createUser,
     createInvite,
-    setInvitedUser
+    setInvitedUser,
+    setResetPassUser,
+    passReset
 } from "../actions";
 import { isLoading } from "../../global/actions";
 import axios from "../../../axios";
@@ -114,7 +116,7 @@ export const getInvited = (guid) => dispatch => {
         })
 }
 
-export const resetPassword = (email) => dispatch => {
+export const sendResetPassword = (email) => dispatch => {
     dispatch(isLoading(true))
     resetPass(email)  //returns true, needs to be changed to an axios call
         .then(res => {
@@ -125,4 +127,31 @@ export const resetPassword = (email) => dispatch => {
             console.log(err.message)
             dispatch(isLoading(false))
         })
+}
+
+export const getResetPassUser = (guid) => dispatch => {
+    dispatch(isLoading(true))
+    getResetPassForUser(guid)
+        .then(res => {
+            dispatch(setResetPassUser(res.data))
+            dispatch(isLoading(false))
+        })
+        .catch(err => {
+            console.log(err.message)
+            dispatch(isLoading(false))
+        })
+}
+
+export const resetPasswordForUser = (guid, password, data) => dispatch => {
+    dispatch(isLoading(true))
+    destroyResetAndUpdatePass(guid, password, data)
+        .then( res => {
+            dispatch(passReset(res.data))
+            dispatch(isLoading(false))
+        })
+        .catch(err => {
+            console.log(err.message)
+            dispatch(isLoading(false))
+        })
+
 }
