@@ -22,7 +22,7 @@ class TeamProjects extends Component {
     }
 
     render() {
-        let projects=this.props.projects.teamProjects  //getting the array so the map function doesn't have a bunch of props
+        let projects = this.props.projects.teamProjects  //getting the array so the map function doesn't have a bunch of props
         console.log("TEAMS: ", this.props.teams.teams);
         console.log("PROJECTS: ",projects)
         if (this.props.isLoading) {
