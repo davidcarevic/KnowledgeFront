@@ -59,3 +59,17 @@ export const setInvitedUser = invited => {
         payload: invited
     }
 }
+
+export const setResetPassUser = reset =>{
+    return {
+        type: types.SET_RESET_PASS_USER,
+        payload: reset
+    }
+}
+
+export const  passReset = passReset =>{
+    return {
+        type: types.PASS_RESET,
+        payload: passReset
+    }
+}

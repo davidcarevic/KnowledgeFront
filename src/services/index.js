@@ -64,5 +64,19 @@ export const getInvitedUser = (guid) => {
 }
 
 export const resetPass = (email) => {
-    return true
+    return axios.post('/api/password-reset/', {
+        email:email
+    })
+}
+
+export const getResetPassForUser = (guid) => {
+    return axios.get('/api/password-reset/'+ guid + '/')
+}
+
+export const destroyResetAndUpdatePass = (guid, password, data) => {
+    return axios.put('/api/password-reset/'+ guid +'/',{
+        guid: guid,
+        password: password,
+        data: data
+    })
 }

@@ -49,7 +49,7 @@ class Home extends Component {
           <Input id="password" placeholder="PASSWORD" type="password" value={password} onChange={this.handleInputChange} /><br/><br/>
           <Button type="submit">LOGIN</Button><br/><br/>
         </Form>
-          <StyledLink to="/forgotpassword">Forgot your password?</StyledLink><br/><br/>
+          <StyledLink to="/forgot-password">Forgot your password?</StyledLink><br/><br/>
           <StyledLink to="/register">You don't have an account?</StyledLink>
         </HomeHolder>
       )
