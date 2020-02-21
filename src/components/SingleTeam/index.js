@@ -6,7 +6,7 @@ import StyledLink from '../../components/elements/Link';
 const SingleTeam = props => (
     <Item>
         <Style>
-            <StyledLink to={"/dashboard/"+props.id}>{props.name}</StyledLink>
+            <StyledLink to={"/dashboard/" + props.id}>{props.name}</StyledLink>
             {/* <h4>{props.description}</h4> */}
         </Style>
     </Item>

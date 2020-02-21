@@ -6,6 +6,11 @@ import { Bar, BellIcon, LogOutIcon, SettingsIcon, PlusIcon, NetworkWiredIcon, Se
 import { Link } from "react-router-dom";
 
 class SideBar extends Component {
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    this.props.logout();
+  }
+
     render() {
       return (
         <Bar>
@@ -16,14 +21,16 @@ class SideBar extends Component {
           <Link to={"#"}><NetworkWiredIcon /></Link>
           <Link to={"#"}><SearchIcon /></Link>
           <Link to={"#"}><SettingsIcon /></Link>
-          <Link to={"#"}><LogOutIcon /></Link>
+          <form onSubmit={this.handleFormSubmit}>
+            <button type="submit"><LogOutIcon /></button>
+          </form>
         </Bar>
       )
     }
   }
 
   const mapDispatchToProps = {
-
+    logout: userRedux.thunks.logout
   }
 
 const mapStateToProps = state => ({

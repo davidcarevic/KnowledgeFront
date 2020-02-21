@@ -52,9 +52,9 @@ class Dashboard extends Component {
             <div>
                 <TeamHolder>
                     <h3>Teams</h3>
-                    {!teams ? <div>No teams</div> : teams.map((item) =>
-                    <Team key={item.team.id}>
-                    <SingleTeam key={item.team.id} id={item.team.id} name={item.team.name} description={item.team.description}/>
+                    {!teams ? <div>No teams</div> : teams.map((item, index) =>
+                    <Team key={index}>
+                    <SingleTeam key={index} id={item.team.id} name={item.team.name} description={item.team.description}/>
                     </Team>
                     )}
                     <StyledLink to="/dashboard/teams/create"><Add>+</Add></StyledLink>

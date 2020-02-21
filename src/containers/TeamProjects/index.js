@@ -41,8 +41,8 @@ class TeamProjects extends Component {
         return (
             <div>
                 <Title>TEAM</Title>
-                {projects.map((item)=>
-                    <SingleProject  key={item.project.id} teamId={this.props.computedMatch.params.id} id={item.project.id} name={item.project.name} description={item.project.description}/>
+                {projects.map((item, index)=>
+                    <SingleProject  key={index} teamId={this.props.computedMatch.params.id} id={item.project.id} name={item.project.name} description={item.project.description}/>
                 )}
                 <StyledLink to={`/teams/${this.props.computedMatch.params.id}/projects/create`}><Add>+</Add></StyledLink>
                 <hr />

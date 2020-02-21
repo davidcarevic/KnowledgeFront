@@ -21,7 +21,7 @@ const PrivateRoute = props => {
     return(
       <div>
           <Component {...props}/>
-          <SideBar />
+          <SideBar {...props} />
       </div>
       )
     }}
