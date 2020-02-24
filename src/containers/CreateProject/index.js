@@ -8,35 +8,41 @@ import Form from '../../components/elements/Form';
 import Input from '../../components/elements/Input';
 import TextArea from '../../components/elements/TextArea';
 import StyledLink from '../../components/elements/Link';
+import FileBase64 from 'react-file-base64';
 
 class CreateProject extends Component {
     state = {
         name: '',
         description: '',
-    }
-    componentDidMount() {
-        console.log("ID : ", this.props.computedMatch.params.id);
+        image: ''
     }
 
     handleInputChange = (e) => {
         this.setState({ [e.target.id]: e.target.value })
     }
 
+    getFiles(image){
+        this.setState({ image: image })
+      }
+
     handleFormSubmit = (e) => {
         e.preventDefault();
         const { history } = this.props
-        const { name, description } = this.state;
-        this.props.createProject(name, description, this.props.computedMatch.params.id)
-        history.push("/dashboard")
+        const { name, description, image } = this.state;
+        console.log("Image: ", image)
+        console.log("Image: ", image)
+        this.props.createProject(name, description, image)
+        // history.push("/dashboard")
     }
 
     render() {
-        const { name, description } = this.state;
+        const { name, description, image } = this.state;
         return (
-            <Form onSubmit={this.handleFormSubmit}>
+            <Form onSubmit={this.handleFormSubmit} enctype="multipart/form-data">
                 <Title>CREATE YOUR PROJECT!</Title>
                 <Input id="name" placeholder="PROJECT NAME" type="text" value={name} onChange={this.handleInputChange} /><br/><br/>
                 <TextArea id="description" placeholder="DESCRIPTION" value={description} onChange={this.handleInputChange} /><br/><br/>
+                <FileBase64 onDone={ this.getFiles.bind(this) } /><br/><br/>
                 <Button type="submit">CREATE PROJECT</Button><hr/>
             <StyledLink to="/dashboard">Back to Dashboard</StyledLink>
             </Form>

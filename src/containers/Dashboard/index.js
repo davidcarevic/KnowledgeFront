@@ -63,7 +63,7 @@ class Dashboard extends Component {
                     <h3>Projects</h3>
                     {!projects ? <div>No projects</div> : projects.map((item) =>
                     <Project key={item.project.id}>
-                        <SingleProject key={item.project.id} id={item.project.id} name={item.project.name} description={item.project.description}/>
+                        <SingleProject key={item.project.id} id={item.project.id} name={item.project.name} description={item.project.description} image={item.project.data.image}/>
                     </Project>
                 )}
                     <StyledLink to="/dashboard/projects/create"><Add>+</Add></StyledLink>
