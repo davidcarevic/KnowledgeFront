@@ -61,6 +61,7 @@ class Register extends Component {
             <HomeHolder>
               <Form onSubmit={this.handleFormSubmit}>
                   <Title> WELCOME </Title>
+                  <h2>{this.props.user.invited.email?this.props.user.invited.email:''}</h2>
                   <Input id="password" placeholder="PASSWORD" type="password" value={password} onChange={this.handleInputChange} /><br/><br/>
                   <Input id="password2" placeholder="CONFIRM PASSWORD" type="password" value={password2} onChange={this.handleInputChange} /><br/><br/>
                   <Button primary type="submit">REGISTER</Button>

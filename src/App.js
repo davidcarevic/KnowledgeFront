@@ -31,6 +31,7 @@ const App = props => (
       <PrivateRoute exact path="/dashboard" Component={Dashboard}/>
       <PrivateRoute exact path="/dashboard/teams/create" Component={CreateTeam}/>
       <PrivateRoute exact path="/dashboard/:id" Component={TeamProjects}/>
+      <PrivateRoute exact path="/dashboard/projects/:id/invite" Component={InviteUser}/>
       <PrivateRoute exact path="/dashboard/projects/create" Component={CreateProject}/>
       <PrivateRoute exact path="/dashboard/projects/:id" Component={SingleProject}/>
       <PrivateRoute exact path="/invite" Component={InviteUser}/>

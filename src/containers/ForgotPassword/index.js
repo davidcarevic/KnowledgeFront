@@ -64,7 +64,8 @@ class ForgotPassword extends Component {
                         <div>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, <br />sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br />
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris<br />nisi ut aliquip ex ea commodo consequat.
-                        </div><br />
+                        </div><br/>
+                        <h2>{this.props.user.reset.email?this.props.user.reset.email:''}</h2>
                         <Input id="password" placeholder="NEW PASSWORD" type="password" value={password} onChange={this.handleInputChange} /><br/><br/>
                         <Input id="password2" placeholder="CONFIRM PASSWORD" type="password" value={password2} onChange={this.handleInputChange} /><br/><br/>
                         <Button primary type="submit">RESET PASSWORD</Button>

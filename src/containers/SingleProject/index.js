@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import projectRedux from '../../redux/projects';
 import { withRouter } from 'react-router-dom';
+import StyledLink from "../../components/elements/Link";
 
 class SingleProject extends Component {
     state = {
@@ -27,6 +28,9 @@ class SingleProject extends Component {
 
                         <p key={item.project.id} id={item.project.id} >{item.project.name}</p>
                 )}
+                </p>
+                <p>
+                    <StyledLink to={"/dashboard/projects/"+this.props.match.params.id+"/invite"}>Invite a person</StyledLink>
                 </p>
             </div>
         )
