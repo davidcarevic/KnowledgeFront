@@ -5,13 +5,13 @@ import teamsRedux from '../../redux/teams';
 import projectsRedux from '../../redux/projects';
 import SingleProject from "../../components/SingleProject";
 import Title from '../../components/elements/Title';
-import Add from '../../components/elements/AddButton';
 import TeamHolder from '../../components/blocks/TeamHolder';
 import ProjectHolder from '../../components/blocks/ProjectHolder';
 import Team from '../../components/elements/Team';
 import Project from '../../components/elements/Project';
 import LoadingSpinner from "../../components/elements/LoadingSpinner";
 import StyledLink from '../../components/elements/Link';
+import { PlusIcon, Flex, UserPlusIcon } from "./styled";
 
 class Dashboard extends Component {
     componentDidMount() {
@@ -51,24 +51,30 @@ class Dashboard extends Component {
         return (
             <div>
                 <TeamHolder>
-                    <h3>Teams</h3>
+                    <Flex>
+                        <h3>Teams</h3>
+                        <StyledLink to="/dashboard/teams/create"><PlusIcon /></StyledLink>
+                        <StyledLink to="/invite"><UserPlusIcon /></StyledLink>
+                    </Flex>
                     {!teams ? <div>No teams</div> : teams.map((item, index) =>
                     <Team key={index}>
                     <SingleTeam key={index} id={item.team.id} name={item.team.name} description={item.team.description}/>
                     </Team>
                     )}
-                    <StyledLink to="/dashboard/teams/create"><Add>+</Add></StyledLink>
                 </TeamHolder>
                 <ProjectHolder>
-                    <h3>Projects</h3>
+                    <Flex>
+                        <h3>Projects</h3>
+                        <StyledLink to="/dashboard/projects/create"><PlusIcon /></StyledLink>
+                    </Flex>
                     {!projects ? <div>No projects</div> : projects.map((item) =>
                     <Project key={item.project.id}>
                         <SingleProject key={item.project.id} id={item.project.id} name={item.project.name} description={item.project.description} image={item.project.data.image}/>
                     </Project>
                 )}
-                    <StyledLink to="/dashboard/projects/create"><Add>+</Add></StyledLink>
+                    
+                
                 </ProjectHolder>
-                <hr/><StyledLink to="/invite">Invite a person</StyledLink>
             </div>
         )
     }

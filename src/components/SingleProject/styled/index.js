@@ -6,6 +6,7 @@ export const Style = styled.div`
   color: palevioletred;
   word-wrap: break-word;
   padding: 2em;
+  display: inline-block;
 `;
 
 export const Image = styled.img`
@@ -13,14 +14,12 @@ export const Image = styled.img`
   width: 280px;
   height: 150px;
   border-radius: 5px 5px 0 0;
-  margin-bottom:0
 `;
 export const Info = styled.div`
     background-color: #F5F5F5;
     word-wrap: break-word;
     display: block;
     width: 250px;
-    margin-top:0;
     padding: 1em;
     border-radius: 0 0 5px 5px;
 `;

@@ -32,6 +32,8 @@ class SingleProject extends Component {
                 <p>
                     <StyledLink to={"/dashboard/projects/"+this.props.match.params.id+"/invite"}>Invite a person</StyledLink>
                 </p>
+                <hr />
+                <StyledLink to="/dashboard">Back to Dashboard</StyledLink>
             </div>
         )
       } 

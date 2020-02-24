@@ -1,6 +1,6 @@
 import React from 'react'
 import StyledLink from '../../components/elements/Link';
-import { Info, Image, Item, Style} from "./styled";
+import { Info, Image, Style} from "./styled";
 
 //<p>ID = {props.id}</p>
 //test image hardcoded!!!

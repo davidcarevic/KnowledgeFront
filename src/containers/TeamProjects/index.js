@@ -4,8 +4,9 @@ import SingleProject from "../../components/SingleProject";
 import StyledLink from '../../components/elements/Link';
 import projectsRedux from '../../redux/projects';
 import Title from '../../components/elements/Title';
-import LoadingSpinner from '../../components/elements/LoadingSpinner'
-import Add from '../../components/elements/AddButton'
+import LoadingSpinner from '../../components/elements/LoadingSpinner';
+import { PlusIcon } from '../../components/elements/Icons';
+import { Flex } from './styled';
 
 class TeamProjects extends Component {
     state = {
@@ -40,11 +41,13 @@ class TeamProjects extends Component {
 
         return (
             <div>
-                <Title>TEAM</Title>
+                <Flex>
+                <Title>TEAM</Title> <StyledLink to={`/teams/${this.props.computedMatch.params.id}/projects/create`}><PlusIcon /></StyledLink>
+                </Flex>
                 {projects.map((item, index)=>
                     <SingleProject  key={index} teamId={this.props.computedMatch.params.id} id={item.project.id} name={item.project.name} description={item.project.description}/>
                 )}
-                <StyledLink to={`/teams/${this.props.computedMatch.params.id}/projects/create`}><Add>+</Add></StyledLink>
+                
                 <hr />
                 <StyledLink to="/dashboard">Back to Dashboard</StyledLink>
             </div>
