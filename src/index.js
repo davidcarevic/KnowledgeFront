@@ -9,9 +9,11 @@ import './index.css';
 import App from './App';
 import theme from './theme'
 import * as serviceWorker from './serviceWorker';
+import Wrapper from './components/blocks/Wrapper';
 
 ReactDOM.render(
     <Provider store={store}>
+        <Wrapper />
         <ThemeProvider theme={theme}>
             <PersistGate loading={<LoadingSpinner/>} persistor={persistor}>
             <App/>
