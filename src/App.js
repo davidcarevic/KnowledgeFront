@@ -29,7 +29,7 @@ const App = props => (
       <Route exact path="/register" component={Register}/>
       <Route exact path="/register/:guid" component={Register}/>
       <Route exact path="/forgot-password" component={ForgotPassword}/>
-      <Route exact path="forgot-password/:guid" component={ForgotPassword}/>
+      <Route exact path="/forgot-password/:guid" component={ForgotPassword}/>
       <PrivateRoute exact path="/dashboard" Component={Dashboard}/>
       <PrivateRoute exact path="/dashboard/teams/create" Component={CreateTeam}/>
       <PrivateRoute exact path="/dashboard/:id" Component={TeamProjects}/>

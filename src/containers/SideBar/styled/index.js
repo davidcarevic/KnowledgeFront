@@ -20,18 +20,15 @@ export const LogOutIcon = styled(LogOut)`
   color: white;
   width: 24px;
   height: 24px;
-  bottom: 10px;
-  left: 7px;
-  position: absolute;
+  margin-bottom: 15px;
 `
 
 export const SettingsIcon = styled(Settings)`
   color: white;
   width: 24px;
   height: 24px;
-  bottom: 45px;
-  left: 7px;
-  position: absolute;
+  padding-left: 7px;
+  margin-bottom: 15px;
 `
 
 export const BellIcon = styled(Bell)`
@@ -39,7 +36,7 @@ export const BellIcon = styled(Bell)`
   width: 24px;
   height: 24px;
   margin-bottom: 15px;
-  padding-left: 5px;
+  padding-left: 7px;
 `
 
 export const PlusIcon = styled(Plus)`
@@ -47,21 +44,21 @@ export const PlusIcon = styled(Plus)`
   width: 24px;
   height: 24px;
   margin-bottom: 15px;
-  padding-left: 5px;
+  padding-left: 7px;
 `
 export const NetworkWiredIcon = styled(NetworkWired)`
   color: white;
   width: 24px;
   height: 24px;
   margin-bottom: 15px;
-  padding-left: 5px;
+  padding-left: 7px;
 `
 export const SearchIcon = styled(Search)`
   color: white;
   width: 24px;
   height: 24px;
   margin-bottom: 15px;
-  padding-left: 5px;
+  padding-left: 7px;
 `
 export const ThSmallIcon = styled(ThSmall)`
   color: white;
@@ -69,12 +66,22 @@ export const ThSmallIcon = styled(ThSmall)`
   height: 24px;
   margin-top: 10px;
   margin-bottom: 15px;
-  padding-left: 5px;
+  padding-left: 7px;
 `
 export const UserPlusIcon = styled(UserPlus)`
   color: white;
   width: 24px;
   height: 24px;
   margin-bottom: 15px;
-  padding-left: 5px;
+  padding-left: 7px;
+`
+
+export const BottomnButtons = styled.div`
+  bottom: 0;
+  position: absolute;
+`
+
+export const ButtonForm = styled.button`
+  background-color: transparent;
+  border: none;
 `

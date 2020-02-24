@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import userRedux from '../../redux/user';
 import { withRouter } from 'react-router-dom';
-import { Bar, BellIcon, LogOutIcon, SettingsIcon, PlusIcon, NetworkWiredIcon, SearchIcon, ThSmallIcon, UserPlusIcon } from './styled';
+import { Bar, BellIcon, LogOutIcon, SettingsIcon, PlusIcon, NetworkWiredIcon, SearchIcon, ThSmallIcon, UserPlusIcon, BottomnButtons, ButtonForm } from './styled';
 import { Link } from "react-router-dom";
 
 class SideBar extends Component {
@@ -20,10 +20,12 @@ class SideBar extends Component {
           <Link to={"#"}><UserPlusIcon /></Link>
           <Link to={"#"}><NetworkWiredIcon /></Link>
           <Link to={"#"}><SearchIcon /></Link>
-          <Link to={"#"}><SettingsIcon /></Link>
-          <form onSubmit={this.handleFormSubmit}>
-            <button type="submit"><LogOutIcon /></button>
-          </form>
+          <BottomnButtons>
+            <Link to={"#"}><SettingsIcon /></Link>
+            <form onSubmit={this.handleFormSubmit} >
+              <ButtonForm type="submit"><LogOutIcon /></ButtonForm>
+            </form>
+          </BottomnButtons>
         </Bar>
       )
     }
