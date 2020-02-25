@@ -7,7 +7,8 @@ export const PlusIcon = styled(Plus)`
   color: black;
   width: 24px;
   height: 24px;
-  float: right;
+  position: absolute;
+  right: 30px;
 `
 
 export const Flex = styled.div`
@@ -20,5 +21,6 @@ export const UserPlusIcon = styled(UserPlus)`
     color: black;
     width: 24px;
     height: 24px;
-    float: right;
+    position: absolute;
+    right: 0;
 `
