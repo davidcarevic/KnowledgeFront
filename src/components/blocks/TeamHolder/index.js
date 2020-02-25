@@ -2,7 +2,9 @@ import styled from "styled-components";
 
 export default styled.div`
     float: left;
-    display: inline-block;
+    position: fixed;
     margin:0 auto;
-    width:30%;
+    width: 25%;
+    height: 100%;
+    overflow-y: auto;
 `;

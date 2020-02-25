@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import userRedux from '../../redux/user';
 import { withRouter } from 'react-router-dom';
-import { Bar, BellIcon, LogOutIcon, SettingsIcon, PlusIcon, NetworkWiredIcon, SearchIcon, ThSmallIcon, UserPlusIcon, BottomnButtons, ButtonForm } from './styled';
+import { Bar, BottomnButtons, ButtonForm } from './styled';
+import { BellIcon, LogOutIcon, SettingsIcon, PlusIcon, NetworkWiredIcon, SearchIcon, ThSmallIcon, UserPlusIcon } from '../../components/elements/Icons';
 import { Link } from "react-router-dom";
 
 class SideBar extends Component {
@@ -16,7 +17,7 @@ class SideBar extends Component {
         <Bar>
           <Link to={"#"}><ThSmallIcon /></Link>
           <Link to={"#"}><BellIcon /></Link>
-          <Link to={"#"}><PlusIcon /></Link>
+          <Link to={"#"}><PlusIcon color={"white"} /></Link>
           <Link to={"#"}><UserPlusIcon /></Link>
           <Link to={"#"}><NetworkWiredIcon /></Link>
           <Link to={"#"}><SearchIcon /></Link>

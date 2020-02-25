@@ -18,20 +18,23 @@ class SingleProject extends Component {
 
     render() {
         let project = this.props.project
-        let categories = this.props.categories //ne valja mapiranje sredi!!!
-        console.log("Categories: ", categories)
+        let sections = this.props.sections
+        // let categories = this.props.categories
+        console.log("Sections: ", sections)
         return (
             <div>
                 <p>{project.name}</p>
                 <p>
-                {!categories ? <div>No categories</div> : categories.map((item) =>
+                {!sections ? <div>No sections</div> : sections.map((item) =>
 
-                        <p key={item.project.id} id={item.project.id} >{item.project.name}</p>
+                        <p key={item.id} id={item.id} >{item.name}</p>
                 )}
                 </p>
                 <p>
                     <StyledLink to={"/dashboard/projects/"+this.props.match.params.id+"/invite"}>Invite a person</StyledLink>
                 </p>
+                <hr />
+                <StyledLink to="/dashboard">Back to Dashboard</StyledLink>
             </div>
         )
       } 
