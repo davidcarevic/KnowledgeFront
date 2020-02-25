@@ -24,3 +24,8 @@ export const UserPlusIcon = styled(UserPlus)`
     position: absolute;
     right: 0;
 `
+
+export const H2 = styled.h2`
+  position: absolute;
+  top: 20px;
+`

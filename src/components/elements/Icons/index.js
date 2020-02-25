@@ -59,7 +59,7 @@ export const ThSmallIcon = styled(ThSmall)`
   padding-left: 7px;
 `
 export const UserPlusIcon = styled(UserPlus)`
-  color: white;
+  color: ${props => props.color || "black"}
   width: 24px;
   height: 24px;
   margin-bottom: 15px;
