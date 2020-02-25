@@ -32,11 +32,11 @@ class CreateProject extends Component {
         console.log("Image: ", image)
         console.log("Image: ", image)
         this.props.createProject(name, description, image)
-        // history.push("/dashboard")
+        history.push("/dashboard")
     }
 
     render() {
-        const { name, description, image } = this.state;
+        const { name, description } = this.state;
         return (
             <Form onSubmit={this.handleFormSubmit} enctype="multipart/form-data">
                 <Title>CREATE YOUR PROJECT!</Title>

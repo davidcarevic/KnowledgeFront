@@ -19,7 +19,7 @@ class SingleProject extends Component {
     render() {
         let project = this.props.project
         let sections = this.props.sections
-        let categories = this.props.categories //ne valja mapiranje sredi!!!
+        // let categories = this.props.categories
         console.log("Sections: ", sections)
         return (
             <div>

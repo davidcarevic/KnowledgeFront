@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 import { Bar, BottomnButtons, ButtonForm } from './styled';
 import { BellIcon, LogOutIcon, SettingsIcon, PlusIcon, NetworkWiredIcon, SearchIcon, ThSmallIcon, UserPlusIcon } from '../../components/elements/Icons';
 import { Link } from "react-router-dom";
-import { Import } from 'styled-icons/boxicons-regular';
 
 class SideBar extends Component {
   handleFormSubmit = (e) => {
