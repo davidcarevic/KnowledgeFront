@@ -5,7 +5,9 @@ const initialState = {
     projects: [],
     teamProjects: [],
     project: {},
-    sections: []
+    sections: [],
+    categories: [],
+    elements: []
 };
 
 export default (state = initialState, action) => {
@@ -34,6 +36,16 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 sections: action.payload
+            }
+        case types.GET_SECTION_CATEGORIES:
+            return {
+                ...state,
+                categories: action.payload
+            }
+        case types.GET_CATEGORY_ELEMENTS:
+            return {
+                ...state,
+                elements: action.payload
             }
         default:
             return state;

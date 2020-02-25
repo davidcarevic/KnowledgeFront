@@ -88,3 +88,11 @@ export const destroyResetAndUpdatePass = (guid, password, data) => {
 export const getProjectSections = (id) => {
     return axios.get('/api/project-sections/' + id + '/')
 }
+
+export const getSectionCategories = (id) => {
+    return axios.get('api/section-categories/' + id + '/')
+}
+
+export const getCategoryElements = (id) => {
+    return axios.get('api/category-elements/' + id + '/')
+}

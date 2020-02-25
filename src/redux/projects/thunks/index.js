@@ -1,5 +1,5 @@
-import { createProject, getProjects, getProjectsByUser, getSingleProject, getProjectSections } from "../../../services";
-import { setProjectsByTeam, setProjectsByUser, getProject, getSections } from "../actions";
+import { createProject, getProjects, getProjectsByUser, getSingleProject, getProjectSections, getSectionCategories, getCategoryElements } from "../../../services";
+import { setProjectsByTeam, setProjectsByUser, getProject, getSections, getCategories, getElements } from "../actions";
 import { isLoading } from "../../global/actions";
 
 
@@ -71,6 +71,32 @@ export const retrieveProjectSections = (id) => dispatch => {
     getProjectSections(id)
     .then(res => {
         dispatch(getSections(res.data))
+        dispatch(isLoading(false))
+    })
+    .catch(err => {
+        console.log(err.message)
+        dispatch(isLoading(false))
+    })
+}
+
+export const retrieveSectionCategories = (id) => dispatch => {
+    dispatch(isLoading(false))
+    getSectionCategories(id)
+    .then(res => {
+        dispatch(getCategories(res.data))
+        dispatch(isLoading(false))
+    })
+    .catch(err => {
+        console.log(err.message)
+        dispatch(isLoading(false))
+    })
+}
+
+export const retrieveCategoryElements = (id) => dispatch => {
+    dispatch(isLoading(false))
+    getCategoryElements(id)
+    .then(res => {
+        dispatch(getElements(res.data))
         dispatch(isLoading(false))
     })
     .catch(err => {

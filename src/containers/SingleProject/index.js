@@ -5,10 +5,6 @@ import { withRouter } from 'react-router-dom';
 import StyledLink from "../../components/elements/Link";
 
 class SingleProject extends Component {
-    state = {
-        id: ''
-    }
-
     componentDidMount() {
         if (!this.props.isLoading) {
             this.props.getProject(this.props.match.params.id)
@@ -17,10 +13,8 @@ class SingleProject extends Component {
     }
 
     render() {
-        let project = this.props.project
-        let sections = this.props.sections
-        // let categories = this.props.categories
-        console.log("Sections: ", sections)
+        const { project, sections, categories, elements } = this.props
+
         return (
             <div>
                 <p>{project.name}</p>
@@ -44,13 +38,15 @@ class SingleProject extends Component {
 const mapDispatchToProps = {
     getProject: projectRedux.thunks.retrieveProject,
     getProjectSections: projectRedux.thunks.retrieveProjectSections,
-    getSectionCategories: projectRedux.thunks.retrieveSectionCategories
+    getSectionCategories: projectRedux.thunks.retrieveSectionCategories,
+    getCategoryElements: projectRedux.thunks.retrieveCategoryElements
 }
 
 const mapStateToProps = state => ({
     project: state.projects.project,
     sections: state.projects.sections,
-    categories: state.projects.categories
+    categories: state.projects.categories,
+    elements: state.projects.elements
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SingleProject))
