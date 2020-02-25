@@ -23,7 +23,7 @@ class ForgotPassword extends Component {
         var guid = this.props.match.params.guid
         if (guid) {
             this.setState({guid: guid})
-            if (!this.props.isLoading && guid){
+            if (!this.props.isLoading && this.props.user.reset!=={}){
                 this.props.getUserReset(guid)
                 this.setState({email:this.props.user.reset.email })
             }
@@ -104,13 +104,13 @@ class ForgotPassword extends Component {
 }
 
 const mapDispatchToProps = {
-    sendPassReset:userRedux.thunks.sendResetPassword,
-    getUserReset:userRedux.thunks.getResetPassUser,
+    sendPassReset: userRedux.thunks.sendResetPassword,
+    getUserReset: userRedux.thunks.getResetPassUser,
     resetPass: userRedux.thunks.resetPasswordForUser
 }
 
 const mapStateToProps = state => ({
-    user:state.user
+    user: state.user
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ForgotPassword))
