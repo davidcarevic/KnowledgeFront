@@ -19,6 +19,9 @@ import CreateProject from "./containers/CreateProject";
 import InviteUser from "./containers/InviteUser";
 import ForgotPassword from "./containers/ForgotPassword";
 import SingleProject from "./containers/SingleProject";
+import CreateSection from "./containers/CreateSection";
+import CreateCategory from "./containers/CreateCategory";
+import CreateElement from "./containers/CreateElement"
 
 const App = props => (
     <Router>
@@ -35,6 +38,9 @@ const App = props => (
       <PrivateRoute exact path="/dashboard/projects/create" Component={CreateProject}/>
       <PrivateRoute exact path="/dashboard/projects/:id" Component={SingleProject}/>
       <PrivateRoute exact path="/invite" Component={InviteUser}/>
+      <PrivateRoute exact path="/dashboard/projects/:id/section-create" Component={CreateSection}/>
+      <PrivateRoute exact path="/dashboard/projects/:id/section/:s_id/category-create" Component={CreateCategory}/>
+      <PrivateRoute exact path="/dashboard/projects/:id/section/:s_id/category/:c_id/element-create" Component={CreateElement}/>
       <Route exact path="/testnav" component={TestNav}/>
       </Switch>
     </Router>

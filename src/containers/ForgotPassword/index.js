@@ -12,9 +12,9 @@ class ForgotPassword extends Component {
     state = {
         guid: '',
         email: '',
-        password:'',
-        password2:'',
-        resend:false,
+        password: '',
+        password2: '',
+        resend: false,
         data: {}
     }
 
@@ -23,7 +23,7 @@ class ForgotPassword extends Component {
         var guid = this.props.match.params.guid
         if (guid) {
             this.setState({guid: guid})
-            if (!this.props.isLoading && guid){
+            if (!this.props.isLoading && guid) {
                 this.props.getUserReset(guid)
                 this.setState({email:this.props.user.reset.email })
             }
@@ -55,8 +55,8 @@ class ForgotPassword extends Component {
     }
 
     render() {
-        const { email, guid, password, password2,resend } = this.state;
-        if(guid){
+        const { email, guid, password, password2, resend } = this.state;
+        if (guid) {
             return (
                 <HomeHolder>
                     <Form onSubmit={this.handlePassReset}>
@@ -73,7 +73,7 @@ class ForgotPassword extends Component {
                 </HomeHolder>
             )
         }
-        if(resend){
+        if (resend) {
             return(
                 <HomeHolder>
                     <Form onSubmit={this.handleFormSubmit}>
@@ -104,13 +104,13 @@ class ForgotPassword extends Component {
 }
 
 const mapDispatchToProps = {
-    sendPassReset:userRedux.thunks.sendResetPassword,
-    getUserReset:userRedux.thunks.getResetPassUser,
+    sendPassReset: userRedux.thunks.sendResetPassword,
+    getUserReset: userRedux.thunks.getResetPassUser,
     resetPass: userRedux.thunks.resetPasswordForUser
 }
 
 const mapStateToProps = state => ({
-    user:state.user
+    user: state.user
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ForgotPassword))

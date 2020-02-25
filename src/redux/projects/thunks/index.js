@@ -1,5 +1,7 @@
-import { createProject, getProjects, getProjectsByUser, getSingleProject, getProjectSections, getSectionCategories, getCategoryElements } from "../../../services";
-import { setProjectsByTeam, setProjectsByUser, getProject, getSections, getCategories, getElements } from "../actions";
+import { createProject, getProjects, getProjectsByUser, getSingleProject, getProjectSections, getSectionCategories, 
+    getCategoryElements, createSection, createCategory, createElement } from "../../../services";
+import { setProjectsByTeam, setProjectsByUser, getProject, getSections, getCategories, getElements, 
+    setSection, setCategory, setElement } from "../actions";
 import { isLoading } from "../../global/actions";
 
 
@@ -97,6 +99,45 @@ export const retrieveCategoryElements = (id) => dispatch => {
     getCategoryElements(id)
     .then(res => {
         dispatch(getElements(res.data))
+        dispatch(isLoading(false))
+    })
+    .catch(err => {
+        console.log(err.message)
+        dispatch(isLoading(false))
+    })
+}
+
+export const sectionCreation = (name, description, project_id) => dispatch => {
+    dispatch(isLoading(false))
+    createSection(name, description, project_id)
+    .then(res => {
+        dispatch(setSection(res.data))
+        dispatch(isLoading(false))
+    })
+    .catch(err => {
+        console.log(err.message)
+        dispatch(isLoading(false))
+    })
+}
+
+export const categoryCreation = (name, description, section_id) => dispatch => {
+    dispatch(isLoading(false))
+    createCategory(name, description, section_id)
+    .then(res => {
+        dispatch(setCategory(res.data))
+        dispatch(isLoading(false))
+    })
+    .catch(err => {
+        console.log(err.message)
+        dispatch(isLoading(false))
+    })
+}
+
+export const elementCreation = (title, description, category_id) => dispatch => {
+    dispatch(isLoading(false))
+    createElement(title, description, category_id)
+    .then(res => {
+        dispatch(setElement(res.data))
         dispatch(isLoading(false))
     })
     .catch(err => {

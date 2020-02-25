@@ -1,10 +1,10 @@
 import axios from '../axios';
 
 export const getToken = (email, password) => {
-      return axios.post('/api/token/', {
-          email,
-          password
-        })
+    return axios.post('/api/token/', {
+        email,
+        password
+    })
 }
 
 export const removeToken = () => {
@@ -18,11 +18,11 @@ export const getRefresh = () =>{
 }
 
 export const register = (email, password, data) => {
-  return axios.post('/api/users/', {
-     email: email,
-     password: password,
-     data: data
-  })
+    return axios.post('/api/users/', {
+        email: email,
+        password: password,
+        data: data
+    })
 }
 
 export const getTeamsByUser = () => {
@@ -95,4 +95,28 @@ export const getSectionCategories = (id) => {
 
 export const getCategoryElements = (id) => {
     return axios.get('api/category-elements/' + id + '/')
+}
+
+export const createSection = (name, description, project) => {
+    return axios.post('/api/sections/', {
+        name: name,
+        description: description,
+        project: project
+    })
+}
+
+export const createCategory = (name, description, section) => {
+    return axios.post('/api/categories/', {
+        name: name,
+        description: description,
+        section: section
+    })
+}
+
+export const createElement = (title, description, category) => {
+    return axios.post('/api/elements/', {
+        title: title,
+        description: description,
+        category: category
+    })
 }

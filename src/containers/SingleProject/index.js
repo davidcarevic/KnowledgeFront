@@ -14,16 +14,17 @@ class SingleProject extends Component {
 
     render() {
         const { project, sections, categories, elements } = this.props
-
+        const project_id = this.props.match.params.id
         return (
             <div>
                 <p>{project.name}</p>
-                <p>
+                <StyledLink to={"/dashboard/projects/" + project_id + "/section-create"}>Create section</StyledLink><hr />
+                <div>
                 {!sections ? <div>No sections</div> : sections.map((item) =>
 
                         <p key={item.id} id={item.id} >{item.name}</p>
                 )}
-                </p>
+                </div>
                 <p>
                     <StyledLink to={"/dashboard/projects/"+this.props.match.params.id+"/invite"}>Invite a person</StyledLink>
                 </p>

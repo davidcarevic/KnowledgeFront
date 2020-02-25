@@ -4,10 +4,13 @@ import { SET_PROJECTS_BY_TEAMS } from "../actions/types";
 const initialState = {
     projects: [],
     teamProjects: [],
-    project: {},
     sections: [],
     categories: [],
-    elements: []
+    elements: [],
+    project: {},
+    section: {},
+    category: {},
+    element: {}
 };
 
 export default (state = initialState, action) => {
@@ -46,6 +49,21 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 elements: action.payload
+            }
+        case types.SET_SECTION:
+            return {
+                ...state,
+                section: action.payload
+            }
+        case types.SET_CATEGORY:
+            return {
+                ...state,
+                category: action.payload
+            }
+        case types.SET_ELEMENT:
+            return {
+                ...state,
+                element: action.payload
             }
         default:
             return state;

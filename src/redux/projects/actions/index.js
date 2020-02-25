@@ -48,3 +48,24 @@ export const getElements = elements => {
         payload: elements
     }
 }
+
+export const setSection = section => {
+    return {
+        type: types.SET_SECTION,
+        payload: section
+    }
+}
+
+export const setCategory = category => {
+    return {
+        type: types.SET_CATEGORY,
+        payload: category
+    }
+}
+
+export const setElement = element => {
+    return {
+        type: types.SET_ELEMENT,
+        payload: element
+    }
+}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import teamRedux from '../../redux/teams'
+import projectRedux from '../../redux/projects'
 import { withRouter } from 'react-router-dom';
 import Button from '../../components/elements/Button';
 import Title from '../../components/elements/Title';
@@ -9,9 +9,9 @@ import Form from '../../components/elements/Form';
 import Input from '../../components/elements/Input';
 import TextArea from '../../components/elements/TextArea';
 
-class CreateTeam extends Component {
+class CreateSection extends Component {
     state = {
-        name: '',
+        title: '',
         description: '',
     }
 
@@ -22,32 +22,34 @@ class CreateTeam extends Component {
     handleFormSubmit = (e) => {
         e.preventDefault();
         const { history } = this.props
-        const { name, description } = this.state;
-        this.props.createTeam(name, description);
-        history.push("/dashboard");
-        }
+        const { title, description } = this.state;
+        const project_id = this.props.match.params.id
+        const category_id = this.props.match.params.c_id
+        this.props.createElement(title, description, category_id);
+        history.push("/dashboard/projects/" + project_id);
+    }
 
     render() {
-        const { name, description } = this.state;
+        const { title, description } = this.state;
+        const project_id = this.props.match.params.id
         return (
         <Form onSubmit={this.handleFormSubmit}>
-            <Title>CREATE YOUR TEAM!</Title>
-            <Input id="name" placeholder="TEAM NAME" type="text" value={name} onChange={this.handleInputChange} /><br/><br/>
+            <Title>CREATE YOUR ELEMENT!</Title>
+            <Input id="title" placeholder="ELEMENT TITLE" type="text" value={title} onChange={this.handleInputChange} /><br/><br/>
             <TextArea id="description" placeholder="DESCRIPTION" value={description} onChange={this.handleInputChange} /><br/><br/>
             <Button type="submit">CREATE</Button><hr/>
-            <StyledLink to="/dashboard">Back to Dashboard</StyledLink>
+            <StyledLink to={"/dashboard/projects/" + project_id}>Back to Project</StyledLink>
         </Form>
         )
     }
 }
 
 const mapDispatchToProps = {
-    createTeam: teamRedux.thunks.teamCreation
+    createElement: projectRedux.thunks.elementCreation
 }
 
 const mapStateToProps = state => ({
-    teams: state.teams,
-    team: state.team
+    element: state.projects.element
 })
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreateTeam))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreateSection))
