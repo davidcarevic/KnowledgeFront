@@ -13,7 +13,7 @@ class Home extends Component {
       email: '',
       password: '',
     }
-    
+
     handleInputChange = (e) => {
       this.setState({ [e.target.id]: e.target.value })
     }

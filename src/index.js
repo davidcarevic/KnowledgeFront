@@ -10,13 +10,16 @@ import App from './App';
 import theme from './theme'
 import * as serviceWorker from './serviceWorker';
 import Wrapper from './components/blocks/Wrapper';
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 
 ReactDOM.render(
     <Provider store={store}>
         <Wrapper />
         <ThemeProvider theme={theme}>
             <PersistGate loading={<LoadingSpinner/>} persistor={persistor}>
-            <App/>
+                <ReactNotification />
+                    <App/>
             </PersistGate>
         </ThemeProvider>
     </Provider>

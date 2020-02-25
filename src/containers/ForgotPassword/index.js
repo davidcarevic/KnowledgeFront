@@ -23,7 +23,11 @@ class ForgotPassword extends Component {
         var guid = this.props.match.params.guid
         if (guid) {
             this.setState({guid: guid})
+<<<<<<< HEAD
             if (!this.props.isLoading && guid) {
+=======
+            if (!this.props.isLoading && this.props.user.reset!=={}){
+>>>>>>> 390f117cb17271222720cbf548776d0b8043c32d
                 this.props.getUserReset(guid)
                 this.setState({email:this.props.user.reset.email })
             }

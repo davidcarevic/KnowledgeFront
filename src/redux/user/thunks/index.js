@@ -15,6 +15,14 @@ import {
 import { isLoading } from "../../global/actions";
 import axios from "../../../axios";
 import {setProjectsByUser} from "../../projects/actions";
+//notifications -->
+import {loginSuccess, loginError} from '../../../components/elements/Notifications/Login/';
+import {logoutSuccess} from "../../../components/elements/Notifications/Logout";
+import {registerSuccess,registerError} from "../../../components/elements/Notifications/Register";
+import {inviteSuccess,inviteError} from "../../../components/elements/Notifications/Invite";
+import {inviteRetrieveError} from "../../../components/elements/Notifications/InviteRetriveError";
+import {generalError} from "../../../components/elements/Notifications/GeneralError";
+import {resetPassError,resetPassSuccess} from "../../../components/elements/Notifications/ResetPassword";
 
 export const loginUser = (email, password) => dispatch => {
     console.log("OVO PRVO")
@@ -29,6 +37,7 @@ export const loginUser = (email, password) => dispatch => {
             dispatch(authenticateUser(true))
             dispatch(isLoading(false));
             window.localStorage.setItem('refreshToken', res.data.refresh);
+            loginSuccess();
         })
         .catch(err => {
             console.log("AXIOS ERROR: ", axios);
@@ -37,7 +46,8 @@ export const loginUser = (email, password) => dispatch => {
             } else {
                 dispatch(isLoading(false));
                 dispatch(authenticationError(true));
-                dispatch(authenticationErrorMessage(err.message));
+                dispatch(authenticationErrorMessage(err.message))
+                loginError();
             }
         })
 }
@@ -74,6 +84,7 @@ export const logout = () => dispatch => {
     dispatch(setProjectsByUser([]));
     window.localStorage.removeItem('refreshToken')
     dispatch(isLoading(false))
+    logoutSuccess();
 }
 
 
@@ -83,10 +94,12 @@ export const registerUser = (email, password, data) => dispatch => {
         .then(res => {
             dispatch(createUser(res.data))
             dispatch(isLoading(false))
+            registerSuccess();
         })
         .catch(err => {
             console.log(err.message)
             dispatch(isLoading(false))
+            registerError();
         })
 }
 
@@ -96,10 +109,12 @@ export const userInvite = (email, data) => dispatch => {
         .then(res => {
             dispatch(createInvite(res.data))
             dispatch(isLoading(false))
+            inviteSuccess(email);
         })
         .catch(err => {
             console.log(err.message)
             dispatch(isLoading(false))
+            inviteError();
         })
 }
 
@@ -113,6 +128,7 @@ export const getInvited = (guid) => dispatch => {
         .catch(err => {
             console.log(err.message)
             dispatch(isLoading(false))
+            inviteRetrieveError();
         })
 }
 
@@ -126,6 +142,7 @@ export const sendResetPassword = (email) => dispatch => {
         .catch(err => {
             console.log(err.message)
             dispatch(isLoading(false))
+            generalError();
         })
 }
 
@@ -139,6 +156,7 @@ export const getResetPassUser = (guid) => dispatch => {
         .catch(err => {
             console.log(err.message)
             dispatch(isLoading(false))
+            generalError();
         })
 }
 
@@ -148,10 +166,12 @@ export const resetPasswordForUser = (guid, password, data) => dispatch => {
         .then( res => {
             dispatch(passReset(res.data))
             dispatch(isLoading(false))
+            resetPassSuccess();
         })
         .catch(err => {
             console.log(err.message)
             dispatch(isLoading(false))
+            resetPassError();
         })
 
 }
