@@ -34,3 +34,17 @@ export const getSections = sections => {
         payload: sections
     }
 }
+
+export const getCategories = categories => {
+    return {
+        type: types.GET_SECTION_CATEGORIES,
+        payload: categories
+    }
+}
+
+export const getElements = elements => {
+    return {
+        type: types.GET_CATEGORY_ELEMENTS,
+        payload: elements
+    }
+}
