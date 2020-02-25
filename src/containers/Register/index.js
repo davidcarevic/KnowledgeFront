@@ -14,16 +14,20 @@ class Register extends Component {
       email: '',
       password: '',
       password2: '',
-      data: {}
+      data: {},
+        notMember:false,
     }
 
     componentDidMount() {
         console.log("GUID : ", this.props.match.params.guid)
         var guid = this.props.match.params.guid
-        if (guid) {
+        if (guid && !this.props.isLoading) {
             this.setState({guid: guid})
             if (this.props.user.invited !== {}  && !this.props.isLoading){
                 this.props.getUser(guid)
+            }
+            if(!this.props.isLoading && this.props.user.invited !=={}){
+                this.setState({notMember:this.props.user.invited.data.not_member})
             }
         }
     }
@@ -34,29 +38,45 @@ class Register extends Component {
 
     handleFormSubmit = (e) => {
       e.preventDefault();
-      const { email, password, password2,data,guid} = this.state;
-      const { history } = this.props
-      if (password === password2) {
+      const { email, password, password2, guid, notMember} = this.state;
+      const { history } = this.props;
+      if(notMember===false){
           if (this.props.user.invited.email) {
               let email = this.props.user.invited.email
               let data = {
                   team: this.props.user.invited.data.team,
                   project: this.props.user.invited.data.project,
-                  guid: guid
+                  guid: guid,
+                  not_member:notMember
+              }
+              this.props.createUser(email,'', data)
+              history.push("/")
+              return
+          }
+      }
+      if (password === password2) {
+          let data={}
+          if (this.props.user.invited.email) {
+              let email = this.props.user.invited.email
+               data = {
+                  team: this.props.user.invited.data.team,
+                  project: this.props.user.invited.data.project,
+                  guid: guid,
+                  not_member:notMember
               }
                this.props.createUser(email, password, data)
                history.push("/")
               return
           }
+          data={not_member:true}
           console.log(this.state)
           this.props.createUser(email, password, data)
           history.push("/")
-
       }
     }
     render() {
-      const { email, password, password2, guid } = this.state;
-      if (guid) {
+      const { email, password, password2, guid, notMember } = this.state;
+      if (guid && notMember) {
           return (
             <HomeHolder>
               <Form onSubmit={this.handleFormSubmit}>
@@ -69,6 +89,18 @@ class Register extends Component {
             </HomeHolder>
           )
       }
+      if(guid && notMember===false){
+          return (
+              <HomeHolder>
+                  <Form onSubmit={this.handleFormSubmit}>
+                      <Title> You've been invited to join a Project </Title>
+                      <h2>{this.props.user.invited.email?this.props.user.invited.email:''}</h2>
+                      <Button primary type="submit">Join</Button>
+                  </Form>
+              </HomeHolder>
+          )
+      }
+
 
       return (
         <HomeHolder>
