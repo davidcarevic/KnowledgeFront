@@ -10,8 +10,15 @@ import HeaderButtons from "../../components/blocks/HeaderButtons";
 import { PlusIcon, UserPlusIcon } from '../../components/elements/Icons';
 import { Flex } from './styled';
 import LoadingSpinner from "../../components/elements/LoadingSpinner";
+import Form from '../../components/elements/Form'
 
 class SingleProject extends Component {
+    state = {
+        selected_section: '',
+        selected_category: '',
+        selected_element: ''
+    }
+
     componentDidMount() {
         if (!this.props.isLoading) {
             this.props.getProject(this.props.match.params.id)
@@ -20,7 +27,16 @@ class SingleProject extends Component {
 
     handleSectionChange = (e) => {
         e.preventDefault();
+        this.props.getSectionCategories()
+    }
 
+    handleClick = (e) => {
+        e.preventDefault();
+        this.setState({
+            selected_section: e.target.id
+        })
+        this.props.getSectionCategories(e.target.id)
+        console.log('OPICIO SE!', e.target.id)
     }
 
     render() {
@@ -43,9 +59,11 @@ class SingleProject extends Component {
                         
                     </LeftHeaderHolder>
                     <RightHeaderHolder>
+                        <Form>
                         {!sections ? <div>No sections</div> : sections.map((item, index) =>
-                            <HeaderButtons key={index} id={item.id} >{item.name} </HeaderButtons>
+                            <HeaderButtons key={index} id={item.id} onClick={this.handleClick}>{item.name} </HeaderButtons>
                         )}
+                        </Form>
                         <StyledLink to={"/dashboard/projects/" + project_id + "/section-create"}><PlusIcon top={'18px'}/></StyledLink>
                         
                         
@@ -54,12 +72,13 @@ class SingleProject extends Component {
                 <SideHolder>
                 {!categories ? <div>No categories</div> : categories.map((item, index) =>
                         <Flex key={index}><Flex key={index} id={item.id} >{item.name}</Flex><Flex right><PlusIcon width={'15px'} height={'15px'}/></Flex></Flex>
+                        
                     )}
                     
                 </SideHolder>
                 <MainHolder>
-                <h1>{category.name}</h1>
-                <div>{category.description}</div><hr />
+                {!category ? <h1>No Categories</h1> : <h1>{category.name}</h1>}
+                {!category ? '' : <div>{category.description}</div>}<hr />
                 {!elements ? <div>No elements</div> : elements.map((item, index) =>
                     <div key={index} id={item.id} ><h3>{item.title}</h3><p>{item.description}</p><hr /></div>
                     )}
@@ -73,7 +92,6 @@ class SingleProject extends Component {
 
 const mapDispatchToProps = {
     getProject: projectRedux.thunks.retrieveProject,
-    getProjectSections: projectRedux.thunks.retrieveProjectSections,
     getSectionCategories: projectRedux.thunks.retrieveSectionCategories,
     getCategoryElements: projectRedux.thunks.retrieveCategoryElements,
     setSection: projectRedux.actions.setSection,

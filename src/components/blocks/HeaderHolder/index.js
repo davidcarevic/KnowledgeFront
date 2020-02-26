@@ -6,6 +6,7 @@ export const Header = styled.div`
     position: fixed;
     top: 0;
     left: 0;
+    right: 0;
     padding-left: 60px;
     padding-top: 20px;
     width: 100%;
@@ -24,14 +25,14 @@ export const LeftHeaderHolder = styled.div`
     padding-left: 60px;
     padding-top: 19px;
     background-color: white;
-    z-index: 1;
+    z-index: 2;
     border-bottom: 1px solid black;
 `;
 
 export const RightHeaderHolder = styled.div`
     right: 0;
     display: flex;
-    width: 66.6%;
+    width: 75%;
     justify-content: flex-end;
     position: fixed;
     top: 0;

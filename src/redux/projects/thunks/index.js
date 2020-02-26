@@ -103,26 +103,21 @@ export const retrieveProject = (id) => dispatch => {
     dispatch(isLoading(false))
 }
 
-export const retrieveProjectSections = (id) => dispatch => {
-    dispatch(isLoading(true))
-    getProjectSections(id)
-    .then(res => {
-        dispatch(setSections(res.data))
-        dispatch(isLoading(false))
-    })
-    .catch(err => {
-        console.log(err.message)
-        dispatch(isLoading(false))
-        generalError()
-    })
-    dispatch(isLoading(false))
-}
-
 export const retrieveSectionCategories = (id) => dispatch => {
     dispatch(isLoading(true))
     getSectionCategories(id)
     .then(res => {
         dispatch(setCategories(res.data))
+        dispatch(isLoading(false))
+        dispatch(setCategory(res.data[0]))
+        dispatch(setElements([]))
+        return res.data[0].id
+    })
+    .then(id => {
+        return getCategoryElements(id)
+    })
+    .then(res => {
+        dispatch(setElements(res.data))
         dispatch(isLoading(false))
     })
     .catch(err => {
