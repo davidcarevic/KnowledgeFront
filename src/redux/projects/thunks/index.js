@@ -85,6 +85,7 @@ export const retrieveProject = (id) => dispatch => {
     })
     .then(res => {
         dispatch(setCategories(res.data))
+        dispatch(setCategory(res.data[0]))
         return res.data[0].id
     })
     .then(id => {
