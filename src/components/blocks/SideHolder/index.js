@@ -4,8 +4,8 @@ export default styled.div`
     float: left;
     position: fixed;
     margin: 0 auto;
-    width: 25%;
-    top: ${props => props.top || "25%"};
+    width: 22%;
+    top: ${props => props.top || "20%"};
     height: 85%;
     overflow-y: auto;
 `;

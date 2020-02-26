@@ -5,7 +5,7 @@ export const Style = styled.div`
   text-align: center;
   color: palevioletred;
   word-wrap: break-word;
-  padding: 2em;
+  padding: 0.5em;
   display: inline-block;
 `;
 

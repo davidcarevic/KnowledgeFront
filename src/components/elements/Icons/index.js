@@ -11,6 +11,10 @@ export const LogOutIcon = styled(LogOut)`
   width: 24px;
   height: 24px;
   margin-bottom: 15px;
+
+  &:hover {
+    color: blue;
+  }
 `
 
 export const SettingsIcon = styled(Settings)`
@@ -19,6 +23,10 @@ export const SettingsIcon = styled(Settings)`
   height: 24px;
   padding-left: 7px;
   margin-bottom: 15px;
+
+  &:hover {
+    color: blue;
+  }
 `
 
 export const BellIcon = styled(Bell)`
@@ -27,6 +35,10 @@ export const BellIcon = styled(Bell)`
   height: 24px;
   margin-bottom: 15px;
   padding-left: 7px;
+
+  &:hover {
+    color: blue;
+  }
 `
 
 export const PlusIcon = styled(Plus)`
@@ -36,6 +48,10 @@ export const PlusIcon = styled(Plus)`
   margin-top: ${props => props.top || ''};
   margin-bottom: 15px;
   padding-left: 7px;
+
+  &:hover {
+    color: blue;
+  }
 `
 export const NetworkWiredIcon = styled(NetworkWired)`
   color: white;
@@ -50,6 +66,10 @@ export const SearchIcon = styled(Search)`
   height: 24px;
   margin-bottom: 15px;
   padding-left: 7px;
+
+  &:hover {
+    color: blue;
+  }
 `
 export const ThSmallIcon = styled(ThSmall)`
   color: white;
@@ -58,12 +78,20 @@ export const ThSmallIcon = styled(ThSmall)`
   margin-top: 10px;
   margin-bottom: 15px;
   padding-left: 7px;
+
+  &:hover {
+    color: blue;
+  }
 `
 export const UserPlusIcon = styled(UserPlus)`
   color: ${props => props.color || "black"}
-  width: 24px;
-  height: 24px;
+  width: ${props => props.width || '24px'};
+  height: ${props => props.height || '24px'};
   margin-top: ${props => props.top || ''};
   margin-bottom: 15px;
   padding-left: 7px;
+
+  &:hover {
+    color: blue;
+  }
 `

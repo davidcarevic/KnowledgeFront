@@ -8,6 +8,7 @@ export const Bar = styled.div`
   width: 40px;
   height: 100%;
   background-color: black;
+  z-index: 2;
 `;
 
 export const BottomnButtons = styled.div`
