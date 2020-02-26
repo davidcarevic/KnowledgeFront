@@ -3,6 +3,12 @@ import { createProject, getProjects, getProjectsByUser, getSingleProject, getPro
 import { setProjectsByTeam, setProjectsByUser, getProject, getSections, getCategories, getElements, 
     setSection, setCategory, setElement } from "../actions";
 import { isLoading } from "../../global/actions";
+//notifications
+import {projectCreateError,projectCreateSuccess} from "../../../components/elements/Notifications/ProjectCreate";
+import {generalError} from "../../../components/elements/Notifications/GeneralError";
+import {categoryCreateError,categoryCreateSuccess} from "../../../components/elements/Notifications/CategoryCreate";
+import {sectionCreateError,sectionCreateSuccess} from "../../../components/elements/Notifications/SectionCreate";
+import {elementCreateError,elementCreateSuccess} from "../../../components/elements/Notifications/ElementCreate";
 
 
 export const getTeamProjects = (id) => dispatch => {
@@ -20,6 +26,7 @@ export const getTeamProjects = (id) => dispatch => {
         .catch(err => {
             console.log(err.message)
             dispatch(isLoading(false))
+            generalError()
         })
 }
 
@@ -32,10 +39,12 @@ export const projectCreation = (name, description, teamId) => dispatch =>{
         .then(res => {
             dispatch(setProjectsByUser(res.data));
             dispatch(isLoading(false));
+            projectCreateSuccess()
         })
         .catch(err => {
             console.log(err.message)
             dispatch(isLoading(false))
+            projectCreateError()
         })
 }
 
@@ -52,6 +61,7 @@ export const getProjectsForUser = (id) => dispatch => {
         .catch(err => {
             console.log(err.message)
             dispatch(isLoading(false))
+            generalError()
         })
 }
 
@@ -65,6 +75,7 @@ export const retrieveProject = (id) => dispatch => {
     .catch(err => {
         console.log(err.message)
         dispatch(isLoading(false))
+        generalError()
     })
 }
 
@@ -78,6 +89,7 @@ export const retrieveProjectSections = (id) => dispatch => {
     .catch(err => {
         console.log(err.message)
         dispatch(isLoading(false))
+        generalError()
     })
 }
 
@@ -91,6 +103,7 @@ export const retrieveSectionCategories = (id) => dispatch => {
     .catch(err => {
         console.log(err.message)
         dispatch(isLoading(false))
+        generalError()
     })
 }
 
@@ -104,6 +117,7 @@ export const retrieveCategoryElements = (id) => dispatch => {
     .catch(err => {
         console.log(err.message)
         dispatch(isLoading(false))
+        generalError()
     })
 }
 
@@ -113,10 +127,12 @@ export const sectionCreation = (name, description, project_id) => dispatch => {
     .then(res => {
         dispatch(setSection(res.data))
         dispatch(isLoading(false))
+        sectionCreateSuccess()
     })
     .catch(err => {
         console.log(err.message)
         dispatch(isLoading(false))
+        sectionCreateError()
     })
 }
 
@@ -126,10 +142,12 @@ export const categoryCreation = (name, description, section_id) => dispatch => {
     .then(res => {
         dispatch(setCategory(res.data))
         dispatch(isLoading(false))
+        categoryCreateSuccess()
     })
     .catch(err => {
         console.log(err.message)
         dispatch(isLoading(false))
+        categoryCreateError()
     })
 }
 
@@ -139,9 +157,11 @@ export const elementCreation = (title, description, category_id) => dispatch => 
     .then(res => {
         dispatch(setElement(res.data))
         dispatch(isLoading(false))
+        elementCreateSuccess()
     })
     .catch(err => {
         console.log(err.message)
         dispatch(isLoading(false))
+        elementCreateError()
     })
 }
