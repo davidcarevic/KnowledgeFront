@@ -34,7 +34,7 @@ class SingleProject extends Component {
     }
 
     render() {
-        const { project, sections, categories, elements, category } = this.props
+        const { project, sections, categories, elements, category, section } = this.props
         const project_id = this.props.match.params.id
 
         if (this.props.isLoading) {
@@ -64,7 +64,7 @@ class SingleProject extends Component {
                     </RightHeaderHolder>
                 </Header>
                 <SideHolder>
-                <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id + '/category-create'}><PlusIcon /></StyledLink>
+                {!section ? '' : <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id + '/category-create'}><PlusIcon /></StyledLink>}
                 {!categories ? <div>No categories</div> : categories.map((item, index) =>
                         <Flex key={index}><Flex key={index} id={item.id} >{item.name}</Flex><Flex right><PlusIcon width={'15px'} height={'15px'}/></Flex></Flex>
                         
@@ -76,8 +76,8 @@ class SingleProject extends Component {
                     {!category ? '' : <div>{category.description}</div>}<hr />
                     {!elements ? <div>No elements</div> : elements.map((item, index) =>
                         <div key={index} id={item.id} ><h3>{item.title}</h3><p>{item.description}</p></div>
-                        )}
-                    {!category ? '' : <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id + '/category/' + this.props.category.id + '/element-create'}><PlusIcon /></StyledLink>}
+                    )}
+                    {(!section || !category) ? '' : <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id + '/category/' + this.props.category.id + '/element-create'}><PlusIcon /></StyledLink>}
                     <hr /><StyledLink to="/dashboard">Back to Dashboard</StyledLink>
                 </MainHolder>
             </div>
