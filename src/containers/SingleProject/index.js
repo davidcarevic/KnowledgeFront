@@ -58,8 +58,8 @@ class SingleProject extends Component {
                     
                 </SideHolder>
                 <MainHolder>
-                {/* <h1>{category.name}</h1> */}
-                {/* <div>{category.description}</div><hr /> */}
+                <h1>{category.name}</h1>
+                <div>{category.description}</div><hr />
                 {!elements ? <div>No elements</div> : elements.map((item, index) =>
                     <div key={index} id={item.id} ><h3>{item.title}</h3><p>{item.description}</p><hr /></div>
                     )}
