@@ -11,7 +11,8 @@ import Team from '../../components/elements/Team';
 import Project from '../../components/elements/Project';
 import LoadingSpinner from "../../components/elements/LoadingSpinner";
 import StyledLink from '../../components/elements/Link';
-import { PlusIcon, Flex, UserPlusIcon, H2 } from "./styled";
+import { Flex, H2 } from "./styled";
+import { PlusIcon, UserPlusIcon } from '../../components/elements/Icons';
 import { Header } from "../../components/blocks/HeaderHolder";
 
 class Dashboard extends Component {
@@ -59,8 +60,10 @@ class Dashboard extends Component {
                 <SideHolder top={"15%"}>
                     <Flex>
                         <h3>Teams</h3>
-                        <StyledLink to="/dashboard/teams/create"><PlusIcon /></StyledLink>
-                        <StyledLink to="/invite"><UserPlusIcon /></StyledLink>
+                        <Flex right>
+                            <StyledLink to="/dashboard/teams/create"><PlusIcon top={'15px'}/></StyledLink>
+                            <StyledLink to="/invite"><UserPlusIcon top={'15px'}/></StyledLink>
+                        </Flex>
                     </Flex>
                     
                     {!teams ? <div>No teams</div> : teams.map((item, index) =>
@@ -72,7 +75,9 @@ class Dashboard extends Component {
                 <MainHolder top={"14%"}>
                     <Flex>
                         <h3>Projects</h3>
-                        <StyledLink to="/dashboard/projects/create"><PlusIcon /></StyledLink>
+                        <Flex right>
+                            <StyledLink to="/dashboard/projects/create"><PlusIcon top={'15px'}/></StyledLink>
+                        </Flex>
                     </Flex>
                     {!projects ? <div>No projects</div> : projects.map((item) =>
                     <Project key={item.project.id}>

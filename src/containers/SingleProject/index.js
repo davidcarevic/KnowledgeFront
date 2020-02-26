@@ -8,6 +8,7 @@ import MainHolder from "../../components/blocks/MainHolder";
 import { Header, LeftHeaderHolder, RightHeaderHolder } from "../../components/blocks/HeaderHolder";
 import HeaderButtons from "../../components/blocks/HeaderButtons";
 import { PlusIcon, UserPlusIcon } from '../../components/elements/Icons';
+import { Flex } from './styled';
 
 class SingleProject extends Component {
     componentDidMount() {
@@ -24,14 +25,18 @@ class SingleProject extends Component {
             <div>
                 <Header>
                 <LeftHeaderHolder>
+                    <Flex>
                     <h3>{project.name}</h3>
-                    <StyledLink to={"/dashboard/projects/"+this.props.match.params.id+"/invite"}><UserPlusIcon /></StyledLink>
+                    </Flex>
+                    <Flex right>
+                        <StyledLink to={"/dashboard/projects/"+this.props.match.params.id+"/invite"}><UserPlusIcon top={'15px'}/></StyledLink>
+                    </Flex>
                 </LeftHeaderHolder>
                 <RightHeaderHolder>
                     {!sections ? <div>No sections</div> : sections.map((item) =>
                         <HeaderButtons key={item.id} id={item.id} >{item.name} </HeaderButtons>
                     )}
-                    <StyledLink to={"/dashboard/projects/" + project_id + "/section-create"}><PlusIcon /></StyledLink>
+                    <StyledLink to={"/dashboard/projects/" + project_id + "/section-create"}><PlusIcon top={'18px'}/></StyledLink>
                     
                     
                 </RightHeaderHolder>

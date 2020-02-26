@@ -33,6 +33,7 @@ export const PlusIcon = styled(Plus)`
   color: ${props => props.color || "black"}
   width: 24px;
   height: 24px;
+  margin-top: ${props => props.top || ''};
   margin-bottom: 15px;
   padding-left: 7px;
 `
@@ -62,6 +63,7 @@ export const UserPlusIcon = styled(UserPlus)`
   color: ${props => props.color || "black"}
   width: 24px;
   height: 24px;
+  margin-top: ${props => props.top || ''};
   margin-bottom: 15px;
   padding-left: 7px;
 `

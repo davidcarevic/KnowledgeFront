@@ -8,7 +8,7 @@ export const Header = styled.div`
 export const LeftHeaderHolder = styled.div`
     left: 5%;
     display: flex;
-    width: 50%;
+    width: 25%;
 `;
 
 export const RightHeaderHolder = styled.div`

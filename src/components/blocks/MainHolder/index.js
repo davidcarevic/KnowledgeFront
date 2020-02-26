@@ -7,5 +7,5 @@ export default styled.div`
     left: 30%;
     display: inline-block;
     margin: 0 auto;
-    width: 70%;
+    width: 50%;
 `;
