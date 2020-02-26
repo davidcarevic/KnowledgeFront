@@ -30,11 +30,6 @@ export default (state = initialState, action) => {
                 ...state,
                 projects: action.payload
             }
-        case types.GET_PROJECT:
-            return {
-                ...state,
-                project: action.payload
-            }
         case types.GET_PROJECT_SECTIONS:
             return {
                 ...state,

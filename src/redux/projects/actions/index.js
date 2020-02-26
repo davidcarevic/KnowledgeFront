@@ -21,28 +21,22 @@ export const setProjectsByUser = projects => {
     }
 }
 
-export const getProject = project => {
-    return {
-        type: types.GET_PROJECT,
-        payload: project
-    }
-}
 
-export const getSections = sections => {
+export const setSections = sections => {
     return {
         type: types.GET_PROJECT_SECTIONS,
         payload: sections
     }
 }
 
-export const getCategories = categories => {
+export const setCategories = categories => {
     return {
         type: types.GET_SECTION_CATEGORIES,
         payload: categories
     }
 }
 
-export const getElements = elements => {
+export const setElements = elements => {
     return {
         type: types.GET_CATEGORY_ELEMENTS,
         payload: elements

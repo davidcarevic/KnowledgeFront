@@ -1,6 +1,6 @@
 import { createProject, getProjects, getProjectsByUser, getSingleProject, getProjectSections, getSectionCategories, 
     getCategoryElements, createSection, createCategory, createElement } from "../../../services";
-import { setProjectsByTeam, setProjectsByUser, getProject, getSections, getCategories, getElements, 
+import { setProjectsByTeam, setProjectsByUser, setProject, setSections, setCategories, setElements, 
     setSection, setCategory, setElement } from "../actions";
 import { isLoading } from "../../global/actions";
 //notifications
@@ -66,24 +66,47 @@ export const getProjectsForUser = (id) => dispatch => {
 }
 
 export const retrieveProject = (id) => dispatch => {
-    dispatch(isLoading(false));
+    dispatch(isLoading(true));
     getSingleProject(id)
     .then(res => {
-        dispatch(getProject(res.data))
+        dispatch(setProject(res.data))
         dispatch(isLoading(false));
+        return res.data.id
+    })
+    .then(id => {
+        return getProjectSections(id)
+    })
+    .then(res => {
+        dispatch(setSections(res.data))
+        return res.data[0].id
+    })
+    .then(id => {
+        return getSectionCategories(id)
+    })
+    .then(res => {
+        dispatch(setCategories(res.data))
+        return res.data[0].id
+    })
+    .then(id => {
+        return getCategoryElements(id)
+    })
+    .then(res => {
+        dispatch(setElements(res.data))
+        dispatch(isLoading(false))
     })
     .catch(err => {
         console.log(err.message)
         dispatch(isLoading(false))
         generalError()
     })
+    dispatch(isLoading(false))
 }
 
 export const retrieveProjectSections = (id) => dispatch => {
-    dispatch(isLoading(false))
+    dispatch(isLoading(true))
     getProjectSections(id)
     .then(res => {
-        dispatch(getSections(res.data))
+        dispatch(setSections(res.data))
         dispatch(isLoading(false))
     })
     .catch(err => {
@@ -91,13 +114,14 @@ export const retrieveProjectSections = (id) => dispatch => {
         dispatch(isLoading(false))
         generalError()
     })
+    dispatch(isLoading(false))
 }
 
 export const retrieveSectionCategories = (id) => dispatch => {
-    dispatch(isLoading(false))
+    dispatch(isLoading(true))
     getSectionCategories(id)
     .then(res => {
-        dispatch(getCategories(res.data))
+        dispatch(setCategories(res.data))
         dispatch(isLoading(false))
     })
     .catch(err => {
@@ -105,13 +129,14 @@ export const retrieveSectionCategories = (id) => dispatch => {
         dispatch(isLoading(false))
         generalError()
     })
+    dispatch(isLoading(false))
 }
 
 export const retrieveCategoryElements = (id) => dispatch => {
-    dispatch(isLoading(false))
+    dispatch(isLoading(true))
     getCategoryElements(id)
     .then(res => {
-        dispatch(getElements(res.data))
+        dispatch(setElements(res.data))
         dispatch(isLoading(false))
     })
     .catch(err => {
@@ -119,10 +144,11 @@ export const retrieveCategoryElements = (id) => dispatch => {
         dispatch(isLoading(false))
         generalError()
     })
+    dispatch(isLoading(false))
 }
 
 export const sectionCreation = (name, description, project_id) => dispatch => {
-    dispatch(isLoading(false))
+    dispatch(isLoading(true))
     createSection(name, description, project_id)
     .then(res => {
         dispatch(setSection(res.data))
@@ -137,7 +163,7 @@ export const sectionCreation = (name, description, project_id) => dispatch => {
 }
 
 export const categoryCreation = (name, description, section_id) => dispatch => {
-    dispatch(isLoading(false))
+    dispatch(isLoading(true))
     createCategory(name, description, section_id)
     .then(res => {
         dispatch(setCategory(res.data))
@@ -152,7 +178,7 @@ export const categoryCreation = (name, description, section_id) => dispatch => {
 }
 
 export const elementCreation = (title, description, category_id) => dispatch => {
-    dispatch(isLoading(false))
+    dispatch(isLoading(true))
     createElement(title, description, category_id)
     .then(res => {
         dispatch(setElement(res.data))

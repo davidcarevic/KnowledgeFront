@@ -9,20 +9,13 @@ import { Header, LeftHeaderHolder, RightHeaderHolder } from "../../components/bl
 import HeaderButtons from "../../components/blocks/HeaderButtons";
 import { PlusIcon, UserPlusIcon } from '../../components/elements/Icons';
 import { Flex } from './styled';
+import LoadingSpinner from "../../components/elements/LoadingSpinner";
 
 class SingleProject extends Component {
     componentDidMount() {
         if (!this.props.isLoading) {
             this.props.getProject(this.props.match.params.id)
-            this.props.getProjectSections(this.props.project.id)
-            this.props.setSection(this.props.sections[0])
-            console.log("SECTION", this.props.section)
-            this.props.setSection(this.props.sections[0])
-            this.props.getSectionCategories(this.props.sections[0].id)
-            this.props.setCategory(this.props.categories[0])
-            console.log("CATEGORY", this.props.category)
-            this.props.getCategoryElements(this.props.categories[0].id)
-        }
+        } 
     }
 
     handleSectionChange = (e) => {
@@ -31,8 +24,12 @@ class SingleProject extends Component {
     }
 
     render() {
-        const { project, sections, categories, elements, section, category, element } = this.props
+        const { project, sections, categories, elements, category } = this.props
         const project_id = this.props.match.params.id
+
+        if (this.props.isLoading) {
+            return <LoadingSpinner/>
+        }
         return (
             <div>
                 <Header>
@@ -46,8 +43,8 @@ class SingleProject extends Component {
                         
                     </LeftHeaderHolder>
                     <RightHeaderHolder>
-                        {!sections ? <div>No sections</div> : sections.map((item) =>
-                            <HeaderButtons key={item.id} id={item.id} >{item.name} </HeaderButtons>
+                        {!sections ? <div>No sections</div> : sections.map((item, index) =>
+                            <HeaderButtons key={index} id={item.id} >{item.name} </HeaderButtons>
                         )}
                         <StyledLink to={"/dashboard/projects/" + project_id + "/section-create"}><PlusIcon top={'18px'}/></StyledLink>
                         
@@ -55,16 +52,16 @@ class SingleProject extends Component {
                     </RightHeaderHolder>
                 </Header>
                 <SideHolder>
-                {!categories ? <div>No categories</div> : categories.map((item) =>
-                        <Flex><Flex key={item.id} id={item.id} >{item.name}</Flex><Flex right><PlusIcon width={'15px'} height={'15px'}/></Flex></Flex>
+                {!categories ? <div>No categories</div> : categories.map((item, index) =>
+                        <Flex key={index}><Flex key={index} id={item.id} >{item.name}</Flex><Flex right><PlusIcon width={'15px'} height={'15px'}/></Flex></Flex>
                     )}
                     
                 </SideHolder>
                 <MainHolder>
-                <h1>{category.name}</h1>
-                <div>{category.description}</div><hr />
-                {!elements ? <div>No elements</div> : elements.map((item) =>
-                    <div key={item.id} id={item.id} ><h3>{item.title}</h3><p>{item.description}</p><hr /></div>
+                {/* <h1>{category.name}</h1> */}
+                {/* <div>{category.description}</div><hr /> */}
+                {!elements ? <div>No elements</div> : elements.map((item, index) =>
+                    <div key={index} id={item.id} ><h3>{item.title}</h3><p>{item.description}</p><hr /></div>
                     )}
                     <StyledLink to="/dashboard">Back to Dashboard</StyledLink>
                 </MainHolder>
@@ -85,6 +82,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = state => ({
+    isLoading: state.global.isLoading,
     project: state.projects.project,
     sections: state.projects.sections,
     categories: state.projects.categories,

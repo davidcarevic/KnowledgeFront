@@ -27,6 +27,13 @@ class Dashboard extends Component {
             this.props.getProjects()
         }
         this.props.unsetProjectsByTeam([])
+        this.props.unsetProject({})
+        this.props.unsetSections([])
+        this.props.unsetCategories([])
+        this.props.unsetElements([])
+        this.props.unsetCategory({})
+        this.props.unsetSection({})
+        this.props.unsetElement({})
     }
     render(){
         let teams = this.props.teams.teams  //getting the array so the map function doesn't have a bunch of props
@@ -94,7 +101,14 @@ class Dashboard extends Component {
 const mapDispatchToProps = {
     getTeams: teamsRedux.thunks.getTeams,
     getProjects: projectsRedux.thunks.getProjectsForUser,
-    unsetProjectsByTeam:projectsRedux.actions.setProjectsByTeam
+    unsetProjectsByTeam:projectsRedux.actions.setProjectsByTeam,
+    unsetProject: projectsRedux.actions.setProject,
+    unsetSections: projectsRedux.actions.setSections,
+    unsetCategories: projectsRedux.actions.setCategories,
+    unsetElements: projectsRedux.actions.setElements,
+    unsetSection: projectsRedux.actions.setSection,
+    unsetCategory: projectsRedux.actions.setCategory,
+    unsetElement: projectsRedux.actions.setElement,
 }
 const mapStateToProps = state => ({
     teams: state.teams,
