@@ -7,6 +7,7 @@ import Form from '../../components/elements/Form';
 import Input from '../../components/elements/Input';
 import HomeHolder from '../../components/elements/HomeHolder';
 import userRedux from '../../redux/user';
+import LoadingSpinner from "../../components/elements/LoadingSpinner";
 
 class ForgotPassword extends Component {
     state = {
@@ -25,7 +26,6 @@ class ForgotPassword extends Component {
             this.setState({guid: guid})
             if (!this.props.isLoading && this.props.user.reset!=={}){
                 this.props.getUserReset(guid)
-                this.setState({email:this.props.user.reset.email })
             }
         }
     }
@@ -45,7 +45,8 @@ class ForgotPassword extends Component {
 
     handlePassReset = (e) =>{
         e.preventDefault();
-        const {guid, password, password2, email} = this.state
+        const {guid, password, password2} = this.state
+        const {email} = this.props.user.reset.email
         const { history } = this.props
         if(password === password2){
             this.props.resetPass(guid, password, email)
@@ -55,7 +56,10 @@ class ForgotPassword extends Component {
 
     render() {
         const { email, guid, password, password2, resend } = this.state;
-        if (guid) {
+        if(this.props.isLoading){
+            return <LoadingSpinner/>
+        }
+        if (guid && !this.props.isLoading && this.props.user.reset) {
             return (
                 <HomeHolder>
                     <Form onSubmit={this.handlePassReset}>
@@ -64,7 +68,7 @@ class ForgotPassword extends Component {
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, <br />sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br />
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris<br />nisi ut aliquip ex ea commodo consequat.
                         </div><br/>
-                        <h2>{this.props.user.reset.email?this.props.user.reset.email:''}</h2>
+                        <h2>{this.props.user.reset && !this.props.isLoading?this.props.user.reset.email:''}</h2>
                         <Input id="password" placeholder="NEW PASSWORD" type="password" value={password} onChange={this.handleInputChange} /><br/><br/>
                         <Input id="password2" placeholder="CONFIRM PASSWORD" type="password" value={password2} onChange={this.handleInputChange} /><br/><br/>
                         <Button primary type="submit">RESET PASSWORD</Button>
