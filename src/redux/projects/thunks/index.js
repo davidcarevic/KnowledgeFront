@@ -78,6 +78,7 @@ export const retrieveProject = (id) => dispatch => {
     })
     .then(res => {
         dispatch(setSections(res.data))
+        dispatch(setSection(res.data[0]))
         return res.data[0].id
     })
     .then(id => {
@@ -98,7 +99,7 @@ export const retrieveProject = (id) => dispatch => {
     .catch(err => {
         console.log(err.message)
         dispatch(isLoading(false))
-        generalError()
+        
     })
     dispatch(isLoading(false))
 }
@@ -123,7 +124,7 @@ export const retrieveSectionCategories = (id) => dispatch => {
     .catch(err => {
         console.log(err.message)
         dispatch(isLoading(false))
-        generalError()
+        
     })
     dispatch(isLoading(false))
 }

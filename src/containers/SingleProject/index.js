@@ -27,16 +27,10 @@ class SingleProject extends Component {
 
     handleSectionChange = (e) => {
         e.preventDefault();
-        this.props.getSectionCategories()
-    }
-
-    handleClick = (e) => {
-        e.preventDefault();
         this.setState({
             selected_section: e.target.id
         })
         this.props.getSectionCategories(e.target.id)
-        console.log('OPICIO SE!', e.target.id)
     }
 
     render() {
@@ -54,14 +48,14 @@ class SingleProject extends Component {
                         <h3>{project.name}</h3>
                         </Flex>
                         <Flex right>
-                            <StyledLink to={"/dashboard/projects/"+this.props.match.params.id+"/invite"}><UserPlusIcon top={'15px'}/></StyledLink>
+                            <StyledLink to={"/dashboard/projects/" + this.props.match.params.id + "/invite"}><UserPlusIcon top={'15px'}/></StyledLink>
                         </Flex>
                         
                     </LeftHeaderHolder>
                     <RightHeaderHolder>
                         <Form>
                         {!sections ? <div>No sections</div> : sections.map((item, index) =>
-                            <HeaderButtons key={index} id={item.id} onClick={this.handleClick}>{item.name} </HeaderButtons>
+                            <HeaderButtons key={index} id={item.id} onClick={this.handleSectionChange}>{item.name} </HeaderButtons>
                         )}
                         </Form>
                         <StyledLink to={"/dashboard/projects/" + project_id + "/section-create"}><PlusIcon top={'18px'}/></StyledLink>
@@ -70,6 +64,7 @@ class SingleProject extends Component {
                     </RightHeaderHolder>
                 </Header>
                 <SideHolder>
+                <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id + '/category-create'}><PlusIcon /></StyledLink>
                 {!categories ? <div>No categories</div> : categories.map((item, index) =>
                         <Flex key={index}><Flex key={index} id={item.id} >{item.name}</Flex><Flex right><PlusIcon width={'15px'} height={'15px'}/></Flex></Flex>
                         
@@ -77,12 +72,13 @@ class SingleProject extends Component {
                     
                 </SideHolder>
                 <MainHolder>
-                {!category ? <h1>No Categories</h1> : <h1>{category.name}</h1>}
-                {!category ? '' : <div>{category.description}</div>}<hr />
-                {!elements ? <div>No elements</div> : elements.map((item, index) =>
-                    <div key={index} id={item.id} ><h3>{item.title}</h3><p>{item.description}</p><hr /></div>
-                    )}
-                    <StyledLink to="/dashboard">Back to Dashboard</StyledLink>
+                    {!category ? <h1>No Categories</h1> : <h1>{category.name}</h1>}
+                    {!category ? '' : <div>{category.description}</div>}<hr />
+                    {!elements ? <div>No elements</div> : elements.map((item, index) =>
+                        <div key={index} id={item.id} ><h3>{item.title}</h3><p>{item.description}</p></div>
+                        )}
+                    {!category ? '' : <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id + '/category/' + this.props.category.id + '/element-create'}><PlusIcon /></StyledLink>}
+                    <hr /><StyledLink to="/dashboard">Back to Dashboard</StyledLink>
                 </MainHolder>
             </div>
         )
