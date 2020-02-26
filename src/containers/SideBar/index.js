@@ -18,7 +18,7 @@ class SideBar extends Component {
           <Link to={"#"}><ThSmallIcon /></Link>
           <Link to={"#"}><BellIcon /></Link>
           <Link to={"#"}><PlusIcon color={"white"} /></Link>
-          <Link to={"#"}><UserPlusIcon /></Link>
+          <Link to={"#"}><UserPlusIcon color={"white"}/></Link>
           <Link to={"#"}><NetworkWiredIcon /></Link>
           <Link to={"#"}><SearchIcon /></Link>
           <BottomnButtons>

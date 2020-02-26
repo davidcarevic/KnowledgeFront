@@ -34,7 +34,8 @@ class TeamProjects extends Component {
             return (
                 <div>
                     <h2>No projects</h2>
-                    <StyledLink to={`/teams/${this.props.computedMatch.params.id}/projects/create`}>Create a project</StyledLink>
+                    <StyledLink to={`/teams/${this.props.computedMatch.params.id}/projects/create`}>Create a project</StyledLink><hr />
+                    <StyledLink to="/dashboard">Back to Dashboard</StyledLink>
                 </div>
             )
         }

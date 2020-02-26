@@ -5,7 +5,3 @@ export const Flex = styled.div`
     display: flex;
     justify-content: ${props => props.right ? 'flex-end' : ''};
 `
-
-export const H2 = styled.h2`
-  margin: 0;
-`

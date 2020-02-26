@@ -5,13 +5,15 @@ import teamsRedux from '../../redux/teams';
 import projectsRedux from '../../redux/projects';
 import SingleProject from "../../components/SingleProject";
 import Title from '../../components/elements/Title';
-import TeamHolder from '../../components/blocks/TeamHolder';
-import ProjectHolder from '../../components/blocks/ProjectHolder';
+import SideHolder from '../../components/blocks/SideHolder';
+import MainHolder from '../../components/blocks/MainHolder';
 import Team from '../../components/elements/Team';
 import Project from '../../components/elements/Project';
 import LoadingSpinner from "../../components/elements/LoadingSpinner";
 import StyledLink from '../../components/elements/Link';
-import { PlusIcon, Flex, UserPlusIcon } from "./styled";
+import { Flex, H2 } from "./styled";
+import { PlusIcon, UserPlusIcon } from '../../components/elements/Icons';
+import { Header } from "../../components/blocks/HeaderHolder";
 
 class Dashboard extends Component {
     componentDidMount() {
@@ -37,9 +39,11 @@ class Dashboard extends Component {
         if (teams === 0 && projects === 0) {
             return(
             <div>
+                <Header>
                 <Title>
                No teams and projects
                 </Title>
+                </Header>
                 <StyledLink to="/dashboard/teams/create">Create a team</StyledLink>
                 <br/>
                 <StyledLink to="/dashboard/projects/create">Create a project</StyledLink>
@@ -50,22 +54,30 @@ class Dashboard extends Component {
         }
         return (
             <div>
-                <TeamHolder>
+                <Header>
+                    <H2>Dashboard</H2>
+                </Header>
+                <SideHolder top={"15%"}>
                     <Flex>
                         <h3>Teams</h3>
-                        <StyledLink to="/dashboard/teams/create"><PlusIcon /></StyledLink>
-                        <StyledLink to="/invite"><UserPlusIcon /></StyledLink>
+                        <Flex right>
+                            <StyledLink to="/dashboard/teams/create"><PlusIcon top={'15px'}/></StyledLink>
+                            <StyledLink to="/invite"><UserPlusIcon top={'15px'}/></StyledLink>
+                        </Flex>
                     </Flex>
+                    
                     {!teams ? <div>No teams</div> : teams.map((item, index) =>
                     <Team key={index}>
                     <SingleTeam key={index} id={item.team.id} name={item.team.name} description={item.team.description}/>
                     </Team>
                     )}
-                </TeamHolder>
-                <ProjectHolder>
+                </SideHolder>
+                <MainHolder top={"14%"}>
                     <Flex>
                         <h3>Projects</h3>
-                        <StyledLink to="/dashboard/projects/create"><PlusIcon /></StyledLink>
+                        <Flex right>
+                            <StyledLink to="/dashboard/projects/create"><PlusIcon top={'15px'}/></StyledLink>
+                        </Flex>
                     </Flex>
                     {!projects ? <div>No projects</div> : projects.map((item) =>
                     <Project key={item.project.id}>
@@ -74,7 +86,7 @@ class Dashboard extends Component {
                 )}
                     
                 
-                </ProjectHolder>
+                </MainHolder>
             </div>
         )
     }
