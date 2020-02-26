@@ -1,6 +1,9 @@
 import { getTeamsByUser, createTeam } from "../../../services";
 import { setTeamsByUser } from "../actions";
 import { isLoading } from "../../global/actions";
+//notifications
+import {teamCreateError, teamCreateSuccess} from "../../../components/elements/Notifications/TeamCreate";
+import {generalError} from "../../../components/elements/Notifications/GeneralError";
 
 export const getTeams = () => dispatch => {
     dispatch(isLoading(true));
@@ -15,6 +18,7 @@ export const getTeams = () => dispatch => {
         .catch(err => {
             console.log(err.message)
             dispatch(isLoading(false))
+            generalError()
         })
 }
 
@@ -27,9 +31,11 @@ export const teamCreation = (name, description) => dispatch => {
         .then(res => {
             dispatch(setTeamsByUser(res.data));
             dispatch(isLoading(false));
+            teamCreateSuccess()
         })
         .catch(err => {
             console.log(err.message)
             dispatch(isLoading(false))
+            teamCreateError()
         })
 }

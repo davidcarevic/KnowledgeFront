@@ -7,6 +7,7 @@ import Title from '../../components/elements/Title'
 import Form from '../../components/elements/Form'
 import Input from '../../components/elements/Input'
 import HomeHolder from '../../components/elements/HomeHolder';
+import LoadingSpinner from "../../components/elements/LoadingSpinner";
 
 class Register extends Component {
     state = {
@@ -15,20 +16,20 @@ class Register extends Component {
       password: '',
       password2: '',
       data: {},
-        notMember:false,
     }
 
     componentDidMount() {
         console.log("GUID : ", this.props.match.params.guid)
         var guid = this.props.match.params.guid
-        if (guid && !this.props.isLoading) {
-            this.setState({guid: guid})
-            if (this.props.user.invited !== {}  && !this.props.isLoading){
-                this.props.getUser(guid)
+        try {
+            if (guid) {
+                this.setState({guid: guid})
+                if (!this.props.isLoading && this.props.user.invited) {
+                    this.props.getUser(guid)
+                }
             }
-            if(!this.props.isLoading && this.props.user.invited !=={}){
-                this.setState({notMember:this.props.user.invited.data.not_member})
-            }
+        } catch (e) {
+
         }
     }
 
@@ -38,8 +39,9 @@ class Register extends Component {
 
     handleFormSubmit = (e) => {
       e.preventDefault();
-      const { email, password, password2, guid, notMember} = this.state;
+      const { email, password, password2, guid} = this.state;
       const { history } = this.props;
+      const{notMember} = this.props.user.invited.data.not_member
       if(notMember===false){
           if (this.props.user.invited.email) {
               let email = this.props.user.invited.email
@@ -76,32 +78,37 @@ class Register extends Component {
     }
     render() {
       const { email, password, password2, guid, notMember } = this.state;
-      if (guid && notMember) {
-          return (
-            <HomeHolder>
-              <Form onSubmit={this.handleFormSubmit}>
-                  <Title> WELCOME </Title>
-                  <h2>{this.props.user.invited.email?this.props.user.invited.email:''}</h2>
-                  <Input id="password" placeholder="PASSWORD" type="password" value={password} onChange={this.handleInputChange} /><br/><br/>
-                  <Input id="password2" placeholder="CONFIRM PASSWORD" type="password" value={password2} onChange={this.handleInputChange} /><br/><br/>
-                  <Button primary type="submit">REGISTER</Button>
-              </Form>
-            </HomeHolder>
-          )
+        if (this.props.isLoading) {
+            return <LoadingSpinner/>
+        }
+      if (guid && this.props.user.invited.data && !this.props.isLoading) {
+          if(this.props.user.invited.data.not_member) {
+              return (
+                  <HomeHolder>
+                      <Form onSubmit={this.handleFormSubmit}>
+                          <Title> WELCOME </Title>
+                          <h2>{this.props.user.invited.email ? this.props.user.invited.email : ''}</h2>
+                          <Input id="password" placeholder="PASSWORD" type="password" value={password}
+                                 onChange={this.handleInputChange}/><br/><br/>
+                          <Input id="password2" placeholder="CONFIRM PASSWORD" type="password" value={password2}
+                                 onChange={this.handleInputChange}/><br/><br/>
+                          <Button primary type="submit">REGISTER</Button>
+                      </Form>
+                  </HomeHolder>
+              )
+          }
+          else{
+              return (
+                  <HomeHolder>
+                      <Form onSubmit={this.handleFormSubmit}>
+                          <Title> You've been invited to join a Project </Title>
+                          <h2>{this.props.user.invited.email?this.props.user.invited.email:''}</h2>
+                          <Button primary type="submit">Join</Button>
+                      </Form>
+                  </HomeHolder>
+              )
+          }
       }
-      if(guid && notMember===false){
-          return (
-              <HomeHolder>
-                  <Form onSubmit={this.handleFormSubmit}>
-                      <Title> You've been invited to join a Project </Title>
-                      <h2>{this.props.user.invited.email?this.props.user.invited.email:''}</h2>
-                      <Button primary type="submit">Join</Button>
-                  </Form>
-              </HomeHolder>
-          )
-      }
-
-
       return (
         <HomeHolder>
           <Form onSubmit={this.handleFormSubmit}>
@@ -127,7 +134,6 @@ class Register extends Component {
 
 const mapStateToProps = state => ({
     user: state.user,
-    invited: state.invited
 })
 
   export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Register))
