@@ -115,7 +115,7 @@ class DragAndDrop extends Component {
                         <Droppable droppableId={list_id} key={list_id}>
                             {(provided, snapshot) => (
                                 <div ref={provided.innerRef}>
-                                    <h2>Category {index}</h2>
+                                    <h2>{this.props.props[index].name}</h2>
                                     {this.state[list_id].map((item, index) => (
                                         <Draggable
                                             key={item.id}

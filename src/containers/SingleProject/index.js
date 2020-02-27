@@ -11,7 +11,7 @@ import { PlusIcon, UserPlusIcon } from '../../components/elements/Icons';
 import { Flex } from './styled';
 import LoadingSpinner from "../../components/elements/LoadingSpinner";
 import Form from '../../components/elements/Form';
-import DragAndDrop from '../TestNav';
+import DragAndDrop from '../DragAndDrop';
 
 class SingleProject extends Component {
     state = {
