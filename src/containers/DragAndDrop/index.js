@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import ToggleBox from '../ToggleBox';
+import { getItemStyle, getListStyle } from './styled';
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -114,8 +116,9 @@ class DragAndDrop extends Component {
                     {Object.keys(this.state).map((list_id, index) => (
                         <Droppable droppableId={list_id} key={list_id}>
                             {(provided, snapshot) => (
-                                <div ref={provided.innerRef}>
-                                    <h2>{this.props.props[index].name}</h2>
+                                <div ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)}>
+                                    <ToggleBox title={this.props.props[index].name}>
+                                        
                                     {this.state[list_id].map((item, index) => (
                                         <Draggable
                                             key={item.id}
@@ -125,12 +128,16 @@ class DragAndDrop extends Component {
                                                 <div
                                                     ref={provided.innerRef}
                                                     {...provided.draggableProps}
-                                                    {...provided.dragHandleProps}>
+                                                    {...provided.dragHandleProps} style={getItemStyle(
+                                                        snapshot.isDragging,
+                                                        provided.draggableProps.style
+                                                    )}>
                                                     {item.title}
                                                 </div>
                                             )}
                                         </Draggable>
                                      ))}
+                                     </ToggleBox>
                                     {provided.placeholder}
                                 </div>
                              )}
