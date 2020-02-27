@@ -35,58 +35,32 @@ const move = (source, destination, droppableSource, droppableDestination) => {
     return result;
 };
 
-//const grid = 8;
+class DragAndDrop extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {}
+        console.log("PROPS: ", props)
+        for (let i = 0; i < props.props.length; i++) {
+            this.state[props.props[i].id] = props.props[i][props.props[i].id]
+        }
 
-console.log('asdasdasd')
-
-
-
-class TestNav extends Component{
-    state = {
-        1: [
-            {
-                id: `item-1`,
-                content: `item 1`
-            },
-            {
-                id: `item-2`,
-                content: `item 2`
-            },
-            {
-                id: `item-3`,
-                content: `item 3`
+        for (let p in this.state) {
+            for (let i = 0; i < this.state[p].length; i++) {
+                this.state[p][i].id = this.state[p][i].id.toString()
             }
-        ],
-        2: [
-            {
-                id: `item-4`,
-                content: `item 4`
-            },
-            {
-                id: `item-5`,
-                content: `item 5`
-            },
-            {
-                id: `item-6`,
-                content: `item 6`
-            }
-        ],
-        3: [
-            {
-                id: `item-7`,
-                content: `item 7`
-            },
-            {
-                id: `item-8`,
-                content: `item 8`
-            },
-            {
-                id: `item-9`,
-                content: `item 9`
-            }
-        ]
-    };
+        }
 
+        for (let i = 0; i < this.state.length; i++) {
+            console.log("USAO")
+            for (let j = 0; j < this.state[i].length; j++) {
+                console.log("ID: ", this.state[i][j].id)
+                let s = this.state[i][j].id
+                let s1 = s.toString()
+                this.state[i][j].id = s1
+            }
+        }
+        console.log("DRAG: ", this.state)
+    }
     /**
      * A semi-generic way to handle multiple lists. Matches
      * the IDs of the droppable container to the names of the
@@ -136,12 +110,11 @@ class TestNav extends Component{
     render() {
         return (
             <div>
-                <h1>Project</h1>
                 <DragDropContext onDragEnd={this.onDragEnd}>
                     {Object.keys(this.state).map((list_id, index) => (
                         <Droppable droppableId={list_id} key={list_id}>
                             {(provided, snapshot) => (
-                                <div ref={provided.innerRef} style={{backgroundColor:'gray'}}>
+                                <div ref={provided.innerRef}>
                                     <h2>Category {index}</h2>
                                     {this.state[list_id].map((item, index) => (
                                         <Draggable
@@ -153,7 +126,7 @@ class TestNav extends Component{
                                                     ref={provided.innerRef}
                                                     {...provided.draggableProps}
                                                     {...provided.dragHandleProps}>
-                                                    {item.content}
+                                                    {item.title}
                                                 </div>
                                             )}
                                         </Draggable>
@@ -168,4 +141,4 @@ class TestNav extends Component{
         );
     }
 }
-export default TestNav;
+export default DragAndDrop;

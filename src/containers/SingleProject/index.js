@@ -10,7 +10,8 @@ import HeaderButtons from "../../components/blocks/HeaderButtons";
 import { PlusIcon, UserPlusIcon } from '../../components/elements/Icons';
 import { Flex } from './styled';
 import LoadingSpinner from "../../components/elements/LoadingSpinner";
-import Form from '../../components/elements/Form'
+import Form from '../../components/elements/Form';
+import DragAndDrop from '../TestNav';
 
 class SingleProject extends Component {
     state = {
@@ -64,11 +65,7 @@ class SingleProject extends Component {
                     </RightHeaderHolder>
                 </Header>
                 <SideHolder>
-                {!section ? '' : <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id + '/category-create'}><PlusIcon /></StyledLink>}
-                {!categories ? <div>No categories</div> : categories.map((item, index) =>
-                        <Flex key={index}><Flex key={index} id={item.id} >{item.name}</Flex><Flex right><PlusIcon width={'15px'} height={'15px'}/></Flex></Flex>
-                        
-                    )}
+                    <DragAndDrop props={categories}/>
                     
                 </SideHolder>
                 <MainHolder>

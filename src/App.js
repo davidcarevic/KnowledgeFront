@@ -8,10 +8,9 @@ import {
 
 import { connect } from 'react-redux';
 
-import Home from './containers/Home'
-import Register from './containers/Register'
-import TestNav from './containers/TestNav'
-import Dashboard from './containers/Dashboard'
+import Home from './containers/Home';
+import Register from './containers/Register';
+import Dashboard from './containers/Dashboard';
 import PrivateRoute from "./HOC/PrivateRoute";
 import CreateTeam from "./containers/CreateTeam";
 import TeamProjects from "./containers/TeamProjects";
@@ -21,7 +20,7 @@ import ForgotPassword from "./containers/ForgotPassword";
 import SingleProject from "./containers/SingleProject";
 import CreateSection from "./containers/CreateSection";
 import CreateCategory from "./containers/CreateCategory";
-import CreateElement from "./containers/CreateElement"
+import CreateElement from "./containers/CreateElement";
 
 const App = props => (
     <Router>
@@ -41,7 +40,6 @@ const App = props => (
       <PrivateRoute exact path="/dashboard/projects/:id/section-create" Component={CreateSection}/>
       <PrivateRoute exact path="/dashboard/projects/:id/section/:s_id/category-create" Component={CreateCategory}/>
       <PrivateRoute exact path="/dashboard/projects/:id/section/:s_id/category/:c_id/element-create" Component={CreateElement}/>
-      <Route exact path="/testnav" component={TestNav}/>
       </Switch>
     </Router>
   )
