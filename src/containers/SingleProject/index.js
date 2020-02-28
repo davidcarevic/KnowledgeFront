@@ -52,7 +52,7 @@ class SingleProject extends Component {
                         <Flex right>
                             <StyledLink to={"/dashboard/projects/" + this.props.match.params.id + "/invite"}><UserPlusIcon top={'15px'}/></StyledLink>
                         </Flex>
-                        
+
                     </LeftHeaderHolder>
                     <RightHeaderHolder>
                         <Form>
@@ -61,13 +61,10 @@ class SingleProject extends Component {
                         )}
                         </Form>
                         <StyledLink to={"/dashboard/projects/" + project_id + "/section-create"}><PlusIcon top={'18px'}/></StyledLink>
-                        
-                        
                     </RightHeaderHolder>
                 </Header>
                 <SideHolder>
-                    <DragAndDrop props={categories}/>
-                    
+                    {categories?<DragAndDrop props={categories} changeCategory={this.props.changeCategory} section={section}/>:<div></div>}
                 </SideHolder>
                 <MainHolder>
                     {!category ? <h1>No Categories</h1> : <h1>{category.name}</h1>}
@@ -80,7 +77,7 @@ class SingleProject extends Component {
                 </MainHolder>
             </div>
         )
-      } 
+      }
       
 }
 
@@ -91,6 +88,7 @@ const mapDispatchToProps = {
     setSection: projectRedux.actions.setSection,
     setCategory: projectRedux.actions.setCategory,
     setElement: projectRedux.actions.setElement,
+    changeCategory: projectRedux.thunks.changeCategoryForElement
 }
 
 const mapStateToProps = state => ({

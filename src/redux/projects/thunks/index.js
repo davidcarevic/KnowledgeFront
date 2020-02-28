@@ -1,5 +1,5 @@
 import { createProject, getProjects, getProjectsByUser, getSingleProject, getProjectSections, getSectionCategories, 
-    getCategoryElements, createSection, createCategory, createElement } from "../../../services";
+    getCategoryElements, createSection, createCategory, createElement, elementCategoryChange } from "../../../services";
 import { setProjectsByTeam, setProjectsByUser, setProject, setSections, setCategories, setElements, 
     setSection, setCategory, setElement } from "../actions";
 import { isLoading } from "../../global/actions";
@@ -187,4 +187,27 @@ export const elementCreation = (title, description, category_id) => dispatch => 
         dispatch(isLoading(false))
         elementCreateError()
     })
+}
+
+export const changeCategoryForElement = (currentElement, category_id, sectionId) => dispatch =>{
+    dispatch(isLoading(true))
+    elementCategoryChange(currentElement, category_id)
+        .then(res => {
+            return getSectionCategories(sectionId)
+        })
+        .then(res => {
+            dispatch(setCategories(res.data))
+            dispatch(setCategory(res.data[0]))
+            return res.data[0].id
+        })
+        .then(id => {
+            return getCategoryElements(id)
+        })
+        .then(res => {
+            dispatch(setElements(res.data))
+            dispatch(isLoading(false))
+        })
+        .catch(err => {
+            dispatch(isLoading(false))
+        })
 }

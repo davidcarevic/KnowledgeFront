@@ -1,4 +1,3 @@
-const grid = 8
 
 export const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer

@@ -27,21 +27,24 @@ const move = (source, destination, droppableSource, droppableDestination) => {
     const sourceClone = Array.from(source);
     const destClone = Array.from(destination);
     const [removed] = sourceClone.splice(droppableSource.index, 1);
-
     destClone.splice(droppableDestination.index, 0, removed);
-
+    // const removed is the moved item
+    // droppableDestination.droppableId is the ID for the category that will be used for the element as foreign key
     const result = {};
     result[droppableSource.droppableId] = sourceClone;
     result[droppableDestination.droppableId] = destClone;
 
-    return result;
+    return ({
+        result: result,
+        removed: removed,
+        id: droppableDestination.droppableId
+    });
 };
 
 class DragAndDrop extends Component {
     constructor(props) {
         super(props);
         this.state = {}
-        console.log("PROPS: ", props)
         for (let i = 0; i < props.props.length; i++) {
             this.state[props.props[i].id] = props.props[i][props.props[i].id]
         }
@@ -51,16 +54,16 @@ class DragAndDrop extends Component {
                 this.state[p][i].id = this.state[p][i].id.toString()
             }
         }
-
-        for (let i = 0; i < this.state.length; i++) {
-            console.log("USAO")
-            for (let j = 0; j < this.state[i].length; j++) {
-                console.log("ID: ", this.state[i][j].id)
-                let s = this.state[i][j].id
-                let s1 = s.toString()
-                this.state[i][j].id = s1
-            }
-        }
+        /** neki test for za setovanje to string*/
+        // for (let i = 0; i < this.state.length; i++) {
+        //     console.log("USAO")
+        //     for (let j = 0; j < this.state[i].length; j++) {
+        //         console.log("ID: ", this.state[i][j].id)
+        //         let s = this.state[i][j].id
+        //         let s1 = s.toString()
+        //         this.state[i][j].id = s1
+        //     }
+        // }
         console.log("DRAG: ", this.state)
     }
     /**
@@ -72,42 +75,36 @@ class DragAndDrop extends Component {
 
     onDragEnd = result => {
         const { source, destination } = result;
-
         // dropped outside the list
         if (!destination) {
             return;
         }
-
         if (source.droppableId === destination.droppableId) {
             const items = reorder(
                 this.getList(source.droppableId),
                 source.index,
                 destination.index
             );
-
             let key = source.droppableId;
-
             let state = { [key]: items };
-
             this.setState(state);
-        } else {
+        }
+        else {
             const result = move(
                 this.getList(source.droppableId),
                 this.getList(destination.droppableId),
                 source,
                 destination
             );
-
+            /** function(projects/thunk), changes the category for an element */
+            this.props.changeCategory(result.removed, result.id, this.props.section.id)
             let new_state = {};
-
-            Object.keys(result).forEach(function(key) {
+            Object.keys(result.result).forEach(function(key) {
                 new_state[key] = result[key];
             });
-
             this.setState(new_state);
         }
     };
-
 
     render() {
         return (
@@ -117,7 +114,7 @@ class DragAndDrop extends Component {
                         <Droppable droppableId={list_id} key={list_id}>
                             {(provided, snapshot) => (
                                 <div ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)}>
-                                    <ToggleBox title={this.props.props[index].name}>
+                                    <ToggleBox title={this.props.props[index]?this.props.props[index].name:''}>
                                         
                                     {this.state[list_id].map((item, index) => (
                                         <Draggable
@@ -148,4 +145,6 @@ class DragAndDrop extends Component {
         );
     }
 }
+
+
 export default DragAndDrop;
