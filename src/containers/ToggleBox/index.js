@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Flex } from './styled';
+import { PlusIcon } from '../../components/elements/Icons';
 
 class ToggleBox extends React.Component {
 
@@ -21,16 +23,19 @@ class ToggleBox extends React.Component {
 		var { title, children } = this.props;
 		const { opened } = this.state;
 
-		if (opened){
+		if (opened) {
 			title = this.props.title;
-		}else{
+		} else {
 			title = this.props.title;
 		}
 
 		return (
 			<div>
 				<h3 onClick={this.toggleBox}>
-					{title}
+					<Flex>
+                    <Flex>{title}</Flex>
+                    <Flex right><PlusIcon /></Flex>
+                    </Flex>
 				</h3>
 				{opened && (					
 					<div>
