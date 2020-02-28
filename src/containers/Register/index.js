@@ -77,7 +77,7 @@ class Register extends Component {
       }
     }
     render() {
-      const { email, password, password2, guid, notMember } = this.state;
+      const { email, password, password2, guid } = this.state;
         if (this.props.isLoading) {
             return <LoadingSpinner/>
         }
