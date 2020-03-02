@@ -14,7 +14,14 @@ import {
 } from "../actions";
 import { isLoading } from "../../global/actions";
 import axios from "../../../axios";
-import {setProjectsByUser} from "../../projects/actions";
+import {
+    setCategories,
+    setCategory, setElement, setElements,
+    setProject,
+    setProjectsByUser,
+    setSection,
+    setSections
+} from "../../projects/actions";
 //notifications -->
 import {loginSuccess, loginError} from '../../../components/elements/Notifications/Login/';
 import {logoutSuccess} from "../../../components/elements/Notifications/Logout";
@@ -72,16 +79,24 @@ export const refreshToken = () => dispatch => {
         })
 }
 export const logout = () => dispatch => {
-    // works, the axios call for blacklisting needs to be added
+    //  axios call for blacklisting needs to be added if it's decided that the tokens will be blacklisted
     dispatch(isLoading(true))
     console.log("usao u logout")
-    let res = removeToken() // a function that returns true, if we decide to implement some kind of axios call to backend for token removal it will be changed
+    let res = removeToken() // a function that returns true, if we decide to implement some kind of axios call to backend for token removal, it will be changed
     console.log("true is remove token ??", res)
     dispatch(setAccessToken(null))
     dispatch(setRefreshToken(null))
     dispatch(authenticateUser(false))
     dispatch(removeTeamsByUser())
+    /** unsets everything in the state*/
     dispatch(setProjectsByUser([]));
+    dispatch(setProject({}))
+    dispatch(setSection({}))
+    dispatch(setSections([]))
+    dispatch(setCategory({}))
+    dispatch(setCategories([]))
+    dispatch(setElement({}))
+    dispatch(setElements({}))
     window.localStorage.removeItem('refreshToken')
     dispatch(isLoading(false))
     logoutSuccess();

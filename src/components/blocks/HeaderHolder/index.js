@@ -23,7 +23,7 @@ export const LeftHeaderHolder = styled.div`
     top: 0;
     left: 0;
     padding-left: 60px;
-    padding-top: 19px;
+    padding-top: 17px;
     background-color: white;
     z-index: 2;
     border-bottom: 1px solid black;

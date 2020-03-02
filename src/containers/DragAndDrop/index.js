@@ -45,32 +45,25 @@ class DragAndDrop extends Component {
     constructor(props) {
         super(props);
         this.state = {}
-        for (let i = 0; i < props.props.length; i++) {
-            this.state[props.props[i].id] = props.props[i][props.props[i].id]
-        }
-
-        for (let p in this.state) {
-            for (let i = 0; i < this.state[p].length; i++) {
-                this.state[p][i].id = this.state[p][i].id.toString()
-            }
-        }
-        /** neki test for za setovanje to string*/
-        // for (let i = 0; i < this.state.length; i++) {
-        //     console.log("USAO")
-        //     for (let j = 0; j < this.state[i].length; j++) {
-        //         console.log("ID: ", this.state[i][j].id)
-        //         let s = this.state[i][j].id
-        //         let s1 = s.toString()
-        //         this.state[i][j].id = s1
-        //     }
-        // }
-        console.log("DRAG: ", this.state)
     }
     /**
      * A semi-generic way to handle multiple lists. Matches
      * the IDs of the droppable container to the names of the
      * source arrays stored in the state.
-     */   
+     */
+    componentWillReceiveProps() {
+            var new_state = {}
+            for (let i = 0; i < this.props.props.length; i++) {
+                new_state[this.props.props[i].id] = this.props.props[i][this.props.props[i].id]
+            }
+            for (let p in new_state) {
+                for (let i = 0; i < new_state[p].length; i++) {
+                    new_state[p][i].id = new_state[p][i].id.toString()
+                }
+            }
+            this.setState(new_state)
+    }
+
     getList = id => this.state[id];
 
     onDragEnd = result => {
@@ -111,11 +104,10 @@ class DragAndDrop extends Component {
             <div>
                 <DragDropContext onDragEnd={this.onDragEnd}>
                     {Object.keys(this.state).map((list_id, index) => (
+                        <ToggleBox key={index} title={this.props.props[index]?this.props.props[index].name:''}>
                         <Droppable droppableId={list_id} key={list_id}>
                             {(provided, snapshot) => (
                                 <div ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)}>
-                                    <ToggleBox title={this.props.props[index]?this.props.props[index].name:''}>
-                                        
                                     {this.state[list_id].map((item, index) => (
                                         <Draggable
                                             key={item.id}
@@ -134,11 +126,11 @@ class DragAndDrop extends Component {
                                             )}
                                         </Draggable>
                                      ))}
-                                     </ToggleBox>
                                     {provided.placeholder}
                                 </div>
                              )}
-                    </Droppable>
+                        </Droppable>
+                        </ToggleBox>
                     ))}
                 </DragDropContext>
             </div>

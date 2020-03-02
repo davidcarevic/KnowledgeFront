@@ -24,6 +24,7 @@ class SingleProject extends Component {
     componentDidMount() {
         if (!this.props.isLoading) {
             this.props.getProject(this.props.match.params.id)
+
         } 
     }
 
@@ -64,7 +65,7 @@ class SingleProject extends Component {
                     </RightHeaderHolder>
                 </Header>
                 <SideHolder>
-                    {categories?<DragAndDrop props={categories} changeCategory={this.props.changeCategory} section={section}/>:<div></div>}
+                    {categories? <DragAndDrop props={categories} changeCategory={this.props.changeCategory} section={section}/>:<div>asd</div>}
                 </SideHolder>
                 <MainHolder>
                     {!category ? <h1>No Categories</h1> : <h1>{category.name}</h1>}
