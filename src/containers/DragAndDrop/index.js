@@ -10,6 +10,7 @@ const reorder = (list, startIndex, endIndex) => {
     console.log('Start index : ',startIndex)
     console.log('End index : ',endIndex)
     const result = Array.from(list);
+    console.log("RESULT MOVE /////////////// ",result)
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
 
@@ -46,22 +47,70 @@ class DragAndDrop extends Component {
         super(props);
         this.state = {}
     }
+    order=["2", "1", "3"]
     /**
      * A semi-generic way to handle multiple lists. Matches
      * the IDs of the droppable container to the names of the
      * source arrays stored in the state.
      */
     componentWillReceiveProps() {
-            var new_state = {}
-            for (let i = 0; i < this.props.props.length; i++) {
-                new_state[this.props.props[i].id] = this.props.props[i][this.props.props[i].id]
-            }
-            for (let p in new_state) {
-                for (let i = 0; i < new_state[p].length; i++) {
-                    new_state[p][i].id = new_state[p][i].id.toString()
+        var new_state = []
+        console.log("PROPOVI pre petlje,", this.props.props)
+
+        var order=[]
+
+        /** gets the order of the category elements and creates a similar object to the state*/
+        for(let i = 0 ; i <  this.props.props.length;i++){
+           order[this.props.props[i].id]= this.props.props[i].order
+        }
+        console.log("ORDER niz :", order)
+
+       /** sets the state for drag and drop*/
+        for (let i = 0; i < this.props.props.length; i++) {
+            new_state[this.props.props[i].id] = this.props.props[i][this.props.props[i].id]
+        }
+        console.log("NEW STATE: ",new_state)
+
+
+        /** remapping of the new state to fit the order*/
+        for (let category = 1; category < new_state.length; category++){
+            //console.log("RM CAT",new_state[category])
+            //console.log("ORRDER CAT",order[category])
+            new_state[category].forEach((ele,index)=>{
+               // console.log("RM ELE ",ele)
+                //console.log("TESTEEASRASDASD", order[category][index])
+                //porediti? prepisati?
+                //ele.id=order[category][index]
+                console.log("ELE ID", ele)
+                for(var i = 0 ; i < order[category].length;i++) {
+                    if (ele.id === order[category][i]) {
+                        order[category][i]=ele
+                    }
                 }
+            })
+            console.log(order[category],category)
+        }
+
+        console.log("NEW STATE POSLE PROMENA IDIJEVA", new_state)
+        console.log("ORDER POSLE" , order)
+
+        /** converts the id of the element into string*/
+        for (let p in new_state) {
+            for (let i = 0; i < new_state[p].length; i++) {
+                new_state[p][i].id = new_state[p][i].id.toString()
             }
-            this.setState(new_state)
+        }
+
+        this.setState(new_state)
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        // console.log("PREV PROPS,",prevProps)
+        // console.log("prevState ORDER KOJI MI TREBA??????????????????????????",prevState)
+         console.log(" STATE ", this.state)
+        if(prevState!==this.state){
+            // console.log("SWAP BACK ORDER")
+        }
+        // console.log("snapshot ",snapshot)
     }
 
     getList = id => this.state[id];
