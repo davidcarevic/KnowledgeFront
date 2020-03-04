@@ -24,7 +24,7 @@ const sortElements=props=> {
 
     }
 
-
+    try {
     /** remapping of the new state to fit the order*/
     for(let category = 1; category < new_state.length; category++){
         new_state[category].forEach((ele,index)=>{
@@ -39,6 +39,7 @@ const sortElements=props=> {
             }
         })
     }
+  } catch {}
 
     console.log("NEW STATE ", new_state);
     console.log("ORDER POSLE" , order);

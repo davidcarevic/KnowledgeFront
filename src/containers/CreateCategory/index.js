@@ -31,8 +31,6 @@ class CreateCategory extends Component {
         const section_id = ''
 
         if (this.props.first && !isLoading) {
-          console.log("PROJECT: ", project)
-          console.log("SECTION:  ", section)
           const project_id = project.id
           const section_id = section.id
           this.props.createCategory(name, description, section_id);

@@ -25,11 +25,19 @@ class CreateSection extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        const { history } = this.props
-        const { name, description } = this.state;
-        const project_id = this.props.match.params.id
-        this.props.createSection(name, description, project_id);
-        history.push("/dashboard/projects/" + project_id);
+        const { history, project } = this.props
+        const { name, description, isLoading } = this.state;
+        const project_id = ''
+
+        if (this.props.first && !isLoading) {
+          const project_id = project.id
+          this.props.createSection(name, description, project_id);
+          history.push("/dashboard/projects/" + project_id);
+        } else {
+          const project_id = this.props.match.params.id
+          this.props.createSection(name, description, project_id);
+          history.push("/dashboard/projects/" + project_id);
+        }
     }
 
     render() {
@@ -53,6 +61,8 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = state => ({
+    isLoading: state.global.isLoading,
+    project: state.projects.project,
     section: state.projects.section
 })
 
