@@ -10,6 +10,10 @@ import Input from '../../components/elements/Input';
 import TextArea from '../../components/elements/TextArea';
 
 class CreateCategory extends Component {
+  constructor(props) {
+    super(props);
+  }
+
     state = {
         name: '',
         description: '',
@@ -21,24 +25,37 @@ class CreateCategory extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        const { history } = this.props
+        const { history, project, section, isLoading } = this.props
         const { name, description } = this.state;
-        const project_id = this.props.match.params.id
-        const section_id = this.props.match.params.s_id
-        this.props.createCategory(name, description, section_id);
-        history.push("/dashboard/projects/" + project_id);
+        const project_id = ''
+        const section_id = ''
+
+        if (this.props.first && !isLoading) {
+          console.log("PROJECT: ", project)
+          console.log("SECTION:  ", section)
+          const project_id = project.id
+          const section_id = section.id
+          this.props.createCategory(name, description, section_id);
+          history.push("/dashboard/projects/" + project_id);
+        } else {
+          const project_id = this.props.match.params.id
+          const section_id = this.props.match.params.s_id
+          this.props.createCategory(name, description, section_id);
+          history.push("/dashboard/projects/" + project_id);
+        }
     }
 
     render() {
         const { name, description } = this.state;
+        const { first } = this.props
         const project_id = this.props.match.params.id
         return (
         <Form onSubmit={this.handleFormSubmit}>
-            <Title>CREATE YOUR CATEGORY!</Title>
+            <Title>{!first ? 'CREATE YOUR CATEGORY!' : 'Create first category.'}</Title>
             <Input id="name" placeholder="CATEGORY NAME" type="text" value={name} onChange={this.handleInputChange} /><br/><br/>
             <TextArea id="description" placeholder="DESCRIPTION" value={description} onChange={this.handleInputChange} /><br/><br/>
             <Button type="submit">CREATE</Button><hr/>
-            <StyledLink to={"/dashboard/projects/" + project_id}>Back to Project</StyledLink>
+            {!first ? <StyledLink to={"/dashboard/projects/" + project_id}>Back to Project</StyledLink> : ''}
         </Form>
         )
     }
@@ -49,6 +66,9 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = state => ({
+    isLoading: state.global.isLoading,
+    project: state.projects.project,
+    section: state.projects.section,
     category: state.projects.category
 })
 

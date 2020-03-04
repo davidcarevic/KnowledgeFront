@@ -1,6 +1,6 @@
-import { createProject, getProjects, getProjectsByUser, getSingleProject, getProjectSections, getSectionCategories, 
+import { createProject, getProjects, getProjectsByUser, getSingleProject, getProjectSections, getSectionCategories,
     getCategoryElements, createSection, createCategory, createElement, elementCategoryChange } from "../../../services";
-import { setProjectsByTeam, setProjectsByUser, setProject, setSections, setCategories, setElements, 
+import { setProjectsByTeam, setProjectsByUser, setProject, setSections, setCategories, setElements,
     setSection, setCategory, setElement } from "../actions";
 import { isLoading } from "../../global/actions";
 //notifications
@@ -34,7 +34,8 @@ export const projectCreation = (name, description, teamId) => dispatch =>{
     dispatch(isLoading(true));
     createProject(name, description, teamId)
         .then(res => {
-        return getProjectsByUser()
+          dispatch(setProject(res.data))
+          return getProjectsByUser()
     })
         .then(res => {
             dispatch(setProjectsByUser(res.data));
@@ -99,7 +100,7 @@ export const retrieveProject = (id) => dispatch => {
     .catch(err => {
         console.log(err.message)
         dispatch(isLoading(false))
-        
+
     })
     dispatch(isLoading(false))
 }
@@ -124,7 +125,7 @@ export const retrieveSectionCategories = (id) => dispatch => {
     .catch(err => {
         console.log(err.message)
         dispatch(isLoading(false))
-        
+
     })
     dispatch(isLoading(false))
 }

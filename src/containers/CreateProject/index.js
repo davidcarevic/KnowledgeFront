@@ -27,19 +27,17 @@ class CreateProject extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        const { history } = this.props
+        const { history, project } = this.props
         const { name, description, image } = this.state;
-        console.log("Image: ", image)
-        console.log("Image: ", image)
         this.props.createProject(name, description, image)
-        history.push("/dashboard")
+        history.push("/dashboard/projects/" + project.id)
     }
 
     render() {
         const { name, description } = this.state;
         return (
             <Form onSubmit={this.handleFormSubmit} enctype="multipart/form-data">
-                <Title>CREATE YOUR PROJECT!</Title>
+                <Title>CREATE PROJECT!</Title>
                 <Input id="name" placeholder="PROJECT NAME" type="text" value={name} onChange={this.handleInputChange} /><br/><br/>
                 <TextArea id="description" placeholder="DESCRIPTION" value={description} onChange={this.handleInputChange} /><br/><br/>
                 <FileBase64 onDone={ this.getFiles.bind(this) } /><br/><br/>
@@ -57,7 +55,7 @@ const mapStateToProps = state => ({
     teams: state.teams,
     team: state.team,
     projects: state.projects,
-    project: state.project
+    project: state.projects.project
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreateProject))
