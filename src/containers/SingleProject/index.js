@@ -12,6 +12,8 @@ import { Flex } from './styled';
 import LoadingSpinner from "../../components/elements/LoadingSpinner";
 import Form from '../../components/elements/Form';
 import DragAndDrop from '../DragAndDrop';
+import CreateSection from '../CreateSection';
+import CreateCategory from '../CreateCategory';
 
 
 class SingleProject extends Component {
@@ -25,7 +27,7 @@ class SingleProject extends Component {
         if (!this.props.isLoading) {
             this.props.getProject(this.props.match.params.id)
 
-        } 
+        }
     }
 
     handleSectionChange = (e) => {
@@ -37,13 +39,22 @@ class SingleProject extends Component {
     }
 
     render() {
-        const { project, sections, categories, elements, category, section } = this.props
+        const { project, sections, categories, elements, category, section, isLoading } = this.props
         const project_id = this.props.match.params.id
 
-        if (this.props.isLoading) {
+        if (isLoading) {
             return <LoadingSpinner/>
         }
-        return (
+
+        if (sections.length < 1 && !isLoading) {
+          return <CreateSection first />
+        }
+
+        if (categories.length < 1 && !isLoading) {
+          return <CreateCategory first />
+        }
+
+        else return (
             <div>
                 <Header>
                     <LeftHeaderHolder>
@@ -68,9 +79,9 @@ class SingleProject extends Component {
                     {categories? <DragAndDrop props={categories} changeCategory={this.props.changeCategory} section={section}/>:<div>asd</div>}
                 </SideHolder>
                 <MainHolder>
-                    {!category ? <h1>No Categories</h1> : <h1>{category.name}</h1>}
-                    {!category ? '' : <div>{category.description}</div>}<hr />
-                    {!elements ? <div>No elements</div> : elements.map((item, index) =>
+                    <h1>{category.name}</h1>
+                    <div>{category.description}</div><hr />
+                    {elements.length < 1 ? <h3>By clicking plus, create first element.</h3> : elements.map((item, index) =>
                         <div key={index} id={item.id} ><h3>{item.title}</h3><p>{item.description}</p></div>
                     )}
                     {(!section || !category) ? '' : <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id + '/category/' + this.props.category.id + '/element-create'}><PlusIcon /></StyledLink>}
@@ -79,7 +90,7 @@ class SingleProject extends Component {
             </div>
         )
       }
-      
+
 }
 
 const mapDispatchToProps = {
