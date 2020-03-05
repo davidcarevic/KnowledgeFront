@@ -18,22 +18,23 @@ const sortElements=props=> {
     /** remapping of the new state to fit the order*/
     /** tmp adds the unsorted elements to the ordered array*/
     for(let category = 1; category < new_state.length; category++){
-        new_state[category].forEach((ele,index)=>{
-            let i = 0;
-            for(i; i < order[category].length; i++) {
-                if (ele.id === order[category][i]) {
-                    order[category][i]=ele
+        if(new_state[category]) {
+            new_state[category].forEach((ele, index) => {
+                let i = 0;
+                for (i; i < order[category].length; i++) {
+                    if (ele.id === order[category][i]) {
+                        order[category][i] = ele
+                    } else {
+                        tmp[index] = ele;
+                    }
                 }
-                else{
-                    tmp[index] = ele;
+                for (i; i < tmp.length; i++) {
+                    if (ele.id === tmp[i].id) {
+                        order[category][index] = tmp[i]
+                    }
                 }
-            }
-            for(i; i < tmp.length; i++){
-                if(ele.id===tmp[i].id){
-                    order[category][index]=tmp[i]
-                }
-            }
-        })
+            })
+        }
     }
     // console.log("NEW STATE ", new_state);
     // console.log("ORDER POSLE" , order);
