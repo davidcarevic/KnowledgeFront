@@ -1,51 +1,50 @@
-const sortElements=props=> {
-    let order=[];
-    let new_state = [];
-    let tmp=[];
+const sortCategoryElements=props=> {
+    let new_state = {};
+    console.log(props)
+        props.forEach(category => {
+            if(category.elements) {
+                new_state[category.id] = sortElements2(category.elements, category.order)
+            }
+            if(category.items){
+                new_state[category.id] = sortElements2(category.items, category.order)
+            }
+        });
 
-    /** gets the order of the category elements and creates a similar object to the state*/
-    /** sets the state for drag and drop*/
-    for(let i = 0 ; i <  props.length; i++){
-        if(props[i].order.length>0) {
-            order[props[i].id] = props[i].order;
-        }
-        else{
-            order[props[i].id] = props[i][props[i].id];
-        }
-        new_state[props[i].id] = props[i][props[i].id]
-    }
 
-    /** remapping of the new state to fit the order*/
-    /** tmp adds the unsorted elements to the ordered array*/
-    for(let category = 1; category < new_state.length; category++){
-        if(new_state[category]) {
-            new_state[category].forEach((ele, index) => {
-                let i = 0;
-                for (i; i < order[category].length; i++) {
-                    if (ele.id === order[category][i]) {
-                        order[category][i] = ele
-                    } else {
-                        tmp[index] = ele;
-                    }
-                }
-                for (i; i < tmp.length; i++) {
-                    if (ele.id === tmp[i].id) {
-                        order[category][index] = tmp[i]
-                    }
-                }
-            })
-        }
-    }
-    // console.log("NEW STATE ", new_state);
-    // console.log("ORDER POSLE" , order);
-    // console.log("TMP ", tmp);
-    /** converts the id of the element into string*/
-    for(let p in order) {
-        for(let i = 0; i < order[p].length; i++) {
-            order[p][i].id = order[p][i].id.toString()
+
+    for(let p in new_state) {
+        for(let i = 0; i < new_state[p].length; i++) {
+            new_state[p][i].id = new_state[p][i].id.toString()
         }
     }
 
-    return order
+    return new_state;
 };
-export default sortElements
+
+const sortElements2 = (elements, order) => {
+    let result = [];
+    let elementsDict = {};
+
+    // Create an indexed elements dictionary:
+    elements.forEach(element => {
+        elementsDict[element.id] = element
+    });
+
+    // Add elements that exist in order:
+    order.forEach(element_id => {
+        try {
+            result.push(elementsDict[element_id]);
+            delete elementsDict[element_id];
+        } catch (e) { }
+    });
+
+    // Add the rest:
+    for (let element_id in elementsDict) {
+        result.push(elementsDict[element_id]);
+    }
+
+    console.log("RES" , result)
+    return result;
+};
+
+export default sortCategoryElements

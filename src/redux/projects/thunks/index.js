@@ -9,6 +9,7 @@ import {generalError} from "../../../components/elements/Notifications/GeneralEr
 import {categoryCreateError,categoryCreateSuccess} from "../../../components/elements/Notifications/CategoryCreate";
 import {sectionCreateError,sectionCreateSuccess} from "../../../components/elements/Notifications/SectionCreate";
 import {elementCreateError,elementCreateSuccess} from "../../../components/elements/Notifications/ElementCreate";
+import sortCategoryElements from "../../../containers/DragAndDrop/sort";
 
 
 export const getTeamProjects = (id) => dispatch => {
@@ -71,7 +72,6 @@ export const retrieveProject = (id) => dispatch => {
     getSingleProject(id)
     .then(res => {
         dispatch(setProject(res.data))
-        dispatch(isLoading(false));
         return res.data.id
     })
     .then(id => {
@@ -98,9 +98,8 @@ export const retrieveProject = (id) => dispatch => {
         dispatch(isLoading(false))
     })
     .catch(err => {
-        console.log(err.message)
+        console.log("???????????",err.message)
         dispatch(isLoading(false))
-
     })
     dispatch(isLoading(false))
 }

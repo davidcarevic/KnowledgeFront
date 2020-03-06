@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ToggleBox from '../ToggleBox';
-import { getItemStyle, getListStyle } from './styled';
-import sortElements from './sort/index'
+import {getItemStyle, getItemStyleHorizontal, getListStyle, getListStyleHorizontal} from './styled';
+import sortCategoryElements from './sort/index'
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -52,10 +52,14 @@ class DragAndDrop extends Component {
      * source arrays stored in the state.
      */
     componentWillReceiveProps() {
-        console.log("PROPOVI pre petlje,", this.props.props);
+        console.log("PROPS NA ULAZU U DRAG AND DROPP !!!!!", this.props);
         /** the function works with an array of categories which are objects*/
-        let new_state=sortElements(this.props.props);
-        this.setState(new_state)
+        let new_state=sortCategoryElements(this.props.array);
+        //let current=this.props.category
+        console.log("new state od nekog broja",new_state)
+       // let eles=sortCategoryElements(this.props.category)
+       //this.props.setElements(new_state[current])
+        this.setState(new_state);
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         // console.log("PREV PROPS,",prevProps)
@@ -100,42 +104,82 @@ class DragAndDrop extends Component {
     };
 
     render() {
-        return (
-            <div>
-                <DragDropContext onDragEnd={this.onDragEnd}>
-                    {Object.keys(this.state).map((list_id, index) => (
-                        <ToggleBox key={index} title={this.props.props[index]?this.props.props[index].name:''}>
-                        <Droppable droppableId={list_id} key={list_id}>
-                            {(provided, snapshot) => (
-                                <div ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)}>
-                                    {this.state[list_id].map((item, index) => (
-                                        <Draggable
-                                            key={item.id}
-                                            draggableId={item.id}
-                                            index={index}>
-                                            {(provided, snapshot) => (
-                                                <div
-                                                    ref={provided.innerRef}
-                                                    {...provided.draggableProps}
-                                                    {...provided.dragHandleProps} style={getItemStyle(
-                                                        snapshot.isDragging,
-                                                        provided.draggableProps.style
-                                                    )}>
-                                                    {item.title}
-                                                </div>
-                                            )}
-                                        </Draggable>
-                                     ))}
-                                    {provided.placeholder}
-                                </div>
-                             )}
-                        </Droppable>
-                        </ToggleBox>
-                    ))}
-                </DragDropContext>
-            </div>
-        );
-    }
+        if(this.props.type==="categories") {
+            return (
+                <div>
+                    <DragDropContext onDragEnd={this.onDragEnd}>
+                        {Object.keys(this.state).map((list_id, index) => (
+                            <ToggleBox key={index} title={this.props.array[index] ? this.props.array[index].name :''}>
+                                <Droppable droppableId={list_id} key={list_id}>
+                                    {(provided, snapshot) => (
+                                        <div ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)}>
+                                            {this.state[list_id].map((item, index) => (
+                                                <Draggable
+                                                    key={'c'+item.id}
+                                                    draggableId={item.id}
+                                                    index={index}>
+                                                    {(provided, snapshot) => (
+                                                        <div
+                                                            ref={provided.innerRef}
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps} style={getItemStyle(
+                                                            snapshot.isDragging,
+                                                            provided.draggableProps.style
+                                                        )}>
+                                                            {item.title}
+                                                        </div>
+                                                    )}
+                                                </Draggable>
+                                            ))}
+                                            {provided.placeholder}
+                                        </div>
+                                    )}
+                                </Droppable>
+                            </ToggleBox>
+                        ))}
+                    </DragDropContext>
+                </div>
+            );
+        }
+        if(this.props.type==="elements"){
+
+            return(
+                <div>
+                    <DragDropContext onDragEnd={this.onDragEnd}>
+                        {Object.keys(this.state).map((list_id,index) => (
+                            <div key={index}> <h3 key={index}>{ this.props.array.filter(ele=>ele.id===parseInt(list_id))[0].title}</h3>
+                                <Droppable droppableId={list_id} key={list_id}>
+                                    {(provided, snapshot) => (
+                                        <div ref={provided.innerRef} style={getListStyleHorizontal(snapshot.isDraggingOver)}>
+                                            {this.state[list_id].map((item, index) => (
+                                                <Draggable
+                                                    key={'e'+item.id}
+                                                    draggableId={item.id}
+                                                    index={index}>
+                                                    {(provided, snapshot) => (
+                                                        <div
+                                                            ref={provided.innerRef}
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps} style={getItemStyleHorizontal(
+                                                            snapshot.isDragging,
+                                                            provided.draggableProps.style
+                                                        )}>
+                                                            {item.content.title}
+                                                        </div>
+                                                    )}
+                                                </Draggable>
+                                            ))}
+                                            {provided.placeholder}
+                                        </div>
+                                    )}
+                                </Droppable>
+                            </div>
+                        ))}
+                    </DragDropContext>
+                </div>
+            )
+        }
+        }
 }
 
 

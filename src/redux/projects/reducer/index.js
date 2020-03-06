@@ -6,7 +6,6 @@ const initialState = {
     teamProjects: [],
     sections: [],
     categories: [],
-    elements: [],
     project: {},
     section: {},
     category: {},
