@@ -63,3 +63,10 @@ export const setElement = element => {
         payload: element
     }
 }
+
+export const setItem = item => {
+    return {
+        type: types.SET_ITEM,
+        payload: item
+    }
+}

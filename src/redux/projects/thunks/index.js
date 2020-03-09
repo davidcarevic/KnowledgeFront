@@ -1,7 +1,7 @@
 import { createProject, getProjects, getProjectsByUser, getSingleProject, getProjectSections, getSectionCategories,
-    getCategoryElements, createSection, createCategory, createElement, elementCategoryChange } from "../../../services";
+    getCategoryElements, createSection, createCategory, createElement, elementCategoryChange, createItem } from "../../../services";
 import { setProjectsByTeam, setProjectsByUser, setProject, setSections, setCategories, setElements,
-    setSection, setCategory, setElement } from "../actions";
+    setSection, setCategory, setElement, setItem } from "../actions";
 import { isLoading } from "../../global/actions";
 //notifications
 import {projectCreateError,projectCreateSuccess} from "../../../components/elements/Notifications/ProjectCreate";
@@ -218,4 +218,17 @@ export const changeCategoryForElement = (currentElement, category_id, sectionId)
         .catch(err => {
             dispatch(isLoading(false))
         })
+}
+
+export const itemCreation = (content, element) => dispatch => {
+    dispatch(isLoading(true))
+    createItem(content, element)
+    .then(res => {
+        dispatch(setItem(res.data))
+        dispatch(isLoading(false))
+    })
+    .catch(err => {
+        console.log(err.message)
+        dispatch(isLoading(false))
+    })
 }

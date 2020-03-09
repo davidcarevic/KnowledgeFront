@@ -8,3 +8,4 @@ export const GET_CATEGORY_ELEMENTS = "GET_CATEGORY_ELEMENTS";
 export const SET_SECTION = "SET_SECTION";
 export const SET_CATEGORY = "SET_CATEGORY";
 export const SET_ELEMENT = "SET_ELEMENT";
+export const SET_ITEM = "SET_ITEM";

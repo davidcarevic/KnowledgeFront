@@ -9,7 +9,8 @@ const initialState = {
     project: {},
     section: {},
     category: {},
-    element: {}
+    element: {},
+    item: {}
 };
 
 export default (state = initialState, action) => {
@@ -58,6 +59,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 element: action.payload
+            }
+        case types.SET_ITEM:
+            return {
+                ...state,
+                item: action.payload
             }
         default:
             return state;
