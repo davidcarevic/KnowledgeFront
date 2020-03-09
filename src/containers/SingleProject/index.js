@@ -27,7 +27,7 @@ class SingleProject extends Component {
     }
 
     componentDidMount() {
-        if (!this.props.isLoading && this.state.elements.length<1) {
+        if (!this.props.isLoading) {
             this.props.getProject(this.props.match.params.id)
             this.setState({elements:sortCategoryElements(this.props.categories)})
            //this.setState({items:sortCategoryElements(this.props.categories[0])})
@@ -92,7 +92,7 @@ class SingleProject extends Component {
                 <MainHolder>
                     <h1>{category.name?category.name:''}</h1>
                     <div>{category.description?category.description:''}</div><hr />
-                    {elements.length>0 && !isLoading?<DragAndDrop  type="elements" array={this.state.elements[category.id]} category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements} section={section}/>
+                    {elements.length>0?<DragAndDrop  type="elements" array={this.state.elements[category.id]} project={project.id} section_id={section.id} category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements} section={section}/>
                         :<h3>By clicking plus, create first element.</h3> }
                     {(!section || !category) ? '' : <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id + '/category/' + this.props.category.id + '/element-create'}><PlusIcon /></StyledLink>}
                     <hr /><StyledLink to="/dashboard">Back to Dashboard</StyledLink>
