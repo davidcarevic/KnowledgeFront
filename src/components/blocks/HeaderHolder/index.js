@@ -10,6 +10,7 @@ export const Header = styled.div`
     padding-left: 60px;
     padding-top: 20px;
     width: 100%;
+    height: 50px;
     background-color: white;
     z-index: 1;
     border-bottom: 1px solid black;
@@ -24,9 +25,7 @@ export const LeftHeaderHolder = styled.div`
     left: 0;
     padding-left: 60px;
     padding-top: 17px;
-    background-color: white;
     z-index: 2;
-    border-bottom: 1px solid black;
 `;
 
 export const RightHeaderHolder = styled.div`
@@ -38,7 +37,5 @@ export const RightHeaderHolder = styled.div`
     top: 0;
     padding-left: 60px;
     padding-top: 20px;
-    border-bottom: 1px solid black;
-    background-color: white;
     z-index: 1;
 `;
