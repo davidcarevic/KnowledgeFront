@@ -21,25 +21,21 @@ class SingleProject extends Component {
     state = {
         selected_section: '',
         selected_category: '',
-        selected_element: ''
+        selected_element: '',
+        elements:[],
+        items:[]
     }
 
     componentDidMount() {
         if (!this.props.isLoading) {
             this.props.getProject(this.props.match.params.id)
-
-            let tmp=this.props.categories[0]
-            let res=[tmp]
-            let nesto=sortCategoryElements(res)
-            for(let i = 0 ; i < this.props.elements.length;i++) {
-                nesto[i] = this.props.elements[i]
-            }
-
-
-          //  this.props.setElements(nesto)
-            console.log("RES OVOG GOVNA ", nesto)
-
+            this.setState({elements:sortCategoryElements(this.props.categories)})
+           //this.setState({items:sortCategoryElements(this.props.categories[0])})
         }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
     }
 
     handleSectionChange = (e) => {
@@ -48,11 +44,14 @@ class SingleProject extends Component {
             selected_section: e.target.id
         })
         this.props.getSectionCategories(e.target.id)
+        this.props.setSection(e.target)
     }
 
     render() {
         const { project, sections, categories, category, elements, section, isLoading } = this.props
         const project_id = this.props.match.params.id
+        console.log("SINGLE PORJECT STATE", this.state)
+
 
         if (isLoading) {
             return <LoadingSpinner/>
@@ -62,7 +61,7 @@ class SingleProject extends Component {
           return <CreateSection first />
         }
 
-        if (categories==={} && !isLoading) {
+        if (categories.length<1 && !isLoading) {
           return <CreateCategory first />
         }
 
@@ -91,9 +90,9 @@ class SingleProject extends Component {
                     {categories && category? <DragAndDrop type="categories" array={categories} category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements} section={section}/>:<div>asd</div>}
                 </SideHolder>
                 <MainHolder>
-                    <h1>{category?category.name:''}</h1>
-                    <div>{category?category.description:''}</div><hr />
-                    {elements?<DragAndDrop  type="elements" array={elements} category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements} section={section}/>
+                    <h1>{category.name?category.name:''}</h1>
+                    <div>{category.description?category.description:''}</div><hr />
+                    {elements.length>0?<DragAndDrop  type="elements" array={this.state.elements[1]} category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements} section={section}/>
                         :<h3>By clicking plus, create first element.</h3> }
                     {(!section || !category) ? '' : <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id + '/category/' + this.props.category.id + '/element-create'}><PlusIcon /></StyledLink>}
                     <hr /><StyledLink to="/dashboard">Back to Dashboard</StyledLink>

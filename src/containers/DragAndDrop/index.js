@@ -52,20 +52,12 @@ class DragAndDrop extends Component {
      * source arrays stored in the state.
      */
     componentWillReceiveProps() {
-        console.log("PROPS NA ULAZU U DRAG AND DROPP !!!!!", this.props);
         /** the function works with an array of categories which are objects*/
         let new_state=sortCategoryElements(this.props.array);
-        //let current=this.props.category
-        console.log("new state od nekog broja",new_state)
-       // let eles=sortCategoryElements(this.props.category)
-       //this.props.setElements(new_state[current])
         this.setState(new_state);
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // console.log("PREV PROPS,",prevProps)
-        // console.log("prevState ORDER KOJI MI TREBA??????????????????????????",prevState)
-         console.log(" STATE ", this.state)
-        // console.log("snapshot ",snapshot)
+
     }
 
     getList = id => this.state[id];
@@ -147,7 +139,7 @@ class DragAndDrop extends Component {
                 <div>
                     <DragDropContext onDragEnd={this.onDragEnd}>
                         {Object.keys(this.state).map((list_id,index) => (
-                            <div key={index}> <h3 key={index}>{ this.props.array.filter(ele=>ele.id===parseInt(list_id))[0].title}</h3>
+                            <div key={index}> <h3 key={index}>{ this.props.array[index].title}</h3>
                                 <Droppable droppableId={list_id} key={list_id}>
                                     {(provided, snapshot) => (
                                         <div ref={provided.innerRef} style={getListStyleHorizontal(snapshot.isDraggingOver)}>

@@ -69,6 +69,8 @@ export const getProjectsForUser = (id) => dispatch => {
 
 export const retrieveProject = (id) => dispatch => {
     dispatch(isLoading(true));
+    let currentCat={}
+    let categories={}
     getSingleProject(id)
     .then(res => {
         dispatch(setProject(res.data))
@@ -86,14 +88,20 @@ export const retrieveProject = (id) => dispatch => {
         return getSectionCategories(id)
     })
     .then(res => {
-        dispatch(setCategories(res.data))
-        dispatch(setCategory(res.data[0]))
+        categories=res.data
+       // dispatch(setCategories(res.data))
+        //dispatch(setCategory(res.data[0]))
+         currentCat=res.data[0]
         return res.data[0].id
     })
     .then(id => {
         return getCategoryElements(id)
     })
     .then(res => {
+        categories[0]['elements']=res.data
+        currentCat['elements']=res.data
+        dispatch(setCategories(categories))
+        dispatch(setCategory(currentCat))
         dispatch(setElements(res.data))
         dispatch(isLoading(false))
     })

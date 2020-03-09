@@ -42,7 +42,7 @@ export default (state = initialState, action) => {
         case types.GET_CATEGORY_ELEMENTS:
             return {
                 ...state,
-                elements: action.payload
+                elements: action.payload,
             }
         case types.SET_SECTION:
             return {
