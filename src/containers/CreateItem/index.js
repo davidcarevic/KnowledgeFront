@@ -5,8 +5,7 @@ import projectRedux from '../../redux/projects'
 import { withRouter } from 'react-router-dom';
 // import Button from '../../components/elements/Button';
 // import Title from '../../components/elements/Title';
-// import StyledLink from '../../components/elements/Link';
-// import Form from '../../components/elements/Form';
+import StyledLink from '../../components/elements/Link';
 // import Input from '../../components/elements/Input';
 // import TextArea from '../../components/elements/TextArea';
 import RichTextEditor from 'react-rte';
@@ -36,15 +35,17 @@ class CreateItem extends Component {
 
       handleFormSubmit = (e) => {
         e.preventDefault();
-        const { history, item } = this.props
-        const { content, isLoading, value } = this.state;
+        const { history } = this.props
+        const { value } = this.state;
         const element_id = this.props.match.params.e_id
+        const project_id = this.props.match.params.id
         this.props.createItem(value, element_id);
-
+        history.push("/dashboard/projects/" + project_id);
         
     }
     
       render() {
+        const project_id = this.props.match.params.id
         const toolbarConfig = {
           display: ['INLINE_STYLE_BUTTONS', 'BLOCK_TYPE_BUTTONS', 'LINK_BUTTONS', 'BLOCK_TYPE_DROPDOWN', 'HISTORY_BUTTONS'],
           INLINE_STYLE_BUTTONS: [
@@ -66,14 +67,16 @@ class CreateItem extends Component {
           ]
         };
         return (
+            <div>
             <Form onSubmit={this.handleFormSubmit}>
-          <RichTextEditor
-          toolbarConfig={toolbarConfig}
-            value={this.state.value}
-            onChange={this.onChange}
-          />
-          <Button type="submit">CREATE</Button><hr/>
-          </Form>
+                <RichTextEditor
+                    toolbarConfig={toolbarConfig}
+                    value={this.state.value}
+                    onChange={this.onChange}/>
+                <Button type="submit">CREATE</Button><hr/>
+            </Form>
+            <StyledLink to={"/dashboard/projects/" + project_id}>Back to Project</StyledLink>
+          </div>
         );
       }
 }
