@@ -1,6 +1,7 @@
 const sortCategoryElements=props=> {
     let new_state = {};
     console.log(props)
+    try {
         props.forEach(category => {
             if(category.elements) {
                 new_state[category.id] = sortElements2(category.elements, category.order)
@@ -9,7 +10,7 @@ const sortCategoryElements=props=> {
                 new_state[category.id] = sortElements2(category.items, category.order)
             }
         });
-
+    } catch {}
 
 
     for(let p in new_state) {

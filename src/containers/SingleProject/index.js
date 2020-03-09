@@ -62,7 +62,7 @@ class SingleProject extends Component {
           return <CreateSection first />
         }
 
-        if (categories==={} && !isLoading) {
+        if (categories.length < 1 && !isLoading) {
           return <CreateCategory first />
         }
 
@@ -88,12 +88,12 @@ class SingleProject extends Component {
                     </RightHeaderHolder>
                 </Header>
                 <SideHolder>
-                    {categories && category? <DragAndDrop type="categories" array={categories} category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements} section={section}/>:<div>asd</div>}
+                    {categories && category ? <DragAndDrop type="categories" array={categories} category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements} section={section}/> : <div>asd</div>}
                 </SideHolder>
                 <MainHolder>
                     <h1>{category?category.name:''}</h1>
                     <div>{category?category.description:''}</div><hr />
-                    {elements?<DragAndDrop  type="elements" array={elements} category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements} section={section}/>
+                    {(elements.length > 0) ? <DragAndDrop  type="elements" array={elements} category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements} section={section}/>
                         :<h3>By clicking plus, create first element.</h3> }
                     {(!section || !category) ? '' : <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id + '/category/' + this.props.category.id + '/element-create'}><PlusIcon /></StyledLink>}
                     <hr /><StyledLink to="/dashboard">Back to Dashboard</StyledLink>
