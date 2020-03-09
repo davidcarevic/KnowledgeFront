@@ -18,7 +18,10 @@ const sortCategoryElements=props=> {
 
     for(let p in new_state) {
         for(let i = 0; i < new_state[p].length; i++) {
-            new_state[p][i].id = new_state[p][i].id.toString()
+            if(new_state[p][i])
+                try {
+                    new_state[p][i].id = new_state[p][i].id.toString()
+                }catch{}
         }
     }
 

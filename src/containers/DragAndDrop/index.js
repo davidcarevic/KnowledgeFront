@@ -136,7 +136,7 @@ class DragAndDrop extends Component {
             );
         }
         if(this.props.type==="elements"){
-
+            console.log("SKACE NA OVO AAAAAAAAAAAAAAAAAAAAAAAA")
             return(
                 <div>
                     <DragDropContext onDragEnd={this.onDragEnd}>
@@ -171,7 +171,7 @@ class DragAndDrop extends Component {
                         ))}
                     </DragDropContext>
                 </div>
-            )
+            );
         }
         }
 }
