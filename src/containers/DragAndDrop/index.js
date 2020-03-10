@@ -3,8 +3,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ToggleBox from '../ToggleBox';
 import {getItemStyle, getItemStyleHorizontal, getListStyle, getListStyleHorizontal} from './styled';
 import sortCategoryElements from './sort/index'
-import StyledLink from "../../components/elements/Link";
-import { PlusIcon } from '../../components/elements/Icons';
+import Popover from '../../components/itemTypes/Popover';
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -141,9 +140,8 @@ class DragAndDrop extends Component {
                 <div>
                     <DragDropContext onDragEnd={this.onDragEnd}>
                         {Object.keys(this.state).map((list_id,index) => (
-                            <div key={index}> <h3 key={index}>{ this.props.array[index].title}<StyledLink to={"/dashboard/projects/" + 
-                                this.props.project + "/section/" + this.props.section_id + "/category/" + this.props.category + "/element/" +
-                                   list_id.slice(1) + "/item-create"}><PlusIcon /></StyledLink></h3>
+                            <div key={index}> <h3 key={index}>{ this.props.array[index].title}</h3>
+                            <Popover project={this.props.project} section={this.props.section_id} category={this.props.category} element={list_id.slice(1)} key={list_id.slice(1)}/>
                                 <Droppable droppableId={list_id} key={list_id}>
                                     {(provided, snapshot) => (
                                         <div ref={provided.innerRef} style={getListStyleHorizontal(snapshot.isDraggingOver)}>

@@ -220,9 +220,9 @@ export const changeCategoryForElement = (currentElement, category_id, sectionId)
         })
 }
 
-export const itemCreation = (content, element) => dispatch => {
+export const itemCreation = (content, type, element) => dispatch => {
     dispatch(isLoading(true))
-    createItem(content, element)
+    createItem(content, type, element)
     .then(res => {
         dispatch(setItem(res.data))
         dispatch(isLoading(false))

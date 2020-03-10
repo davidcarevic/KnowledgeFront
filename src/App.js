@@ -41,7 +41,7 @@ const App = props => (
       <PrivateRoute exact path="/dashboard/projects/:id/section-create" Component={CreateSection}/>
       <PrivateRoute exact path="/dashboard/projects/:id/section/:s_id/category-create" Component={CreateCategory}/>
       <PrivateRoute exact path="/dashboard/projects/:id/section/:s_id/category/:c_id/element-create" Component={CreateElement}/>
-      <PrivateRoute exact path="/dashboard/projects/:id/section/:s_id/category/:c_id/element/:e_id/item-create" Component={CreateItem}/>
+      <PrivateRoute exact path="/dashboard/projects/:id/section/:s_id/category/:c_id/element/:e_id/item-create/:type" Component={CreateItem}/>
       </Switch>
     </Router>
   )

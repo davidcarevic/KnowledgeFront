@@ -129,9 +129,10 @@ export const elementCategoryChange = (element, categoryId) => {
     })
 }
 
-export const createItem = (content, element) => {
+export const createItem = (content, type, element) => {
     return axios.post("api/items/", {
         content: content,
+        type: type,
         element: element
     })
 }

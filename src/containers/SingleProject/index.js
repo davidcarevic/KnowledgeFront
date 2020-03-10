@@ -48,7 +48,7 @@ class SingleProject extends Component {
     }
 
     render() {
-        const { project, sections, categories, category, elements, section, isLoading } = this.props
+        const { project, sections, categories, category, elements, section, element, isLoading } = this.props
         const project_id = this.props.match.params.id
         console.log("SINGLE PORJECT STATE", this.state)
 
@@ -87,14 +87,17 @@ class SingleProject extends Component {
                     </RightHeaderHolder>
                 </Header>
                 <SideHolder>
-                    {categories && category? <DragAndDrop type="categories" array={categories} category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements} section={section}/>:<div>asd</div>}
+                    {categories && category? <DragAndDrop type="categories" array={categories} category={category.id} changeCategory={this.props.changeCategory} 
+                        setElements={this.props.setElements} section={section}/>:<div>asd</div>}
                 </SideHolder>
                 <MainHolder>
                     <h1>{category.name?category.name:''}</h1>
                     <div>{category.description?category.description:''}</div><hr />
-                    {elements.length>0?<DragAndDrop  type="elements" array={this.state.elements[category.id]} project={project.id} section_id={section.id} category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements} section={section}/>
+                        {elements.length>0?<DragAndDrop  type="elements" array={this.state.elements[category.id]} project={project.id} section_id={section.id} 
+                            category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements} section={section}/>
                         :<h3>By clicking plus, create first element.</h3> }
-                    {(!section || !category) ? '' : <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id + '/category/' + this.props.category.id + '/element-create'}><PlusIcon /></StyledLink>}
+                    {(!section || !category) ? '' : <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id + '/category/' + 
+                        this.props.category.id + '/element-create'}><PlusIcon /></StyledLink>}
                     <hr /><StyledLink to="/dashboard">Back to Dashboard</StyledLink>
                 </MainHolder>
             </div>
