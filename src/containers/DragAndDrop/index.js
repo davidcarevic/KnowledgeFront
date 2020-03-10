@@ -3,7 +3,13 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ToggleBox from '../ToggleBox';
 import {getItemStyle, getItemStyleHorizontal, getListStyle, getListStyleHorizontal} from './styled';
 import sortCategoryElements from './sort/index'
+<<<<<<< HEAD
 import Popover from '../../components/itemTypes/Popover';
+=======
+import StyledLink from "../../components/elements/Link";
+import { PlusIcon } from '../../components/elements/Icons';
+import Button from "../../components/elements/Button";
+>>>>>>> fcdefc883b6802093f6daccef26aeee9d03d1ff7
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -61,6 +67,10 @@ class DragAndDrop extends Component {
 
     }
 
+    handleCategoryChange = (e) =>{
+        e.preventDefault()
+    }
+
     getList = id => this.state[id];
 
     onDragEnd = result => {
@@ -100,15 +110,16 @@ class DragAndDrop extends Component {
         if(this.props.type==="categories") {
             return (
                 <div>
-                    <DragDropContext onDragEnd={this.onDragEnd}>
+                    <DragDropContext  onDragEnd={this.onDragEnd}>
                         {Object.keys(this.state).map((list_id, index) => (
-                            <ToggleBox key={index} title={this.props.array[index] ? this.props.array[index].name :''}>
-                                <Droppable droppableId={list_id} key={list_id}>
+                            <div id={list_id} key={index} >
+                            <ToggleBox key={index} id={list_id}  category={this.props.hisCat} changeActiveCategory={this.props.changeActiveCategory} title={this.props.array[index] ? this.props.array[index].name :''}>
+                                <Droppable  droppableId={list_id} key={list_id} >
                                     {(provided, snapshot) => (
                                         <div ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)}>
                                             {this.state[list_id].map((item, index) => (
                                                 <Draggable
-                                                    key={'c'+item.id}
+                                                    key={item.id}
                                                     draggableId={item.id}
                                                     index={index}>
                                                     {(provided, snapshot) => (
@@ -129,25 +140,32 @@ class DragAndDrop extends Component {
                                     )}
                                 </Droppable>
                             </ToggleBox>
+                            </div>
                         ))}
                     </DragDropContext>
                 </div>
             );
         }
         if(this.props.type==="elements"){
-            console.log("SKACE NA OVO AAAAAAAAAAAAAAAAAAAAAAAA")
+            console.log("ARRAY ELEMETNS AND ITEMS",this.props.array)
             return(
                 <div>
                     <DragDropContext onDragEnd={this.onDragEnd}>
                         {Object.keys(this.state).map((list_id,index) => (
+<<<<<<< HEAD
                             <div key={index}> <h3 key={index}>{ this.props.array[index].title}</h3>
                             <Popover project={this.props.project} section={this.props.section_id} category={this.props.category} element={list_id.slice(1)} key={list_id.slice(1)}/>
+=======
+                            <div key={index}> <h3 key={index}>{ this.props.array?this.props.array[index].title:''}<StyledLink to={"/dashboard/projects/" +
+                                this.props.project + "/section/" + this.props.section_id + "/category/" + this.props.category + "/element/" +
+                                   list_id.slice(1) + "/item-create"}><PlusIcon /></StyledLink></h3>
+>>>>>>> fcdefc883b6802093f6daccef26aeee9d03d1ff7
                                 <Droppable droppableId={list_id} key={list_id}>
                                     {(provided, snapshot) => (
                                         <div ref={provided.innerRef} style={getListStyleHorizontal(snapshot.isDraggingOver)}>
                                             {this.state[list_id].map((item, index) => (
                                                 <Draggable
-                                                    key={'e'+item.id}
+                                                    key={item.id}
                                                     draggableId={item.id}
                                                     index={index}>
                                                     {(provided, snapshot) => (

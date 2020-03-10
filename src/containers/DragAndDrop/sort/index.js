@@ -1,6 +1,5 @@
 const sortCategoryElements=props=> {
     let new_state = {};
-    console.log("PROPS PRE SORTA!!!",props)
     try {
         props.forEach(category => {
             if (category.elements) {
@@ -8,20 +7,18 @@ const sortCategoryElements=props=> {
                 new_state[category.id] = sortElements2(category.elements, category.order)
             }
             if (category.items) {
-                console.log("element ID ", category.id)
-                new_state["e"+category.id] = sortElements2(category.items, category.order)
+                //console.log("element ID ", category.id)
+                new_state["e" + category.id] = sortElements2(category.items, category.order)
             }
         });
-        }
-        catch{}
+    }catch {}
+
 
 
     for(let p in new_state) {
         for(let i = 0; i < new_state[p].length; i++) {
             if(new_state[p][i])
-                try {
                     new_state[p][i].id = new_state[p][i].id.toString()
-                }catch{}
         }
     }
 
@@ -39,10 +36,10 @@ const sortElements2 = (elements, order) => {
 
     // Add elements that exist in order:
     order.forEach(element_id => {
-        try {
+            if(elementsDict[element_id])
             result.push(elementsDict[element_id]);
             delete elementsDict[element_id];
-        } catch (e) { }
+
     });
 
     // Add the rest:
@@ -50,7 +47,6 @@ const sortElements2 = (elements, order) => {
         result.push(elementsDict[element_id]);
     }
 
-    console.log("RES" , result)
     return result;
 };
 

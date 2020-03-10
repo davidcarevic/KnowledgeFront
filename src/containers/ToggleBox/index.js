@@ -8,19 +8,30 @@ class ToggleBox extends React.Component {
 		super(props);
 		this.state = {
 			opened: false,
+			id:props.id
 		};
 		this.toggleBox = this.toggleBox.bind(this);
 	}
   
-	toggleBox() {
+	toggleBox(e) {
+		e.persist()
+		console.log("OVDE ",this.state.id)
+		console.log("PROPOVI U TOGGLE ",this.props)
 		const { opened } = this.state;
 		this.setState({
 			opened: !opened,
 		});
+		let current={}
+		for(let i=0;i<this.props.category.length;i++){
+			if(this.props.id===this.props.category[i].id.toString()){
+				current=this.props.category[i]
+			}
+		}
+		this.props.changeActiveCategory(current)
 	}
   
 	render() {
-		var { title, children } = this.props;
+		var { title, children ,id} = this.props;
 		const { opened } = this.state;
 
 		if (opened) {
@@ -30,7 +41,7 @@ class ToggleBox extends React.Component {
 		}
 
 		return (
-			<div>
+			<div id={id}>
 				<h3 onClick={this.toggleBox}>
 					<Flex>
                     <Flex>{title}</Flex>
