@@ -69,11 +69,12 @@ export const getProjectsForUser = (id) => dispatch => {
 
 export const retrieveProject = (id) => dispatch => {
     dispatch(isLoading(true));
-    let currentCat={}
-    let categories={}
+    let currentCat={};
+    let categories={};
     getSingleProject(id)
     .then(res => {
         dispatch(setProject(res.data))
+        //dispatch(isLoading(false))
         return res.data.id
     })
     .then(id => {
@@ -98,18 +99,21 @@ export const retrieveProject = (id) => dispatch => {
         return getCategoryElements(id)
     })
     .then(res => {
-        categories[0]['elements']=res.data
-        currentCat['elements']=res.data
-        dispatch(setCategories(categories))
-        dispatch(setCategory(currentCat))
+        //categories[0]['elements']=res.data
+        currentCat['elements']=res.data;
+        dispatch(setCategories(categories));
+        dispatch(setCategory(currentCat));
         dispatch(setElements(res.data))
-        dispatch(isLoading(false))
+        //dispatch(isLoading(false))
     })
     .catch(err => {
-        console.log("???????????",err.message)
+        console.log(err.message)
         dispatch(isLoading(false))
     })
-    dispatch(isLoading(false))
+        .finally(
+            dispatch(isLoading(false))
+        )
+
 }
 
 export const retrieveSectionCategories = (id) => dispatch => {
@@ -231,4 +235,28 @@ export const itemCreation = (content, element) => dispatch => {
         console.log(err.message)
         dispatch(isLoading(false))
     })
+}
+
+export const changeCategory = (category) => dispatch =>{
+    //dispatch(isLoading(true))
+    let currentCat=category
+    let categories={}
+    dispatch(setElements([]))
+    dispatch(setCategory([]))
+    console.log("CAT ID U THUNK", category)
+         getCategoryElements(category.id)
+        .then(res=>{
+            console.log("RES PROMENE ACTIVNE", res.data)
+            //categories[currentCat]['elements']=res.data
+            currentCat['elements']=res.data
+            //dispatch(setCategories(categories))
+            dispatch(setCategory(currentCat))
+            dispatch(setElements(res.data))
+            dispatch(isLoading(false))
+        })
+        .catch(err=>{
+            console.log(err.message)
+            dispatch(isLoading(false))
+        })
+
 }
