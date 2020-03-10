@@ -18,7 +18,7 @@ const Popover = (props) => {
         <PopoverHeader>Select item type</PopoverHeader>
         <PopoverBody>
             <StyledLink to={"/dashboard/projects/" + props.project + "/section/" + props.section + "/category/" + props.category + "/element/" +
-                props.element + "/item-create/iframe"}>Iframe</StyledLink><br/>
+                props.element + "/item-create/embed"}>Iframe</StyledLink><br/>
             <StyledLink to={"/dashboard/projects/" + props.project + "/section/" + props.section + "/category/" + props.category + "/element/" +
                 props.element + "/item-create/richText"}>Rich Text</StyledLink>
         </PopoverBody>

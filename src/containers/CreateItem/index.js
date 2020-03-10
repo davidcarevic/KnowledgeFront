@@ -28,6 +28,11 @@ class CreateItem extends Component {
       )
     }
 
+    return (
+      <div>
+        Hello!
+      </div>
+    )
 
   }
 }

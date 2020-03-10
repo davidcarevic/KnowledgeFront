@@ -3,13 +3,10 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ToggleBox from '../ToggleBox';
 import {getItemStyle, getItemStyleHorizontal, getListStyle, getListStyleHorizontal} from './styled';
 import sortCategoryElements from './sort/index'
-<<<<<<< HEAD
 import Popover from '../../components/itemTypes/Popover';
-=======
 import StyledLink from "../../components/elements/Link";
 import { PlusIcon } from '../../components/elements/Icons';
 import Button from "../../components/elements/Button";
->>>>>>> fcdefc883b6802093f6daccef26aeee9d03d1ff7
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -152,14 +149,9 @@ class DragAndDrop extends Component {
                 <div>
                     <DragDropContext onDragEnd={this.onDragEnd}>
                         {Object.keys(this.state).map((list_id,index) => (
-<<<<<<< HEAD
-                            <div key={index}> <h3 key={index}>{ this.props.array[index].title}</h3>
-                            <Popover project={this.props.project} section={this.props.section_id} category={this.props.category} element={list_id.slice(1)} key={list_id.slice(1)}/>
-=======
-                            <div key={index}> <h3 key={index}>{ this.props.array?this.props.array[index].title:''}<StyledLink to={"/dashboard/projects/" +
-                                this.props.project + "/section/" + this.props.section_id + "/category/" + this.props.category + "/element/" +
-                                   list_id.slice(1) + "/item-create"}><PlusIcon /></StyledLink></h3>
->>>>>>> fcdefc883b6802093f6daccef26aeee9d03d1ff7
+                            <div key={index}> 
+                                <h3 key={index}>{this.props.array ? this.props.array[index].title : ''}</h3>
+                                <Popover project={this.props.project} section={this.props.section_id} category={this.props.category} element={list_id.slice(1)} key={list_id.slice(1)}/>
                                 <Droppable droppableId={list_id} key={list_id}>
                                     {(provided, snapshot) => (
                                         <div ref={provided.innerRef} style={getListStyleHorizontal(snapshot.isDraggingOver)}>
@@ -191,7 +183,7 @@ class DragAndDrop extends Component {
                 </div>
             );
         }
-        }
+    }
 }
 
 

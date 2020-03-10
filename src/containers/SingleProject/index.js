@@ -84,23 +84,14 @@ class SingleProject extends Component {
                     </RightHeaderHolder>
                 </Header>
                 <SideHolder>
-<<<<<<< HEAD
-                    {categories && category? <DragAndDrop type="categories" array={categories} category={category.id} changeCategory={this.props.changeCategory} 
-                        setElements={this.props.setElements} section={section}/>:<div>asd</div>}
-=======
                     {categories && category? <DragAndDrop type="categories" array={categories} hisCat={this.props.categories} changeActiveCategory={this.props.changeActiveCategory} category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements} section={section}/>:<div>asd</div>}
->>>>>>> fcdefc883b6802093f6daccef26aeee9d03d1ff7
+
                 </SideHolder>
                 <MainHolder>
                     <h1>{category.name?category.name:''}</h1>
                     <div>{category.description?category.description:''}</div><hr />
-<<<<<<< HEAD
                         {elements.length>0?<DragAndDrop  type="elements" array={this.state.elements[category.id]} project={project.id} section_id={section.id} 
-                            category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements} section={section}/>
-=======
-                    {elements.length>0?<DragAndDrop  type="elements"  array={this.state.elements[category.id]} project={project.id} section_id={section.id} category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements} section={section}/>
->>>>>>> fcdefc883b6802093f6daccef26aeee9d03d1ff7
-                        :<h3>By clicking plus, create first element.</h3> }
+                            category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements} section={section}/>:<h3>By clicking plus, create first element.</h3> }
                     {(!section || !category) ? '' : <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id + '/category/' + 
                         this.props.category.id + '/element-create'}><PlusIcon /></StyledLink>}
                     <hr /><StyledLink to="/dashboard">Back to Dashboard</StyledLink>
