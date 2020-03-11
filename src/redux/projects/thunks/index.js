@@ -71,6 +71,7 @@ export const retrieveProject = (id) => dispatch => {
     dispatch(isLoading(true));
     let currentCat={};
     let categories={};
+    let categoriesUnsorted={};
     getSingleProject(id)
     .then(res => {
         dispatch(setProject(res.data))
@@ -89,31 +90,44 @@ export const retrieveProject = (id) => dispatch => {
         return getSectionCategories(id)
     })
     .then(res => {
-        categories=res.data
-       // dispatch(setCategories(res.data))
-        //dispatch(setCategory(res.data[0]))
-         currentCat=res.data[0]
-        return res.data[0].id
+        let firstId=res.data[0].id
+        categoriesUnsorted=res.data
+        categories=sortCategoryElements(res.data)
+        for(let i=0;i<categoriesUnsorted.length;i++){
+            for(let j in categories){
+                if(categoriesUnsorted[i].id===parseInt(j)) {
+                    categoriesUnsorted[i].elements = categories[j]
+                }
+            }
+        }
+        currentCat=categoriesUnsorted[0]
+        return firstId
     })
     .then(id => {
         return getCategoryElements(id)
     })
     .then(res => {
-        //categories[0]['elements']=res.data
-        currentCat['elements']=res.data;
-        dispatch(setCategories(categories));
+        let items=sortCategoryElements(res.data)
+        currentCat.elements.forEach((element,index)=>{
+            for(let i in items){
+                if(element.id===i){
+                    element.items=items[i]
+                }
+            }
+        })
+        console.log("CURRENT CATEGORY AFTER CHANGE !!!! ",currentCat)
+        dispatch(setCategories(categoriesUnsorted));
         dispatch(setCategory(currentCat));
-        dispatch(setElements(res.data))
-        //dispatch(isLoading(false))
+        dispatch(setElements(items));
+        dispatch(isLoading(false))
     })
     .catch(err => {
         console.log(err.message)
         dispatch(isLoading(false))
     })
         .finally(
-            dispatch(isLoading(false))
-        )
-
+        dispatch(isLoading(false))
+    )
 }
 
 export const retrieveSectionCategories = (id) => dispatch => {
@@ -246,12 +260,17 @@ export const changeCategory = (category) => dispatch =>{
     console.log("CAT ID U THUNK", category)
          getCategoryElements(category.id)
         .then(res=>{
-            console.log("RES PROMENE ACTIVNE", res.data)
-            //categories[currentCat]['elements']=res.data
-            currentCat['elements']=res.data
-            //dispatch(setCategories(categories))
-            dispatch(setCategory(currentCat))
-            dispatch(setElements(res.data))
+            let items=sortCategoryElements(res.data)
+            currentCat.elements.forEach((element,index)=>{
+                for(let i in items){
+                    if(element.id===i){
+                        element.items=items[i]
+                    }
+                }
+            })
+            console.log("CURRENT CATEGORY AFTER CHANGE !!!! ",currentCat)
+            dispatch(setCategory(currentCat));
+            dispatch(setElements(items));
             dispatch(isLoading(false))
         })
         .catch(err=>{

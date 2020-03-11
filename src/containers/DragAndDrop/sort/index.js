@@ -8,12 +8,10 @@ const sortCategoryElements=props=> {
             }
             if (category.items) {
                 //console.log("element ID ", category.id)
-                new_state["e" + category.id] = sortElements2(category.items, category.order)
+                new_state[category.id] = sortElements2(category.items, category.order)
             }
         });
     }catch {}
-
-
 
     for(let p in new_state) {
         for(let i = 0; i < new_state[p].length; i++) {

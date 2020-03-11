@@ -23,7 +23,7 @@ class ToggleBox extends React.Component {
 		});
 		let current={}
 		for(let i=0;i<this.props.category.length;i++){
-			if(this.props.id===this.props.category[i].id.toString()){
+			if(this.props.id===this.props.category[i].id){
 				current=this.props.category[i]
 			}
 		}
