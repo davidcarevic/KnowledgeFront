@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ToggleBox from '../ToggleBox';
 import {getItemStyle, getItemStyleHorizontal, getListStyle, getListStyleHorizontal} from './styled';
-import sortCategoryElements from './sort/index'
+import sortCategoryElements from './sort/index';
 import Popover from '../../components/itemTypes/Popover';
-import Embed from "../../components/itemTypes/Iframe"
+import Embed from "../../components/itemTypes/Iframe";
+import SingleItem from '../../components/SingleItem';
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -167,7 +168,8 @@ class DragAndDrop extends Component {
                                                             provided.draggableProps.style
                                                         )}>
                                                             {item.content.title}
-                                                            {item.type === 'embed' ? <Embed content={item.content}/> : ''}
+                                                            <SingleItem type={item.type} content={item.content}/>
+                                                            
                                                         </div>
                                                     )}
                                                 </Draggable>
