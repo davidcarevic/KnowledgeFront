@@ -162,7 +162,7 @@ class DragAndDrop extends Component {
                         {Object.keys(this.state).map((list_id,index) => (
                             <div key={index}>
                                 <h3 key={index}>{this.props.array ? this.props.array[index].title : ''}</h3>
-                                <Popover project={this.props.project} section={this.props.section_id} category={this.props.category} element={list_id.slice(1)} key={list_id.slice(1)}/>
+                                <Popover project={this.props.project} section={this.props.section_id} category={this.props.category} element={this.props.array[index].id} key={list_id.slice(1)}/>
                                 <Droppable droppableId={list_id} key={list_id}>
                                     {(provided, snapshot) => (
                                         <div ref={provided.innerRef} style={getListStyleHorizontal(snapshot.isDraggingOver)}>
