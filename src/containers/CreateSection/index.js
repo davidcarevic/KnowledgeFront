@@ -27,7 +27,6 @@ class CreateSection extends Component {
         e.preventDefault();
         const { history, project } = this.props
         const { name, description, isLoading } = this.state;
-        const project_id = ''
 
         if (this.props.first && !isLoading) {
           const project_id = project.id

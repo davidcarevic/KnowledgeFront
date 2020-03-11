@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import projectRedux from '../../redux/projects'
+// import projectRedux from '../../redux/projects'
 import { withRouter } from 'react-router-dom';
 import Embed from '../../components/itemTypes/Iframe'
+import RichText from '../../components/itemTypes/RichText'
 
 class CreateItem extends Component {
   constructor(props) {
@@ -23,11 +23,16 @@ class CreateItem extends Component {
     if (type === 'richText') {
       return (
         <div>
-          Rich Text!!!
+          <RichText editing={true}/>
         </div>
       )
     }
 
+    return (
+      <div>
+        Hello!
+      </div>
+    )
 
   }
 }

@@ -59,6 +59,10 @@ export const NetworkWiredIcon = styled(NetworkWired)`
   height: 24px;
   margin-bottom: 15px;
   padding-left: 7px;
+
+  &:hover {
+    color: blue;
+  }
 `
 export const SearchIcon = styled(Search)`
   color: white;
