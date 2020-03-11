@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 class Item extends Component {
     constructor(props) {
@@ -9,6 +9,7 @@ class Item extends Component {
 
     state = {
         content: '',
+        type: '',
         editing: false
     }
 
@@ -18,15 +19,17 @@ class Item extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        const { history, element, isLoading } = this.props
-        const { url } = this.state;
+        const { history } = this.props
+        const { content, type } = this.state;
         const project_id = this.props.match.params.id
         const element_id = this.props.match.params.e_id
-        this.props.createItem(url, 'embed', element_id);
+        this.props.createItem(content, type, element_id);
         history.push("/dashboard/projects/" + project_id);
     }
 
-
+    render() {
+        return null
+    }
 }
 
 export default Item

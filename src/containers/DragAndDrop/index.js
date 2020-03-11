@@ -4,9 +4,7 @@ import ToggleBox from '../ToggleBox';
 import {getItemStyle, getItemStyleHorizontal, getListStyle, getListStyleHorizontal} from './styled';
 import sortCategoryElements from './sort/index'
 import Popover from '../../components/itemTypes/Popover';
-import StyledLink from "../../components/elements/Link";
-import { PlusIcon } from '../../components/elements/Icons';
-import Button from "../../components/elements/Button";
+import Embed from "../../components/itemTypes/Iframe"
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -169,6 +167,7 @@ class DragAndDrop extends Component {
                                                             provided.draggableProps.style
                                                         )}>
                                                             {item.content.title}
+                                                            {item.type === 'embed' ? <Embed content={item.content}/> : ''}
                                                         </div>
                                                     )}
                                                 </Draggable>

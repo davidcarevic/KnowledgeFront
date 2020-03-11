@@ -27,8 +27,6 @@ class CreateCategory extends Component {
         e.preventDefault();
         const { history, project, section, isLoading } = this.props
         const { name, description } = this.state;
-        const project_id = ''
-        const section_id = ''
 
         if (this.props.first && !isLoading) {
           const project_id = project.id
