@@ -217,20 +217,44 @@ export const elementCreation = (title, description, category_id) => dispatch => 
 
 export const changeCategoryForElement = (currentElement, category_id, sectionId) => dispatch =>{
     dispatch(isLoading(true))
-    elementCategoryChange(currentElement, category_id)
+    let categoriesUnsorted=[];
+    let categories=[];
+    let currentCat=[];
+
+    elementCategoryChange(currentElement, parseInt(category_id))
         .then(res => {
             return getSectionCategories(sectionId)
         })
         .then(res => {
-            dispatch(setCategories(res.data))
-            dispatch(setCategory(res.data[0]))
-            return res.data[0].id
+            let firstId=res.data[0].id
+            categoriesUnsorted=res.data
+            categories=sortCategoryElements(res.data)
+            for(let i=0;i<categoriesUnsorted.length;i++){
+                for(let j in categories){
+                    if(categoriesUnsorted[i].id===parseInt(j)) {
+                        categoriesUnsorted[i].elements = categories[j]
+                    }
+                }
+            }
+            currentCat=categoriesUnsorted[0]
+            return firstId
         })
         .then(id => {
             return getCategoryElements(id)
         })
         .then(res => {
-            dispatch(setElements(res.data))
+            let items=sortCategoryElements(res.data)
+            currentCat.elements.forEach((element,index)=>{
+                for(let i in items){
+                    if(element.id===i){
+                        element.items=items[i]
+                    }
+                }
+            })
+            console.log("CURRENT CATEGORY AFTER CHANGE !!!! ",currentCat)
+            dispatch(setCategories(categoriesUnsorted));
+            dispatch(setCategory(currentCat));
+            dispatch(setElements(items));
             dispatch(isLoading(false))
         })
         .catch(err => {
