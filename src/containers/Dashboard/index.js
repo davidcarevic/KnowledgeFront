@@ -47,11 +47,9 @@ class Dashboard extends Component {
             return(
             <div>
                 <Header>
-                <Title>
-               No teams and projects
-                </Title>
+                    <H2> No teams and projects</H2>
                 </Header>
-                <StyledLink to="/dashboard/teams/create">Create a team</StyledLink>
+                <br/><StyledLink to="/dashboard/teams/create">Create a team</StyledLink>
                 <br/>
                 <StyledLink to="/dashboard/projects/create">Create a project</StyledLink>
                 <br/>
@@ -72,7 +70,7 @@ class Dashboard extends Component {
                             <StyledLink to="/invite"><UserPlusIcon top={'15px'}/></StyledLink>
                         </Flex>
                     </Flex>
-                    
+
                     {!teams ? <div>No teams</div> : teams.map((item, index) =>
                     <Team key={index}>
                     <SingleTeam key={index} id={item.team.id} name={item.team.name} description={item.team.description}/>
@@ -91,8 +89,8 @@ class Dashboard extends Component {
                         <SingleProject key={item.project.id} id={item.project.id} name={item.project.name} description={item.project.description} image={item.project.data.image}/>
                     </Project>
                 )}
-                    
-                
+
+
                 </MainHolder>
             </div>
         )
