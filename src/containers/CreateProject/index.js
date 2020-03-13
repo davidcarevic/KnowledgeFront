@@ -29,8 +29,10 @@ class CreateProject extends Component {
         e.preventDefault();
         const { history, project } = this.props
         const { name, description, image } = this.state;
+        const project_id = project.id
         this.props.createProject(name, description, image)
-        history.push("/dashboard/projects/" + project.id)
+        console.log("PROJECT: ", project)
+        history.push("/dashboard/projects/" + project_id)
     }
 
     render() {
