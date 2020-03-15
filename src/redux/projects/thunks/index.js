@@ -1,5 +1,6 @@
 import { createProject, getProjects, getProjectsByUser, getSingleProject, getProjectSections, getSectionCategories,
-    getCategoryElements, createSection, createCategory, createElement, elementCategoryChange, createItem } from "../../../services";
+    getCategoryElements, createSection, createCategory, createElement, elementCategoryChange, createItem,
+    reorderElementsForCategory, reorderItemsForElement, itemElementChange } from "../../../services";
 import { setProjectsByTeam, setProjectsByUser, setProject, setSections, setCategories, setElements,
     setSection, setCategory, setElement, setItem } from "../actions";
 import { isLoading } from "../../global/actions";
@@ -215,16 +216,13 @@ export const elementCreation = (title, description, category_id) => dispatch => 
     })
 }
 
-export const changeCategoryForElement = (currentElement, category_id, sectionId) => dispatch =>{
+export const changeCategoryForElement = (currentElement, category_id) => dispatch =>{
     dispatch(isLoading(true))
     let categoriesUnsorted=[];
     let categories=[];
     let currentCat=[];
 
     elementCategoryChange(currentElement, parseInt(category_id))
-        .then(res => {
-            return getSectionCategories(sectionId)
-        })
         .then(res => {
             let firstId=res.data[0].id
             categoriesUnsorted=res.data
@@ -303,3 +301,68 @@ export const changeCategory = (category) => dispatch =>{
         })
 
 }
+
+
+export const reorderElements=(elementsIdArray,catId)=>dispatch=>{
+    console.log(" REORDER THUNK !!!!!!!!!!!!!!!!!!!")
+    reorderElementsForCategory(elementsIdArray,catId)
+        .then(res=>{
+            console.log("RES FROM BACKEND", res)
+        })
+
+}
+
+export const reorderItems=(itemsIdArray,eleId)=>dispatch=>{
+    console.log(" REORDER THUNK !!!!!!!!!!!!!!!!!!!")
+    reorderItemsForElement(itemsIdArray,eleId)
+        .then(res=>{
+            console.log("RES FROM BACKEND", res)
+        })
+
+}
+
+
+export const changeElementForItem = (currentItem, element_id) => dispatch =>{
+    dispatch(isLoading(true))
+    let categoriesUnsorted=[];
+    let categories=[];
+    let currentCat=[];
+
+    itemElementChange(currentItem, parseInt(element_id))
+        .then(res => {
+            let firstId=res.data[0].id
+            categoriesUnsorted=res.data
+            categories=sortCategoryElements(res.data)
+            for(let i=0;i<categoriesUnsorted.length;i++){
+                for(let j in categories){
+                    if(categoriesUnsorted[i].id===parseInt(j)) {
+                        categoriesUnsorted[i].elements = categories[j]
+                    }
+                }
+            }
+            currentCat=categoriesUnsorted[0]
+            return firstId
+        })
+        .then(id => {
+            return getCategoryElements(id)
+        })
+        .then(res => {
+            let items=sortCategoryElements(res.data)
+            currentCat.elements.forEach((element,index)=>{
+                for(let i in items){
+                    if(element.id===i){
+                        element.items=items[i]
+                    }
+                }
+            })
+            console.log("CURRENT CATEGORY AFTER CHANGE !!!! ",currentCat)
+            dispatch(setCategories(categoriesUnsorted));
+            dispatch(setCategory(currentCat));
+            dispatch(setElements(items));
+            dispatch(isLoading(false))
+        })
+        .catch(err => {
+            dispatch(isLoading(false))
+        })
+}
+

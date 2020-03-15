@@ -85,12 +85,12 @@ class SingleProject extends Component {
                 </Header>
                 <SideHolder>
                     <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id + '/category-create/'}>Add new Category</StyledLink>
-                    {categories && category? <DragAndDrop type="categories" array={categories} hisCat={this.props.categories} changeActiveCategory={this.props.changeActiveCategory} category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements} section={section}/>:<div>asd</div>}
+                    {categories && category? <DragAndDrop type="categories" reorderElements={this.props.reorderElements} array={categories} hisCat={this.props.categories} changeActiveCategory={this.props.changeActiveCategory} category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements} section={section}/>:<div>asd</div>}
                 </SideHolder>
                 <MainHolder>
                     <h1>{category.name?category.name:''}</h1>
                     <div>{category.description?category.description:''}</div><hr />
-                    {category.elements?<DragAndDrop  type="elements"  array={category.elements} project={project.id} section_id={section.id} category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements} section={section}/>
+                    {category.elements?<DragAndDrop  type="elements" changeElementForItem={this.props.changeElementForItem} reorderItems={this.props.reorderItems}  array={category.elements} project={project.id} section_id={section.id} category={category.id} setElements={this.props.setElements} section={section}/>
                         :<h3>By clicking plus, create first element.</h3> }
                     {(!section || !category) ? '' : <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id + '/category/' + this.props.category.id + '/element-create'}><PlusIcon /></StyledLink>}
                     <hr /><StyledLink to="/dashboard">Back to Dashboard</StyledLink>
@@ -110,7 +110,10 @@ const mapDispatchToProps = {
     setElement: projectRedux.actions.setElement,
     changeCategory: projectRedux.thunks.changeCategoryForElement,
     setElements:projectRedux.actions.setElements,
-    changeActiveCategory: projectRedux.thunks.changeCategory
+    changeActiveCategory: projectRedux.thunks.changeCategory,
+    reorderElements: projectRedux.thunks.reorderElements,
+    reorderItems: projectRedux.thunks.reorderItems,
+    changeElementForItem: projectRedux.thunks.changeElementForItem
 }
 
 const mapStateToProps = state => ({

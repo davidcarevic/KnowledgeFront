@@ -136,3 +136,21 @@ export const createItem = (content, type, element) => {
         element: element
     })
 }
+
+export const reorderElementsForCategory = (arrayElements, catId) =>{
+    return axios.put("api/reorder-elements/"+catId+"/",{
+        order: arrayElements
+    })
+}
+
+export const reorderItemsForElement = (arrayItems, eleId) =>{
+    return axios.put("api/reorder-items/"+eleId+"/",{
+        order: arrayItems
+    })
+}
+
+export const itemElementChange = (item, elementId) =>{
+    return axios.put('api/element-items/'+item.id+'/',{
+        element_id: elementId
+    })
+    }

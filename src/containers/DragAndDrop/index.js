@@ -22,7 +22,6 @@ const reorder = (list, startIndex, endIndex) => {
     if(list.items){
         result = list.items;
     }
-    console.log("RESULT MOVE /////////////// ",result)
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
 
@@ -99,30 +98,43 @@ class DragAndDrop extends Component {
             return;
         }
         if (source.droppableId === destination.droppableId) {
+            let list=this.getList(source.droppableId)
             const items = reorder(
-                this.getList(source.droppableId),
+                list,
                 source.index,
                 destination.index
             );
+            let orderArray=[];
+            for(let i in items){
+                orderArray.push(parseInt(items[i].id))
+            }
             let key = source.droppableId;
             let state={}
-            if(source.elements) {
-                 state = {[key]: {...this.state[key], elements: items}};
+            if(list.elements) {
+                this.props.reorderElements(orderArray, key)
             }
-            if(source.items){
-                state = {[key]: {...this.state[key], items: items}};
+            if(list.items){
+                this.props.reorderItems(orderArray, key)
             }
+
             this.setState(state);
         }
         else {
+            let sourceList= this.getList(source.droppableId)
+            let destList= this.getList(destination.droppableId)
             const result = move(
-                this.getList(source.droppableId),
-                this.getList(destination.droppableId),
+                sourceList,
+                destList,
                 source,
                 destination
             );
             /** function(projects/thunk), changes the category for an element in the current section*/
-            this.props.changeCategory(result.removed, result.id, this.props.section.id);
+            if(sourceList.elements) {
+                this.props.changeCategory(result.removed, result.id);
+            }
+            if(sourceList.items){
+                this.props.changeElementForItem(result.removed, result.id)
+            }
             let new_state = {};
             Object.keys(result.result).forEach(function(key) {
                 new_state[key] = result[key];
@@ -140,7 +152,7 @@ class DragAndDrop extends Component {
                     <DragDropContext  onDragEnd={this.onDragEnd}>
                         {Object.keys(this.state).map((list_id, index) => (
                             <div id={list_id} key={index} >
-                            <ToggleBox key={index} id={this.state[index].id}  category={this.props.hisCat} changeActiveCategory={this.props.changeActiveCategory} title={this.props.array[index] ? this.props.array[index].name :''}>
+                            <ToggleBox key={index} id={this.state[index].id}  category={this.props.hisCat} changeActiveCategory={this.props.changeActiveCategory} title={this.state[index] ? this.state[index].name :''}>
                                 <Droppable  droppableId={this.state[index].id.toString()} key={list_id} >
                                     {(provided, snapshot) => (
                                         <div ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)}>
@@ -181,7 +193,7 @@ class DragAndDrop extends Component {
                     <DragDropContext onDragEnd={this.onDragEnd}>
                         {Object.keys(this.state).map((list_id,index) => (
                             <div key={'i' + index}>
-                                <h3 key={'e' + index}>{this.props.array ? this.state[index].title : ''}</h3>
+                                <h3 key={'e' + index}>{this.state ? this.state[index].title : ''}</h3>
                                 <Popover project={this.props.project} section={this.props.section_id} category={this.props.category} element={this.state[index].id}/>
                                 <Droppable droppableId={this.state[index].id.toString()}>
                                     {(provided, snapshot) => (
