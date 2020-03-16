@@ -1,8 +1,8 @@
 import { createProject, getProjects, getProjectsByUser, getSingleProject, getProjectSections, getSectionCategories,
     getCategoryElements, createSection, createCategory, createElement, elementCategoryChange, createItem,
-    reorderElementsForCategory, reorderItemsForElement, itemElementChange } from "../../../services";
+    reorderElementsForCategory, reorderItemsForElement, itemElementChange, updateItem } from "../../../services";
 import { setProjectsByTeam, setProjectsByUser, setProject, setSections, setCategories, setElements,
-    setSection, setCategory, setElement, setItem } from "../actions";
+    setSection, setCategory, setElement, setItem, editItem } from "../actions";
 import { isLoading } from "../../global/actions";
 //notifications
 import {projectCreateError,projectCreateSuccess} from "../../../components/elements/Notifications/ProjectCreate";
@@ -366,3 +366,15 @@ export const changeElementForItem = (currentItem, element_id) => dispatch =>{
         })
 }
 
+export const itemUpdate = (id, content) => dispatch => {
+  dispatch(isLoading(true))
+  updateItem(id, content)
+  .then(res => {
+    dispatch(editItem(res.data))
+    dispatch(isLoading(false))
+  })
+  .catch(err => {
+    console.log(err.message)
+    dispatch(isLoading(false))
+  })
+}

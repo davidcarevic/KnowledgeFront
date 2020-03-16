@@ -137,20 +137,26 @@ export const createItem = (content, type, element) => {
     })
 }
 
-export const reorderElementsForCategory = (arrayElements, catId) =>{
-    return axios.put("api/reorder-elements/"+catId+"/",{
+export const reorderElementsForCategory = (arrayElements, catId) => {
+    return axios.put("api/reorder-elements/" + catId + "/", {
         order: arrayElements
     })
 }
 
-export const reorderItemsForElement = (arrayItems, eleId) =>{
-    return axios.put("api/reorder-items/"+eleId+"/",{
+export const reorderItemsForElement = (arrayItems, eleId) => {
+    return axios.put("api/reorder-items/" + eleId + "/", {
         order: arrayItems
     })
 }
 
-export const itemElementChange = (item, elementId) =>{
-    return axios.put('api/element-items/'+item.id+'/',{
+export const itemElementChange = (item, elementId) => {
+    return axios.put('api/element-items/' + item.id + '/', {
         element_id: elementId
     })
-    }
+}
+
+export const updateItem = (id, content) => {
+  return axios.patch('api/items/' + id + '/', {
+    content: content
+  })
+}

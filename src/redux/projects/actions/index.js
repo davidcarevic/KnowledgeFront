@@ -70,3 +70,10 @@ export const setItem = item => {
         payload: item
     }
 }
+
+export const editItem = item => {
+  return {
+    type: types.UPDATE_ITEM,
+    payload: item
+  }
+}

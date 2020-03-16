@@ -213,7 +213,7 @@ class DragAndDrop extends Component {
                                                             provided.draggableProps.style
                                                         )}>
                                                             {item.content.title}
-                                                            <SingleItem type={item.type} content={item.content}/>
+                                                            <SingleItem id={item.id} type={item.type} content={item.content} first={true}/>
 
                                                         </div>
                                                     )}
