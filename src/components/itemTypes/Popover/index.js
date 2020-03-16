@@ -4,7 +4,6 @@ import StyledLink from "../../elements/Link";
 
 const Popover=(props)=>(
     <div>
-        <div>{props.element}</div>
         <Button key={props.element} id={"PopoverFocus"+props.element} type="button">
             Add new item
         </Button>

@@ -133,27 +133,53 @@ export const retrieveProject = (id) => dispatch => {
 
 export const retrieveSectionCategories = (id) => dispatch => {
     dispatch(isLoading(true))
+    let categoriesUnsorted=[]
+    let categories=[]
+    let currentCat=[]
+    dispatch(setCategories([]))
+    dispatch(setCategory([]))
+    dispatch(setElements([]))
+    dispatch(setElement([]))
     getSectionCategories(id)
-    .then(res => {
-        dispatch(setCategories(res.data))
-        dispatch(isLoading(false))
-        dispatch(setCategory(res.data[0]))
-        dispatch(setElements([]))
-        return res.data[0].id
-    })
-    .then(id => {
-        return getCategoryElements(id)
-    })
-    .then(res => {
-        dispatch(setElements(res.data))
-        dispatch(isLoading(false))
-    })
-    .catch(err => {
-        console.log(err.message)
-        dispatch(isLoading(false))
-
-    })
-    dispatch(isLoading(false))
+        .then(res => {
+            let firstId=res.data[0].id
+            categoriesUnsorted=res.data
+            categories=sortCategoryElements(res.data)
+            for(let i=0;i<categoriesUnsorted.length;i++){
+                for(let j in categories){
+                    if(categoriesUnsorted[i].id===parseInt(j)) {
+                        categoriesUnsorted[i].elements = categories[j]
+                    }
+                }
+            }
+            currentCat=categoriesUnsorted[0]
+            return firstId
+        })
+        .then(id => {
+            return getCategoryElements(id)
+        })
+        .then(res => {
+            let items=sortCategoryElements(res.data)
+            currentCat.elements.forEach((element,index)=>{
+                for(let i in items){
+                    if(element.id===i){
+                        element.items=items[i]
+                    }
+                }
+            })
+            console.log("CURRENT CATEGORY AFTER CHANGE !!!! ",currentCat)
+            dispatch(setCategories(categoriesUnsorted));
+            dispatch(setCategory(currentCat));
+            dispatch(setElements(items));
+            dispatch(isLoading(false))
+        })
+        .catch(err => {
+            console.log(err.message)
+            dispatch(isLoading(false))
+        })
+        .finally(
+            dispatch(isLoading(false))
+        )
 }
 
 export const retrieveCategoryElements = (id) => dispatch => {
