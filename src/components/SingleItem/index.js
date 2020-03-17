@@ -41,8 +41,8 @@ class SingleItem extends Component {
     render() {
         if (this.props.type === 'embed') {
             return (
-              <div id={this.props.id}>
-                <Embed content={this.props.content} editing={this.state.editing} first={this.state.first}/>
+              <div>
+                <Embed id={this.props.id} content={this.props.content} editing={this.state.editing} first={this.state.first}/>
                 <Button onClick={this.handleEditingMode}>{this.state.buttonText}</Button>
               </div>
             )

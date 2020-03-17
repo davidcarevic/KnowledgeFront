@@ -12,6 +12,7 @@ import { withRouter } from 'react-router-dom';
 class Embed extends Item {
   constructor(props) {
     super(props);
+    this.state.content = this.props.content || ''
   }
 
     state = {
@@ -32,7 +33,6 @@ class Embed extends Item {
             )
         }
       if (this.props.editing && !this.props.first) {
-        const content = this.props.content
         return (
           <Form onSubmit={this.handleUpdateSubmit}>
               <Input id="content" type="text" value={content} onChange={this.handleInputChange} /><br/><br/>
