@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledSunEditor, DisplayRichText } from './styled';
+import { StyledSunEditor, DisplayRichText, StyledItem } from './styled';
 import { buttonList } from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
 import Form from '../../elements/Form';
@@ -47,10 +47,12 @@ class RichText extends Item {
       const content = Base64.decode(this.props.content)
       return (
         <Form onSubmit={this.handleUpdateSubmit}>
+          <StyledItem>
             <StyledSunEditor setContents={content} onChange={this.handleChange} editing={true} placeholder="Please type here..." autoFocus={true} enable={true} showToolbar={true}
               setOptions={{
                 buttonList: buttonList.complex}}/><br/><br/>
             <Button type="submit" width={'150px'}>Save</Button>
+          </StyledItem>
         </Form>
       );
     }

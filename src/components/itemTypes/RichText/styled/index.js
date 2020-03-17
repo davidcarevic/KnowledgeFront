@@ -7,6 +7,13 @@ export const StyledSunEditor = styled(SunEditor)`
 `;
 
 export const DisplayRichText = styled.div`
-  width: 250px;
-  height: 150px;
+  width: auto;
+  height: auto;
+`;
+
+export const StyledItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;

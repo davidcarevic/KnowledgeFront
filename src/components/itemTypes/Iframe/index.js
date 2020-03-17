@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledIframe } from './styled'
+import { StyledIframe, StyledItem } from './styled'
 import Form from '../../elements/Form';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
@@ -35,8 +35,10 @@ class Embed extends Item {
       if (this.props.editing && !this.props.first) {
         return (
           <Form onSubmit={this.handleUpdateSubmit}>
+            <StyledItem>
               <Input id="content" type="text" value={content} onChange={this.handleInputChange} /><br/><br/>
               <Button type="submit" width={'150px'}>Save</Button>
+            </StyledItem>
           </Form>
         );
       }
