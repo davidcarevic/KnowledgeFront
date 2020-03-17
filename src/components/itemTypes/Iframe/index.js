@@ -1,5 +1,5 @@
 import React from 'react';
-import Iframe from 'react-iframe'
+import { StyledIframe } from './styled'
 import Form from '../../elements/Form';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
@@ -36,12 +36,12 @@ class Embed extends Item {
         return (
           <Form onSubmit={this.handleUpdateSubmit}>
               <Input id="content" type="text" value={content} onChange={this.handleInputChange} /><br/><br/>
-              <Button type="submit">Save</Button>
+              <Button type="submit" width={'150px'}>Save</Button>
           </Form>
         );
       }
         return (
-            <Iframe url={this.props.content}/>
+            <StyledIframe url={this.props.content}/>
         )
     }
 }

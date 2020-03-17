@@ -7,6 +7,6 @@ export default styled.button`
   font-size: 1em;
   padding: 0.25em 1em;
   border-radius: 5px;
-  width: 315px;
+  width: ${props => props.width || '315px'};
   height: 35px;
 `;

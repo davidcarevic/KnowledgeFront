@@ -13,28 +13,30 @@ export const getItemStyle = (isDragging, draggableStyle) => ({
 });
 
 export const getListStyle = isDraggingOver => ({
-    background: isDraggingOver ? 'lightblue' : 'lightgray',
+    background: isDraggingOver ? 'lightgray' : 'white',
     padding: 10 ,
-    width: 250
+    width: 150
 });
 
 export const getListStyleHorizontal = isDraggingOver => ({
-    background: isDraggingOver ? 'lightblue' : 'lightgrey',
+    background: isDraggingOver ? 'lightgray' : 'white',
     display: 'flex',
     padding: grid,
-    overflow: 'auto'
+    margin: grid,
+    flexWrap: 'wrap',
+    overflow: 'disabled'
 });
 
 export const getItemStyleHorizontal = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
     userSelect: 'none',
     padding: grid * 2,
-    margin: `0 ${grid}px 0 0`,
-    width: 300,
-    height:200,
+    margin: grid,
+    width: 'auto',
+    height: 'auto',
 
     // change background colour if dragging
-    background: isDragging ? 'lightgreen' : 'grey',
+    background: isDragging ? 'lightgray' : '#F0F0F0',
 
     // styles we need to apply on draggables
     ...draggableStyle,

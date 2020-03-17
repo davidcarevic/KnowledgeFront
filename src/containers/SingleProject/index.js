@@ -68,12 +68,16 @@ class SingleProject extends Component {
                         <h3>{project.name}</h3>
                         </Flex>
                         <Flex right>
-                            <StyledLink to={"/dashboard/projects/" + this.props.match.params.id + "/invite"}><UserPlusIcon background={'lightgrey'} top={'18px'} width={'15px'} height={'15px'} right={'5px'}/></StyledLink>
+                            <StyledLink to={"/dashboard/projects/" + this.props.match.params.id + "/invite"}>
+                              <UserPlusIcon background={'lightgrey'} top={'18px'} width={'15px'} height={'15px'} right={'5px'}/>
+                            </StyledLink>
                         </Flex>
 
                     </LeftHeaderHolder>
                     <RightHeaderHolder>
-                        <StyledLink to={"/dashboard/projects/" + project_id + "/section-create"}><PlusIcon background={'lightgrey'} top={'18px'} width={'15px'} height={'15px'} right={'5px'}/></StyledLink>
+                        <StyledLink to={"/dashboard/projects/" + project_id + "/section-create"}>
+                          <PlusIcon background={'lightgrey'} top={'18px'} width={'15px'} height={'15px'} right={'5px'}/>
+                        </StyledLink>
                         <Form>
                         {!sections ? <div>No sections</div> : sections.map((item, index) =>
                             <HeaderButtons key={index} id={item.id} onClick={this.handleSectionChange}>{item.name} </HeaderButtons>
@@ -82,15 +86,23 @@ class SingleProject extends Component {
                     </RightHeaderHolder>
                 </Header>
                 <SideHolder top={'13%'}>
-                    <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id + '/category-create/'}>Add new Category</StyledLink>
-                    {categories && category? <DragAndDrop type="categories" reorderElements={this.props.reorderElements} array={categories} hisCat={this.props.categories} changeActiveCategory={this.props.changeActiveCategory} category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements} section={section} categoryObj={category}/>:<div>asd</div>}
+                    <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id + '/category-create/'}>
+                      Add new Category</StyledLink>
+                    {categories && category? <DragAndDrop type="categories" reorderElements={this.props.reorderElements}
+                        array={categories} hisCat={this.props.categories} changeActiveCategory={this.props.changeActiveCategory}
+                        category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements}
+                        section={section} categoryObj={category}/>:<div>asd</div>}
                 </SideHolder>
                 <MainHolder top={'18%'}>
                     <h1>{category.name?category.name:''}</h1>
                     <div>{category.description?category.description:''}</div><hr />
-                    {category.elements?<DragAndDrop  type="elements" changeElementForItem={this.props.changeElementForItem} reorderItems={this.props.reorderItems}  array={category.elements} project={project.id} section_id={section.id} category={category.id} setElements={this.props.setElements} section={section} catObj={category}/>
+                    {category.elements?<DragAndDrop  type="elements" changeElementForItem={this.props.changeElementForItem}
+                        reorderItems={this.props.reorderItems}  array={category.elements} project={project.id} section_id={section.id}
+                        category={category.id} setElements={this.props.setElements} section={section} catObj={category}/>
                         :<h3>By clicking plus, create first element.</h3> }
-                    {(!section || !category) ? '' : <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id + '/category/' + this.props.category.id + '/element-create'}><PlusIcon background={'lightgrey'} top={'18px'} width={'15px'} height={'15px'} right={'5px'} /></StyledLink>}
+                    {(!section || !category) ? '' : <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id +
+                        '/category/' + this.props.category.id + '/element-create'}>
+                        <PlusIcon background={'lightgrey'} top={'18px'} width={'15px'} height={'15px'} right={'5px'} /></StyledLink>}
                     <hr /><StyledLink to="/dashboard">Back to Dashboard</StyledLink>
                 </MainHolder>
             </div>

@@ -180,6 +180,7 @@ class DragAndDrop extends Component {
                         {Object.keys(this.state).map((list_id,index) => (
                             <div key={'i' + index}>
                                 <h3 key={'e' + index}>{this.state[index] ? this.state[index].title : ''}</h3>
+                                <div key={'ec' + index}>{this.state[index] ? this.state[index].description : ''}</div><br />
                                 <Popover project={this.props.project?this.props.project:''} section={this.props.section_id?this.props.section_id:''} category={this.props.category?this.props.category:''} element={this.state[index]?this.state[index].id:''}/>
                                 <Droppable droppableId={this.state[index]?this.state[index].id.toString():''}>
                                     {(provided, snapshot) => (
@@ -198,7 +199,6 @@ class DragAndDrop extends Component {
                                                             snapshot.isDragging,
                                                             provided.draggableProps.style
                                                         )}>
-                                                            {item.content.title}
                                                             <SingleItem id={item.id} type={item.type} content={item.content} first={true}/>
 
                                                         </div>
@@ -208,10 +208,11 @@ class DragAndDrop extends Component {
                                             {provided.placeholder}
                                         </div>
                                     )}
-                                </Droppable>
+                                </Droppable><br /><br />
                             </div>
                         ))}
                     </DragDropContext>
+
                 </div>
             );
         }

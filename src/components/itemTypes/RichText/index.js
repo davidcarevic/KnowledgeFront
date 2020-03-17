@@ -1,5 +1,6 @@
 import React from 'react';
-import SunEditor, { buttonList} from 'suneditor-react';
+import { StyledSunEditor, DisplayRichText } from './styled';
+import { buttonList } from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
 import Form from '../../elements/Form';
 import Button from '../../elements/Button';
@@ -34,9 +35,8 @@ class RichText extends Item {
     if (this.props.editing && this.props.first === undefined) {
       return (
         <Form onSubmit={this.handleSaveSubmit}>
-            <SunEditor onChange={this.handleChange} editing={true} placeholder="Please type here..." autoFocus={true} enable={true} showToolbar={true}
+            <StyledSunEditor onChange={this.handleChange} editing={true} placeholder="Please type here..." autoFocus={true} enable={true} showToolbar={true}
               setOptions={{
-                height: 300,
                 buttonList: buttonList.complex}}/><br/><br/>
             <Button type="submit">CREATE</Button><hr/>
             <StyledLink to={"/dashboard/projects/" + project_id}>Back to Project</StyledLink>
@@ -47,11 +47,10 @@ class RichText extends Item {
       const content = Base64.decode(this.props.content)
       return (
         <Form onSubmit={this.handleUpdateSubmit}>
-            <SunEditor setContents={content} onChange={this.handleChange} editing={true} placeholder="Please type here..." autoFocus={true} enable={true} showToolbar={true}
+            <StyledSunEditor setContents={content} onChange={this.handleChange} editing={true} placeholder="Please type here..." autoFocus={true} enable={true} showToolbar={true}
               setOptions={{
-                height: 300,
                 buttonList: buttonList.complex}}/><br/><br/>
-            <Button type="submit">Save</Button>
+            <Button type="submit" width={'150px'}>Save</Button>
         </Form>
       );
     }
@@ -59,9 +58,9 @@ class RichText extends Item {
     if (!this.props.editing) {
       const content = ReactHtmlParser(Base64.decode(this.props.content))
       return (
-        <div>
+        <DisplayRichText>
           {content}
-        </div>
+        </DisplayRichText>
       );
     }
   }

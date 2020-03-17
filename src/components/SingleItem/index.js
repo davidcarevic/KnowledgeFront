@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Embed from '../itemTypes/Iframe';
 import RichText from '../itemTypes/RichText';
 import Button from '../elements/Button';
+import { StyledItem } from './styled';
 
 class SingleItem extends Component {
     constructor(props) {
@@ -13,7 +14,7 @@ class SingleItem extends Component {
     state = {
       editing: false,
       first: true,
-      buttonText: 'edit',
+      buttonText: 'Edit',
       content: this.props.content
     }
 
@@ -38,18 +39,18 @@ class SingleItem extends Component {
     render() {
         if (this.props.type === 'embed') {
             return (
-              <div>
+              <StyledItem>
                 <Embed id={this.props.id} content={this.props.content} editing={this.state.editing} first={this.state.first}/>
-                <Button onClick={this.handleEditingMode}>{this.state.buttonText}</Button>
-              </div>
+                <Button onClick={this.handleEditingMode} width={'150px'}>{this.state.buttonText}</Button>
+              </StyledItem>
             )
         }
         if (this.props.type === 'richText') {
             return (
-              <div>
+              <StyledItem>
                 <RichText id={this.props.id} content={this.props.content}  editing={this.state.editing} first={this.state.first}/>
-                <Button onClick={this.handleEditingMode}>{this.state.buttonText}</Button>
-              </div>
+                <Button onClick={this.handleEditingMode} width={'150px'}>{this.state.buttonText}</Button>
+              </StyledItem>
             )
         }
     }
