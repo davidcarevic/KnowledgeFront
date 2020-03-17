@@ -15,8 +15,6 @@ class ToggleBox extends React.Component {
   
 	toggleBox(e) {
 		e.persist()
-		console.log("OVDE ",this.state.id)
-		console.log("PROPOVI U TOGGLE ",this.props)
 		const { opened } = this.state;
 		this.setState({
 			opened: !opened,

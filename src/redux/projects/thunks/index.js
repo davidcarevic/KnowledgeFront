@@ -126,9 +126,7 @@ export const retrieveProject = (id) => dispatch => {
         console.log(err.message)
         dispatch(isLoading(false))
     })
-        .finally(
-        dispatch(isLoading(false))
-    )
+        .finally(dispatch(isLoading(false)))
 }
 
 export const retrieveSectionCategories = (id) => dispatch => {
@@ -242,15 +240,17 @@ export const elementCreation = (title, description, category_id) => dispatch => 
     })
 }
 
-export const changeCategoryForElement = (currentElement, category_id) => dispatch =>{
-    dispatch(isLoading(true))
-    let categoriesUnsorted=[];
-    let categories=[];
-    let currentCat=[];
-
-    elementCategoryChange(currentElement, parseInt(category_id))
+export const changeCategoryForElement = (currentElement, category, section, destination) => dispatch =>{
+    let categoriesUnsorted = [];
+    let currentCat = destination;
+    console.log("CURRENT ", currentCat)
+    let categories = []
+    elementCategoryChange(currentElement, parseInt(category.id))
+        .then(res=>{
+        return getSectionCategories(section.id)
+    })
         .then(res => {
-            let firstId=res.data[0].id
+            let currentId = currentCat.id
             categoriesUnsorted=res.data
             categories=sortCategoryElements(res.data)
             for(let i=0;i<categoriesUnsorted.length;i++){
@@ -260,8 +260,7 @@ export const changeCategoryForElement = (currentElement, category_id) => dispatc
                     }
                 }
             }
-            currentCat=categoriesUnsorted[0]
-            return firstId
+            return currentId
         })
         .then(id => {
             return getCategoryElements(id)
@@ -282,6 +281,7 @@ export const changeCategoryForElement = (currentElement, category_id) => dispatc
             dispatch(isLoading(false))
         })
         .catch(err => {
+            console.log(err.message)
             dispatch(isLoading(false))
         })
 }
@@ -300,12 +300,9 @@ export const itemCreation = (content, type, element) => dispatch => {
 }
 
 export const changeCategory = (category) => dispatch =>{
-    //dispatch(isLoading(true))
     let currentCat=category
-    let categories={}
     dispatch(setElements([]))
     dispatch(setCategory([]))
-    console.log("CAT ID U THUNK", category)
          getCategoryElements(category.id)
         .then(res=>{
             let items=sortCategoryElements(res.data)
@@ -316,7 +313,6 @@ export const changeCategory = (category) => dispatch =>{
                     }
                 }
             })
-            console.log("CURRENT CATEGORY AFTER CHANGE !!!! ",currentCat)
             dispatch(setCategory(currentCat));
             dispatch(setElements(items));
             dispatch(isLoading(false))
@@ -325,54 +321,49 @@ export const changeCategory = (category) => dispatch =>{
             console.log(err.message)
             dispatch(isLoading(false))
         })
-
 }
 
-
-export const reorderElements=(elementsIdArray,catId)=>dispatch=>{
-    console.log(" REORDER THUNK !!!!!!!!!!!!!!!!!!!")
-    reorderElementsForCategory(elementsIdArray,catId)
+export const reorderElements=(elementsIdArray,category)=>dispatch=>{
+     let currentCat=category
+    reorderElementsForCategory(elementsIdArray,category.id)
         .then(res=>{
-            console.log("RES FROM BACKEND", res)
+            return getCategoryElements(category.id)
         })
-
-}
-
-export const reorderItems=(itemsIdArray,eleId)=>dispatch=>{
-    console.log(" REORDER THUNK !!!!!!!!!!!!!!!!!!!")
-    reorderItemsForElement(itemsIdArray,eleId)
         .then(res=>{
-            console.log("RES FROM BACKEND", res)
-        })
-
-}
-
-
-export const changeElementForItem = (currentItem, element_id) => dispatch =>{
-    dispatch(isLoading(true))
-    let categoriesUnsorted=[];
-    let categories=[];
-    let currentCat=[];
-
-    itemElementChange(currentItem, parseInt(element_id))
-        .then(res => {
-            let firstId=res.data[0].id
-            categoriesUnsorted=res.data
-            categories=sortCategoryElements(res.data)
-            for(let i=0;i<categoriesUnsorted.length;i++){
-                for(let j in categories){
-                    if(categoriesUnsorted[i].id===parseInt(j)) {
-                        categoriesUnsorted[i].elements = categories[j]
-                    }
+        let items=sortCategoryElements(res.data)
+        currentCat.elements.forEach((element,index)=>{
+            for(let i in items){
+                if(element.id===i){
+                    element.items=items[i]
                 }
             }
-            currentCat=categoriesUnsorted[0]
-            return firstId
         })
-        .then(id => {
-            return getCategoryElements(id)
+        dispatch(setCategory(currentCat));
+        dispatch(setElements(items));
+        dispatch(isLoading(false))
         })
-        .then(res => {
+        .catch(err=>{
+            console.log(err.message)
+            dispatch(isLoading(false))
+        })
+}
+
+export const reorderItems=(itemsIdArray,element)=>dispatch=>{
+    reorderItemsForElement(itemsIdArray,element.id)
+        .then(res=>{
+        })
+        .catch(err=>{
+            console.log(err.message)
+        })
+}
+
+export const changeElementForItem = (currentItem, element, category) => dispatch =>{
+    let currentCat=category
+    itemElementChange(currentItem, parseInt(element.id))
+        .then(res=>{
+            return getCategoryElements(category.id)
+        })
+        .then(res=>{
             let items=sortCategoryElements(res.data)
             currentCat.elements.forEach((element,index)=>{
                 for(let i in items){
@@ -381,13 +372,16 @@ export const changeElementForItem = (currentItem, element_id) => dispatch =>{
                     }
                 }
             })
-            console.log("CURRENT CATEGORY AFTER CHANGE !!!! ",currentCat)
-            dispatch(setCategories(categoriesUnsorted));
             dispatch(setCategory(currentCat));
             dispatch(setElements(items));
             dispatch(isLoading(false))
         })
-        .catch(err => {
+        .catch(err=>{
+            console.log(err.message)
+            dispatch(isLoading(false))
+        })
+        .catch(err=>{
+            console.log(err.message)
             dispatch(isLoading(false))
         })
 }
