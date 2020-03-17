@@ -7,5 +7,4 @@ export const Style = styled.div`
 `;
 export const Item = styled.div`
   padding: 0.5em;
-  background: papayawhip;
 `;

@@ -8,10 +8,10 @@ import { UserPlus } from 'styled-icons/icomoon';
 
 export const LogOutIcon = styled(LogOut)`
   color: white;
-  width: 24px;
-  height: 24px;
-  margin-bottom: 15px;
-
+  width: ${props => props.width || '24px'};
+  height: ${props => props.height || '24px'};
+  margin-bottom: 5px;
+  background: ${props => props.background || "black"};
   &:hover {
     color: blue;
   }
@@ -19,10 +19,11 @@ export const LogOutIcon = styled(LogOut)`
 
 export const SettingsIcon = styled(Settings)`
   color: white;
-  width: 24px;
-  height: 24px;
-  padding-left: 7px;
-  margin-bottom: 15px;
+  width: ${props => props.width || '24px'};
+  height: ${props => props.height || '24px'};
+  margin-bottom: 5px;
+  padding: 6px;
+  background: ${props => props.background || "black"};
 
   &:hover {
     color: blue;
@@ -31,10 +32,11 @@ export const SettingsIcon = styled(Settings)`
 
 export const BellIcon = styled(Bell)`
   color: white;
-  width: 24px;
-  height: 24px;
-  margin-bottom: 15px;
-  padding-left: 7px;
+  width: ${props => props.width || '24px'};
+  height: ${props => props.height || '24px'};
+  margin-bottom: 5px;
+  padding: 6px;
+  background: ${props => props.background || "black"};
 
   &:hover {
     color: blue;
@@ -43,11 +45,13 @@ export const BellIcon = styled(Bell)`
 
 export const PlusIcon = styled(Plus)`
   color: ${props => props.color || "black"}
-  width: 24px;
-  height: 24px;
+  width: ${props => props.width || '24px'};
+  height: ${props => props.height || '24px'};
   margin-top: ${props => props.top || ''};
-  margin-bottom: 15px;
-  padding-left: 7px;
+  margin-bottom: 5px;
+  margin-right: ${props => props.right || '0px'};
+  padding: 6px;
+  background: ${props => props.background || "black"};
 
   &:hover {
     color: blue;
@@ -55,10 +59,11 @@ export const PlusIcon = styled(Plus)`
 `
 export const NetworkWiredIcon = styled(NetworkWired)`
   color: white;
-  width: 24px;
-  height: 24px;
-  margin-bottom: 15px;
-  padding-left: 7px;
+  width: ${props => props.width || '24px'};
+  height: ${props => props.height || '24px'};
+  margin-bottom: 5px;
+  padding: 6px;
+  background: ${props => props.background || "black"};
 
   &:hover {
     color: blue;
@@ -66,10 +71,11 @@ export const NetworkWiredIcon = styled(NetworkWired)`
 `
 export const SearchIcon = styled(Search)`
   color: white;
-  width: 24px;
-  height: 24px;
-  margin-bottom: 15px;
-  padding-left: 7px;
+  width: ${props => props.width || '24px'};
+  height: ${props => props.height || '24px'};
+  margin-bottom: 5px;
+  padding: 6px;
+  background: ${props => props.background || "black"};
 
   &:hover {
     color: blue;
@@ -77,11 +83,12 @@ export const SearchIcon = styled(Search)`
 `
 export const ThSmallIcon = styled(ThSmall)`
   color: white;
-  width: 24px;
-  height: 24px;
+  width: ${props => props.width || '24px'};
+  height: ${props => props.height || '24px'};
   margin-top: 10px;
-  margin-bottom: 15px;
-  padding-left: 7px;
+  margin-bottom: 5px;
+  padding: 6px;
+  background: ${props => props.background || "black"};
 
   &:hover {
     color: blue;
@@ -92,8 +99,9 @@ export const UserPlusIcon = styled(UserPlus)`
   width: ${props => props.width || '24px'};
   height: ${props => props.height || '24px'};
   margin-top: ${props => props.top || ''};
-  margin-bottom: 15px;
-  padding-left: 7px;
+  margin-bottom: 5px;
+  padding: 6px;
+  background: ${props => props.background || "black"};
 
   &:hover {
     color: blue;
