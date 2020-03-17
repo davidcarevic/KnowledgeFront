@@ -71,16 +71,7 @@ class DragAndDrop extends Component {
      * source arrays stored in the state.
      */
     componentWillReceiveProps() {
-        /** the function works with an array of categories which are objects*/
-        //let new_state=sortCategoryElements(this.props.array);
         this.setState(this.props.array);
-    }
-    componentDidUpdate(prevProps, prevState, snapshot) {
-
-    }
-
-    handleCategoryChange = (e) =>{
-        e.preventDefault()
     }
 
     getList = id => {
@@ -111,13 +102,11 @@ class DragAndDrop extends Component {
             let key = source.droppableId;
             let state={}
             if(list.elements) {
-                this.props.reorderElements(orderArray, key)
+                this.props.reorderElements(orderArray, list)
             }
             if(list.items){
-                this.props.reorderItems(orderArray, key)
+                this.props.reorderItems(orderArray, list)
             }
-
-            this.setState(state);
         }
         else {
             let sourceList= this.getList(source.droppableId)
@@ -130,16 +119,16 @@ class DragAndDrop extends Component {
             );
             /** function(projects/thunk), changes the category for an element in the current section*/
             if(sourceList.elements) {
-                this.props.changeCategory(result.removed, result.id);
+                this.props.changeCategory(result.removed, result, this.props.section, destList);
             }
             if(sourceList.items){
-                this.props.changeElementForItem(result.removed, result.id)
+                this.props.changeElementForItem(result.removed, result, this.props.catObj)
             }
             let new_state = {};
-            Object.keys(result.result).forEach(function(key) {
-                new_state[key] = result[key];
-            });
-            this.setState(new_state);
+            // Object.keys(result.result).forEach(function(key) {
+            //     new_state[key] = result[key];
+            // });
+            // this.setState(new_state);
         }
     };
 
@@ -152,8 +141,8 @@ class DragAndDrop extends Component {
                     <DragDropContext  onDragEnd={this.onDragEnd}>
                         {Object.keys(this.state).map((list_id, index) => (
                             <div id={list_id} key={index} >
-                            <ToggleBox key={index} id={this.state[index].id}  category={this.props.hisCat} changeActiveCategory={this.props.changeActiveCategory} title={this.state[index] ? this.state[index].name :''}>
-                                <Droppable  droppableId={this.state[index].id.toString()} key={list_id} >
+                            <ToggleBox key={index} id={this.state[index]?this.state[index].id:''}  category={this.props.hisCat} changeActiveCategory={this.props.changeActiveCategory} title={this.state[index] ? this.state[index].name :''}>
+                                <Droppable  droppableId={this.state[index]?this.state[index].id.toString():''} key={list_id} >
                                     {(provided, snapshot) => (
                                         <div ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)}>
                                             {this.state[index].elements.map((item, index) => (
@@ -193,13 +182,13 @@ class DragAndDrop extends Component {
                     <DragDropContext onDragEnd={this.onDragEnd}>
                         {Object.keys(this.state).map((list_id,index) => (
                             <div key={'i' + index}>
-                                <h3 key={'e' + index}>{this.state ? this.state[index].title : ''}</h3>
-                                <Popover project={this.props.project} section={this.props.section_id} category={this.props.category} element={this.state[index].id}/>
-                                <Droppable droppableId={this.state[index].id.toString()}>
+                                <h3 key={'e' + index}>{this.state[index] ? this.state[index].title : ''}</h3>
+                                <Popover project={this.props.project?this.props.project:''} section={this.props.section_id?this.props.section_id:''} category={this.props.category?this.props.category:''} element={this.state[index]?this.state[index].id:''}/>
+                                <Droppable droppableId={this.state[index]?this.state[index].id.toString():''}>
                                     {(provided, snapshot) => (
                                         <div ref={provided.innerRef} style={getListStyleHorizontal(snapshot.isDraggingOver)}>
 
-                                            {this.state[index].items.map((item, index) => (
+                                            {this.state[index]?this.state[index].items.map((item, index) => (
                                                 <Draggable
                                                     key={item.id}
                                                     draggableId={item.id}
@@ -218,7 +207,7 @@ class DragAndDrop extends Component {
                                                         </div>
                                                     )}
                                                 </Draggable>
-                                            ))}
+                                            )):''}
                                             {provided.placeholder}
                                         </div>
                                     )}
