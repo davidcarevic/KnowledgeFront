@@ -65,6 +65,11 @@ export default (state = initialState, action) => {
                 ...state,
                 item: action.payload
             }
+        case types.UPDATE_ITEM:
+            return {
+                ...state,
+                item: action.payload
+            }
         default:
             return state;
     }

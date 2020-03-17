@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button, UncontrolledPopover, PopoverHeader, PopoverBody } from 'reactstrap';
 import StyledLink from "../../elements/Link";
 
@@ -20,4 +20,5 @@ const Popover=(props)=>(
         </UncontrolledPopover>
     </div>
 )
+
 export default Popover

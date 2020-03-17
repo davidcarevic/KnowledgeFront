@@ -1,15 +1,20 @@
 import { Component } from 'react';
+import projectRedux from '../../redux/projects';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class Item extends Component {
     constructor(props) {
         super(props)
         this.state.editing = props.editing || false;
         this.state.content = props.content || '';
+        this.state.first = props.first || true;
     }
 
     state = {
         content: '',
         type: '',
+        first: true,
         editing: false
     }
 
@@ -17,7 +22,7 @@ class Item extends Component {
         this.setState({ [e.target.id]: e.target.value })
     }
 
-    handleFormSubmit = (e) => {
+    handleSaveSubmit = (e) => {
         e.preventDefault();
         const { history } = this.props
         const { content, type } = this.state;
@@ -27,8 +32,15 @@ class Item extends Component {
         history.push("/dashboard/projects/" + project_id);
     }
 
+    handleUpdateSubmit = (e) => {
+      e.preventDefault();
+      const { content } = this.state
+      const itemId = this.props.id
+      this.props.updateItem(itemId, content)
+    }
+
     render() {
-        return null
+      return null
     }
 }
 
