@@ -4,7 +4,6 @@ import SingleTeam from "../../components/SingleTeam";
 import teamsRedux from '../../redux/teams';
 import projectsRedux from '../../redux/projects';
 import SingleProject from "../../components/SingleProject";
-import Title from '../../components/elements/Title';
 import SideHolder from '../../components/blocks/SideHolder';
 import MainHolder from '../../components/blocks/MainHolder';
 import Team from '../../components/elements/Team';

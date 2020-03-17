@@ -1,7 +1,4 @@
 import { Component } from 'react';
-import projectRedux from '../../redux/projects';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
 
 class Item extends Component {
     constructor(props) {

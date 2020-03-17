@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ToggleBox from '../ToggleBox';
 import {getItemStyle, getItemStyleHorizontal, getListStyle, getListStyleHorizontal} from './styled';
-import Embed from "../../components/itemTypes/Iframe";
 import SingleItem from '../../components/SingleItem';
-import sortCategoryElements from './sort/index'
-import StyledLink from "../../components/elements/Link";
+// import sortCategoryElements from './sort/index'
 import Popover from "../../components/itemTypes/Popover";
-import Button from "../../components/elements/Button";
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {

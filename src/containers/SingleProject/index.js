@@ -14,7 +14,7 @@ import Form from '../../components/elements/Form';
 import DragAndDrop from '../DragAndDrop';
 import CreateSection from '../CreateSection';
 import CreateCategory from '../CreateCategory';
-import sortCategoryElements from "../DragAndDrop/sort";
+// import sortCategoryElements from "../DragAndDrop/sort";
 
 
 class SingleProject extends Component {
@@ -42,7 +42,7 @@ class SingleProject extends Component {
     }
 
     render() {
-        const { project, sections, categories, category, elements, section, isLoading } = this.props
+        const { project, sections, categories, category, section, isLoading } = this.props
         const project_id = this.props.match.params.id
 
         //console.log("CATEGORY U single porject ",this.props.category)

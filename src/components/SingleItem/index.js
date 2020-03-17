@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import Embed from '../itemTypes/Iframe';
 import RichText from '../itemTypes/RichText';
 import Button from '../elements/Button';
-import { connect } from 'react-redux';
-import projectRedux from '../../redux/projects'
-import { withRouter } from 'react-router-dom';
 
 class SingleItem extends Component {
     constructor(props) {
@@ -58,10 +55,4 @@ class SingleItem extends Component {
     }
 }
 
-const mapDispatchToProps = {
-}
-
-const mapStateToProps = state => ({
-})
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SingleItem))
+export default SingleItem
