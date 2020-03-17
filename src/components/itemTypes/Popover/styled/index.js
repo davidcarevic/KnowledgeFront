@@ -14,7 +14,7 @@ export const ButtonS = styled(Button)`
 `;
 
 export const UncontrolledPopoverStyled = styled(UncontrolledPopover)`
-    position: relative;
+    position: absolute;
 `;
 
 export const BodyStyled = styled(PopoverBody)`
