@@ -119,7 +119,7 @@ class DragAndDrop extends Component {
                 this.props.changeCategory(result.removed, result, this.props.section, destList);
             }
             if(sourceList.items){
-                this.props.changeElementForItem(result.removed, result, this.props.catObj)
+                this.props.changeElementForItem(result.removed, result, this.props.catObj,destList)
             }
             let new_state = {};
             // Object.keys(result.result).forEach(function(key) {
