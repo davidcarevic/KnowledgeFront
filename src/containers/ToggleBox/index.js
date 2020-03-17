@@ -12,7 +12,7 @@ class ToggleBox extends React.Component {
 		};
 		this.toggleBox = this.toggleBox.bind(this);
 	}
-  
+
 	toggleBox(e) {
 		e.persist()
 		const { opened } = this.state;
@@ -27,7 +27,7 @@ class ToggleBox extends React.Component {
 		}
 		this.props.changeActiveCategory(current)
 	}
-  
+
 	render() {
 		var { title, children ,id} = this.props;
 		const { opened } = this.state;
@@ -43,10 +43,10 @@ class ToggleBox extends React.Component {
 				<h3 onClick={this.toggleBox}>
 					<Flex>
                     <Flex>{title}</Flex>
-                    <Flex right><PlusIcon /></Flex>
+                    <Flex right><PlusIcon background={'transparent'} width={'15px'} height={'15px'} right={'5px'}/></Flex>
                     </Flex>
 				</h3>
-				{opened && (					
+				{opened && (
 					<div>
 						{children}
 					</div>
