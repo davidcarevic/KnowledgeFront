@@ -63,10 +63,10 @@ class Dashboard extends Component {
                 </Header>
                 <SideHolder top={"15%"}>
                     <Flex>
-                        <h3>Teams</h3>
+                        <h4>Teams</h4>
                         <Flex right>
-                            <StyledLink to="/dashboard/teams/create"><PlusIcon top={'15px'}/></StyledLink>
-                            <StyledLink to="/invite"><UserPlusIcon top={'15px'}/></StyledLink>
+                            <StyledLink to="/dashboard/teams/create"><PlusIcon background={'lightgrey'} top={'18px'} width={'15px'} height={'15px'} right={'5px'}/></StyledLink>
+                            <StyledLink to="/invite"><UserPlusIcon background={'lightgrey'} top={'18px'} width={'15px'} height={'15px'}/></StyledLink>
                         </Flex>
                     </Flex>
 
@@ -78,9 +78,9 @@ class Dashboard extends Component {
                 </SideHolder>
                 <MainHolder top={"14%"}>
                     <Flex>
-                        <h3>Projects</h3>
+                        <h4>Projects</h4>
                         <Flex right>
-                            <StyledLink to="/dashboard/projects/create"><PlusIcon top={'15px'}/></StyledLink>
+                            <StyledLink to="/dashboard/projects/create"><PlusIcon background={'lightgrey'} top={'18px'} width={'15px'} height={'15px'}/></StyledLink>
                         </Flex>
                     </Flex>
                     {!projects ? <div>No projects</div> : projects.map((item) =>

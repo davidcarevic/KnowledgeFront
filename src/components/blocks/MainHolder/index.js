@@ -4,8 +4,8 @@ export default styled.div`
     position: absolute;
     top: ${props => props.top || "20%"};
     float: right;
-    left: 30%;
+    left: 22%;
     display: inline-block;
     margin: 0 auto;
-    width: 50%;
+    width: 70%;
 `;
