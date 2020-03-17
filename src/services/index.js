@@ -121,11 +121,12 @@ export const createElement = (title, description, category) => {
     })
 }
 
-export const elementCategoryChange = (element, categoryId) => {
+export const elementCategoryChange = (element, categoryId, newOrder) => {
     console.log("ID elementa",element.id)
     return axios.put ('/api/category-elements/'+element.id+'/', {
         element: element,
-        category_id: categoryId
+        category_id: categoryId,
+        newOrder: newOrder
     })
 }
 

@@ -243,9 +243,13 @@ export const elementCreation = (title, description, category_id) => dispatch => 
 export const changeCategoryForElement = (currentElement, category, section, destination) => dispatch =>{
     let categoriesUnsorted = [];
     let currentCat = destination;
-    console.log("CURRENT ", currentCat)
+    let newOrder=[]
+    for(let i in currentCat.elements){
+        newOrder[i]=parseInt(currentCat.elements[i].id)
+    }
+    currentCat.order=newOrder
     let categories = []
-    elementCategoryChange(currentElement, parseInt(category.id))
+    elementCategoryChange(currentElement, parseInt(category.id), newOrder)
         .then(res=>{
         return getSectionCategories(section.id)
     })
