@@ -278,7 +278,6 @@ export const changeCategoryForElement = (currentElement, category, section, dest
                     }
                 }
             })
-            console.log("CURRENT CATEGORY AFTER CHANGE !!!! ",currentCat)
             dispatch(setCategories(categoriesUnsorted));
             dispatch(setCategory(currentCat));
             dispatch(setElements(items));
@@ -364,12 +363,10 @@ export const reorderItems=(itemsIdArray,element)=>dispatch=>{
 export const changeElementForItem = (currentItem, element, category, destination) => dispatch =>{
     let currentCat=category
     let currentEle = destination
-    console.log("ELEMENT ", destination)
     let newOrder=[]
     for(let i in currentEle.items){
         newOrder[i]=parseInt(currentEle.items[i].id)
     }
-    console.log("NEW ORDER", newOrder)
     currentEle.order = newOrder
     itemElementChange(currentItem, parseInt(element.id), newOrder)
         .then(res=>{
