@@ -60,13 +60,13 @@ class InviteUser extends Component {
                     <Title> Invite a person to join this project</Title>
                     <Input id="email" placeholder="EMAIL" type="email" value={email} onChange={this.handleInputChange} /><br/><br/>
                     <Button  type="submit">INVITE THIS EMAIL</Button><hr/>
-                    <StyledLink to={"/dashboard" + projectId}>Back to Dashboard</StyledLink>
+                    <StyledLink to={"/dashboard/projects/" + projectId}>Back to Project</StyledLink>
                 </Form>
             )
 
         }
         return (
-            
+
             <Form onSubmit={this.handleFormSubmit}>
                 <Title> Invite a person to join a team or the app.</Title>
                 <Input id="email" placeholder="EMAIL" type="email" value={email} onChange={this.handleInputChange} /><br/><br/>

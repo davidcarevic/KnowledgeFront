@@ -9,20 +9,21 @@ export const ButtonS = styled(Button)`
   font-size: 1em;
   padding: 0.25em 1em;
   border-radius: 5px;
-  width: 315px;
+  width: 200px;
   height: 35px;
 `;
 
 export const UncontrolledPopoverStyled = styled(UncontrolledPopover)`
-    position: absolute;
+    background-color: lightgrey;
 `;
 
 export const BodyStyled = styled(PopoverBody)`
-    padding: 5px;
-    background-color:white;
+    padding: 10px;
+    background-color: lightgrey;
 `;
 
 export const HeaderStyled = styled(PopoverHeader)`
-    padding: 5px;
-    background-color:white
+    padding: 10px;
+    background-color: lightgrey;
+    margin: 0;
 `;

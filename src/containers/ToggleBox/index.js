@@ -3,12 +3,11 @@ import { Flex } from './styled';
 import { PlusIcon } from '../../components/elements/Icons';
 
 class ToggleBox extends React.Component {
-
 	constructor(props) {
 		super(props);
 		this.state = {
 			opened: false,
-			id:props.id
+			id: props.id
 		};
 		this.toggleBox = this.toggleBox.bind(this);
 	}
@@ -20,31 +19,36 @@ class ToggleBox extends React.Component {
 			opened: !opened,
 		});
 		let current={}
-		for(let i=0;i<this.props.category.length;i++){
-			if(this.props.id===this.props.category[i].id){
+		for (let i=0; i<this.props.category.length; i++) {
+			if (this.props.id === this.props.category[i].id) {
 				current=this.props.category[i]
 			}
 		}
-		this.props.changeActiveCategory(current)
+		if (opened === false) {
+			this.props.changeActiveCategory(current)
+		}
 	}
 
 	render() {
-		var { title, children ,id} = this.props;
+		var sign;
+		var { title, children , id} = this.props;
 		const { opened } = this.state;
 
 		if (opened) {
 			title = this.props.title;
+			sign = '-';
 		} else {
 			title = this.props.title;
+			sign = '+';
 		}
 
 		return (
 			<div id={id}>
 				<h3 onClick={this.toggleBox}>
 					<Flex>
-                    <Flex>{title}</Flex>
-                    <Flex right><PlusIcon background={'transparent'} width={'15px'} height={'15px'} right={'5px'}/></Flex>
-                    </Flex>
+            <Flex>{title}</Flex>
+            <Flex right>{sign}</Flex>
+          </Flex>
 				</h3>
 				{opened && (
 					<div>
