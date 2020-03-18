@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
-import { Button, UncontrolledPopover, PopoverHeader, PopoverBody } from 'reactstrap';
 import StyledLink from "../../elements/Link";
-import {ButtonS, UncontrolledPopoverStyled, BodyStyled,HeaderStyled} from "./styled"
+import { ButtonS, UncontrolledPopoverStyled, BodyStyled, HeaderStyled } from "./styled"
 
 
-const Popover=(props)=> {
+const Popover = (props) => {
     const [popoverOpen, setPopoverOpen] = useState(false);
     const toggle = () => setPopoverOpen(!popoverOpen);
     return (
