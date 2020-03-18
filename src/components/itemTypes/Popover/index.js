@@ -1,30 +1,54 @@
-import React, {useState} from 'react';
+import React, { Component } from 'react';
 import StyledLink from "../../elements/Link";
-import { ButtonS, UncontrolledPopoverStyled, BodyStyled, HeaderStyled } from "./styled"
+import { ButtonS, StyledPopover} from "./styled"
 
 
-const Popover = (props) => {
-    const [popoverOpen, setPopoverOpen] = useState(false);
-    const toggle = () => setPopoverOpen(!popoverOpen);
-    return (
-        <div>
-            <ButtonS key={props.element} id={"PopoverFocus" + props.element} type="button" onClick={toggle}>
-                Add new item
-            </ButtonS>
-            <UncontrolledPopoverStyled placement="right" triger="focus" target={"PopoverFocus" + props.element}
-                                 isOpen={popoverOpen} toggle={toggle}>
-                <HeaderStyled>Select item type</HeaderStyled>
-                <BodyStyled>
-                    <StyledLink
-                        to={"/dashboard/projects/" + props.project + "/section/" + props.section + "/category/" + props.category + "/element/" +
-                        props.element + "/item-create/embed"}>Iframe</StyledLink><br/>
-                    <StyledLink
-                        to={"/dashboard/projects/" + props.project + "/section/" + props.section + "/category/" + props.category + "/element/" +
-                        props.element + "/item-create/richText"}>Rich Text</StyledLink>
-                </BodyStyled>
-            </UncontrolledPopoverStyled>
-        </div>
-    )
+class Popover extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			opened: false,
+			id: props.id
+		};
+		this.toggleBox = this.toggleBox.bind(this);
+	}
+
+	toggleBox(e) {
+		e.persist()
+		const { opened } = this.state;
+		this.setState({
+			opened: !opened,
+		});
+	}
+
+	render() {
+		var sign;
+		var { title, children , id} = this.props;
+		const { opened } = this.state;
+
+		if (opened) {
+			title = 'Close';
+		} else {
+			title = 'Add new Item';
+		}
+
+		return (
+			<div id={id}>
+        <ButtonS onClick={this.toggleBox}>{title}</ButtonS>
+				{opened && (
+					<StyledPopover>
+            <h4>Select Item Type</h4>
+            <StyledLink
+                to={"/dashboard/projects/" + this.props.project + "/section/" + this.props.section + "/category/" + this.props.category + "/element/" +
+                this.props.element + "/item-create/embed"}>Iframe</StyledLink><br/>
+            <StyledLink
+                to={"/dashboard/projects/" + this.props.project + "/section/" + this.props.section + "/category/" + this.props.category + "/element/" +
+                this.props.element + "/item-create/richText"}>Rich Text</StyledLink>
+					</StyledPopover>
+				)}
+			</div>
+		);
+	}
 }
 
-export default Popover
+export default Popover;

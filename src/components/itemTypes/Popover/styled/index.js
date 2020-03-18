@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button, UncontrolledPopover, PopoverHeader, PopoverBody } from 'reactstrap';
+import { Button } from 'reactstrap';
 
 
 export const ButtonS = styled(Button)`
@@ -13,17 +13,13 @@ export const ButtonS = styled(Button)`
   height: 35px;
 `;
 
-export const UncontrolledPopoverStyled = styled(UncontrolledPopover)`
+export const StyledPopover = styled.div`
     background-color: lightgrey;
-`;
-
-export const BodyStyled = styled(PopoverBody)`
+    position: fixed;
+    top: 10%;
+    bottomn: 0;
+    right:0;
+    height: 100%;
+    width: 150px;
     padding: 10px;
-    background-color: lightgrey;
-`;
-
-export const HeaderStyled = styled(PopoverHeader)`
-    padding: 10px;
-    background-color: lightgrey;
-    margin: 0;
 `;
