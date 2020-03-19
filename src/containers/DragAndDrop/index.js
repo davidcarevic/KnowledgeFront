@@ -198,11 +198,7 @@ class DragAndDrop extends Component {
                     <DragDropContext onDragEnd={this.onDragEnd}>
                         {Object.keys(this.props.array).map((list_id,index) => (
                             <div key={'i' + index}>
-<<<<<<< HEAD
                                 <h3><Element name={this.props.array[index].id} key={'e' + index}>{this.props.array[index] ? this.props.array[index].title : ''}</Element></h3>
-=======
-                                <h3 key={'e' + index} ref={this.myRef}>{this.props.array[index] ? this.props.array[index].title : ''}</h3>
->>>>>>> c6ca6bbc564ada1c38ad05618d02e64da971defc
                                 <div key={'ec' + index}>{this.props.array[index] ? this.props.array[index].description : ''}</div><br />
                                 <Popover project={this.props.project?this.props.project:''} section={this.props.section_id?this.props.section_id:''} category={this.props.category?this.props.category:''} element={this.state[index]?this.state[index].id:''}/>
                                 <Droppable droppableId={this.props.array[index]?this.props.array[index].id.toString():''} >
