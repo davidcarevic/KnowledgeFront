@@ -22,8 +22,7 @@ class Popover extends Component {
 	}
 
 	render() {
-		var sign;
-		var { title, children , id} = this.props;
+		var { title, id} = this.props;
 		const { opened } = this.state;
 
 		if (opened) {
