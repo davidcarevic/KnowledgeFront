@@ -1,6 +1,5 @@
 import React from "react";
 import { Flex } from './styled';
-import { PlusIcon } from '../../components/elements/Icons';
 
 class ToggleBox extends React.Component {
 	constructor(props) {
