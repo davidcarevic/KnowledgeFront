@@ -41,7 +41,7 @@ class Register extends Component {
       e.preventDefault();
       const { email, password, password2, guid} = this.state;
       const { history } = this.props;
-      const{notMember} = this.props.user.invited.data.not_member
+      let notMember = this.props.user.invited.data?this.props.user.invited.data.not_member:true
       if(notMember===false){
           if (this.props.user.invited.email) {
               let email = this.props.user.invited.email
@@ -49,31 +49,34 @@ class Register extends Component {
                   team: this.props.user.invited.data.team,
                   project: this.props.user.invited.data.project,
                   guid: guid,
-                  not_member:notMember
+                  not_member:this.props.user.invited.data.not_member
               }
               this.props.createUser(email,'', data)
               history.push("/")
               return
           }
       }
-      if (password === password2) {
-          let data={}
-          if (this.props.user.invited.email) {
-              let email = this.props.user.invited.email
-               data = {
-                  team: this.props.user.invited.data.team,
-                  project: this.props.user.invited.data.project,
-                  guid: guid,
-                  not_member:notMember
+      else {
+         if (password === password2)
+          {
+              let data = {}
+              if (this.props.user.invited.email) {
+                  let email = this.props.user.invited.email
+                  data = {
+                      team: this.props.user.invited.data.team,
+                      project: this.props.user.invited.data.project,
+                      guid: guid,
+                      not_member: true
+                  }
+                  this.props.createUser(email, password, data)
+                  history.push("/")
+                  return
               }
-               this.props.createUser(email, password, data)
-               history.push("/")
-              return
+              data = {not_member: true}
+              console.log(this.state)
+              this.props.createUser(email, password, data)
+              history.push("/")
           }
-          data={not_member:true}
-          console.log(this.state)
-          this.props.createUser(email, password, data)
-          history.push("/")
       }
     }
     render() {
