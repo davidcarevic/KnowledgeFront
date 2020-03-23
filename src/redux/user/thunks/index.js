@@ -20,7 +20,8 @@ import {
     setProject,
     setProjectsByUser,
     setSection,
-    setSections
+    setSections,
+    setItem
 } from "../../projects/actions";
 //notifications -->
 import {loginSuccess, loginError} from '../../../components/elements/Notifications/Login/';
@@ -97,6 +98,10 @@ export const logout = () => dispatch => {
     dispatch(setCategories([]))
     dispatch(setElement({}))
     dispatch(setElements({}))
+    dispatch(setItem({}))
+    dispatch(setInvitedUser({}))
+    dispatch(createInvite({}))
+    dispatch(createUser({}))
     window.localStorage.removeItem('refreshToken')
     dispatch(isLoading(false))
     logoutSuccess();
