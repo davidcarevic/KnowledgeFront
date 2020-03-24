@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledSunEditor, DisplayRichText, StyledItem } from './styled';
+import { DisplayRichText, StyledItem } from './styled';
 import { buttonList } from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
 import Form from '../../elements/Form';
@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import projectRedux from '../../../redux/projects'
 import { withRouter } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
+import SunEditor from 'suneditor-react';
 
 class RichText extends Item {
   constructor(props) {
@@ -35,8 +36,10 @@ class RichText extends Item {
     if (this.props.editing && this.props.first === undefined) {
       return (
         <Form onSubmit={this.handleSaveSubmit}>
-            <StyledSunEditor onChange={this.handleChange} editing={true} placeholder="Please type here..." autoFocus={true} enable={true} showToolbar={true}
+            <SunEditor onChange={this.handleChange} editing={true} placeholder="Please type here..." autoFocus={true} enable={true} showToolbar={true}
               setOptions={{
+                height: 'auto',
+                width: 'auto',
                 buttonList: buttonList.complex}}/><br/><br/>
             <Button type="submit">CREATE</Button><hr/>
             <StyledLink to={"/dashboard/projects/" + project_id}>Back to Project</StyledLink>
@@ -48,8 +51,10 @@ class RichText extends Item {
       return (
         <Form onSubmit={this.handleUpdateSubmit}>
           <StyledItem>
-            <StyledSunEditor setContents={content} onChange={this.handleChange} editing={true} placeholder="Please type here..." autoFocus={true} enable={true} showToolbar={true}
+            <SunEditor setContents={content} onChange={this.handleChange} editing={true} placeholder="Please type here..." autoFocus={true} enable={true} showToolbar={true}
               setOptions={{
+                height: 'auto',
+                width: 'auto',
                 buttonList: buttonList.complex}}/><br/><br/>
             <Button type="submit" width={'150px'}>Save</Button>
           </StyledItem>
