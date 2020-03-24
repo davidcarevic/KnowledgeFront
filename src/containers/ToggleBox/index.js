@@ -5,7 +5,7 @@ class ToggleBox extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			opened: false,
+			opened: true,
 			id: props.id
 		};
 		this.toggleBox = this.toggleBox.bind(this);
