@@ -77,3 +77,66 @@ export const editItem = item => {
     payload: item
   }
 }
+
+export const editElement = element => {
+  return {
+    type: types.UPDATE_ELEMENT,
+    payload: element
+  }
+}
+
+export const editCategory = category => {
+  return {
+    type: types.UPDATE_CATEGORY,
+    payload: category
+  }
+}
+
+export const editSection = section => {
+  return {
+    type: types.UPDATE_SECTION,
+    payload: section
+  }
+}
+
+export const editProject = project => {
+  return {
+    type: types.UPDATE_PROJECT,
+    payload: project
+  }
+}
+
+export const removeItem = id => {
+  return {
+    type: types.DELETE_ITEM,
+    id: id
+  }
+}
+
+export const removeElement = id => {
+  return {
+    type: types.DELETE_ELEMENT,
+    id: id
+  }
+}
+
+export const removeCategory = id => {
+  return {
+    type: types.DELETE_CATEGORY,
+    id: id
+  }
+}
+
+export const removeSection = id => {
+  return {
+    type: types.DELETE_SECTION,
+    id: id
+  }
+}
+
+export const removeProject = id => {
+  return {
+    type: types.DELETE_PROJECT,
+    id: id
+  }
+}

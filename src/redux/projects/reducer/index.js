@@ -70,6 +70,51 @@ export default (state = initialState, action) => {
                 ...state,
                 item: action.payload
             }
+        case types.UPDATE_ELEMENT:
+            return {
+              ...state,
+              element: action.payload
+            }
+        case types.UPDATE_CATEGORY:
+            return {
+              ...state,
+              category: action.payload
+            }
+        case types.UPDATE_SECTION:
+            return {
+              ...state,
+              section: action.payload
+            }
+        case types.UPDATE_PROJECT:
+            return {
+              ...state,
+              project: action.payload
+            }
+        case types.DELETE_ITEM:
+            return {
+              ...state,
+              item: action.payload
+            }
+        case types.DELETE_ELEMENT:
+            return {
+              ...state,
+              element: action.payload
+            }
+        case types.DELETE_CATEGORY:
+            return {
+              ...state,
+              category: action.payload
+            }
+        case types.DELETE_SECTION:
+            return {
+              ...state,
+              section: action.payload
+            }
+        case types.DELETE_PROJECT:
+            return {
+              ...state,
+              project: action.payload
+            }
         default:
             return state;
     }
