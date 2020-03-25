@@ -50,7 +50,6 @@ class InviteUser extends Component {
         }
         const { history } = this.props
         this.props.inviteUser(email, data)
-        console.log("PROJECT: ", this.props.project)
         if (this.props.project.id) {
           history.push('/dashboard/projects/' + this.props.project.id);
         } else {
