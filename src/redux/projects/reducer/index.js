@@ -93,27 +93,27 @@ export default (state = initialState, action) => {
         case types.DELETE_ITEM:
             return {
               ...state,
-              item: action.payload
+              id: action.payload
             }
         case types.DELETE_ELEMENT:
             return {
               ...state,
-              element: action.payload
+              id: action.payload
             }
         case types.DELETE_CATEGORY:
             return {
               ...state,
-              category: action.payload
+              id: action.payload
             }
         case types.DELETE_SECTION:
             return {
               ...state,
-              section: action.payload
+              id: action.payload
             }
         case types.DELETE_PROJECT:
             return {
               ...state,
-              project: action.payload
+              id: action.payload
             }
         default:
             return state;
