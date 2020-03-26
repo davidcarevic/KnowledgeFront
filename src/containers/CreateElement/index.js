@@ -25,7 +25,7 @@ class CreateSection extends Component {
         const { title, description } = this.state;
         const project_id = this.props.match.params.id
         const category_id = this.props.match.params.c_id
-        this.props.createElement(title, description, category_id);
+        this.props.createElement(title, description, category_id,this.props.category);
         history.push("/dashboard/projects/" + project_id);
     }
 
@@ -49,7 +49,8 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = state => ({
-    element: state.projects.element
+    element: state.projects.element,
+    category: state.projects.category
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreateSection))

@@ -28,7 +28,7 @@ class SingleProject extends Component {
 
     componentDidMount() {
         if (!this.props.isLoading) {
-            this.props.getProject(this.props.match.params.id)
+            this.props.getProject(this.props.match.params.id, this.props.category)
         }
     }
 
@@ -37,7 +37,7 @@ class SingleProject extends Component {
         this.setState({
             selected_section: e.target.id
         })
-        this.props.getSectionCategories(e.target.id)
+        this.props.getSectionCategories(e.target.id, this.props.category)
         this.props.setSection(e.target)
     }
 

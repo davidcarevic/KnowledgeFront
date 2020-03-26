@@ -71,9 +71,9 @@ export const getProjectsForUser = (id) => dispatch => {
         })
 }
 
-export const retrieveProject = (id) => dispatch => {
+export const retrieveProject = (id, category) => dispatch => {
     dispatch(isLoading(true));
-    let currentCat={};
+    let currentCat=category;
     let categories={};
     let categoriesUnsorted={};
     getSingleProject(id)
@@ -104,7 +104,13 @@ export const retrieveProject = (id) => dispatch => {
                 }
             }
         }
-        currentCat=categoriesUnsorted[0]
+        if(currentCat.hasOwnProperty('id')){
+            console.log("SETTUJE STARI")
+            currentCat=currentCat
+        }
+        else{
+            currentCat=categoriesUnsorted[0]
+        }
         return firstId
     })
     .then(id => {
@@ -132,11 +138,11 @@ export const retrieveProject = (id) => dispatch => {
         .finally(dispatch(isLoading(false)))
 }
 
-export const retrieveSectionCategories = (id) => dispatch => {
+export const retrieveSectionCategories = (id, category) => dispatch => {
     dispatch(isLoading(true))
     let categoriesUnsorted=[]
     let categories=[]
-    let currentCat=[]
+    let currentCat=category
     dispatch(setCategories([]))
     dispatch(setCategory([]))
     dispatch(setElements([]))
@@ -153,7 +159,13 @@ export const retrieveSectionCategories = (id) => dispatch => {
                     }
                 }
             }
-            currentCat=categoriesUnsorted[0]
+            if(currentCat.hasOwnProperty('id')){
+                console.log("SETTUJE STARI")
+                currentCat=currentCat
+            }
+            else{
+                currentCat=categoriesUnsorted[0]
+            }
             return firstId
         })
         .then(id => {
@@ -228,14 +240,35 @@ export const categoryCreation = (name, description, section_id) => dispatch => {
     })
 }
 
-export const elementCreation = (title, description, category_id) => dispatch => {
-    dispatch(isLoading(true))
+export const elementCreation = (title, description, category_id, category) => dispatch => {
+    let currentCat = category
+    let createdEle
     createElement(title, description, category_id)
     .then(res => {
+        createdEle=res.data
         dispatch(setElement(res.data))
-        dispatch(isLoading(false))
         elementCreateSuccess()
     })
+        .then(res=>{
+             return getCategoryElements(category.id)}
+             )
+        .then(res => {
+            let items = sortCategoryElements(res.data)
+            currentCat.elements.forEach((element, index) => {
+                for (let i in items) {
+                    if (element.id === i) {
+                        element.items = items[i]
+                    }
+                }
+            })
+            let idswap=createdEle.id.toString()
+            createdEle.id=idswap
+            createdEle.items=[]
+            currentCat.elements.push(createdEle)
+            dispatch(setCategory(currentCat));
+            dispatch(setElements(items));
+            dispatch(isLoading(false))
+        })
     .catch(err => {
         console.log(err.message)
         dispatch(isLoading(false))
