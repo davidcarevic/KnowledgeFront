@@ -30,12 +30,12 @@ export const getItemStyleHorizontal = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
     userSelect: 'none',
     width: '100%',
-    minHeight:'500px',
+    minHeight:'100px',
     display:'inline-block',
     overflow:`auto`,
 
     // change background colour if dragging
-    background: isDragging ? 'lightgray' : '#F0F0F0',
+    background: isDragging ? 'lightgray' : 'white',
 
     // styles we need to apply on draggables
     ...draggableStyle,

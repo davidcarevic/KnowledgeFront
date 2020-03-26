@@ -2,8 +2,8 @@ import styled from "styled-components";
 import Iframe from 'react-iframe'
 
 export const StyledIframe = styled(Iframe)`
-  width: 500px;
-  height: 300px;
+  width: 100%;
+  min-height: 30vw;
 `;
 
 export const StyledItem = styled.div`
