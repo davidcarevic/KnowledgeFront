@@ -28,9 +28,7 @@ class Register extends Component {
                     this.props.getUser(guid)
                 }
             }
-        } catch (e) {
-
-        }
+        } catch (e) {}
     }
 
     handleInputChange = (e) => {
@@ -39,10 +37,10 @@ class Register extends Component {
 
     handleFormSubmit = (e) => {
       e.preventDefault();
-      const { email, password, password2, guid} = this.state;
+      const { email, password, password2, guid } = this.state;
       const { history } = this.props;
-      let notMember = this.props.user.invited.data?this.props.user.invited.data.not_member:true
-      if(notMember===false){
+      let notMember = this.props.user.invited.data ? this.props.user.invited.data.not_member : true
+      if (notMember === false) {
           if (this.props.user.invited.email) {
               let email = this.props.user.invited.email
               let data = {
@@ -51,39 +49,40 @@ class Register extends Component {
                   guid: guid,
                   not_member:this.props.user.invited.data.not_member
               }
-              this.props.createUser(email,'', data)
+              this.props.createUser(email, '', data)
               history.push("/")
               return
           }
       }
       else {
-         if (password === password2)
-          {
-              let data = {}
-              if (this.props.user.invited.email) {
-                  let email = this.props.user.invited.email
-                  data = {
-                      team: this.props.user.invited.data.team,
-                      project: this.props.user.invited.data.project,
-                      guid: guid,
-                      not_member: true
-                  }
-                  this.props.createUser(email, password, data)
-                  history.push("/")
-                  return
-              }
-              data = {not_member: true}
-              console.log(this.state)
-              this.props.createUser(email, password, data)
-              history.push("/")
-          }
+         if (password === password2) {
+            let data = {}
+            if (this.props.user.invited.email) {
+                let email = this.props.user.invited.email
+                data = {
+                    team: this.props.user.invited.data.team,
+                    project: this.props.user.invited.data.project,
+                    guid: guid,
+                    not_member: true
+                }
+                this.props.createUser(email, password, data)
+                history.push('/dashboard');
+                return
+            }
+            data = {not_member: true}
+            console.log(this.state)
+            this.props.createUser(email, password, data)
+            history.push('/dashboard');
+        }
       }
     }
+
     render() {
       const { email, password, password2, guid } = this.state;
-        if (this.props.isLoading) {
-            return <LoadingSpinner/>
-        }
+      if (this.props.isLoading) {
+          return <LoadingSpinner/>
+      }
+
       if (guid && this.props.user.invited.data && !this.props.isLoading) {
           if(this.props.user.invited.data.not_member) {
               return (
@@ -100,7 +99,7 @@ class Register extends Component {
                   </HomeHolder>
               )
           }
-          else{
+          else {
               return (
                   <HomeHolder>
                       <Form onSubmit={this.handleFormSubmit}>
@@ -112,6 +111,7 @@ class Register extends Component {
               )
           }
       }
+
       return (
         <HomeHolder>
           <Form onSubmit={this.handleFormSubmit}>
@@ -132,7 +132,7 @@ class Register extends Component {
 
   const mapDispatchToProps = {
     createUser: userRedux.thunks.registerUser,
-      getUser: userRedux.thunks.getInvited
+    getUser: userRedux.thunks.getInvited
   }
 
 const mapStateToProps = state => ({

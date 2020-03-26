@@ -28,14 +28,9 @@ class Home extends Component {
 
     render() {
       const { email, password } = this.state;
+      const { history } = this.props
       if (this.props.isAuthenticated) {
-          return (
-              <div>
-                  <Title>
-                  Logged in
-                  </Title>
-              </div>
-          )
+          history.push('/dashboard');
       }
       return (
         <HomeHolder>

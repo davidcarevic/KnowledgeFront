@@ -36,6 +36,12 @@ class Item extends Component {
       this.props.updateItem(itemId, content)
     }
 
+    handleDeleteSubmit = (e) => {
+      e.preventDefault();
+      const itemId = this.props.id
+      this.props.deleteItem(itemId)
+    }
+
     render() {
       return null
     }

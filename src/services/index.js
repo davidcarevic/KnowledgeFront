@@ -163,3 +163,52 @@ export const updateItem = (id, content) => {
     content: content
   })
 }
+
+export const updateElement = (id, title, description) => {
+  return axios.patch('api/elements/' + id + '/', {
+    title: title,
+    description: description
+  })
+}
+
+export const updateCategory = (id, name, description) => {
+  return axios.patch('api/categories/' + id + '/', {
+    name: name,
+    description: description
+  })
+}
+
+export const updateSection = (id, name, description) => {
+  return axios.patch('api/sections/' + id + '/', {
+    name: name,
+    description: description
+  })
+}
+
+export const updateProject = (id, name, description, data) => {
+  return axios.pach('api/projects/' + id + '/', {
+    name: name,
+    description: description,
+    data: data
+  })
+}
+
+export const deleteItem = (id) => {
+  return axios.delete('api/items/' + id + '/')
+}
+
+export const deleteElement = (id) => {
+  return axios.delete('api/elements/' + id + '/')
+}
+
+export const deleteCategory = (id) => {
+  return axios.delete('api/categories/' + id + '/')
+}
+
+export const deleteSection = (id) => {
+  return axios.delete('api/sections/' + id + '/')
+}
+
+export const deleteProject = (id) => {
+  return axios.delete('api/projects/' + id + '/')
+}

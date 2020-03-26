@@ -33,13 +33,11 @@ import {generalError} from "../../../components/elements/Notifications/GeneralEr
 import {resetPassError,resetPassSuccess} from "../../../components/elements/Notifications/ResetPassword";
 
 export const loginUser = (email, password) => dispatch => {
-    console.log("OVO PRVO")
     dispatch(isLoading(true));
     dispatch(authenticationError(false));
     dispatch(authenticationErrorMessage(''));
     getToken(email, password)
         .then(res => {
-            console.log("OVO DRUGO");
             dispatch(setAccessToken(res.data.access))
             dispatch(setRefreshToken(res.data.refresh))
             dispatch(authenticateUser(true))
@@ -48,7 +46,6 @@ export const loginUser = (email, password) => dispatch => {
             loginSuccess();
         })
         .catch(err => {
-            console.log("AXIOS ERROR: ", axios);
             if(err.status === 401) {
                 //
             } else {
@@ -113,8 +110,11 @@ export const registerUser = (email, password, data) => dispatch => {
     register(email, password, data)
         .then(res => {
             dispatch(createUser(res.data))
-            dispatch(isLoading(false))
             registerSuccess();
+        })
+        .then(res => {
+          dispatch(loginUser(email, password))
+          dispatch(isLoading(false))
         })
         .catch(err => {
             console.log(err.message)

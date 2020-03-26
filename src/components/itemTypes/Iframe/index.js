@@ -34,12 +34,19 @@ class Embed extends Item {
         }
       if (this.props.editing && !this.props.first) {
         return (
-          <Form onSubmit={this.handleUpdateSubmit}>
-            <StyledItem>
-              <Input id="content" type="text" value={content} onChange={this.handleInputChange} /><br/><br/>
-              <Button type="submit" width={'150px'}>Save</Button>
-            </StyledItem>
-          </Form>
+          <div>
+            <Form onSubmit={this.handleUpdateSubmit}>
+              <StyledItem>
+                <Input id="content" type="text" value={content} onChange={this.handleInputChange} /><br/><br/>
+                <Button type="submit" width={'150px'}>Save</Button>
+              </StyledItem>
+            </Form>
+            <Form onSubmit={this.handleDeleteSubmit}>
+              <StyledItem>
+                <Button type="submit" width={'150px'}>Delete</Button>
+              </StyledItem>
+            </Form>
+          </div>
         );
       }
         return (
@@ -50,8 +57,8 @@ class Embed extends Item {
 
 const mapDispatchToProps = {
   createItem: projectRedux.thunks.itemCreation,
-  updateItem: projectRedux.thunks.itemUpdate
-
+  updateItem: projectRedux.thunks.itemUpdate,
+  deleteItem: projectRedux.thunks.itemDelete
 }
 
 const mapStateToProps = state => ({

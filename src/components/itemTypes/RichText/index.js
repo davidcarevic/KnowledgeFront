@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledSunEditor, DisplayRichText, StyledItem } from './styled';
+import { DisplayRichText, StyledItem } from './styled';
 import { buttonList } from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
 import Form from '../../elements/Form';
@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import projectRedux from '../../../redux/projects'
 import { withRouter } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
+import SunEditor from 'suneditor-react';
 
 class RichText extends Item {
   constructor(props) {
@@ -35,8 +36,10 @@ class RichText extends Item {
     if (this.props.editing && this.props.first === undefined) {
       return (
         <Form onSubmit={this.handleSaveSubmit}>
-            <StyledSunEditor onChange={this.handleChange} editing={true} placeholder="Please type here..." autoFocus={true} enable={true} showToolbar={true}
+            <SunEditor onChange={this.handleChange} editing={true} placeholder="Please type here..." autoFocus={true} enable={true} showToolbar={true}
               setOptions={{
+                height: 'auto',
+                width: 'auto',
                 buttonList: buttonList.complex}}/><br/><br/>
             <Button type="submit">CREATE</Button><hr/>
             <StyledLink to={"/dashboard/projects/" + project_id}>Back to Project</StyledLink>
@@ -46,14 +49,23 @@ class RichText extends Item {
     if (this.props.editing && !this.props.first) {
       const content = Base64.decode(this.props.content)
       return (
-        <Form onSubmit={this.handleUpdateSubmit}>
-          <StyledItem>
-            <StyledSunEditor setContents={content} onChange={this.handleChange} editing={true} placeholder="Please type here..." autoFocus={true} enable={true} showToolbar={true}
-              setOptions={{
-                buttonList: buttonList.complex}}/><br/><br/>
-            <Button type="submit" width={'150px'}>Save</Button>
-          </StyledItem>
-        </Form>
+        <div>
+          <Form onSubmit={this.handleUpdateSubmit}>
+            <StyledItem>
+              <SunEditor setContents={content} onChange={this.handleChange} editing={true} placeholder="Please type here..." autoFocus={true} enable={true} showToolbar={true}
+                setOptions={{
+                  height: 'auto',
+                  width: 'auto',
+                  buttonList: buttonList.complex}}/><br/><br/>
+              <Button type="submit" width={'150px'}>Save</Button>
+            </StyledItem>
+          </Form>
+          <Form onSubmit={this.handleDeleteSubmit}>
+            <StyledItem>
+              <Button type="submit" width={'150px'}>Delete</Button>
+            </StyledItem>
+          </Form>
+        </div>
       );
     }
 
@@ -70,8 +82,8 @@ class RichText extends Item {
 
 const mapDispatchToProps = {
   createItem: projectRedux.thunks.itemCreation,
-  updateItem: projectRedux.thunks.itemUpdate
-
+  updateItem: projectRedux.thunks.itemUpdate,
+  deleteItem: projectRedux.thunks.itemDelete
 }
 
 const mapStateToProps = state => ({

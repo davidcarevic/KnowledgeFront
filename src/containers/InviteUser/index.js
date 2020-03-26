@@ -6,13 +6,14 @@ import Title from '../../components/elements/Title';
 import Form from '../../components/elements/Form';
 import Input from '../../components/elements/Input'
 import StyledLink from '../../components/elements/Link';
+import { withRouter } from 'react-router-dom';
 
 class InviteUser extends Component {
     state = {
         email: '',
         team: '',
         project: '',
-        projectId:'',
+        projectId: '',
         teamId:''
     }
 
@@ -30,8 +31,8 @@ class InviteUser extends Component {
     handleFormSubmit = (e) => {
         e.preventDefault();
         const { email, team, project, projectId, teamId } = this.state;
-        let data={};
-        if(projectId){
+        let data = {};
+        if (projectId) {
             data = {
                 project: projectId
             }
@@ -47,14 +48,19 @@ class InviteUser extends Component {
                 project: project
             }
         }
-        //const {history } = this.props
-            console.log(" email i data : ",email,data)
-            this.props.inviteUser(email,data)
-    }
+        const { history } = this.props
+        this.props.inviteUser(email, data)
+        if (this.props.project.id) {
+          history.push('/dashboard/projects/' + this.props.project.id);
+        } else {
+          history.push('/dashboard/');
+        }
+
+      }
 
     render() {
         const { email, team , project, projectId } = this.state;
-        if(projectId){
+        if (projectId) {
             return (
                 <Form onSubmit={this.handleFormSubmit}>
                     <Title> Invite a person to join this project</Title>
@@ -63,7 +69,6 @@ class InviteUser extends Component {
                     <StyledLink to={"/dashboard/projects/" + projectId}>Back to Project</StyledLink>
                 </Form>
             )
-
         }
         return (
 
@@ -84,8 +89,9 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = state => ({
+    project: state.projects.project,
     invite: state.invite,
     isLoading:state.isLoading
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(InviteUser)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(InviteUser))
