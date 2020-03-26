@@ -360,7 +360,7 @@ export const reorderItems=(itemsIdArray,element)=>dispatch=>{
         })
 }
 
-export const changeElementForItem = (currentItem, element, category, destination) => dispatch =>{
+export const changeElementForItem = (currentItem, element, category, destination, column) => dispatch =>{
     let currentCat=category
     let currentEle = destination
     let newOrder=[]
@@ -368,7 +368,7 @@ export const changeElementForItem = (currentItem, element, category, destination
         newOrder[i]=parseInt(currentEle.items[i].id)
     }
     currentEle.order = newOrder
-    itemElementChange(currentItem, parseInt(element.id), newOrder)
+    itemElementChange(currentItem, parseInt(element.id), newOrder, column)
         .then(res=>{
             return getCategoryElements(category.id)
         })

@@ -5,7 +5,6 @@ export default styled.div`
     top: ${props => props.top || "20%"};
     float: right;
     left: 22%;
-    display: inline-block;
     margin: 0 auto;
-    width: 70%;
+    width: 77%;
 `;

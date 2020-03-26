@@ -20,20 +20,19 @@ export const getListStyle = isDraggingOver => ({
 
 export const getListStyleHorizontal = isDraggingOver => ({
     background: isDraggingOver ? 'lightgray' : 'white',
-    display: 'flex',
-    padding: grid,
-    margin: grid,
-    flexWrap: 'wrap',
-    overflow: 'disabled'
+    overflow: 'disabled',
+    width:'49%',
+    display:'inline-grid',
+    margin:`10px auto`
 });
 
 export const getItemStyleHorizontal = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
     userSelect: 'none',
-    padding: grid * 2,
-    margin: grid,
-    width: 'auto',
-    height: 'auto',
+    width: '100%',
+    minHeight:'500px',
+    display:'inline-block',
+    overflow:`auto`,
 
     // change background colour if dragging
     background: isDragging ? 'lightgray' : '#F0F0F0',

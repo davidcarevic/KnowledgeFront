@@ -34,6 +34,12 @@ const move = (source, destination, droppableSource, droppableDestination) => {
     console.log('destination : ',destination);
     console.log('Droppable source : ',droppableSource);
     console.log('Droppable dest: ',droppableDestination);
+    let destCheck=droppableDestination.droppableId;
+    let column=2
+    if(destCheck.indexOf('e')===-1){
+        column=1
+    }
+
     let sourceClone=[]
     let destClone=[]
     if(source.elements){
@@ -54,7 +60,8 @@ const move = (source, destination, droppableSource, droppableDestination) => {
     return ({
         result: result,
         removed: removed,
-        id: droppableDestination.droppableId
+        id: droppableDestination.droppableId,
+        column: column
     });
 };
 
@@ -119,10 +126,10 @@ class DragAndDrop extends Component {
             );
             /** function(projects/thunk), changes the category for an element in the current section*/
             if(sourceList.elements) {
-                this.props.changeCategory(result.removed, result, this.props.section, destList);
+               this.props.changeCategory(result.removed, result, this.props.section, destList);
             }
             if(sourceList.items){
-                this.props.changeElementForItem(result.removed, result, this.props.catObj,destList)
+               this.props.changeElementForItem(result.removed, result, this.props.catObj,destList, result.column)
             }
             let new_state = {};
             // Object.keys(result.result).forEach(function(key) {
@@ -194,7 +201,6 @@ class DragAndDrop extends Component {
             console.log("CATEGORIES U DND, ELEMENTS AND ITEMS",  this.props.array)
             console.log("Internal STATE FOR DND // ELEMENTS AND ITEMS", this.state)
             return(
-                <div>
                     <DragDropContext onDragEnd={this.onDragEnd}>
                         {Object.keys(this.props.array).map((list_id,index) => (
                             <div key={'i' + index}>
@@ -206,6 +212,7 @@ class DragAndDrop extends Component {
                                         <div ref={provided.innerRef} style={getListStyleHorizontal(snapshot.isDraggingOver)}>
 
                                             {this.props.array[index]?this.props.array[index].items.map((item, index) => (
+                                                item.column===1?
                                                 <Draggable
                                                     key={item.id}
                                                     draggableId={item.id}
@@ -222,17 +229,43 @@ class DragAndDrop extends Component {
 
                                                         </div>
                                                     )}
-                                                </Draggable>
+                                                </Draggable>:''
                                             )):''}
                                             {provided.placeholder}
                                         </div>
                                     )}
-                                </Droppable><br /><br />
+                                </Droppable>
+                                <Droppable droppableId={this.props.array[index]?this.props.array[index].id.toString()+'e':''} >
+                                    {(provided, snapshot) => (
+                                        <div ref={provided.innerRef} style={getListStyleHorizontal(snapshot.isDraggingOver)}>
+
+                                            {this.props.array[index]?this.props.array[index].items.map((item, index) => (
+                                                item.column===2?
+                                                <Draggable
+                                                    key={item.id}
+                                                    draggableId={item.id}
+                                                    index={index}>
+                                                    {(provided, snapshot) => (
+                                                        <div
+                                                            ref={provided.innerRef}
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps} style={getItemStyleHorizontal(
+                                                            snapshot.isDragging,
+                                                            provided.draggableProps.style
+                                                        )}>
+                                                            <SingleItem id={item.id} type={item.type} content={item.content} first={true}/>
+
+                                                        </div>
+                                                    )}
+                                                </Draggable>:''
+                                            )):''}
+                                            {provided.placeholder}
+                                        </div>
+                                    )}
+                                </Droppable>
                             </div>
                         ))}
                     </DragDropContext>
-
-                </div>
             );
         }
         }

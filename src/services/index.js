@@ -150,10 +150,11 @@ export const reorderItemsForElement = (arrayItems, eleId) => {
     })
 }
 
-export const itemElementChange = (item, elementId, newOrder) => {
+export const itemElementChange = (item, elementId, newOrder, column) => {
     return axios.put('api/element-items/' + item.id + '/', {
         element_id: elementId,
-        newOrder: newOrder
+        newOrder: newOrder,
+        column: column
     })
 }
 
