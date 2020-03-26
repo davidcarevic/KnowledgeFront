@@ -78,10 +78,9 @@ class SingleElement extends Component {
             return (
               <div>
                 <Flex>
-                  <h3>{this.props.title}</h3>
-                  <Button onClick={this.handleEditingMode} width={'80px'}  top={'17px'}>{this.state.buttonText}</Button>
+                  <h3 onDoubleClick={this.handleEditingMode}>{this.props.title}</h3>
                 </Flex>
-                <div>{this.props.description}</div>
+                <div onDoubleClick={this.handleEditingMode}>{this.props.description}</div>
 
               </div>
             )
