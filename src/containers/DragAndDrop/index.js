@@ -5,8 +5,8 @@ import {getItemStyle, getItemStyleHorizontal, getListStyle, getListStyleHorizont
 import SingleItem from '../../components/SingleItem';
 // import sortCategoryElements from './sort/index'
 import Popover from "../../components/itemTypes/Popover";
-import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
-
+import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
+import SingleElement from '../../components/SingleElement';
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
 
@@ -164,7 +164,8 @@ class DragAndDrop extends Component {
                 <div>
                     <DragDropContext  onDragEnd={this.onDragEnd}>
                         {Object.keys(this.state).map((list_id, index) => (
-                            <ToggleBox key={index} id={this.state[index]?this.state[index].id:''}  category={this.props.hisCat} changeActiveCategory={this.props.changeActiveCategory} title={this.state[index] ? this.state[index].name :''}>
+                            <ToggleBox key={index} id={this.state[index]?this.state[index].id:''}  category={this.props.hisCat}
+                                changeActiveCategory={this.props.changeActiveCategory} title={this.state[index] ? this.state[index].name :''}>
                                 <Droppable  droppableId={this.state[index]?this.state[index].id.toString():''} key={list_id} >
                                     {(provided, snapshot) => (
                                         <div ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)}>
@@ -183,7 +184,8 @@ class DragAndDrop extends Component {
                                                             snapshot.isDragging,
                                                             provided.draggableProps.style
                                                         )}>
-                                                            <Link offset={-80} activeClass="active" className="test3" to={item.id} spy={true} smooth={true} duration={500}>{item.title}</Link>
+                                                            <Link offset={-80} activeClass="active" className="test3" to={item.id}
+                                                            spy={true} smooth={true} duration={500}>{item.title}</Link>
                                                         </div>
                                                     )}
                                                 </Draggable>
@@ -204,9 +206,12 @@ class DragAndDrop extends Component {
                     <DragDropContext onDragEnd={this.onDragEnd}>
                         {Object.keys(this.props.array).map((list_id,index) => (
                             <div key={'i' + index}>
-                                <h3><Element name={this.props.array[index].id} key={'e' + index}>{this.props.array[index] ? this.props.array[index].title : ''}</Element></h3>
-                                <div key={'ec' + index}>{this.props.array[index] ? this.props.array[index].description : ''}</div><br />
-                                <Popover project={this.props.project?this.props.project:''} section={this.props.section_id?this.props.section_id:''} category={this.props.category?this.props.category:''} element={this.state[index]?this.state[index].id:''}/>
+                                <Element name={this.props.array[index].id} key={'e' + index}>
+                                  <SingleElement id={this.props.array[index].id} title={this.props.array[index].title}
+                                      description={this.props.array[index].description}/>
+                                </Element><br />
+                                <Popover project={this.props.project?this.props.project:''} section={this.props.section_id?this.props.section_id:''}
+                                    category={this.props.category?this.props.category:''} element={this.state[index]?this.state[index].id:''}/>
                                 <Droppable droppableId={this.props.array[index]?this.props.array[index].id.toString():''} >
                                     {(provided, snapshot) => (
                                         <div ref={provided.innerRef} style={getListStyleHorizontal(snapshot.isDraggingOver)}>

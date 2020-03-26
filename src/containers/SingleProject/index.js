@@ -14,6 +14,7 @@ import Form from '../../components/elements/Form';
 import DragAndDrop from '../DragAndDrop';
 import CreateSection from '../CreateSection';
 import CreateCategory from '../CreateCategory';
+import SingleCategory from '../../components/SingleCategory'
 // import sortCategoryElements from "../DragAndDrop/sort";
 
 
@@ -94,8 +95,7 @@ class SingleProject extends Component {
                         section={section} categoryObj={category}/>:<div>asd</div>}
                 </SideHolder>
                 <MainHolder top={'18%'}>
-                    <h1>{category.name?category.name:''}</h1>
-                    <div>{category.description?category.description:''}</div><hr />
+                    <SingleCategory id={category.id} name={category.name} description={category.description} /><hr />
                     {category.elements?<DragAndDrop type="elements" changeElementForItem={this.props.changeElementForItem}
                         reorderItems={this.props.reorderItems}  array={category.elements} project={project.id} section_id={section.id}
                         category={category.id} setElements={this.props.setElements} section={section} catObj={category}/>

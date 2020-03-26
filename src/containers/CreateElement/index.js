@@ -9,7 +9,7 @@ import Form from '../../components/elements/Form';
 import Input from '../../components/elements/Input';
 import TextArea from '../../components/elements/TextArea';
 
-class CreateSection extends Component {
+class CreateElement extends Component {
     state = {
         title: '',
         description: '',
@@ -53,4 +53,4 @@ const mapStateToProps = state => ({
     category: state.projects.category
 })
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreateSection))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreateElement))
