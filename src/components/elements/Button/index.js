@@ -9,4 +9,6 @@ export default styled.button`
   border-radius: 5px;
   width: ${props => props.width || '315px'};
   height: 35px;
+
+  margin-top: ${props => props.top || ''};
 `;
