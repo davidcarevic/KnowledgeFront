@@ -15,7 +15,8 @@ import DragAndDrop from '../DragAndDrop';
 import CreateSection from '../CreateSection';
 import CreateCategory from '../CreateCategory';
 import CreateElement from '../CreateElement';
-import SingleCategory from '../../components/SingleCategory'
+import SingleCategory from '../../components/SingleCategory';
+import Section from '../../components/Section';
 // import sortCategoryElements from "../DragAndDrop/sort";
 
 
@@ -30,23 +31,14 @@ class SingleProject extends Component {
 
     componentDidMount() {
         if (!this.props.isLoading) {
-            this.props.getProject(this.props.match.params.id, this.props.category)
+            this.props.getProject(this.props.match.params.id)
         }
-    }
-
-    handleSectionChange = (e) => {
-        e.preventDefault();
-        this.setState({
-            selected_section: e.target.id
-        })
-        this.props.getSectionCategories(e.target.id, this.props.category)
-        this.props.setSection(e.target)
     }
 
     render() {
         const { project, sections, categories, category, section, isLoading } = this.props
         const { newElement } = this.state
-        const project_id = this.props.match.params.id
+        const project_id = project.id
 
         //console.log("CATEGORY U single porject ",this.props.category)
 
@@ -56,10 +48,10 @@ class SingleProject extends Component {
         }
 
         if (sections.length < 1 && !isLoading) {
-          return <CreateSection first />
+          return <CreateSection first={true} />
         }
 
-        if (categories.length<1 && !isLoading) {
+        if (categories.length < 1 && !isLoading) {
           return <CreateCategory first />
         }
 
@@ -78,19 +70,16 @@ class SingleProject extends Component {
 
                     </LeftHeaderHolder>
                     <RightHeaderHolder>
-                        <StyledLink to={"/dashboard/projects/" + project_id + "/section-create"}>
-                          <PlusIcon background={'lightgrey'} top={'18px'} width={'15px'} height={'15px'} right={'5px'}/>
-                        </StyledLink>
+                        <CreateSection />
                         <Form>
                         {!sections ? <div>No sections</div> : sections.map((item, index) =>
-                            <HeaderButtons key={index} id={item.id} onClick={this.handleSectionChange}>{item.name} </HeaderButtons>
+                            <HeaderButtons><Section section={item} key={index} id={item.id} name={item.name}/></HeaderButtons>
                         )}
                         </Form>
                     </RightHeaderHolder>
                 </Header>
                 <SideHolder top={'13%'}>
-                    <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id + '/category-create/'}>
-                      Add new Category</StyledLink>
+                      Add new Category
                     {categories && category? <DragAndDrop type="categories" reorderElements={this.props.reorderElements}
                         array={categories} hisCat={this.props.categories} changeActiveCategory={this.props.changeActiveCategory}
                         category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements}
@@ -99,7 +88,7 @@ class SingleProject extends Component {
                 <MainHolder top={'18%'}>
                     <SingleCategory id={category.id} name={category.name} description={category.description} /><hr />
                     {category.elements?<DragAndDrop type="elements" changeElementForItem={this.props.changeElementForItem}
-                        reorderItems={this.props.reorderItems}  array={category.elements} project={project.id} section_id={section.id}
+                        reorderItems={this.props.reorderItems}  array={category.elements} project={project_id} section_id={section.id}
                         category={category.id} setElements={this.props.setElements} section={section} catObj={category}/>
                         :<h3>By clicking plus, create first element.</h3> }
                     {(!section || !category) ? '' : <CreateElement />}

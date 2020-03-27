@@ -78,9 +78,9 @@ export const getProjectsForUser = (id) => dispatch => {
         })
 }
 
-export const retrieveProject = (id, category) => dispatch => {
+export const retrieveProject = (id) => dispatch => {
     dispatch(isLoading(true));
-    let currentCat=category;
+    let currentCat={};
     let categories={};
     let categoriesUnsorted={};
     getSingleProject(id)
@@ -145,11 +145,11 @@ export const retrieveProject = (id, category) => dispatch => {
         .finally(dispatch(isLoading(false)))
 }
 
-export const retrieveSectionCategories = (id, category) => dispatch => {
+export const retrieveSectionCategories = (id) => dispatch => {
     dispatch(isLoading(true))
     let categoriesUnsorted=[]
     let categories=[]
-    let currentCat=category
+    let currentCat={}
     dispatch(setCategories([]))
     dispatch(setCategory([]))
     dispatch(setElements([]))
