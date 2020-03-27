@@ -14,6 +14,7 @@ import {categoryCreateError,categoryCreateSuccess} from "../../../components/ele
 import {sectionCreateError,sectionCreateSuccess} from "../../../components/elements/Notifications/SectionCreate";
 import {elementCreateError,elementCreateSuccess} from "../../../components/elements/Notifications/ElementCreate";
 import {itemCreateError, itemCreateSuccess} from "../../../components/elements/Notifications/ItemCreate";
+import {categoryUpdateError,categoryUpdateSuccess} from "../../../components/elements/Notifications/CategoryUpdate";
 import sortCategoryElements from "../../../containers/DragAndDrop/sort";
 
 
@@ -226,12 +227,17 @@ export const sectionCreation = (name, description, project_id) => dispatch => {
     })
 }
 
-export const categoryCreation = (name, description, section_id) => dispatch => {
+export const categoryCreation = (name, description, section_id, categories) => dispatch => {
+    let catsSet=categories
     dispatch(isLoading(true))
     createCategory(name, description, section_id)
     .then(res => {
+        res.data.elements=[]
         dispatch(setCategory(res.data))
         dispatch(isLoading(false))
+        catsSet.push(res.data)
+        console.log("CAT SET jbg", catsSet)
+        dispatch(setCategories(catsSet))
         categoryCreateSuccess()
     })
     .catch(err => {
@@ -443,10 +449,6 @@ export const changeElementForItem = (currentItem, element, category, destination
             console.log(err.message)
             dispatch(isLoading(false))
         })
-        .catch(err=>{
-            console.log(err.message)
-            dispatch(isLoading(false))
-        })
 }
 
 export const itemUpdate = (id, content) => dispatch => {
@@ -475,16 +477,54 @@ export const elementUpdate = (id, title, description) => dispatch => {
   })
 }
 
-export const categoryUpdate = (id, name, description) => dispatch => {
-  dispatch(isLoading(true))
+export const categoryUpdate = (id, name, description, category, section) => dispatch => {
+    let currentCat=category
+    let currentSection=section
+    let categoriesUnsorted=[]
+    let categories=[]
   updateCategory(id, name, description)
   .then(res => {
     dispatch(editCategory(res.data))
     dispatch(isLoading(false))
-  })
+      currentCat.description=res.data.description
+      currentCat.name=res.data.name
+      categoryUpdateSuccess()
+  }).then(res => {
+    return getSectionCategories(currentSection.id)})
+        .then(res => {
+            let firstId=currentCat.id
+            categoriesUnsorted=res.data
+            categories=sortCategoryElements(res.data)
+            for(let i=0;i<categoriesUnsorted.length;i++){
+                for(let j in categories){
+                    if(categoriesUnsorted[i].id===parseInt(j)) {
+                        categoriesUnsorted[i].elements = categories[j]
+                    }
+                }
+            }
+            return firstId
+        })
+        .then(id => {
+            return getCategoryElements(id)
+        })
+        .then(res => {
+            let items=sortCategoryElements(res.data)
+            currentCat.elements.forEach((element,index)=>{
+                for(let i in items){
+                    if(element.id===i){
+                        element.items=items[i]
+                    }
+                }
+            })
+            dispatch(setCategories(categoriesUnsorted));
+            dispatch(setCategory(currentCat));
+            dispatch(setElements(items));
+            dispatch(isLoading(false))
+        })
   .catch(err => {
     console.log(err.message)
     dispatch(isLoading(false))
+      categoryUpdateError()
   })
 }
 

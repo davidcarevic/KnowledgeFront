@@ -36,7 +36,7 @@ class CreateCategory extends Component {
         } else {
           const project_id = this.props.match.params.id
           const section_id = this.props.match.params.s_id
-          this.props.createCategory(name, description, section_id);
+          this.props.createCategory(name, description, section_id,this.props.categories);
           history.push("/dashboard/projects/" + project_id);
         }
     }

@@ -44,10 +44,12 @@ class SingleCategory extends Component {
     }
 
     handleFormSubmit = (e) => {
+        console.log("THIS PROPS ", this.props)
         e.preventDefault();
         const { id, history } = this.props
         const { name, description } = this.state;
-        this.props.updateCategory(id, name, description);
+        this.props.updateCategory(id, name, description, this.props.category, this.props.section);
+        this.setState({editing: false})
     }
 
     handleDeleteSubmit = (e) => {
