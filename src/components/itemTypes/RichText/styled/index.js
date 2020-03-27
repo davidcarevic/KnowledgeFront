@@ -8,6 +8,6 @@ export const DisplayRichText = styled.div`
 export const StyledItem = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: left;
+  align-items: center;
   justify-content: center;
 `;

@@ -20,7 +20,6 @@ import ForgotPassword from "./containers/ForgotPassword";
 import SingleProject from "./containers/SingleProject";
 import CreateSection from "./containers/CreateSection";
 import CreateCategory from "./containers/CreateCategory";
-import CreateElement from "./containers/CreateElement";
 import CreateItem from "./containers/CreateItem";
 
 const App = props => (
@@ -40,7 +39,6 @@ const App = props => (
       <PrivateRoute exact path="/invite" Component={InviteUser}/>
       <PrivateRoute exact path="/dashboard/projects/:id/section-create" Component={CreateSection}/>
       <PrivateRoute exact path="/dashboard/projects/:id/section/:s_id/category-create" Component={CreateCategory}/>
-      <PrivateRoute exact path="/dashboard/projects/:id/section/:s_id/category/:c_id/element-create" Component={CreateElement}/>
       <PrivateRoute exact path="/dashboard/projects/:id/section/:s_id/category/:c_id/element/:e_id/item-create/:type" Component={CreateItem}/>
       </Switch>
     </Router>

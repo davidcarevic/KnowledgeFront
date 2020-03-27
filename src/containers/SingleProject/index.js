@@ -14,6 +14,7 @@ import Form from '../../components/elements/Form';
 import DragAndDrop from '../DragAndDrop';
 import CreateSection from '../CreateSection';
 import CreateCategory from '../CreateCategory';
+import CreateElement from '../CreateElement';
 import SingleCategory from '../../components/SingleCategory'
 // import sortCategoryElements from "../DragAndDrop/sort";
 
@@ -44,6 +45,7 @@ class SingleProject extends Component {
 
     render() {
         const { project, sections, categories, category, section, isLoading } = this.props
+        const { newElement } = this.state
         const project_id = this.props.match.params.id
 
         //console.log("CATEGORY U single porject ",this.props.category)
@@ -100,9 +102,7 @@ class SingleProject extends Component {
                         reorderItems={this.props.reorderItems}  array={category.elements} project={project.id} section_id={section.id}
                         category={category.id} setElements={this.props.setElements} section={section} catObj={category}/>
                         :<h3>By clicking plus, create first element.</h3> }
-                    {(!section || !category) ? '' : <StyledLink to={"/dashboard/projects/" + project_id + "/section/" + this.props.section.id +
-                        '/category/' + this.props.category.id + '/element-create'}>
-                        <PlusIcon background={'lightgrey'} top={'18px'} width={'15px'} height={'15px'} right={'5px'} /></StyledLink>}
+                    {(!section || !category) ? '' : <CreateElement />}
                     <hr /><StyledLink to="/dashboard">Back to Dashboard</StyledLink>
                 </MainHolder>
             </div>
@@ -123,7 +123,9 @@ const mapDispatchToProps = {
     changeActiveCategory: projectRedux.thunks.changeCategory,
     reorderElements: projectRedux.thunks.reorderElements,
     reorderItems: projectRedux.thunks.reorderItems,
-    changeElementForItem: projectRedux.thunks.changeElementForItem
+    changeElementForItem: projectRedux.thunks.changeElementForItem,
+    createElement: projectRedux.thunks.elementCreation,
+    createItem: projectRedux.thunks.itemCreation
 }
 
 const mapStateToProps = state => ({
