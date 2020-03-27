@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import StyledLink from "../../elements/Link";
 import { ButtonS, StyledPopover} from "./styled"
+import CreateItem from '../../../containers/CreateItem';
 
 
 class Popover extends Component {
@@ -37,12 +38,12 @@ class Popover extends Component {
 				{opened && (
 					<StyledPopover>
             <h4>Select Item Type</h4>
-            <StyledLink
-                to={"/dashboard/projects/" + this.props.project + "/section/" + this.props.section + "/category/" + this.props.category + "/element/" +
-                this.props.element + "/item-create/embed"}>Iframe</StyledLink><br/>
-            <StyledLink
-                to={"/dashboard/projects/" + this.props.project + "/section/" + this.props.section + "/category/" + this.props.category + "/element/" +
-                this.props.element + "/item-create/richText"}>Rich Text</StyledLink>
+						<div>
+							<CreateItem type={'embed'}/>
+						</div>
+						<div>
+							<CreateItem type={'richText'}/>
+						</div>
 					</StyledPopover>
 				)}
 			</div>

@@ -21,14 +21,12 @@ class Embed extends Item {
 
     render() {
       const { content } = this.state
-      const project_id = this.props.match.params.id
 
       if (this.props.editing && this.props.first === undefined) {
             return (
                 <Form onSubmit={this.handleSaveSubmit}>
                     <Input id="content" placeholder="ENTER YOUR URL" type="text" value={content} onChange={this.handleInputChange} /><br/><br/>
-                    <Button type="submit">CREATE</Button><hr/>
-                    <StyledLink to={"/dashboard/projects/" + project_id}>Back to Project</StyledLink>
+                    <Button type="submit">CREATE</Button>
                 </Form>
             )
         }
