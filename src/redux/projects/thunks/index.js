@@ -232,13 +232,12 @@ export const categoryCreation = (name, description, section_id, categories) => d
     dispatch(isLoading(true))
     createCategory(name, description, section_id)
     .then(res => {
-        res.data.elements=[]
-        dispatch(setCategory(res.data))
-        dispatch(isLoading(false))
-        catsSet.push(res.data)
+        let catCur=res.data
+        catCur['elements']=[]
+        dispatch(setCategory(catCur))
         console.log("CAT SET jbg", catsSet)
-        dispatch(setCategories(catsSet))
         categoryCreateSuccess()
+        dispatch(isLoading(false))
     })
     .catch(err => {
         console.log(err.message)
