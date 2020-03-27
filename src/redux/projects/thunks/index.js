@@ -13,6 +13,7 @@ import {generalError} from "../../../components/elements/Notifications/GeneralEr
 import {categoryCreateError,categoryCreateSuccess} from "../../../components/elements/Notifications/CategoryCreate";
 import {sectionCreateError,sectionCreateSuccess} from "../../../components/elements/Notifications/SectionCreate";
 import {elementCreateError,elementCreateSuccess} from "../../../components/elements/Notifications/ElementCreate";
+import {itemCreateError, itemCreateSuccess} from "../../../components/elements/Notifications/ItemCreate";
 import sortCategoryElements from "../../../containers/DragAndDrop/sort";
 
 
@@ -325,16 +326,33 @@ export const changeCategoryForElement = (currentElement, category, section, dest
         })
 }
 
-export const itemCreation = (content, type, element) => dispatch => {
-    dispatch(isLoading(true))
+export const itemCreation = (content, type, element, category) => dispatch => {
+    let currentCat = category
     createItem(content, type, element)
     .then(res => {
         dispatch(setItem(res.data))
-        dispatch(isLoading(false))
+        itemCreateSuccess()
     })
+        .then(res=>{
+            return getCategoryElements(category.id)}
+        )
+        .then(res => {
+            let items = sortCategoryElements(res.data)
+            currentCat.elements.forEach((element, index) => {
+                for (let i in items) {
+                    if (element.id === i) {
+                        element.items = items[i]
+                    }
+                }
+            })
+            dispatch(setCategory(currentCat));
+            dispatch(setElements(items));
+            dispatch(isLoading(false))
+        })
     .catch(err => {
         console.log(err.message)
         dispatch(isLoading(false))
+        itemCreateError()
     })
 }
 

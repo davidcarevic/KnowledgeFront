@@ -64,7 +64,8 @@ const mapDispatchToProps = {
 const mapStateToProps = state => ({
   isLoading: state.global.isLoading,
   element: state.projects.element,
-  item: state.projects.item
+  item: state.projects.item,
+    category:state.projects.category
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Embed))

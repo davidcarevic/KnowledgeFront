@@ -40,7 +40,7 @@ class SingleItem extends Component {
         if (this.props.type === 'embed') {
             return (
               <StyledItem>
-                <Embed id={this.props.id} content={this.props.content} editing={this.state.editing} first={this.state.first}/>
+                <Embed id={this.props.id} content={this.props.content} category={this.props.category} editing={this.state.editing} first={this.state.first}/>
                 <Button onClick={this.handleEditingMode} width={'150px'}>{this.state.buttonText}</Button>
               </StyledItem>
             )
@@ -48,7 +48,7 @@ class SingleItem extends Component {
         if (this.props.type === 'richText') {
             return (
               <StyledItem>
-                <RichText id={this.props.id} content={this.props.content}  editing={this.state.editing} first={this.state.first}/>
+                <RichText id={this.props.id} content={this.props.content} category={this.props.category}   editing={this.state.editing} first={this.state.first}/>
                 <Button onClick={this.handleEditingMode} width={'150px'}>{this.state.buttonText}</Button>
               </StyledItem>
             )

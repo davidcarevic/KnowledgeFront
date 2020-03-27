@@ -21,11 +21,12 @@ class Item extends Component {
 
     handleSaveSubmit = (e) => {
         e.preventDefault();
+        console.log(" PROPS U ITEM", this.props)
         const { history } = this.props
         const { content, type } = this.state;
         const project_id = this.props.match.params.id
         const element_id = this.props.match.params.e_id
-        this.props.createItem(content, type, element_id);
+        this.props.createItem(content, type, element_id, this.props.category);
         history.push("/dashboard/projects/" + project_id);
     }
 

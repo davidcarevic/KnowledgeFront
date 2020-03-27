@@ -16,14 +16,14 @@ class CreateItem extends Component {
 
     if (type === 'embed') {
       return (
-        <Embed editing={true}/>
+        <Embed category={this.props.category} editing={true}/>
       )
     }
 
     if (type === 'richText') {
       return (
         <div>
-          <RichText editing={true}/>
+          <RichText category={this.props.category} editing={true}/>
         </div>
       )
     }
@@ -42,7 +42,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = state => ({
-
+  category:state.projects.category
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreateItem))
