@@ -74,10 +74,9 @@ class SingleCategory extends Component {
             return (
               <div>
                 <Flex>
-                  <h1>{this.props.name}</h1>
-                  <Button onClick={this.handleEditingMode} width={'80px'}  top={'28px'}>{this.state.buttonText}</Button>
+                  <h1 onDoubleClick={this.handleEditingMode}>{this.props.name}</h1>
                 </Flex>
-                <div>{this.props.description}</div>
+                <div onDoubleClick={this.handleEditingMode}>{this.props.description}</div>
 
               </div>
             )
