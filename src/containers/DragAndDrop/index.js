@@ -4,7 +4,7 @@ import ToggleBox from '../ToggleBox';
 import {getItemStyle, getItemStyleHorizontal, getListStyle, getListStyleHorizontal} from './styled';
 import SingleItem from '../../components/SingleItem';
 // import sortCategoryElements from './sort/index'
-import Popover from "../../components/itemTypes/Popover";
+import CreateItem from '../CreateItem'
 import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 import SingleElement from '../../components/SingleElement';
 // a little function to help us with reordering the result
@@ -210,8 +210,7 @@ class DragAndDrop extends Component {
                                   <SingleElement id={this.props.array[index].id} title={this.props.array[index].title}
                                       description={this.props.array[index].description}/>
                                 </Element><br />
-                                <Popover project={this.props.project?this.props.project:''} section={this.props.section_id?this.props.section_id:''}
-                                    category={this.props.category?this.props.category:''} element={this.state[index]?this.state[index].id:''}/>
+                                <CreateItem element={this.state[index]?this.state[index].id:''}/>
                                 <Droppable droppableId={this.props.array[index]?this.props.array[index].id.toString():''} >
                                     {(provided, snapshot) => (
                                         <div ref={provided.innerRef} style={getListStyleHorizontal(snapshot.isDraggingOver)}>

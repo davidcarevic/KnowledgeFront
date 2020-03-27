@@ -41,8 +41,7 @@ class RichText extends Item {
                 height: 'auto',
                 width: 'auto',
                 buttonList: buttonList.complex}}/><br/><br/>
-            <Button type="submit">CREATE</Button><hr/>
-            <StyledLink to={"/dashboard/projects/" + project_id}>Back to Project</StyledLink>
+            <Button type="submit">CREATE</Button>
         </Form>
       );
     }
