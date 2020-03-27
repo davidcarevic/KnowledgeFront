@@ -52,13 +52,16 @@ class SingleElement extends Component {
         e.preventDefault();
         const { history, project, category, isLoading } = this.props
         const { id, title, description } = this.state;
-        this.props.updateElement(id, title, description);
+        console.log("THIS PROPS", this.props)
+        this.props.updateElement(id, title, description, this.props.category, this.props.section);
+        this.setState({editing:false})
     }
 
     handleDeleteSubmit = (e) => {
       e.preventDefault();
       const id = this.props.id
-      this.props.deleteElement(id)
+      this.props.deleteElement(id, this.props.category, this.props.section)
+        this.setState({editing:false})
     }
 
     render() {
@@ -95,8 +98,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
     isLoading: state.global.isLoading,
-    section: state.projects.category,
-    category: state.projects.element
+    section: state.projects.section,
+    category: state.projects.category
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SingleElement))

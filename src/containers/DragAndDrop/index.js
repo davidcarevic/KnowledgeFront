@@ -207,7 +207,7 @@ class DragAndDrop extends Component {
                         {Object.keys(this.props.array).map((list_id,index) => (
                             <div key={'i' + index}>
                                 <Element name={this.props.array[index].id} key={'e' + index}>
-                                  <SingleElement id={this.props.array[index].id} title={this.props.array[index].title}
+                                  <SingleElement id={this.props.array[index].id} category={this.props.category} title={this.props.array[index].title}
                                       description={this.props.array[index].description}/>
                                 </Element><br />
                                 <CreateItem element={this.state[index]?this.state[index].id:''}/>

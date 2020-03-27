@@ -10,11 +10,16 @@ import { isLoading } from "../../global/actions";
 //notifications
 import {projectCreateError,projectCreateSuccess} from "../../../components/elements/Notifications/ProjectCreate";
 import {generalError} from "../../../components/elements/Notifications/GeneralError";
-import {categoryCreateError,categoryCreateSuccess} from "../../../components/elements/Notifications/CategoryCreate";
 import {sectionCreateError,sectionCreateSuccess} from "../../../components/elements/Notifications/SectionCreate";
-import {elementCreateError,elementCreateSuccess} from "../../../components/elements/Notifications/ElementCreate";
-import {itemCreateError, itemCreateSuccess} from "../../../components/elements/Notifications/ItemCreate";
+import {categoryCreateError,categoryCreateSuccess} from "../../../components/elements/Notifications/CategoryCreate";
 import {categoryUpdateError,categoryUpdateSuccess} from "../../../components/elements/Notifications/CategoryUpdate";
+import {categoryDeleteError,categoryDeleteSuccess} from "../../../components/elements/Notifications/CategoryDelete";
+import {elementCreateError,elementCreateSuccess} from "../../../components/elements/Notifications/ElementCreate";
+import {elementUpdateError, elementUpdateSuccess} from "../../../components/elements/Notifications/ElementUpdate";
+import {elementDeleteError,elementDeleteSuccess} from "../../../components/elements/Notifications/ElementDelete";
+import {itemCreateError, itemCreateSuccess} from "../../../components/elements/Notifications/ItemCreate";
+import {itemUpdateError,itemUpdateSuccess} from "../../../components/elements/Notifications/ItemUpdate";
+import {itemDeleteError,itemDeleteSuccess} from "../../../components/elements/Notifications/ItemDelete";
 import sortCategoryElements from "../../../containers/DragAndDrop/sort";
 
 
@@ -463,15 +468,56 @@ export const itemUpdate = (id, content) => dispatch => {
   })
 }
 
-export const elementUpdate = (id, title, description) => dispatch => {
-  dispatch(isLoading(true))
+export const elementUpdate = (id, title, description, category, section) => dispatch => {
+    let currentCat=category
+    let currentSection=section
+    let createdEle
+    let categoriesUnsorted=[]
+    let categories=[]
   updateElement(id, title, description)
   .then(res => {
+      createdEle=res.data
     dispatch(editElement(res.data))
-    dispatch(isLoading(false))
-  })
+      elementUpdateSuccess()
+  }).then(res => {
+      return getSectionCategories(currentSection.id)})
+      .then(res => {
+          let firstId=currentCat.id
+          categoriesUnsorted=res.data
+          categories=sortCategoryElements(res.data)
+          for(let i=0;i<categoriesUnsorted.length;i++){
+              for(let j in categories){
+                  if(categoriesUnsorted[i].id===parseInt(j)) {
+                      categoriesUnsorted[i].elements = categories[j]
+                  }
+              }
+          }
+          return firstId
+      })
+      .then(id => {
+          return getCategoryElements(id)
+      })
+      .then(res => {
+          let items=sortCategoryElements(res.data)
+          currentCat.elements.forEach((element,index)=>{
+              for(let i in items){
+                  if(element.id===i){
+                      element.items=items[i]
+                  }
+                  if(element.id===createdEle.id.toString()){
+                      element.description=createdEle.description
+                      element.title=createdEle.title
+                  }
+              }
+          })
+          dispatch(setCategories(categoriesUnsorted));
+          dispatch(setCategory(currentCat));
+          dispatch(setElements(items));
+          dispatch(isLoading(false))
+      })
   .catch(err => {
     console.log(err.message)
+      elementUpdateError()
     dispatch(isLoading(false))
   })
 }
@@ -566,15 +612,58 @@ export const itemDelete = (id) => dispatch => {
   })
 }
 
-export const elementDelete = (id) => dispatch => {
-  dispatch(isLoading(true))
+export const elementDelete = (id,category, section) => dispatch => {
+  let currentCat=category
+    let categories=[]
+    let categoriesUnsorted=[]
+    let currentSection=section
+    let eleId=id
   deleteElement(id)
   .then(res => {
     dispatch(removeElement(res.data))
-    dispatch(isLoading(false))
+      elementDeleteSuccess()
   })
+      .then(res => {
+          return getSectionCategories(currentSection.id)})
+      .then(res => {
+          let firstId=currentCat.id
+          categoriesUnsorted=res.data
+          categories=sortCategoryElements(res.data)
+          for(let i=0;i<categoriesUnsorted.length;i++){
+              for(let j in categories){
+                  if(categoriesUnsorted[i].id===parseInt(j)) {
+                      categoriesUnsorted[i].elements = categories[j]
+                  }
+              }
+          }
+          return firstId
+      })
+      .then(id => {
+          return getCategoryElements(id)
+      })
+      .then(res => {
+          let items=sortCategoryElements(res.data)
+          let removeIndex=''
+          currentCat.elements.forEach((element,index)=>{
+              for(let i in items){
+                  if(element.id===i){
+                      element.items=items[i]
+                  }
+                  if(element.id===eleId.toString()){
+                      removeIndex=index
+                  }
+              }
+          })
+          currentCat.elements.splice(removeIndex,1)
+          dispatch(setCategories(categoriesUnsorted));
+          dispatch(setCategory(currentCat));
+          dispatch(setElements(items));
+          dispatch(isLoading(false))
+      })
+
   .catch(err => {
     console.log(err.message)
+      elementDeleteError()
     dispatch(isLoading(false))
   })
 }
@@ -584,10 +673,14 @@ export const categoryDelete = (id) => dispatch => {
   deleteCategory(id)
   .then(res => {
     dispatch(removeCategory(res.data))
+      dispatch(setCategory({}))
+      dispatch(setCategories([]))
     dispatch(isLoading(false))
+      categoryDeleteSuccess()
   })
   .catch(err => {
     console.log(err.message)
+      categoryDeleteError()
     dispatch(isLoading(false))
   })
 }
