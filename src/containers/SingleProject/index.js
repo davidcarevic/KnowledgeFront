@@ -30,13 +30,13 @@ class SingleProject extends Component {
     }
 
     componentDidMount() {
-        if (!this.props.isLoading && this.props.categories.length<1) {
+        if (!this.props.isLoading) {
             this.props.getProject(this.props.match.params.id)
         }
     }
 
     render() {
-        const { project, sections, categories, category, section, isLoading } = this.props
+        const { project, sections, categories, category, section, isLoading, elements } = this.props
         const { newElement } = this.state
         const project_id = project.id
 
@@ -80,17 +80,17 @@ class SingleProject extends Component {
                 </Header>
                 <SideHolder top={'15%'}>
                     <CreateCategory />
-                    {category.elements? <DragAndDrop type="categories" reorderElements={this.props.reorderElements}
+                    {categories && category? <DragAndDrop type="categories" reorderElements={this.props.reorderElements}
                         array={categories} hisCat={this.props.categories} changeActiveCategory={this.props.changeActiveCategory}
                         category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements}
                         section={section} categoryObj={category}/>:<div>asd</div>}
                 </SideHolder>
                 <MainHolder top={'18%'}>
                     <SingleCategory id={category.id} name={category.name} description={category.description} /><hr />
-                    {category.elements?<DragAndDrop type="elements" changeElementForItem={this.props.changeElementForItem}
+                    {category.elements ? <DragAndDrop type="elements" changeElementForItem={this.props.changeElementForItem}
                         reorderItems={this.props.reorderItems}  array={category.elements} project={project_id} section_id={section.id}
                         category={category.id} setElements={this.props.setElements} section={section} catObj={category}/>
-                        :<h3>By clicking plus, create first element.</h3> }
+                        : '' }
                     <CreateElement />
                     <hr /><StyledLink to="/dashboard">Back to Dashboard</StyledLink>
                 </MainHolder>
