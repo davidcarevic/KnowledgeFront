@@ -18,7 +18,6 @@ import CreateProject from "./containers/CreateProject";
 import InviteUser from "./containers/InviteUser";
 import ForgotPassword from "./containers/ForgotPassword";
 import SingleProject from "./containers/SingleProject";
-import CreateCategory from "./containers/CreateCategory";
 
 const App = props => (
     <Router>
@@ -35,7 +34,6 @@ const App = props => (
       <PrivateRoute exact path="/dashboard/projects/create" Component={CreateProject}/>
       <PrivateRoute exact path="/dashboard/projects/:id" Component={SingleProject}/>
       <PrivateRoute exact path="/invite" Component={InviteUser}/>
-      <PrivateRoute exact path="/dashboard/projects/:id/section/:s_id/category-create" Component={CreateCategory}/>
       </Switch>
     </Router>
   )
