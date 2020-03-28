@@ -229,7 +229,7 @@ class DragAndDrop extends Component {
                                                             snapshot.isDragging,
                                                             provided.draggableProps.style
                                                         )}>
-                                                            <SingleItem id={item.id} type={item.type} content={item.content} first={true}/>
+                                                            <SingleItem id={item.id} type={item.type}  content={item.content} first={true}/>
 
                                                         </div>
                                                     )}

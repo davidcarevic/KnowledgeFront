@@ -20,12 +20,13 @@ class Item extends Component {
     }
 
     handleSaveSubmit = (e) => {
+        e.preventDefault();
         const { content, type } = this.state;
         const category = this.props.category
         const element_id = this.props.id
         this.props.createItem(content, type, element_id, category);
         this.setState({
-          editing: false
+            editing: false
         })
     }
 
@@ -33,13 +34,19 @@ class Item extends Component {
       e.preventDefault();
       const { content } = this.state
       const itemId = this.props.id
-      this.props.updateItem(itemId, content)
+      this.props.updateItem(itemId, content, this.props.category)
+        this.setState({
+            editing: false
+        })
     }
 
     handleDeleteSubmit = (e) => {
       e.preventDefault();
       const itemId = this.props.id
-      this.props.deleteItem(itemId)
+      this.props.deleteItem(itemId, this.props.category)
+        this.setState({
+            editing: false
+        })
     }
 
     render() {

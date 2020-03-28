@@ -31,11 +31,12 @@ class Section extends Component {
     }
 
     handleSectionChange = (e) => {
+        e.preventDefault()
+        console.log("THIS PROPS SECTIOn", this.props)
         this.setState({
             selected_section: e.target.id
         })
-        this.props.getSectionCategories(e.target.id)
-        this.props.getCategoryElements(this.props.category.id)
+        this.props.getSectionCategories(this.props.section.id)
     }
 
     handleUpdateMode = (e) => {

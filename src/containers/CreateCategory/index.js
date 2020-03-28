@@ -25,17 +25,18 @@ class CreateCategory extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
+        console.log("this.props SECTIOn", this.props)
         const { history, project, section, isLoading } = this.props
         const { name, description } = this.state;
 
         if (this.props.first && !isLoading) {
           const project_id = project.id
-          const section_id = section.id
+          const section_id = this.props.section.id
           this.props.createCategory(name, description, section_id);
           history.push("/dashboard/projects/" + project_id);
         } else {
           const project_id = this.props.match.params.id
-          const section_id = this.props.match.params.s_id
+          const section_id = this.props.section.id
           this.props.createCategory(name, description, section_id,this.props.categories);
           history.push("/dashboard/projects/" + project_id);
         }
