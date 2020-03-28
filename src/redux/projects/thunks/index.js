@@ -142,6 +142,7 @@ export const retrieveProject = (id) => dispatch => {
         console.log(err.message)
         dispatch(isLoading(false))
     })
+        .finally(dispatch(isLoading(false)))
 }
 
 export const retrieveSectionCategories = (id, section) => dispatch => {
