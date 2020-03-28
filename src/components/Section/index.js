@@ -57,7 +57,8 @@ class Section extends Component {
       e.preventDefault();
       const { name, description } = this.state
       const sectionId = this.props.id
-      this.props.updateSection(sectionId, name, description)
+      this.props.updateSection(sectionId, name, description, this.props.section,this.props.project.id)
+        this.setState({editing:false})
     }
 
     handleDeleteSubmit = (e) => {

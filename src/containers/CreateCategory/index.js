@@ -27,10 +27,12 @@ class CreateCategory extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
+        console.log("CAT CREATE PROPS", this.props)
         const { history, project, section, isLoading } = this.props
         const { name, description } = this.state;
         const section_id = section.id
         this.props.createCategory(name, description, section_id, this.props.categories);
+        this.setState({newCategory:false})
     }
 
     createNewCategory = (e) => {

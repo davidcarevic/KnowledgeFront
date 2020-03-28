@@ -26,7 +26,8 @@ class Item extends Component {
         const element_id = this.props.id
         this.props.createItem(content, type, element_id, category);
         this.setState({
-            editing: false
+            editing: false,
+            first: false
         })
     }
 
@@ -36,7 +37,8 @@ class Item extends Component {
       const itemId = this.props.id
       this.props.updateItem(itemId, content, this.props.category)
         this.setState({
-            editing: false
+            editing: false,
+            first: false
         })
     }
 

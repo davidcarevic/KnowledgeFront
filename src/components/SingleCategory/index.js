@@ -55,7 +55,7 @@ class SingleCategory extends Component {
     handleDeleteSubmit = (e) => {
       e.preventDefault();
       const { id } = this.props
-      this.props.deleteCategory(id)
+      this.props.deleteCategory(id, this.props.section)
     }
 
     render() {

@@ -73,13 +73,13 @@ class SingleProject extends Component {
                         <CreateSection />
                         <Flex top={'15px'}>
                           {!sections ? <div>No sections</div> : sections.map((item, index) =>
-                              <Section section={item} key={index} id={item.id} name={item.name}/>
+                              <Section section={item} key={index} id={item.id} project={this.props.project} name={item.name}/>
                           )}
                         </Flex>
                     </RightHeaderHolder>
                 </Header>
                 <SideHolder top={'15%'}>
-                    <CreateCategory />
+                    <CreateCategory categories={this.props.categories} />
                     {categories && category? <DragAndDrop type="categories" reorderElements={this.props.reorderElements}
                         array={categories} hisCat={this.props.categories} changeActiveCategory={this.props.changeActiveCategory}
                         category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements}
