@@ -31,11 +31,12 @@ class CreateSection extends Component {
       e.preventDefault();
       if (this.state.newSection) {
         this.setState({
-          newElement: false,
+          newSection: false,
           title: '',
           description: 'Description',
         })
       } else {
+        console.log("NEW SECTION: ", this.state.newSection)
         this.setState({
           newSection: true,
         })
@@ -75,8 +76,9 @@ class CreateSection extends Component {
         if (newSection) {
           return (
             <Form onSubmit={this.handleFormSubmit}>
-                <Title>{!first ? '' : 'To start your project, please create first section.'}</Title>
                 <Input id="name" placeholder="SECTION NAME" type="text" value={name} onChange={this.handleInputChange} /><br/><br/>
+                <Button width={'157px'} type="submit">CREATE</Button>
+                <Button width={'157px'} onClick={this.createNewSection}>CANCEL</Button>
             </Form>
           )
       } else {

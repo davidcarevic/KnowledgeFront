@@ -8,6 +8,7 @@ import StyledLink from '../../components/elements/Link';
 import Form from '../../components/elements/Form';
 import Input from '../../components/elements/Input';
 import TextArea from '../../components/elements/TextArea';
+import { PlusIcon } from '../../components/elements/Icons';
 
 class CreateCategory extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class CreateCategory extends Component {
     state = {
         name: '',
         description: '',
+        newCategory: false
     }
 
     handleInputChange = (e) => {
@@ -25,36 +27,60 @@ class CreateCategory extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        console.log("this.props SECTIOn", this.props)
         const { history, project, section, isLoading } = this.props
         const { name, description } = this.state;
 
         if (this.props.first && !isLoading) {
-          const project_id = project.id
-          const section_id = this.props.section.id
+          const section_id = section.id
           this.props.createCategory(name, description, section_id);
-          history.push("/dashboard/projects/" + project_id);
         } else {
-          const project_id = this.props.match.params.id
-          const section_id = this.props.section.id
-          this.props.createCategory(name, description, section_id,this.props.categories);
-          history.push("/dashboard/projects/" + project_id);
+          const section_id = section.id
+          this.props.createCategory(name, description, section_id, this.props.categories);
         }
     }
 
+    createNewCategory = (e) => {
+      e.preventDefault();
+      if (this.state.newCategory) {
+        this.setState({
+          newCategory: false,
+          name: '',
+          description: '',
+        })
+      } else {
+        this.setState({
+          newCategory: true,
+        })
+      }
+    }
+
     render() {
-        const { name, description } = this.state;
+        const { name, description, newCategory } = this.state;
         const { first } = this.props
-        const project_id = this.props.match.params.id
+        if (first) {
+          return (
+            <Form onSubmit={this.handleFormSubmit}>
+                <Title>Create first category.</Title>
+                <Input id="name" placeholder="CATEGORY NAME" type="text" value={name} onChange={this.handleInputChange} /><br/><br/>
+                <TextArea id="description" placeholder="DESCRIPTION" value={description} onChange={this.handleInputChange} /><br/><br/>
+                <Button type="submit">CREATE</Button><hr/>
+            </Form>
+          )
+        }
+        if (newCategory) {
+          return (
+            <Form onSubmit={this.handleFormSubmit}>
+                <Input width={'auto'} id="name" placeholder="CATEGORY NAME" type="text" value={name} onChange={this.handleInputChange} /><br/><br/>
+                <TextArea width={'auto'} id="description" placeholder="DESCRIPTION" value={description} onChange={this.handleInputChange} /><br/><br/>
+                <Button width={'160px'} type="submit">CREATE</Button>
+                <Button width={'160px'} onClick={this.createNewCategory}>CANCEL</Button>
+            </Form>
+          )
+      } else {
         return (
-        <Form onSubmit={this.handleFormSubmit}>
-            <Title>{!first ? 'CREATE YOUR CATEGORY!' : 'Create first category.'}</Title>
-            <Input id="name" placeholder="CATEGORY NAME" type="text" value={name} onChange={this.handleInputChange} /><br/><br/>
-            <TextArea id="description" placeholder="DESCRIPTION" value={description} onChange={this.handleInputChange} /><br/><br/>
-            <Button type="submit">CREATE</Button><hr/>
-            {!first ? <StyledLink to={"/dashboard/projects/" + project_id}>Back to Project</StyledLink> : ''}
-        </Form>
+          <PlusIcon onClick={this.createNewCategory} background={'lightgrey'} top={'18px'} width={'15px'} height={'15px'} right={'5px'}/>
         )
+      }
     }
 }
 

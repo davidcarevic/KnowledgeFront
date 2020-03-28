@@ -48,7 +48,7 @@ class CreateItem extends Component {
       return (
         <div>
           <Embed id={this.props.element} category={this.props.category} editing={true}/>
-          <Button onClick={this.handlePopover}>Cancel</Button>
+          <Button onClick={this.handlePopover}>CANCEL</Button>
         </div>
       )
     }
@@ -57,7 +57,7 @@ class CreateItem extends Component {
       return (
         <div>
           <RichText id={this.props.element} category={this.props.category} editing={true}/>
-          <Button onClick={this.handlePopover}>Cancel</Button>
+          <Button onClick={this.handlePopover}>CANCEL</Button>
         </div>
       )
     }
