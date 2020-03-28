@@ -47,9 +47,9 @@ class Embed extends Item {
           </div>
         );
       }
-        return (
-            <StyledIframe url={this.props.content}/>
-        )
+      if(!this.props.editing) {
+        return <StyledIframe url={this.props.content}/>
+      }
     }
 }
 
