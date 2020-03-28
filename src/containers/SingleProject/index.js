@@ -36,7 +36,7 @@ class SingleProject extends Component {
     }
 
     render() {
-        const { project, sections, categories, category, section, isLoading } = this.props
+        const { project, sections, categories, category, section, isLoading, elements } = this.props
         const { newElement } = this.state
         const project_id = project.id
 
@@ -87,11 +87,11 @@ class SingleProject extends Component {
                 </SideHolder>
                 <MainHolder top={'18%'}>
                     <SingleCategory id={category.id} name={category.name} description={category.description} /><hr />
-                    {category.elements?<DragAndDrop type="elements" changeElementForItem={this.props.changeElementForItem}
+                    {category.elements ? <DragAndDrop type="elements" changeElementForItem={this.props.changeElementForItem}
                         reorderItems={this.props.reorderItems}  array={category.elements} project={project_id} section_id={section.id}
                         category={category.id} setElements={this.props.setElements} section={section} catObj={category}/>
-                        :<h3>By clicking plus, create first element.</h3> }
-                    {(!section || !category) ? '' : <CreateElement />}
+                        : '' }
+                    <CreateElement />
                     <hr /><StyledLink to="/dashboard">Back to Dashboard</StyledLink>
                 </MainHolder>
             </div>

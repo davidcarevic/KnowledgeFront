@@ -47,15 +47,8 @@ class CreateSection extends Component {
         e.preventDefault();
         const { history, project } = this.props
         const { name, description, first, isLoading } = this.state;
-
-        if (first && !isLoading) {
-          const project_id = project.id
-          this.props.createSection(name, description, project_id);
-          history.push("/dashboard/projects/" + project_id);
-        } else {
-          const project_id = project.id
-          this.props.createSection(name, description, project_id);
-        }
+        const project_id = project.id
+        this.props.createSection(name, description, project_id);
     }
 
     render() {
