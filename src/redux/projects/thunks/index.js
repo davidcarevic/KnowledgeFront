@@ -142,11 +142,11 @@ export const retrieveProject = (id) => dispatch => {
         console.log(err.message)
         dispatch(isLoading(false))
     })
-        .finally(dispatch(isLoading(false)))
 }
 
-export const retrieveSectionCategories = (id) => dispatch => {
+export const retrieveSectionCategories = (id, section) => dispatch => {
     console.log("ID OVAJ", id)
+    let currentSection = section
     let categoriesUnsorted=[]
     let categories=[]
     let currentCat={}
@@ -154,6 +154,7 @@ export const retrieveSectionCategories = (id) => dispatch => {
     dispatch(setCategory([]))
     dispatch(setElements([]))
     dispatch(setElement([]))
+    dispatch(setSection(currentSection))
     getSectionCategories(id)
         .then(res => {
             console.log("RES SEKCIJE ",res.data)

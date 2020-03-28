@@ -30,7 +30,7 @@ class SingleProject extends Component {
     }
 
     componentDidMount() {
-        if (!this.props.isLoading) {
+        if (!this.props.isLoading && this.props.categories.length<1) {
             this.props.getProject(this.props.match.params.id)
         }
     }
@@ -80,7 +80,7 @@ class SingleProject extends Component {
                 </Header>
                 <SideHolder top={'15%'}>
                     <CreateCategory />
-                    {categories && category? <DragAndDrop type="categories" reorderElements={this.props.reorderElements}
+                    {category.elements? <DragAndDrop type="categories" reorderElements={this.props.reorderElements}
                         array={categories} hisCat={this.props.categories} changeActiveCategory={this.props.changeActiveCategory}
                         category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements}
                         section={section} categoryObj={category}/>:<div>asd</div>}
@@ -91,7 +91,7 @@ class SingleProject extends Component {
                         reorderItems={this.props.reorderItems}  array={category.elements} project={project_id} section_id={section.id}
                         category={category.id} setElements={this.props.setElements} section={section} catObj={category}/>
                         :<h3>By clicking plus, create first element.</h3> }
-                    {(!section || !category) ? '' : <CreateElement />}
+                    <CreateElement />
                     <hr /><StyledLink to="/dashboard">Back to Dashboard</StyledLink>
                 </MainHolder>
             </div>

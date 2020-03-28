@@ -50,7 +50,7 @@ class Section extends Component {
         this.setState({
             selected_section: e.target.id
         })
-        this.props.getSectionCategories(this.props.section.id)
+        this.props.getSectionCategories(this.props.section.id, this.props.section)
     }
 
     handleUpdateSubmit = (e) => {
