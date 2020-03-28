@@ -71,15 +71,15 @@ class SingleProject extends Component {
                     </LeftHeaderHolder>
                     <RightHeaderHolder>
                         <CreateSection />
-                        <Form>
-                        {!sections ? <div>No sections</div> : sections.map((item, index) =>
-                            <HeaderButtons><Section section={item} key={index} id={item.id} name={item.name}/></HeaderButtons>
-                        )}
-                        </Form>
+                        <Flex top={'15px'}>
+                          {!sections ? <div>No sections</div> : sections.map((item, index) =>
+                              <Section section={item} key={index} id={item.id} name={item.name}/>
+                          )}
+                        </Flex>
                     </RightHeaderHolder>
                 </Header>
-                <SideHolder top={'13%'}>
-                      Add new Category
+                <SideHolder top={'15%'}>
+                    <CreateCategory />
                     {categories && category? <DragAndDrop type="categories" reorderElements={this.props.reorderElements}
                         array={categories} hisCat={this.props.categories} changeActiveCategory={this.props.changeActiveCategory}
                         category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements}

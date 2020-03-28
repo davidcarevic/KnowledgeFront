@@ -69,7 +69,7 @@ class SingleElement extends Component {
         if (editing) {
             return (
               <Form onSubmit={this.handleFormSubmit}>
-                  <Input id="title" placeholder="CATEGORY title" type="text" value={title} onChange={this.handleInputChange} /><br/><br/>
+                  <Input id="title" placeholder="ELEMENT TITLE" type="text" value={title} onChange={this.handleInputChange} /><br/><br/>
                   <TextArea id="description" placeholder="DESCRIPTION" value={description} onChange={this.handleInputChange} /><br/>
                   <Button type="submit"  width={'80px'}>Save</Button>
                   <Button onClick={this.handleDeleteSubmit} width={'80px'}  top={'28px'}>Delete</Button>

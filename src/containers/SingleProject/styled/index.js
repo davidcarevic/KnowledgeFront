@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Flex = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: ${props => props.right ? 'flex-end' : ''};
-
+  display: flex;
+  margin-top: ${props => props.top || '3px'};
+  margin-right: 15px;
+  flex-direction: row;
 `

@@ -10,7 +10,7 @@ export const Header = styled.div`
     padding-left: 60px;
     padding-top: 20px;
     width: 100%;
-    height: 50px;
+    height: 65px;
     background-color: white;
     z-index: 1;
     border-bottom: 1px solid black;

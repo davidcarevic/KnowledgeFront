@@ -5,6 +5,18 @@ import { Plus, NetworkWired } from 'styled-icons/fa-solid';
 import { Search } from 'styled-icons/evil';
 import { ThSmall } from 'styled-icons/typicons';
 import { UserPlus } from 'styled-icons/icomoon';
+import { DotsVerticalRounded } from 'styled-icons/boxicons-regular';
+
+export const DotsIcon = styled(DotsVerticalRounded)`
+  width: 15px;
+  height: 15px;
+  margin-top: 10px;
+
+  &:hover {
+      background-color: #d3d3d3;
+      color: white;
+    }
+`
 
 export const LogOutIcon = styled(LogOut)`
   color: white;
