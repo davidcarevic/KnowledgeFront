@@ -21,16 +21,8 @@ class Embed extends Item {
 
     render() {
       const { content } = this.state
-
-      if (this.props.editing && this.props.first === undefined) {
-            return (
-                <Form onSubmit={this.handleSaveSubmit}>
-                    <Input id="content" placeholder="ENTER YOUR URL" type="text" value={content} onChange={this.handleInputChange} /><br/><br/>
-                    <Button type="submit">CREATE</Button>
-                </Form>
-            )
-        }
-      if (this.props.editing && !this.props.first) {
+      const { editing } = this.props
+      if (editing) {
         return (
           <div>
             <Form onSubmit={this.handleUpdateSubmit}>
@@ -47,14 +39,13 @@ class Embed extends Item {
           </div>
         );
       }
-      if(!this.props.editing) {
+      if(!editing) {
         return <StyledIframe url={this.props.content}/>
       }
     }
 }
 
 const mapDispatchToProps = {
-  createItem: projectRedux.thunks.itemCreation,
   updateItem: projectRedux.thunks.itemUpdate,
   deleteItem: projectRedux.thunks.itemDelete
 }
@@ -63,7 +54,7 @@ const mapStateToProps = state => ({
   isLoading: state.global.isLoading,
   element: state.projects.element,
   item: state.projects.item,
-    category:state.projects.category
+  category: state.projects.category
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Embed))

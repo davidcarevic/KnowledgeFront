@@ -32,20 +32,8 @@ class RichText extends Item {
 
 
   render() {
-    const project_id = this.props.match.params.id
-    if (this.props.editing && this.props.first === undefined) {
-      return (
-        <Form onSubmit={this.handleSaveSubmit}>
-            <SunEditor onChange={this.handleChange} editing={true} placeholder="Please type here..." autoFocus={true} enable={true} showToolbar={true}
-              setOptions={{
-                height: 'auto',
-                width: 'auto',
-                buttonList: buttonList.complex}}/><br/><br/>
-            <Button type="submit">CREATE</Button>
-        </Form>
-      );
-    }
-    if (this.props.editing && !this.props.first) {
+    const { editing } = this.props
+    if (editing) {
       const content = Base64.decode(this.props.content)
       return (
         <div>
@@ -68,7 +56,7 @@ class RichText extends Item {
       );
     }
 
-    if (!this.props.editing) {
+    if (!editing) {
       const content = ReactHtmlParser(Base64.decode(this.props.content))
       return (
         <DisplayRichText>
@@ -80,7 +68,6 @@ class RichText extends Item {
 }
 
 const mapDispatchToProps = {
-  createItem: projectRedux.thunks.itemCreation,
   updateItem: projectRedux.thunks.itemUpdate,
   deleteItem: projectRedux.thunks.itemDelete
 }
@@ -89,7 +76,7 @@ const mapStateToProps = state => ({
   isLoading: state.global.isLoading,
   element: state.projects.element,
   item: state.projects.item,
-    category:state.projects.category
+  category: state.projects.category
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RichText))

@@ -5,30 +5,16 @@ class Item extends Component {
         super(props)
         this.state.editing = props.editing || false;
         this.state.content = props.content || '';
-        this.state.first = props.first || true;
     }
 
     state = {
         content: '',
         type: '',
-        first: true,
         editing: false
     }
 
     handleInputChange = (e) => {
         this.setState({ [e.target.id]: e.target.value })
-    }
-
-    handleSaveSubmit = (e) => {
-        e.preventDefault();
-        const { content, type } = this.state;
-        const category = this.props.category
-        const element_id = this.props.id
-        this.props.createItem(content, type, element_id, category);
-        this.setState({
-            editing: false,
-            first: false
-        })
     }
 
     handleUpdateSubmit = (e) => {
@@ -38,7 +24,6 @@ class Item extends Component {
       this.props.updateItem(itemId, content, this.props.category)
         this.setState({
             editing: false,
-            first: false
         })
     }
 

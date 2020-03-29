@@ -2,18 +2,17 @@ import React, { Component } from 'react';
 import Embed from '../itemTypes/Iframe';
 import RichText from '../itemTypes/RichText';
 import Button from '../elements/Button';
+import Form from '../elements/Form'
 import { StyledItem } from './styled';
 
 class SingleItem extends Component {
     constructor(props) {
         super(props)
-        this.state.first = this.props.first
         this.state.editing = this.props.editing
     }
 
     state = {
       editing: false,
-      first: true,
       buttonText: 'Edit',
       content: this.props.content
     }
@@ -23,34 +22,46 @@ class SingleItem extends Component {
       if (this.state.editing) {
         this.setState({
           editing: false,
-          buttonText: 'Edit',
-          first: true
+          buttonText: 'Edit'
         })
       }
       else {
         this.setState({
           editing: true,
-          buttonText: 'Cancel',
-          first: false
+          buttonText: 'Cancel'
         })
       }
     }
 
+    handleSubmit = (e) => {
+      e.preventDefault()
+      this.setState({
+        editing: false,
+        buttonText: 'Edit'
+      })
+    }
+
     render() {
-        if (this.props.type === 'embed') {
+      const { id, content, category, type } = this.props
+      const { editing, buttonText } = this.state
+        if (type === 'embed') {
             return (
-              <StyledItem>
-                <Embed id={this.props.id} content={this.props.content} category={this.props.category} editing={this.state.editing} first={this.state.first}/>
-                <Button onClick={this.handleEditingMode} width={'150px'}>{this.state.buttonText}</Button>
-              </StyledItem>
+              <Form onSubmit={this.handleSubmit}>
+                <StyledItem>
+                  <Embed id={id} content={content} category={category} editing={editing} />
+                  <Button onClick={this.handleEditingMode} width={'150px'}>{buttonText}</Button>
+                </StyledItem>
+              </Form>
             )
         }
-        if (this.props.type === 'richText') {
+        if (type === 'richText') {
             return (
-              <StyledItem>
-                <RichText id={this.props.id} content={this.props.content} category={this.props.category}   editing={this.state.editing} first={this.state.first}/>
-                <Button onClick={this.handleEditingMode} width={'150px'}>{this.state.buttonText}</Button>
-              </StyledItem>
+              <Form onSubmit={this.handleSubmit}>
+                <StyledItem>
+                  <RichText id={id} content={content} category={category} editing={editing} />
+                  <Button onClick={this.handleEditingMode} width={'150px'}>{buttonText}</Button>
+                </StyledItem>
+              </Form>
             )
         }
     }
