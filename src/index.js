@@ -12,6 +12,11 @@ import * as serviceWorker from './serviceWorker';
 import Wrapper from './components/blocks/Wrapper';
 import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
+import styled from "styled-components";
+
+const Font = styled.div`
+  font-family: Arial;
+`
 
 ReactDOM.render(
     <Provider store={store}>
@@ -19,7 +24,9 @@ ReactDOM.render(
         <ThemeProvider theme={theme}>
             <PersistGate loading={<LoadingSpinner/>} persistor={persistor}>
                 <ReactNotification />
-                    <App/>
+                    <Font>
+                      <App/>
+                    </Font>
             </PersistGate>
         </ThemeProvider>
     </Provider>

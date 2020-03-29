@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const StyledSection = styled.div`
-    margin-top: 5px;
+    margin-top: 9px;
     margin-left: 10px;
-    font-weight:bold;
+    font-weight: bold;
 
     &:hover {
         background-color: #d3d3d3;

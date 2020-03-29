@@ -1,13 +1,7 @@
 import React from 'react';
 import './App.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
-
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { connect } from 'react-redux';
-
 import Home from './containers/Home';
 import Register from './containers/Register';
 import Dashboard from './containers/Dashboard';
