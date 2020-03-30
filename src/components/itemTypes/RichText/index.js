@@ -57,11 +57,13 @@ class RichText extends Item {
     }
 
     if (!editing) {
-      const content = ReactHtmlParser(Base64.decode(this.props.content))
+      const content = Base64.decode(this.props.content)
       return (
-        <DisplayRichText>
-          {content}
-        </DisplayRichText>
+        <SunEditor setContents={content} editing={false} placeholder="Please type here..." autoFocus={false} enable={true} showToolbar={false}
+          setOptions={{
+            height: 'auto',
+            width: 'auto',
+            }}/>
       );
     }
   }
