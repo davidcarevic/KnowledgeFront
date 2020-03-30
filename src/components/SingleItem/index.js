@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Embed from '../itemTypes/Iframe';
 import RichText from '../itemTypes/RichText';
+import CodeSnipet from '../itemTypes/CodeSnipet'
 import Button from '../elements/Button';
 import Form from '../elements/Form'
 import { StyledItem } from './styled';
+
 
 class SingleItem extends Component {
     constructor(props) {
@@ -63,6 +65,18 @@ class SingleItem extends Component {
                 </StyledItem>
               </Form>
             )
+        }
+        if (type === 'codeSnipet') {
+          return (
+            <div>
+              <Form onSubmit={this.handleSubmit}>
+                <StyledItem>
+                  <CodeSnipet id={id} content={content} category={category} editing={editing} />
+                  <Button onClick={this.handleEditingMode} width={'150px'}>{buttonText}</Button>
+                </StyledItem>
+              </Form>
+            </div>
+          )
         }
     }
 }

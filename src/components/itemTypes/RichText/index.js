@@ -4,7 +4,6 @@ import { buttonList } from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
 import Form from '../../elements/Form';
 import Button from '../../elements/Button';
-import StyledLink from "../../elements/Link";
 import Item from '../../Item';
 import { Base64 } from 'js-base64';
 import { connect } from 'react-redux';
@@ -57,11 +56,13 @@ class RichText extends Item {
     }
 
     if (!editing) {
-      const content = ReactHtmlParser(Base64.decode(this.props.content))
+      const content = Base64.decode(this.props.content)
       return (
-        <DisplayRichText>
-          {content}
-        </DisplayRichText>
+        <SunEditor setContents={content} editing={false} placeholder="Please type here..." autoFocus={false} disable={true} showToolbar={false}
+          setOptions={{
+            height: 'auto',
+            width: 'auto',
+            }}/>
       );
     }
   }

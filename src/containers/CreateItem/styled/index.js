@@ -9,4 +9,5 @@ export const StyledPopover = styled.div`
     height: 100%;
     width: 150px;
     padding: 10px;
+    z-index: 2;
 `;

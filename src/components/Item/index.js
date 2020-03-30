@@ -19,9 +19,17 @@ class Item extends Component {
 
     handleUpdateSubmit = (e) => {
       e.preventDefault();
-      const { content } = this.state
+      const { content, type } = this.state
       const itemId = this.props.id
-      this.props.updateItem(itemId, content, this.props.category)
+      if (type === 'codeSnipet') {
+        var codeContent = {}
+        codeContent['code'] = content['code']
+        codeContent['language'] = content['language']
+        this.props.updateItem(itemId, codeContent, this.props.category)
+      } else {
+        this.props.updateItem(itemId, content, this.props.category)
+      }
+
         this.setState({
             editing: false,
         })
