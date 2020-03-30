@@ -48,7 +48,7 @@ class Dashboard extends Component {
                 <Header>
                     <H2> No teams and projects</H2>
                 </Header>
-                <br/><StyledLink to="/dashboard/teams/create">Create a team</StyledLink>
+                <br/><br/><br/><StyledLink to="/dashboard/teams/create">Create a team</StyledLink>
                 <br/>
                 <StyledLink to="/dashboard/projects/create">Create a project</StyledLink>
                 <br/>
