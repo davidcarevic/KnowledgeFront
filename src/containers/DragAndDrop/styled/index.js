@@ -22,21 +22,38 @@ export const getListStyleHorizontal = isDraggingOver => ({
     background: isDraggingOver ? 'lightgray' : 'white',
     overflow: 'disabled',
     width:'49%',
-    display:'inline-grid',
-    margin:`10px auto`
+    display: 'inline-flex',
+    flexWrap: 'wrap',
+    flex:'100 100%',
+    margin:`10px auto`,
 });
+
+
 
 export const getItemStyleHorizontal = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
     userSelect: 'none',
     width: '100%',
     minHeight:'100px',
-    display:'inline-block',
+    display:'inline-flex',
+    flexDirection:'column',
     overflow:`auto`,
-
     // change background colour if dragging
     background: isDragging ? 'lightgray' : 'white',
+    // styles we need to apply on draggables
+    ...draggableStyle,
+});
 
+export const getItemStyleHorizontalDouble = (isDragging, draggableStyle) =>  ({
+    // some basic styles to make the items look a bit nicer
+    userSelect: 'none',
+    width: isDragging? '100%' : '100%',
+    minHeight:'100px',
+    display:'inline-flex',
+    flexDirection:'column',
+    flewGrow:'10',
+    // change background colour if dragging
+    background: isDragging ? 'lightgray' : 'white',
     // styles we need to apply on draggables
     ...draggableStyle,
 });

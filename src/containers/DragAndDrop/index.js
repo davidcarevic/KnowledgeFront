@@ -1,7 +1,7 @@
 import React, { Component,forwardRef, useRef, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ToggleBox from '../ToggleBox';
-import {getItemStyle, getItemStyleHorizontal, getListStyle, getListStyleHorizontal} from './styled';
+import {getItemStyle, getItemStyleHorizontal, getListStyle, getListStyleHorizontal, getItemStyleHorizontalDouble} from './styled';
 import SingleItem from '../../components/SingleItem';
 // import sortCategoryElements from './sort/index'
 import CreateItem from '../CreateItem'
@@ -202,6 +202,32 @@ class DragAndDrop extends Component {
         if(this.props.type==="elements"){
             console.log("CATEGORIES U DND, ELEMENTS AND ITEMS",  this.props.array)
             console.log("Internal STATE FOR DND // ELEMENTS AND ITEMS", this.state)
+            let ele={
+            }
+            let arrayLeft=[]
+            let arrayRight=[]
+            let eleCount=0
+            let tmpLeft=[]
+            let tmpRight=[]
+
+            for(let ele in this.props.array) {
+                eleCount++
+                for (let item in this.props.array[ele].items) {
+                    if (this.props.array[ele].items[item].column === 1) {
+                        arrayLeft.push(this.props.array[ele].items[item])
+                    } else {
+                        arrayRight.push(this.props.array[ele].items[item])
+                    }
+                }
+                tmpLeft[ele]=arrayLeft
+                tmpRight[ele]=arrayRight
+
+                arrayLeft=[]
+                arrayRight=[]
+            }
+
+
+            console.log(" ARRAY ", tmpLeft,tmpRight)
             return(
                     <DragDropContext onDragEnd={this.onDragEnd}>
                         {Object.keys(this.props.array).map((list_id,index) => (
@@ -225,7 +251,7 @@ class DragAndDrop extends Component {
                                                         <div
                                                             ref={provided.innerRef}
                                                             {...provided.draggableProps}
-                                                            {...provided.dragHandleProps} style={getItemStyleHorizontal(
+                                                            {...provided.dragHandleProps} style={getItemStyleHorizontalDouble(
                                                             snapshot.isDragging,
                                                             provided.draggableProps.style
                                                         )}>
