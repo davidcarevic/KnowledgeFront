@@ -81,7 +81,7 @@ class SingleProject extends Component {
                 <SideHolder top={'15%'}>
                     <CreateCategory categories={this.props.categories} />
                     {categories && category? <DragAndDrop type="categories" reorderElements={this.props.reorderElements}
-                        array={categories} hisCat={this.props.categories} changeActiveCategory={this.props.changeActiveCategory}
+                        array={categories} hisCat={this.props.categories} activeCategory={this.props.category} changeActiveCategory={this.props.changeActiveCategory}
                         category={category.id} changeCategory={this.props.changeCategory} setElements={this.props.setElements}
                         section={section} categoryObj={category}/>:<div>asd</div>}
                 </SideHolder>

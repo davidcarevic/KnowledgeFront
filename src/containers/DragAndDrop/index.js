@@ -298,10 +298,4 @@ class DragAndDrop extends Component {
     }
 }
 
-const mapDispatchToProps = {}
-
-const mapStateToProps = state => ({
-    activeCategory: state.projects.category,
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(DragAndDrop)
+export default DragAndDrop
