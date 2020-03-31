@@ -44,7 +44,7 @@ class CodeSnipet extends Item {
       })
     }
 
-    onChange(cont){
+    onChange(cont) {
       var codeContent = {}
       codeContent['code'] = cont
       codeContent['language'] = this.state.language
@@ -94,7 +94,7 @@ class CodeSnipet extends Item {
               mode={content['language']}
               theme="tomorrow"
               height="auto"
-              value={content['code']}
+              value={this.props.content['code']}
               editorProps={{ $blockScrolling: true }}
               setOptions={{
                 enableBasicAutocompletion: false,
