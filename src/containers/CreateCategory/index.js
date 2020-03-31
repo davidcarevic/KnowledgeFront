@@ -9,6 +9,8 @@ import Form from '../../components/elements/Form';
 import Input from '../../components/elements/Input';
 import TextArea from '../../components/elements/TextArea';
 import { PlusIcon } from '../../components/elements/Icons';
+import AutosizeInput from 'react-input-autosize';
+import TextareaAutosize from 'react-autosize-textarea';
 
 class CreateCategory extends Component {
   constructor(props) {
@@ -20,6 +22,12 @@ class CreateCategory extends Component {
         description: '',
         newCategory: false
     }
+
+    handleChange = (input, event) => {
+		const newState = {};
+		newState[input] = event.target.value;
+		this.setState(newState);
+	};
 
     handleInputChange = (e) => {
         this.setState({ [e.target.id]: e.target.value })
@@ -52,24 +60,28 @@ class CreateCategory extends Component {
 
     render() {
         const { name, description, newCategory } = this.state;
-        const { first } = this.props
-        if (first) {
-          return (
-            <Form onSubmit={this.handleFormSubmit}>
-                <Title>Create first category.</Title>
-                <Input id="name" placeholder="CATEGORY NAME" type="text" value={name} onChange={this.handleInputChange} /><br/><br/>
-                <TextArea id="description" placeholder="DESCRIPTION" value={description} onChange={this.handleInputChange} /><br/><br/>
-                <Button type="submit">CREATE</Button><hr/>
-            </Form>
-          )
-        }
         if (newCategory) {
           return (
             <Form onSubmit={this.handleFormSubmit}>
-                <Input width={'auto'} id="name" placeholder="CATEGORY NAME" type="text" value={name} onChange={this.handleInputChange} /><br/><br/>
-                <TextArea width={'auto'} id="description" placeholder="DESCRIPTION" value={description} onChange={this.handleInputChange} /><br/><br/>
-                <Button width={'160px'} type="submit">CREATE</Button>
-                <Button width={'160px'} onClick={this.createNewCategory}>CANCEL</Button>
+              <AutosizeInput
+                placeholder="CATEGORY NAME"
+                placeholderIsMinWidth
+                name="form-field-name"
+                value={name}
+                onChange={this.handleChange.bind(this, 'name')}
+                style={{  border: 'none' }}
+                inputStyle={{ background: '#F0F0F0', border: 'none', padding: 5, fontSize: '1.17em', fontWeight: 'bold' }}
+              /><br /><br />
+              <TextareaAutosize
+                rows={5}
+                columns={10}
+                placeholder='DESCRIPTION'
+                value={description}
+                onChange={this.handleChange.bind(this, 'description')}
+                style={{ width: '180px', background: '#F0F0F0', border: 'none', fontSize: '1.2em'}}
+              /><br /><br />
+              <Button width={'160px'} type="submit">CREATE</Button>
+              <Button width={'160px'} onClick={this.createNewCategory}>CANCEL</Button>
             </Form>
           )
       } else {

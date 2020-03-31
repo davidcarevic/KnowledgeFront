@@ -4,11 +4,10 @@ import projectRedux from '../../redux/projects'
 import { withRouter } from 'react-router-dom';
 import Button from '../../components/elements/Button';
 import Title from '../../components/elements/Title';
-import StyledLink from '../../components/elements/Link';
 import Form from '../../components/elements/Form';
 import Input from '../../components/elements/Input';
-import TextArea from '../../components/elements/TextArea';
 import { PlusIcon } from '../../components/elements/Icons';
+import AutosizeInput from 'react-input-autosize';
 
 class CreateSection extends Component {
   constructor(props) {
@@ -22,6 +21,12 @@ class CreateSection extends Component {
         description: 'Description',
         newSection: false
     }
+
+    handleChange = (input, event) => {
+		const newState = {};
+		newState[input] = event.target.value;
+		this.setState(newState);
+	};
 
     handleInputChange = (e) => {
         this.setState({ [e.target.id]: e.target.value })
@@ -45,33 +50,28 @@ class CreateSection extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        const { history, project } = this.props
-        const { name, description, first, isLoading } = this.state;
+        const { project } = this.props
+        const { name, description } = this.state;
         const project_id = project.id
         this.props.createSection(name, description, project_id);
     }
 
     render() {
         const { name, newSection } = this.state;
-        const { first } = this.props
-        const project_id = this.props.match.params.id;
-
-        if (first) {
-          return (
-            <Form onSubmit={this.handleFormSubmit}>
-                <Title>To start your project, please create first section.</Title>
-                <Input id="name" placeholder="SECTION NAME" type="text" value={name} onChange={this.handleInputChange} /><br/><br/>
-                <Button type="submit">CREATE</Button>
-            </Form>
-          )
-        }
-
         if (newSection) {
           return (
             <Form onSubmit={this.handleFormSubmit}>
-                <Input id="name" placeholder="SECTION NAME" type="text" value={name} onChange={this.handleInputChange} /><br/><br/>
-                <Button width={'157px'} type="submit">CREATE</Button>
-                <Button width={'157px'} onClick={this.createNewSection}>CANCEL</Button>
+              <AutosizeInput
+                placeholder="SECTION NAME"
+                placeholderIsMinWidth
+                name="form-field-name"
+                value={name}
+                onChange={this.handleChange.bind(this, 'name')}
+                style={{ border: 'none' }}
+                inputStyle={{ background: '#F0F0F0', border: 'none', padding: 5, fontSize: '1em', fontWeight: 'bold' }}
+              /><br /><br />
+              <Button width={'157px'} type="submit">CREATE</Button>
+              <Button width={'157px'} onClick={this.createNewSection}>CANCEL</Button>
             </Form>
           )
       } else {

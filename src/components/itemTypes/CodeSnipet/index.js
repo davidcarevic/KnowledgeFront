@@ -5,7 +5,6 @@ import Button from '../../elements/Button';
 import Item from '../../Item'
 import { connect } from 'react-redux';
 import projectRedux from '../../../redux/projects'
-import { withRouter } from 'react-router-dom';
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/mode-javascript";
