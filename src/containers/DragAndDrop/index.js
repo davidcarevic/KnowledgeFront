@@ -7,6 +7,8 @@ import SingleItem from '../../components/SingleItem';
 import CreateItem from '../CreateItem'
 import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 import SingleElement from '../../components/SingleElement';
+import { connect } from 'react-redux'
+import projectRedux from '../../redux/projects';
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
 
@@ -138,22 +140,21 @@ class DragAndDrop extends Component {
             // this.setState(new_state)
         }
     };
-    handleChild=(e)=>{
-        e.stopPropagation();
-        e.persist()
-        let selectedCategory={}
-        for(let i in this.props.hisCat){
-            console.log(this.props.hisCat[i].elements)
+    handleChild = (id) => {
+        let selectedCategory = {}
+        for (let i in this.props.hisCat) {
+            console.log("CAT ELEMENTS: ", this.props.hisCat[i].elements)
             for(let j in this.props.hisCat[i].elements){
-                if(e.target.id===this.props.hisCat[i].elements[j].id)
+              console.log("CATEGORY: ", this.props.hisCat[i])
+                if(id === this.props.hisCat[i].elements[j].id)
                     selectedCategory = this.props.hisCat[i]
             }
         }
-      this.props.changeActiveCategory(selectedCategory)
-
-       let ref=this.myRef
-        console.log("REFFFFFFF !!!!!!!!!!! ", ref)
-       // window.scrollTo(0, ref.current.offsetTop)
+        console.log("SELECTED CATEGORY: ", selectedCategory)
+        console.log("PROPS: ", this.props.activeCategory)
+        if (this.props.activeCategory.id !== selectedCategory.id) {
+          this.props.changeActiveCategory(selectedCategory)
+        }
     }
 
     render() {
@@ -164,7 +165,7 @@ class DragAndDrop extends Component {
                 <div>
                     <DragDropContext  onDragEnd={this.onDragEnd}>
                         {Object.keys(this.state).map((list_id, index) => (
-                            <ToggleBox key={index} id={this.state[index]?this.state[index].id:''}  category={this.props.hisCat}
+                            <ToggleBox key={index} id={this.state[index] ? this.state[index].id : ''}  category={this.props.hisCat}
                                 changeActiveCategory={this.props.changeActiveCategory} title={this.state[index] ? this.state[index].name :''}>
                                 <Droppable  droppableId={this.state[index]?this.state[index].id.toString():''} key={list_id} >
                                     {(provided, snapshot) => (
@@ -177,7 +178,7 @@ class DragAndDrop extends Component {
                                                     {(provided, snapshot) => (
                                                         <div
                                                             id={item.id}
-                                                            onClick={this.handleChild}
+                                                            onDoubleClick={() => this.handleChild(item.id)}
                                                             ref={provided.innerRef}
                                                             {...provided.draggableProps}
                                                             {...provided.dragHandleProps} style={getItemStyle(
@@ -185,7 +186,7 @@ class DragAndDrop extends Component {
                                                             provided.draggableProps.style
                                                         )}>
                                                             <Link offset={-80} activeClass="active" className="test3" to={item.id}
-                                                            spy={true} smooth={true} duration={500}>{item.title}</Link>
+                                                            spy={true} smooth={true} duration={10}>{item.title}</Link>
                                                         </div>
                                                     )}
                                                 </Draggable>
@@ -272,6 +273,13 @@ class DragAndDrop extends Component {
                     </DragDropContext>
             );
         }
-        }
+    }
 }
-export default DragAndDrop;
+
+const mapDispatchToProps = {}
+
+const mapStateToProps = state => ({
+    activeCategory: state.projects.category,
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(DragAndDrop)

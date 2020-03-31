@@ -1,5 +1,7 @@
 import React from "react";
 import { Flex } from './styled';
+import { connect } from 'react-redux'
+import projectRedux from '../../redux/projects';
 
 class ToggleBox extends React.Component {
 	constructor(props) {
@@ -17,13 +19,18 @@ class ToggleBox extends React.Component {
 		this.setState({
 			opened: !opened,
 		});
-		let current={}
-		for (let i=0; i<this.props.category.length; i++) {
+	}
+
+	changeActiveCategory = (e) => {
+		e.persist();
+		e.stopPropagation();
+		let current = {}
+		for (let i = 0; i < this.props.category.length; i++) {
 			if (this.props.id === this.props.category[i].id) {
-				current=this.props.category[i]
+				current = this.props.category[i]
 			}
 		}
-		if (opened === false) {
+		if (current.id !== this.props.activeCategory.id) {
 			this.props.changeActiveCategory(current)
 		}
 	}
@@ -43,10 +50,10 @@ class ToggleBox extends React.Component {
 
 		return (
 			<div id={id}>
-				<h3 onClick={this.toggleBox}>
+				<h3>
 					<Flex>
-            <Flex>{title}</Flex>
-            <Flex right>{sign}</Flex>
+            <Flex onClick={this.changeActiveCategory}>{title}</Flex>
+            <Flex right onClick={this.toggleBox}>{sign}</Flex>
           </Flex>
 				</h3>
 				{opened && (
@@ -59,4 +66,10 @@ class ToggleBox extends React.Component {
 	}
 }
 
-export default ToggleBox;
+const mapDispatchToProps = {}
+
+const mapStateToProps = state => ({
+    activeCategory: state.projects.category,
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ToggleBox)
