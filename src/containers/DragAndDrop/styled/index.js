@@ -18,13 +18,32 @@ export const getListStyle = isDraggingOver => ({
     width: 150
 });
 
+export const getListStyleHorizontalHidden = (isDraggingOver, isDragging )=> ({
+    background: isDraggingOver ? 'black' : 'black',
+    overflow: 'disabled',
+    width: isDragging? '49%':'20%',
+    display: isDragging? 'flex':'hidden',
+    flexWrap: 'wrap',
+    float:'left',
+    margin:`10px auto`,
+});
+
+export const getListStyleHorizontalDouble = (isDraggingOver, isDragging) => ({
+    background: isDraggingOver ? 'lightgray' : 'white',
+    overflow: 'disabled',
+    width: isDraggingOver? '49%':'98%',
+    display: 'inline-flex',
+    flexWrap: 'wrap',
+    margin:`10px auto`,
+});
+
+
 export const getListStyleHorizontal = isDraggingOver => ({
     background: isDraggingOver ? 'lightgray' : 'white',
     overflow: 'disabled',
     width:'49%',
     display: 'inline-flex',
     flexWrap: 'wrap',
-    flex:'100 100%',
     margin:`10px auto`,
 });
 
@@ -44,16 +63,3 @@ export const getItemStyleHorizontal = (isDragging, draggableStyle) => ({
     ...draggableStyle,
 });
 
-export const getItemStyleHorizontalDouble = (isDragging, draggableStyle) =>  ({
-    // some basic styles to make the items look a bit nicer
-    userSelect: 'none',
-    width: isDragging? '100%' : '100%',
-    minHeight:'100px',
-    display:'inline-flex',
-    flexDirection:'column',
-    flewGrow:'10',
-    // change background colour if dragging
-    background: isDragging ? 'lightgray' : 'white',
-    // styles we need to apply on draggables
-    ...draggableStyle,
-});
