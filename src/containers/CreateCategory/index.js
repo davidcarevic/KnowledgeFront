@@ -20,7 +20,8 @@ class CreateCategory extends Component {
     state = {
         name: '',
         description: '',
-        newCategory: false
+        newCategory: false,
+        first: this.props.first,
     }
 
     handleChange = (input, event) => {
@@ -59,7 +60,19 @@ class CreateCategory extends Component {
     }
 
     render() {
-        const { name, description, newCategory } = this.state;
+        const { name, description, newCategory, first } = this.state;
+        if (first) {
+          return (
+            <div>
+            <h1>Create your first category.</h1>
+              <Form onSubmit={this.handleFormSubmit}>
+                <Input id="name" placeholder="SECTION NAME" type="text" value={name} onChange={this.handleInputChange} /><br/><br/>
+                <TextArea id="description" placeholder="DESCRIPTION" value={description} onChange={this.handleInputChange} /><br/><br/>
+                <Button width={'315px'} type="submit">CREATE</Button>
+              </Form>
+            </div>
+          )
+        }
         if (newCategory) {
           return (
             <Form onSubmit={this.handleFormSubmit}>

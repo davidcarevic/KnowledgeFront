@@ -57,7 +57,18 @@ class CreateSection extends Component {
     }
 
     render() {
-        const { name, newSection } = this.state;
+        const { name, newSection, first } = this.state;
+        if (first) {
+          return (
+            <div>
+            <h1>To start your project create first section.</h1>
+              <Form onSubmit={this.handleFormSubmit}>
+                <Input id="name" placeholder="SECTION NAME" type="text" value={name} onChange={this.handleInputChange} /><br/><br/>
+                <Button width={'315px'} type="submit">CREATE</Button>
+              </Form>
+            </div>
+          )
+        }
         if (newSection) {
           return (
             <Form onSubmit={this.handleFormSubmit}>
