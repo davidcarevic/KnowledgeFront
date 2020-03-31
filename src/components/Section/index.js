@@ -4,7 +4,6 @@ import projectRedux from '../../redux/projects'
 import { withRouter } from 'react-router-dom';
 import Form from '../elements/Form';
 import Button from '../elements/Button';
-import Input from '../elements/Input';
 import { StyledSection, Div } from './styled';
 import { DotsIcon } from '../elements/Icons'
 import AutosizeInput from 'react-input-autosize';

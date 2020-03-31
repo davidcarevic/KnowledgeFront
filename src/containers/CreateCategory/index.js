@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import projectRedux from '../../redux/projects'
 import { withRouter } from 'react-router-dom';
 import Button from '../../components/elements/Button';
-import Title from '../../components/elements/Title';
-import StyledLink from '../../components/elements/Link';
 import Form from '../../components/elements/Form';
 import Input from '../../components/elements/Input';
 import TextArea from '../../components/elements/TextArea';
@@ -37,7 +35,7 @@ class CreateCategory extends Component {
     handleFormSubmit = (e) => {
         e.preventDefault();
         console.log("CAT CREATE PROPS", this.props)
-        const { history, project, section, isLoading } = this.props
+        const { section } = this.props
         const { name, description } = this.state;
         const section_id = section.id
         this.props.createCategory(name, description, section_id, this.props.categories);

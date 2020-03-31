@@ -27,7 +27,7 @@ class CreateProject extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        const { history, project } = this.props
+        const { history } = this.props
         const { name, description, image } = this.state;
         //const project_id = project.id
         this.props.createProject(name, description, image)

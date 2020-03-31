@@ -61,7 +61,8 @@ export const PlusIcon = styled(Plus)`
   height: ${props => props.height || '24px'};
   margin-top: ${props => props.top || ''};
   margin-bottom: 5px;
-  margin-right: ${props => props.right || '0px'};
+  margin-left: ${props => props.left || ''};
+  margin-right: ${props => props.right || ''};
   padding: 6px;
   background: ${props => props.background || "black"};
 

@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import projectRedux from '../../redux/projects';
 import Button from '../../components/elements/Button';
 import Form from '../../components/elements/Form';
-import Input from '../../components/elements/Input';
-import TextArea from '../../components/elements/TextArea';
-import ReactHtmlParser from 'react-html-parser';
 import { PlusIcon } from '../../components/elements/Icons';
 import AutosizeInput from 'react-input-autosize';
 import TextareaAutosize from 'react-autosize-textarea';
@@ -89,7 +86,7 @@ class CreateElement extends Component {
           )
         } else {
             return (
-              <PlusIcon onClick={this.createNewElement} background={'lightgrey'} top={'18px'} width={'15px'} height={'15px'} right={'5px'} />
+              <PlusIcon onClick={this.createNewElement} background={'lightgrey'} top={'18px'} width={'15px'} height={'15px'} left={'0px'} />
             )
         }
     }

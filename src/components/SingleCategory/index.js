@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Form from '../elements/Form';
 import Button from '../elements/Button';
-import Input from '../elements/Input';
-import TextArea from '../elements/TextArea';
 import Flex from '../elements/Flex';
 import { connect } from 'react-redux';
 import projectRedux from '../../redux/projects'

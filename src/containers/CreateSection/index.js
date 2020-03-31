@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import projectRedux from '../../redux/projects'
 import { withRouter } from 'react-router-dom';
 import Button from '../../components/elements/Button';
-import Title from '../../components/elements/Title';
 import Form from '../../components/elements/Form';
 import Input from '../../components/elements/Input';
 import { PlusIcon } from '../../components/elements/Icons';

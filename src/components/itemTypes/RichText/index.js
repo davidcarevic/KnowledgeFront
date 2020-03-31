@@ -1,5 +1,5 @@
 import React from 'react';
-import { DisplayRichText, StyledItem } from './styled';
+import { StyledItem } from './styled';
 import { buttonList } from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
 import Form from '../../elements/Form';
@@ -9,7 +9,6 @@ import { Base64 } from 'js-base64';
 import { connect } from 'react-redux';
 import projectRedux from '../../../redux/projects'
 import { withRouter } from 'react-router-dom';
-import ReactHtmlParser from 'react-html-parser';
 import SunEditor from 'suneditor-react';
 
 class RichText extends Item {
