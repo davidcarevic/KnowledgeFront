@@ -9,17 +9,17 @@ import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, 
 import SingleElement from '../../components/SingleElement';
 import { connect } from 'react-redux'
 import projectRedux from '../../redux/projects';
+
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
-
-    console.log('List : ',list)
-    console.log('Start index : ',startIndex)
-    console.log('End index : ',endIndex)
-    let result=[]
-    if(list.elements) {
+    console.log('List : ', list)
+    console.log('Start index : ', startIndex)
+    console.log('End index : ', endIndex)
+    let result = []
+    if (list.elements) {
         result = list.elements;
     }
-    if(list.items){
+    if (list.items) {
         result = list.items;
     }
     const [removed] = result.splice(startIndex, 1);
@@ -32,23 +32,23 @@ const reorder = (list, startIndex, endIndex) => {
  * Moves an item from one list to another list.
  */
 const move = (source, destination, droppableSource, droppableDestination) => {
-    console.log('source : ',source);
-    console.log('destination : ',destination);
-    console.log('Droppable source : ',droppableSource);
-    console.log('Droppable dest: ',droppableDestination);
-    let destCheck=droppableDestination.droppableId;
-    let column=2
-    if(destCheck.indexOf('e')===-1){
+    console.log('source : ', source);
+    console.log('destination : ', destination);
+    console.log('Droppable source : ', droppableSource);
+    console.log('Droppable dest: ', droppableDestination);
+    let destCheck = droppableDestination.droppableId;
+    let column = 2
+    if (destCheck.indexOf('e') === -1) {
         column=1
     }
 
-    let sourceClone=[]
-    let destClone=[]
-    if(source.elements){
+    let sourceClone = []
+    let destClone = []
+    if (source.elements) {
          sourceClone = source.elements;
          destClone = destination.elements;
     }
-    if(source.items){
+    if (source.items) {
         sourceClone = source.items;
         destClone = destination.items;
     }
@@ -84,8 +84,8 @@ class DragAndDrop extends Component {
     }
 
     getList = id => {
-        for(let item in this.state){
-            if(parseInt(id)===parseInt(this.state[item].id)){
+        for (let item in this.state) {
+            if (parseInt(id) === parseInt(this.state[item].id)) {
                 return this.state[item]
             }
         }
@@ -104,16 +104,16 @@ class DragAndDrop extends Component {
                 source.index,
                 destination.index
             );
-            let orderArray=[];
+            let orderArray = [];
             for(let i in items){
                 orderArray.push(parseInt(items[i].id))
             }
             let key = source.droppableId;
-            let state={}
-            if(list.elements) {
+            let state = {}
+            if (list.elements) {
                 this.props.reorderElements(orderArray, list)
             }
-            if(list.items){
+            if (list.items) {
                 this.props.reorderItems(orderArray, list)
             }
         }
@@ -127,10 +127,10 @@ class DragAndDrop extends Component {
                 destination
             );
             /** function(projects/thunk), changes the category for an element in the current section*/
-            if(sourceList.elements) {
+            if (sourceList.elements) {
                this.props.changeCategory(result.removed, result, this.props.section, destList);
             }
-            if(sourceList.items){
+            if (sourceList.items) {
                this.props.changeElementForItem(result.removed, result, this.props.catObj,destList, result.column)
             }
             let new_state = {};
@@ -143,15 +143,11 @@ class DragAndDrop extends Component {
     handleChild = (id) => {
         let selectedCategory = {}
         for (let i in this.props.hisCat) {
-            console.log("CAT ELEMENTS: ", this.props.hisCat[i].elements)
             for(let j in this.props.hisCat[i].elements){
-              console.log("CATEGORY: ", this.props.hisCat[i])
                 if(id === this.props.hisCat[i].elements[j].id)
                     selectedCategory = this.props.hisCat[i]
             }
         }
-        console.log("SELECTED CATEGORY: ", selectedCategory)
-        console.log("PROPS: ", this.props.activeCategory)
         if (this.props.activeCategory.id !== selectedCategory.id) {
           this.props.changeActiveCategory(selectedCategory)
         }
