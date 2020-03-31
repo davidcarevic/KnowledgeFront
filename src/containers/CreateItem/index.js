@@ -27,6 +27,7 @@ class CreateItem extends Component {
     content: '',
     language: '',
     opened: false,
+    openedType: false,
     openedLanguage: false,
     button: 'Add new Item'
   }
@@ -43,47 +44,62 @@ class CreateItem extends Component {
 
   handlePopover = (e) => {
     e.persist()
+    if (this.state.openedType) {
+      this.setState({
+        openedType: false,
+        button: 'Add new Item',
+        type: '',
+        content: '',
+        language: ''
+      })
+    }
+    if (this.state.openedLanguage) {
+      this.setState({
+        openedLanguage: false,
+      })
+    }
+    if (!this.state.openedType) {
+      this.setState({
+        openedType: true,
+        button: 'Close',
+      })
+    }
     if (this.state.opened) {
       this.setState({
         opened: false,
+        openedType: false,
         openedLanguage: false,
         button: 'Add new Item',
         type: '',
         content: '',
         language: ''
       })
-    } else {
-      this.setState({
-        opened: true,
-        button: 'Close',
-      })
     }
   }
 
   handleItemCreate(type) {
-    this.setState({
-      type: type
-    })
     if (type === 'codeSnipet') {
       this.setState({
-        opened: false,
-        openedLanguage: true
+        type: type,
+        button: 'Back',
+        openedType: false,
+        openedLanguage: true,
+        opened: false
+      })
+    } else {
+      this.setState({
+        type: type,
+        opened: true
       })
     }
   }
 
   handleLanguage(language) {
-    if (!this.state.opened) {
-      this.setState({
-        language: language,
-        opened: true
-      })
-    } else {
-      this.setState({
-        opened: false
-      })
-    }
-
+    this.setState({
+      openedType: false,
+      language: language,
+      opened: true
+    })
   }
 
   handleChange(cont) {
@@ -108,17 +124,18 @@ class CreateItem extends Component {
       }
 
       this.setState({
-          opened: false,
-          openedLanguage: false,
-          button: 'Add new Item',
-          type: '',
-          content: '',
-          language: ''
+        opened: false,
+        openedType: false,
+        openedLanguage: false,
+        button: 'Add new Item',
+        type: '',
+        content: '',
+        language: ''
       })
   }
 
   render() {
-  const { type, content, button, opened, openedLanguage } = this.state
+  const { type, content, button, opened, openedType, openedLanguage } = this.state
 
     if (type === 'embed' && opened) {
       return (
@@ -177,7 +194,7 @@ class CreateItem extends Component {
     return (
       <div>
         <Button width={'150px'} onClick={this.handlePopover}>{button}</Button>
-        {opened && (
+        {openedType && (
 					<StyledPopover>
             <h4>Select Item Type</h4>
 						<div onClick={() => this.handleItemCreate('embed')}>Iframe</div>
