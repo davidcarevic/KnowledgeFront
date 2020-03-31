@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export default styled.input`
-    min-width: 100px;
+    min-width: 300px;
     min-height: 35px;
     width: ${props => props.width || ''};
     height: ${props => props.height || ''};
