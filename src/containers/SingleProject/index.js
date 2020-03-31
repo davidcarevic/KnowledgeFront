@@ -6,11 +6,9 @@ import StyledLink from "../../components/elements/Link";
 import SideHolder from "../../components/blocks/SideHolder";
 import MainHolder from "../../components/blocks/MainHolder";
 import { Header, LeftHeaderHolder, RightHeaderHolder } from "../../components/blocks/HeaderHolder";
-import HeaderButtons from "../../components/blocks/HeaderButtons";
-import { PlusIcon, UserPlusIcon } from '../../components/elements/Icons';
+import { UserPlusIcon } from '../../components/elements/Icons';
 import { Flex } from './styled';
 import LoadingSpinner from "../../components/elements/LoadingSpinner";
-import Form from '../../components/elements/Form';
 import DragAndDrop from '../DragAndDrop';
 import CreateSection from '../CreateSection';
 import CreateCategory from '../CreateCategory';
@@ -36,8 +34,7 @@ class SingleProject extends Component {
     }
 
     render() {
-        const { project, sections, categories, category, section, isLoading, elements } = this.props
-        const { newElement } = this.state
+        const { project, sections, categories, category, section, isLoading } = this.props
         const project_id = project.id
 
         //console.log("CATEGORY U single porject ",this.props.category)

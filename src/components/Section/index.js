@@ -7,6 +7,7 @@ import Button from '../elements/Button';
 import Input from '../elements/Input';
 import { StyledSection, Div } from './styled';
 import { DotsIcon } from '../elements/Icons'
+import AutosizeInput from 'react-input-autosize';
 
 class Section extends Component {
     constructor(props) {
@@ -19,6 +20,12 @@ class Section extends Component {
       name: this.props.name,
       description: this.props.description
     }
+
+    handleChange = (input, event) => {
+		const newState = {};
+		newState[input] = event.target.value;
+		this.setState(newState);
+	};
 
     handleInputChange = (e) => {
         this.setState({ [e.target.id]: e.target.value })
@@ -73,10 +80,18 @@ class Section extends Component {
       if (editing) {
         return (
           <Form onSubmit={this.handleUpdateSubmit}>
-              <Input id="name" placeholder="SECTION NAME" type="text" value={name} onChange={this.handleInputChange} /><br/>
-              <Button type="submit"  width={'105px'}>Save</Button>
-              <Button onClick={this.handleDeleteSubmit} width={'105px'}  top={'28px'}>Delete</Button>
-              <Button onClick={this.handleEditingMode} width={'105px'}  top={'28px'}>{this.state.buttonText}</Button>
+            <AutosizeInput
+              placeholder="CATEGORY NAME"
+              placeholderIsMinWidth
+              name="form-field-name"
+              value={name}
+              onChange={this.handleChange.bind(this, 'name')}
+              style={{ border: 'none' }}
+              inputStyle={{ background: '#F0F0F0', border: 'none', padding: 5, fontSize: '1.17em', fontWeight: 'bold' }}
+            /><br /><br />
+            <Button type="submit"  width={'105px'}>Save</Button>
+            <Button onClick={this.handleDeleteSubmit} width={'105px'}  top={'28px'}>Delete</Button>
+            <Button onClick={this.handleEditingMode} width={'105px'}  top={'28px'}>{this.state.buttonText}</Button>
           </Form>
         )
       } else {

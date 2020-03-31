@@ -3,11 +3,9 @@ import { StyledIframe, StyledItem } from './styled'
 import Form from '../../elements/Form';
 import Input from '../../elements/Input';
 import Button from '../../elements/Button';
-import StyledLink from "../../elements/Link";
 import Item from '../../Item'
 import { connect } from 'react-redux';
 import projectRedux from '../../../redux/projects'
-import { withRouter } from 'react-router-dom';
 
 class Embed extends Item {
   constructor(props) {
@@ -57,4 +55,4 @@ const mapStateToProps = state => ({
   category: state.projects.category
 })
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Embed))
+export default connect(mapStateToProps, mapDispatchToProps)(Embed)

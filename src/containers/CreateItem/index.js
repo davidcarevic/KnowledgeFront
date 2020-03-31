@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import projectRedux from '../../redux/projects'
 import { withRouter } from 'react-router-dom';
-import Embed from '../../components/itemTypes/Iframe';
-import RichText from '../../components/itemTypes/RichText';
 import Button from '../../components/elements/Button';
 import Form from '../../components/elements/Form';
 import Input from '../../components/elements/Input';

@@ -3,11 +3,11 @@ import Form from '../elements/Form';
 import Button from '../elements/Button';
 import Input from '../elements/Input';
 import TextArea from '../elements/TextArea';
-import Title from '../elements/Title';
 import Flex from '../elements/Flex';
 import { connect } from 'react-redux';
 import projectRedux from '../../redux/projects'
-import { withRouter } from 'react-router-dom';
+import AutosizeInput from 'react-input-autosize';
+import TextareaAutosize from 'react-autosize-textarea';
 
 class SingleElement extends Component {
     constructor(props) {
@@ -21,6 +21,12 @@ class SingleElement extends Component {
       title: '',
       description: ''
     }
+
+    handleChange = (input, event) => {
+		const newState = {};
+		newState[input] = event.target.value;
+		this.setState(newState);
+	};
 
     handleInputChange = (e) => {
         this.setState({ [e.target.id]: e.target.value })
@@ -50,9 +56,7 @@ class SingleElement extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        const { history, project, category, isLoading } = this.props
         const { id, title, description } = this.state;
-        console.log("THIS PROPS", this.props)
         this.props.updateElement(id, title, description, this.props.category, this.props.section);
         this.setState({editing:false})
     }
@@ -69,11 +73,26 @@ class SingleElement extends Component {
         if (editing) {
             return (
               <Form onSubmit={this.handleFormSubmit}>
-                  <Input id="title" placeholder="ELEMENT TITLE" type="text" value={title} onChange={this.handleInputChange} /><br/><br/>
-                  <TextArea id="description" placeholder="DESCRIPTION" value={description} onChange={this.handleInputChange} /><br/>
-                  <Button type="submit"  width={'80px'}>Save</Button>
-                  <Button onClick={this.handleDeleteSubmit} width={'80px'}  top={'28px'}>Delete</Button>
-                  <Button onClick={this.handleEditingMode} width={'80px'}  top={'28px'}>{this.state.buttonText}</Button>
+                <AutosizeInput
+                  placeholder="ELEMENT TITLE"
+                  placeholderIsMinWidth
+                  name="form-field-name"
+                  value={title}
+                  onChange={this.handleChange.bind(this, 'title')}
+                  style={{ border: 'none' }}
+                  inputStyle={{ background: '#F0F0F0', border: 'none', padding: 5, fontSize: '1.17em', fontWeight: 'bold' }}
+                /><br /><br />
+                <TextareaAutosize
+                  rows={5}
+                  columns={10}
+                  placeholder='DESCRIPTION'
+                  value={description}
+                  onChange={this.handleChange.bind(this, 'description')}
+                  style={{ width: '700px', background: '#F0F0F0', border: 'none', fontSize: '1.2em'}}
+                /><br /><br />
+                <Button type="submit"  width={'80px'}>Save</Button>
+                <Button onClick={this.handleDeleteSubmit} width={'80px'}  top={'28px'}>Delete</Button>
+                <Button onClick={this.handleEditingMode} width={'80px'}  top={'28px'}>{this.state.buttonText}</Button>
               </Form>
             )
         }
@@ -102,4 +121,4 @@ const mapStateToProps = state => ({
     category: state.projects.category
 })
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SingleElement))
+export default connect(mapStateToProps, mapDispatchToProps)(SingleElement)
