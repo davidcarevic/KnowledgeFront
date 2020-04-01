@@ -18,7 +18,7 @@ export const getListStyle = isDraggingOver => ({
     width: 150
 });
 
-export const getListStyleHorizontalHidden = (isDraggingOver, isDragging )=> ({
+export const getListStyleHorizontalHidden = (isDraggingOver, isDragging, onBeforeDragStart )=> ({
     background: isDraggingOver ? 'black' : 'black',
     overflow: 'disabled',
     width: isDraggingOver? '49%':'49%',
@@ -29,7 +29,7 @@ export const getListStyleHorizontalHidden = (isDraggingOver, isDragging )=> ({
     minHeight:`100%`,
 });
 
-export const getListStyleHorizontalDouble = (isDraggingOver, isDragging) => ({
+export const getListStyleHorizontalDouble = (isDraggingOver, isDragging, onBeforeDragStart) => ({
     background: isDraggingOver ? 'lightgray' : 'white',
     overflow: 'disabled',
     width: isDragging? '49%':'98%',

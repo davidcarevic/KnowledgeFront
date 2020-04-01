@@ -247,7 +247,7 @@ class DragAndDrop extends Component {
                                         <div ref={provided.innerRef} style={
                                             this.props.array[index].items.find(item=>item.column===2)?
                                                 getListStyleHorizontal(snapshot.isDraggingOver):
-                                                getListStyleHorizontalDouble(snapshot.isDraggingOver, provided.isDragging)
+                                                getListStyleHorizontalDouble(snapshot.isDraggingOver, Draggable.isDragging, snapshot.onBeforeDragStart)
                                         }>
                                             {this.props.array[index]?this.props.array[index].items.map((item, index) => (
                                                 item.column===1?
@@ -278,7 +278,7 @@ class DragAndDrop extends Component {
                                         <div ref={provided.innerRef} style={
                                             this.props.array[index].items.find(item=>item.column===2)?
                                                 getListStyleHorizontal(snapshot.isDraggingOver):
-                                                getListStyleHorizontalHidden(snapshot.isDraggingOver, provided.isDragging)}>
+                                                getListStyleHorizontalHidden(snapshot.isDraggingOver, Draggable.isDragging, snapshot.onBeforeDragStart)}>
                                             {this.props.array[index]?this.props.array[index].items.map((item, index) => (
                                                 item.column===2?
                                                 <Draggable
