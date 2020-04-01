@@ -34,13 +34,13 @@ class RichText extends Item {
     if (editing) {
       const content = Base64.decode(this.props.content)
       return (
-        <div>
-          <Form onSubmit={this.handleUpdateSubmit}>
+          <>
+          <Form  onSubmit={this.handleUpdateSubmit}>
             <StyledItem>
               <SunEditor setContents={content} onChange={this.handleChange} editing={true} placeholder="Please type here..." autoFocus={true} enable={true} showToolbar={true}
                 setOptions={{
                   height: 'auto',
-                  width: 'auto',
+                  width: '100%',
                   buttonList: buttonList.complex}}/><br/><br/>
               <Button type="submit" width={'150px'}>Save</Button>
             </StyledItem>
@@ -50,7 +50,7 @@ class RichText extends Item {
               <Button type="submit" width={'150px'}>Delete</Button>
             </StyledItem>
           </Form>
-        </div>
+        </>
       );
     }
 

@@ -21,11 +21,12 @@ export const getListStyle = isDraggingOver => ({
 export const getListStyleHorizontalHidden = (isDraggingOver, isDragging )=> ({
     background: isDraggingOver ? 'black' : 'black',
     overflow: 'disabled',
-    width: isDragging? '49%':'20%',
+    width: isDraggingOver? '49%':'49%',
     display: isDragging? 'flex':'hidden',
     flexWrap: 'wrap',
-    float:'left',
+    float:'right',
     margin:`10px auto`,
+    minHeight:`100%`,
 });
 
 export const getListStyleHorizontalDouble = (isDraggingOver, isDragging) => ({
@@ -35,6 +36,7 @@ export const getListStyleHorizontalDouble = (isDraggingOver, isDragging) => ({
     display: 'inline-flex',
     flexWrap: 'wrap',
     margin:`10px auto`,
+    minHeight:`100%`,
 });
 
 
@@ -45,6 +47,7 @@ export const getListStyleHorizontal = isDraggingOver => ({
     display: 'inline-flex',
     flexWrap: 'wrap',
     margin:`10px auto`,
+    minHeight:`100%`,
 });
 
 

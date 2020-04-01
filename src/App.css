@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.sun-editor {
+  width: 100% !important;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
