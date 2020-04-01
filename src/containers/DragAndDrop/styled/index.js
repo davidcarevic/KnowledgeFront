@@ -32,7 +32,7 @@ export const getListStyleHorizontalHidden = (isDraggingOver, isDragging )=> ({
 export const getListStyleHorizontalDouble = (isDraggingOver, isDragging) => ({
     background: isDraggingOver ? 'lightgray' : 'white',
     overflow: 'disabled',
-    width: isDraggingOver? '49%':'98%',
+    width: isDragging? '49%':'98%',
     display: 'inline-flex',
     flexWrap: 'wrap',
     margin:`10px auto`,

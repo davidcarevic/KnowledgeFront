@@ -42,6 +42,10 @@ const move = (source, destination, droppableSource, droppableDestination) => {
         column=1
     }
 
+    let sourceId=droppableSource.droppableId
+    let destinationId=droppableDestination.droppableId
+
+
     let sourceClone = []
     let destClone = []
     if (source.elements) {
@@ -54,6 +58,12 @@ const move = (source, destination, droppableSource, droppableDestination) => {
     }
     console.log("SOURCE DESTINATION U MOVE  !!!!!!!!!!!!!!!!!!!!!!!!!", sourceClone,destClone)
     const [removed] = sourceClone.splice(droppableSource.index, 1);
+
+    // fix for the sorting, without this the if them item from the right column is placed in the left column of
+    // the same element it will be placed one position up
+    if(destinationId+'e'=== sourceId){
+        droppableDestination.index= droppableDestination.index - 1
+    }
     destClone.splice(droppableDestination.index, 0, removed);
     const result = {};
     result[droppableSource.droppableId] = sourceClone;
@@ -237,7 +247,7 @@ class DragAndDrop extends Component {
                                         <div ref={provided.innerRef} style={
                                             this.props.array[index].items.find(item=>item.column===2)?
                                                 getListStyleHorizontal(snapshot.isDraggingOver):
-                                                getListStyleHorizontalDouble(snapshot.isDraggingOver, snapshot.onDragStart)
+                                                getListStyleHorizontalDouble(snapshot.isDraggingOver, provided.isDragging)
                                         }>
                                             {this.props.array[index]?this.props.array[index].items.map((item, index) => (
                                                 item.column===1?
