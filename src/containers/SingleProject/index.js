@@ -67,9 +67,11 @@ class SingleProject extends Component {
 
                     </LeftHeaderHolder>
                     <RightHeaderHolder>
-                      { (project['role'] === 'admin' || project['role'] === 'editor') ?
-                        <CreateSection /> : ''
-                      }
+                      <Flex>
+                        { (project['role'] === 'admin' || project['role'] === 'editor') ?
+                          <CreateSection /> : ''
+                        }
+                        </Flex>
                         <Flex top={'15px'}>
                           {!sections ? <div>No sections</div> : sections.map((item, index) =>
                               <Section role={project['role']} section={item} key={index} id={item.id} project={this.props.project} name={item.name}/>
