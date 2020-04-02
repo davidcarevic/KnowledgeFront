@@ -74,7 +74,7 @@ export const refreshToken = () => dispatch => {
             dispatch(isLoading(false));
             console.log(err.message)
         })
-        dispatch(isLoading(false))
+
 }
 export const logout = () => dispatch => {
     //  axios call for blacklisting needs to be added if it's decided that the tokens will be blacklisted

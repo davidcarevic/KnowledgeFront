@@ -26,7 +26,6 @@ class Dashboard extends Component {
         if(len1 < 1 && !this.props.isLoading){
             this.props.getProjects()
         }
-        this.props.refreshToken()
         this.props.unsetProjectsByTeam([])
         this.props.unsetProject({})
         this.props.unsetSections([])
