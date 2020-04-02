@@ -56,13 +56,14 @@ class CodeSnipet extends Item {
       const { editing, role } = this.props
       if (editing) {
         return (
-          <div>
+          <>
             <Form onSubmit={this.handleUpdateSubmit}>
               <StyledItem>
                 <AceEditor
                   mode={content['language']}
                   theme="tomorrow"
                   height="auto"
+                  width="100%"
                   value={content['code']}
                   onChange={this.onChange}
                   editorProps={{ $blockScrolling: true }}
@@ -85,16 +86,17 @@ class CodeSnipet extends Item {
                 }
               </StyledItem>
             </Form>
-          </div>
+          </>
         );
       }
       if(!editing) {
         return (
-          <div>
+          <>
             <AceEditor
               mode={content['language']}
               theme="tomorrow"
               height="auto"
+              width="100%"
               value={this.props.content['code']}
               editorProps={{ $blockScrolling: true }}
               setOptions={{
@@ -106,7 +108,7 @@ class CodeSnipet extends Item {
                 readOnly: true
               }}
             />
-          </div>
+          </>
         );
       }
     }
