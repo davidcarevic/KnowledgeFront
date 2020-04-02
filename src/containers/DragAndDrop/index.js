@@ -167,6 +167,10 @@ class DragAndDrop extends Component {
         if(this.props.type==="categories") {
             console.log("CATEGORIES U DND, CATEGORIES",  this.props.array)
             console.log("Internal STATE FOR DND // CATEGORIES", this.state)
+            let cannotDrag=false
+            if(this.props.role==='viewer'){
+                cannotDrag=true
+            }
             return (
                 <div>
                     <DragDropContext  onDragEnd={this.onDragEnd}>
@@ -178,6 +182,7 @@ class DragAndDrop extends Component {
                                         <div ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)}>
                                             {this.state[index].elements.map((item, index) => (
                                                 <Draggable
+                                                    isDragDisabled={cannotDrag}
                                                     key={item.id}
                                                     draggableId={item.id}
                                                     index={index}>
@@ -209,6 +214,7 @@ class DragAndDrop extends Component {
         if(this.props.type==="elements"){
             console.log("CATEGORIES U DND, ELEMENTS AND ITEMS",  this.props.array)
             console.log("Internal STATE FOR DND // ELEMENTS AND ITEMS", this.state)
+            let role=this.props.role
             // let ele={
             // }
             // let arrayLeft=[]
@@ -233,6 +239,11 @@ class DragAndDrop extends Component {
             //     arrayRight=[]
             // }
 
+            let cannotDrag=false
+            if(this.props.role==='viewer'){
+                cannotDrag=true
+            }
+
             return(
                     <DragDropContext onDragEnd={this.onDragEnd}>
                         {Object.keys(this.props.array).map((list_id,index) => (
@@ -252,6 +263,7 @@ class DragAndDrop extends Component {
                                             {this.props.array[index]?this.props.array[index].items.map((item, index) => (
                                                 item.column===1?
                                                 <Draggable
+                                                    isDragDisabled={cannotDrag}
                                                     key={item.id}
                                                     draggableId={item.id}
                                                     index={index}>
@@ -282,6 +294,7 @@ class DragAndDrop extends Component {
                                             {this.props.array[index]?this.props.array[index].items.map((item, index) => (
                                                 item.column===2?
                                                 <Draggable
+                                                    isDragDisabled={cannotDrag}
                                                     key={item.id}
                                                     draggableId={item.id}
                                                     index={index}>
