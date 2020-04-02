@@ -19,7 +19,7 @@ class Embed extends Item {
 
     render() {
       const { content } = this.state
-      const { editing } = this.props
+      const { editing, role } = this.props
       if (editing) {
         return (
           <div>
@@ -31,7 +31,9 @@ class Embed extends Item {
             </Form>
             <Form onSubmit={this.handleDeleteSubmit}>
               <StyledItem>
-                <Button type="submit" width={'150px'}>Delete</Button>
+              { role === 'admin' ?
+                <Button type="submit" width={'150px'}>Delete</Button> : ''
+              }
               </StyledItem>
             </Form>
           </div>

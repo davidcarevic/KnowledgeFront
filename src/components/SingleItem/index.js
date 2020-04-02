@@ -21,17 +21,20 @@ class SingleItem extends Component {
 
     handleEditingMode = (e) => {
       e.preventDefault();
-      if (this.state.editing) {
-        this.setState({
-          editing: false,
-          buttonText: 'Edit'
-        })
-      }
-      else {
-        this.setState({
-          editing: true,
-          buttonText: 'Cancel'
-        })
+      const { role } = this.props
+      if (role === 'admin' || role === 'editor') {
+        if (this.state.editing) {
+          this.setState({
+            editing: false,
+            buttonText: 'Edit'
+          })
+        }
+        else {
+          this.setState({
+            editing: true,
+            buttonText: 'Cancel'
+          })
+        }
       }
     }
 
@@ -44,14 +47,16 @@ class SingleItem extends Component {
     }
 
     render() {
-      const { id, content, category, type } = this.props
+      const { id, content, category, type, role } = this.props
       const { editing, buttonText } = this.state
         if (type === 'embed') {
             return (
               <Form onSubmit={this.handleSubmit}>
                 <StyledItem>
-                  <Embed id={id} content={content} category={category} editing={editing} />
-                  <Button onClick={this.handleEditingMode} width={'150px'}>{buttonText}</Button>
+                  <Embed id={id} content={content} category={category} editing={editing} role={role} />
+                  { (role === 'admin' || role === 'editor') ?
+                    <Button onClick={this.handleEditingMode} width={'150px'}>{buttonText}</Button> : ''
+                  }
                 </StyledItem>
               </Form>
             )
@@ -60,8 +65,10 @@ class SingleItem extends Component {
             return (
               <Form onSubmit={this.handleSubmit}>
                 <StyledItem>
-                  <RichText id={id} content={content} category={category} editing={editing} />
-                  <Button onClick={this.handleEditingMode} width={'150px'}>{buttonText}</Button>
+                  <RichText id={id} content={content} category={category} editing={editing} role={role} />
+                  { (role === 'admin' || role === 'editor') ?
+                    <Button onClick={this.handleEditingMode} width={'150px'}>{buttonText}</Button> : ''
+                  }
                 </StyledItem>
               </Form>
             )
@@ -71,8 +78,10 @@ class SingleItem extends Component {
             <div>
               <Form onSubmit={this.handleSubmit}>
                 <StyledItem>
-                  <CodeSnipet id={id} content={content} category={category} editing={editing} />
-                  <Button onClick={this.handleEditingMode} width={'150px'}>{buttonText}</Button>
+                  <CodeSnipet id={id} content={content} category={category} editing={editing} role={role} />
+                  { (role === 'admin' || role === 'editor') ?
+                    <Button onClick={this.handleEditingMode} width={'150px'}>{buttonText}</Button> : ''
+                  }
                 </StyledItem>
               </Form>
             </div>

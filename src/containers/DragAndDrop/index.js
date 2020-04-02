@@ -238,10 +238,10 @@ class DragAndDrop extends Component {
                         {Object.keys(this.props.array).map((list_id,index) => (
                             <div key={'i' + index}>
                                 <Element name={this.props.array[index].id} key={'e' + index}>
-                                  <SingleElement id={this.props.array[index].id} category={this.props.category} title={this.props.array[index].title}
+                                  <SingleElement role={this.props.role} id={this.props.array[index].id} category={this.props.category} title={this.props.array[index].title}
                                       description={this.props.array[index].description}/>
                                 </Element><br />
-                                <CreateItem element={this.state[index]?this.state[index].id:''}/>
+                                <CreateItem role={this.props.role} element={this.state[index]?this.state[index].id:''}/>
                                 <Droppable droppableId={this.props.array[index]?this.props.array[index].id.toString():''} >
                                     {(provided, snapshot) => (
                                         <div ref={provided.innerRef} style={
@@ -263,7 +263,7 @@ class DragAndDrop extends Component {
                                                             snapshot.isDragging,
                                                             provided.draggableProps.style
                                                         )}>
-                                                            <SingleItem id={item.id} type={item.type}  content={item.content} first={true}/>
+                                                            <SingleItem role={this.props.role} id={item.id} type={item.type}  content={item.content} first={true}/>
 
                                                         </div>
                                                     )}
@@ -293,7 +293,7 @@ class DragAndDrop extends Component {
                                                             snapshot.isDragging,
                                                             provided.draggableProps.style
                                                         )}>
-                                                            <SingleItem id={item.id} type={item.type} content={item.content} first={true}/>
+                                                            <SingleItem role={this.props.role} id={item.id} type={item.type} content={item.content} first={true}/>
 
                                                         </div>
                                                     )}

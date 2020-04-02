@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import SingleTeam from "../../components/SingleTeam";
 import teamsRedux from '../../redux/teams';
 import projectsRedux from '../../redux/projects';
+import userRedux from '../../redux/user';
 import SingleProject from "../../components/SingleProject";
 import SideHolder from '../../components/blocks/SideHolder';
 import MainHolder from '../../components/blocks/MainHolder';
@@ -25,6 +26,7 @@ class Dashboard extends Component {
         if(len1 < 1 && !this.props.isLoading){
             this.props.getProjects()
         }
+        this.props.refreshToken()
         this.props.unsetProjectsByTeam([])
         this.props.unsetProject({})
         this.props.unsetSections([])
@@ -106,6 +108,7 @@ const mapDispatchToProps = {
     unsetSection: projectsRedux.actions.setSection,
     unsetCategory: projectsRedux.actions.setCategory,
     unsetElement: projectsRedux.actions.setElement,
+    refreshToken: userRedux.thunks.refreshToken
 }
 const mapStateToProps = state => ({
     teams: state.teams,

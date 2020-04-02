@@ -31,19 +31,22 @@ class SingleCategory extends Component {
 
     handleEditingMode = (e) => {
       e.preventDefault();
-      if (this.state.editing) {
-        this.setState({
-          editing: false,
-          buttonText: 'Edit',
-        })
-      }
-      else {
-        this.setState({
-          name: this.props.name,
-          description: this.props.description,
-          editing: true,
-          buttonText: 'Cancel',
-        })
+      const { role } = this.props
+      if (role === 'admin' || role === 'editor') {
+        if (this.state.editing) {
+          this.setState({
+            editing: false,
+            buttonText: 'Edit',
+          })
+        }
+        else {
+          this.setState({
+            name: this.props.name,
+            description: this.props.description,
+            editing: true,
+            buttonText: 'Cancel',
+          })
+        }
       }
     }
 
@@ -64,7 +67,8 @@ class SingleCategory extends Component {
     render() {
 
       const { editing, name, description } = this.state
-        if (editing) {
+      const { role } = this.props
+        if (editing && (role === 'admin' || role === 'editor')) {
             return (
               <Form onSubmit={this.handleFormSubmit}>
                 <AutosizeInput
@@ -85,7 +89,9 @@ class SingleCategory extends Component {
                   style={{ width: '700px',background: '#F0F0F0', border: 'none', fontSize: '1.2em'}}
                 /><br /><br />
                 <Button type="submit"  width={'80px'}>Save</Button>
-                <Button onClick={this.handleDeleteSubmit} width={'80px'}  top={'28px'}>Delete</Button>
+                { role === 'admin' ?
+                  <Button onClick={this.handleDeleteSubmit} width={'80px'}  top={'28px'}>Delete</Button> : ''
+                }
                 <Button onClick={this.handleEditingMode} width={'80px'}  top={'28px'}>{this.state.buttonText}</Button>
               </Form>
             )

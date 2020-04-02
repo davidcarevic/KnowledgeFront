@@ -11,7 +11,7 @@ export const removeToken = () => {
     return true
 }
 
-export const getRefresh = () =>{
+export const getRefresh = () => {
     return axios.post('/api/token/refresh/', {
         refresh: window.localStorage.getItem("refreshToken")
     })

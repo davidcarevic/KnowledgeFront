@@ -64,7 +64,7 @@ class CreateCategory extends Component {
             <div>
             <h1>Create your first category.</h1>
               <Form onSubmit={this.handleFormSubmit}>
-                <Input id="name" placeholder="SECTION NAME" type="text" value={name} onChange={this.handleInputChange} /><br/><br/>
+                <Input id="name" placeholder="CATEGORY NAME" type="text" value={name} onChange={this.handleInputChange} /><br/><br/>
                 <TextArea id="description" placeholder="DESCRIPTION" value={description} onChange={this.handleInputChange} /><br/><br/>
                 <Button width={'315px'} type="submit">CREATE</Button>
               </Form>

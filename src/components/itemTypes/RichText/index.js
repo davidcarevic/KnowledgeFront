@@ -30,7 +30,7 @@ class RichText extends Item {
 
 
   render() {
-    const { editing } = this.props
+    const { editing, role } = this.props
     if (editing) {
       const content = Base64.decode(this.props.content)
       return (
@@ -47,7 +47,9 @@ class RichText extends Item {
           </Form>
           <Form onSubmit={this.handleDeleteSubmit}>
             <StyledItem>
-              <Button type="submit" width={'150px'}>Delete</Button>
+            { role === 'admin' ?
+              <Button type="submit" width={'150px'}>Delete</Button> : ''
+            }
             </StyledItem>
           </Form>
         </>

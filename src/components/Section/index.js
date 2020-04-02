@@ -32,21 +32,24 @@ class Section extends Component {
 
     handleEditingMode = (e) => {
       e.preventDefault();
-      if (this.state.editing) {
-        this.setState({
-          editing: false,
-          buttonText: 'Edit',
-          name: '',
-          description: ''
-        })
-      }
-      else {
-        this.setState({
-          editing: true,
-          buttonText: 'Cancel',
-          name: this.props.name,
-          description: this.props.description
-        })
+      const { role } = this.props
+      if (role === 'admin' || role === 'editor') {
+        if (this.state.editing) {
+          this.setState({
+            editing: false,
+            buttonText: 'Edit',
+            name: '',
+            description: ''
+          })
+        }
+        else {
+          this.setState({
+            editing: true,
+            buttonText: 'Cancel',
+            name: this.props.name,
+            description: this.props.description
+          })
+        }
       }
     }
 
@@ -76,6 +79,7 @@ class Section extends Component {
 
     render() {
       const { editing, name } = this.state
+      const { role } = this.props
       if (editing) {
         return (
           <Form onSubmit={this.handleUpdateSubmit}>
@@ -89,7 +93,9 @@ class Section extends Component {
               inputStyle={{ background: '#F0F0F0', border: 'none', padding: 5, fontSize: '1.17em', fontWeight: 'bold' }}
             /><br /><br />
             <Button type="submit"  width={'105px'}>Save</Button>
-            <Button onClick={this.handleDeleteSubmit} width={'105px'}  top={'28px'}>Delete</Button>
+            { role === 'admin' ?
+              <Button onClick={this.handleDeleteSubmit} width={'105px'}  top={'28px'}>Delete</Button> : ''
+            }
             <Button onClick={this.handleEditingMode} width={'105px'}  top={'28px'}>{this.state.buttonText}</Button>
           </Form>
         )
@@ -97,7 +103,9 @@ class Section extends Component {
           return (
             <Div>
               <StyledSection key={this.props.key} id={this.props.id} onClick={this.handleSectionChange}>{this.props.name}</StyledSection>
-              <DotsIcon onClick={this.handleEditingMode}/>
+              { (role === 'admin' || role === 'editor') ?
+                <DotsIcon onClick={this.handleEditingMode}/> : ''
+              }
             </Div>
           )
       }

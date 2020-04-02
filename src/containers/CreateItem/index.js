@@ -133,8 +133,8 @@ class CreateItem extends Component {
   }
 
   render() {
-  const { type, content, button, opened, openedType, openedLanguage } = this.state
-
+    const { type, content, button, opened, openedType, openedLanguage } = this.state
+    const { role } = this.props
     if (type === 'embed' && opened) {
       return (
         <div>
@@ -191,7 +191,9 @@ class CreateItem extends Component {
 
     return (
       <div>
-        <Button width={'150px'} onClick={this.handlePopover}>{button}</Button>
+        { (role === 'admin' || role === 'editor') ?
+          <Button width={'150px'} onClick={this.handlePopover}>{button}</Button> : ''
+        }
         {openedType && (
 					<StyledPopover>
             <h4>Select Item Type</h4>

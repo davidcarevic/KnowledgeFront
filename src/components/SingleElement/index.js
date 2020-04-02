@@ -32,26 +32,28 @@ class SingleElement extends Component {
 
     handleEditingMode = (e) => {
       e.preventDefault();
-      if (this.state.editing) {
-        this.setState({
-          id: '',
-          title: '',
-          description: '',
-          editing: false,
-          buttonText: 'Edit',
-        })
-      }
-      else {
-        this.setState({
-          id: this.props.id,
-          title: this.props.title,
-          description: this.props.description,
-          editing: true,
-          buttonText: 'Cancel',
-        })
+      const { role } = this.props
+      if (role === 'admin' || role === 'editor') {
+        if (this.state.editing) {
+          this.setState({
+            id: '',
+            title: '',
+            description: '',
+            editing: false,
+            buttonText: 'Edit',
+          })
+        }
+        else {
+          this.setState({
+            id: this.props.id,
+            title: this.props.title,
+            description: this.props.description,
+            editing: true,
+            buttonText: 'Cancel',
+          })
+        }
       }
     }
-
     handleFormSubmit = (e) => {
         e.preventDefault();
         const { id, title, description } = this.state;
@@ -68,7 +70,8 @@ class SingleElement extends Component {
 
     render() {
       const { editing, title, description } = this.state
-        if (editing) {
+      const { role } = this.props
+        if (editing && (role === 'admin' || role === 'editor')) {
             return (
               <Form onSubmit={this.handleFormSubmit}>
                 <AutosizeInput
@@ -89,7 +92,9 @@ class SingleElement extends Component {
                   style={{ width: '700px', background: '#F0F0F0', border: 'none', fontSize: '1.2em'}}
                 /><br /><br />
                 <Button type="submit"  width={'80px'}>Save</Button>
-                <Button onClick={this.handleDeleteSubmit} width={'80px'}  top={'28px'}>Delete</Button>
+                { role === 'admin' ?
+                  <Button onClick={this.handleDeleteSubmit} width={'80px'}  top={'28px'}>Delete</Button> : ''
+                }
                 <Button onClick={this.handleEditingMode} width={'80px'}  top={'28px'}>{this.state.buttonText}</Button>
               </Form>
             )

@@ -64,17 +64,17 @@ export const refreshToken = () => dispatch => {
     dispatch(authenticationErrorMessage(''));
     getRefresh()
         .then(res => {
-            dispatch(isLoading(false));
             dispatch(setAccessToken(res.data.access))
             dispatch(authenticateUser(true))
+            dispatch(isLoading(false));
         })
         .catch(err => {
-            console.log("OVDE: ", err);
-            dispatch(isLoading(false));
             dispatch(authenticationError(true));
             dispatch(authenticationErrorMessage(err.message));
-           console.log(err.message)
+            dispatch(isLoading(false));
+            console.log(err.message)
         })
+        dispatch(isLoading(false))
 }
 export const logout = () => dispatch => {
     //  axios call for blacklisting needs to be added if it's decided that the tokens will be blacklisted
